@@ -186,7 +186,7 @@
               <button type="button" class="btn btn-maps" onclick="abrirGoogleMaps()">
                 <i class="fas fa-map-marked-alt"></i> Maps
               </button>
-              <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
+              <input type="url" id="mapsLink" class="form-control" placeholder=" O pegue aquí el link de Google Maps">
             </div>
           </div>
         </div>
@@ -197,7 +197,7 @@
   </div>
 
   <script>
-    const DEFAULT_NUMERO_DESTINO = "51TU_NUMERO"; // 👈 cambia aquí
+    const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 Reemplaza con tu número real
 
     let pedido = [];
     let metodoSeleccionado = "";
@@ -205,25 +205,22 @@
     // Cargar productos desde JSON
     async function cargarProductos() {
       try {
-        // Simulamos la carga de productos con datos de ejemplo
-        const productosEjemplo = [
-          { PRODUCTO: "Pizza Margarita" },
-          { PRODUCTO: "Hamburguesa Clásica" },
-          { PRODUCTO: "Ensalada César" },
-          { PRODUCTO: "Sushi Mixto" },
-          { PRODUCTO: "Pasta Carbonara" }
-        ];
-        
+        const response = await fetch("productos.json?v=" + Date.now());
+        if (!response.ok) {
+          throw new Error("No se pudo cargar el archivo productos.json");
+        }
+        const productos = await response.json();
         const lista = document.getElementById("listaProductos");
         lista.innerHTML = "";
         
-        productosEjemplo.forEach(p => {
+        productos.forEach(p => {
           const option = document.createElement("option");
           option.value = p.PRODUCTO;
           lista.appendChild(option);
         });
       } catch (error) {
         console.error("Error al cargar productos:", error);
+        alert("Error al cargar la lista de productos. Por favor, recarga la página.");
       }
     }
 
@@ -321,6 +318,15 @@
 
       const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
+      
+      // Limpiar el formulario después de enviar
+      pedido = [];
+      mostrarPedido();
+      document.getElementById("pedidoForm").reset();
+      document.querySelectorAll('.delivery-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      document.getElementById("deliveryFields").style.display = "none";
     }
 
     window.onload = cargarProductos;
