@@ -362,7 +362,7 @@
         return;
       }
     
-      let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
+      let mensaje = `*Pedido de:* ${nombre}\n\n`;
       mensaje += `*Productos:*\n`;
       
       pedido.forEach((item, i) => {
@@ -372,11 +372,11 @@
         }
       });
     
-      mensaje += `\n📍 Método de entrega: ${metodo}\n`;
+      mensaje += `\n📍 Lugar de entrega: ${metodo}\n`;
       
       if (metodo === "Delivery") {
-        mensaje += `🏠 Dirección: ${direccion || "No especificada"}\n`;
-        if (mapsLink) mensaje += `🗺️ Google Maps: ${mapsLink}\n`;
+        mensaje += `🏠 Dirección: ${direccion || "Link de google maps"}\n`;
+        if (mapsLink) mensaje += `🗺️ Dirección: ${mapsLink}\n`;
       }
     
       const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
@@ -397,5 +397,6 @@
   </script>
 </body>
 </html>
+
 
 
