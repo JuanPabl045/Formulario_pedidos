@@ -11,6 +11,10 @@
     .card {
       border-radius: 15px;
     }
+    #sugerencias {
+      max-height: 200px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
@@ -19,11 +23,11 @@
       <h1 class="text-center text-success mb-4">🛒 Formulario de Pedido</h1>
       <form id="pedidoForm">
         
-        <!-- Producto -->
-        <div class="mb-3">
+        <!-- Producto con buscador -->
+        <div class="mb-3 position-relative">
           <label for="producto" class="form-label">Producto:</label>
-          <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
-          <datalist id="listaProductos"></datalist>
+          <input type="text" id="producto" class="form-control" placeholder="Escribe para buscar..." onkeyup="buscarProductos()">
+          <div id="sugerencias" class="list-group position-absolute w-100" style="z-index: 1000;"></div>
         </div>
 
         <!-- Cantidad -->
@@ -55,24 +59,42 @@
   </div>
 
   <script>
-    const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 Cambia esto por tu número real
-    
+    const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 cambia por tu número real
+    let productos = [];
     let pedido = [];
 
     // Cargar productos desde JSON
     async function cargarProductos() {
       try {
         const response = await fetch("productos.json");
-        const productos = await response.json();
-        const lista = document.getElementById("listaProductos");
-
-        productos.forEach(p => {
-          const option = document.createElement("option");
-          option.value = p.nombre;
-          lista.appendChild(option);
-        });
+        productos = await response.json();
       } catch (error) {
         console.error("Error al cargar productos:", error);
+      }
+    }
+
+    // Buscar productos en tiempo real
+    function buscarProductos() {
+      const query = document.getElementById("producto").value.toLowerCase();
+      const sugerencias = document.getElementById("sugerencias");
+      sugerencias.innerHTML = "";
+
+      if (query.length > 1) {
+        const resultados = productos.filter(p =>
+          p.PRODUCTO.toLowerCase().includes(query) ||
+          p.DESCRIPCION.toLowerCase().includes(query)
+        );
+
+        resultados.forEach(p => {
+          const div = document.createElement("div");
+          div.className = "list-group-item list-group-item-action";
+          div.innerHTML = `<b>${p.PRODUCTO}</b> - ${p.DESCRIPCION} <span class="text-success">S/ ${p.PRECIO_L_KG}</span>`;
+          div.onclick = () => {
+            document.getElementById("producto").value = `${p.PRODUCTO} - ${p.DESCRIPCION} (S/ ${p.PRECIO_L_KG})`;
+            sugerencias.innerHTML = "";
+          };
+          sugerencias.appendChild(div);
+        });
       }
     }
 
