@@ -2,163 +2,135 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Formulario de Pedido</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedidos</title>
   <style>
     body {
-      background: #f8f9fa;
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
     }
-    .card {
-      border-radius: 15px;
+    h1 {
+      text-align: center;
+      color: #333;
     }
-    #sugerencias {
-      max-height: 200px;
-      overflow-y: auto;
+    .buscador {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    input {
+      padding: 8px;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #007BFF;
+      color: white;
+    }
+    tr:hover {
+      background: #f1f1f1;
+    }
+    button {
+      padding: 8px 12px;
+      background: #28a745;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
     }
   </style>
 </head>
 <body>
-  <div class="container mt-5">
-    <div class="card shadow p-4">
-      <h1 class="text-center text-success mb-4">🛒 Formulario de Pedido</h1>
-      <form id="pedidoForm">
-        
-        <!-- Producto con buscador -->
-        <div class="mb-3 position-relative">
-          <label for="producto" class="form-label">Producto:</label>
-          <input type="text" id="producto" class="form-control" placeholder="Escribe para buscar..." onkeyup="buscarProductos()">
-          <div id="sugerencias" class="list-group position-absolute w-100" style="z-index: 1000;"></div>
-        </div>
+  <h1>Catálogo de Productos</h1>
 
-        <!-- Cantidad -->
-        <div class="mb-3">
-          <label for="cantidad" class="form-label">Cantidad:</label>
-          <input type="number" id="cantidad" class="form-control" min="1" value="1">
-        </div>
-
-        <!-- Descripción -->
-        <div class="mb-3">
-          <label for="descripcion" class="form-label">Descripción adicional:</label>
-          <textarea id="descripcion" class="form-control" placeholder="Ejemplo: entregar el viernes en la tarde..."></textarea>
-        </div>
-
-        <button type="button" class="btn btn-primary w-100 mb-3" onclick="agregarProducto()">➕ Agregar producto</button>
-
-        <h4 class="mt-4">📝 Productos añadidos:</h4>
-        <ul id="listaPedido" class="list-group mb-3"></ul>
-
-        <!-- Nombre -->
-        <div class="mb-3">
-          <label for="nombre" class="form-label">Tu nombre:</label>
-          <input type="text" id="nombre" class="form-control" required>
-        </div>
-
-        <button type="button" class="btn btn-success w-100" onclick="enviarPedido()">📲 Enviar pedido por WhatsApp</button>
-      </form>
-    </div>
+  <div class="buscador">
+    <input type="text" id="buscar" placeholder="Buscar producto o descripción...">
   </div>
 
+  <table id="tablaProductos">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Descripción</th>
+        <th>Precio (S/ por Kg)</th>
+        <th>Cantidad (Kg)</th>
+        <th>Pedir</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
   <script>
-    const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 cambia por tu número real
+    const NUMERO_WHATSAPP = "51TU_NUMERO_AQUI"; // 👈 Reemplaza con tu número real
+
     let productos = [];
-    let pedido = [];
 
-    // Cargar productos desde JSON
-    async function cargarProductos() {
-      try {
-        const response = await fetch("productos.json");
-        productos = await response.json();
-      } catch (error) {
-        console.error("Error al cargar productos:", error);
-      }
-    }
+    // Cargar productos desde productos.json
+    fetch("productos.json")
+      .then(res => res.json())
+      .then(data => {
+        productos = data;
+        mostrarProductos(productos);
+      })
+      .catch(err => console.error("Error cargando productos:", err));
 
-    // Buscar productos en tiempo real
-    function buscarProductos() {
-      const query = document.getElementById("producto").value.toLowerCase();
-      const sugerencias = document.getElementById("sugerencias");
-      sugerencias.innerHTML = "";
+    // Mostrar productos en la tabla
+    function mostrarProductos(lista) {
+      const tbody = document.querySelector("#tablaProductos tbody");
+      tbody.innerHTML = "";
 
-      if (query.length > 1) {
-        const resultados = productos.filter(p =>
-          p.PRODUCTO.toLowerCase().includes(query) ||
-          p.DESCRIPCION.toLowerCase().includes(query)
-        );
+      lista.forEach((p, index) => {
+        const fila = document.createElement("tr");
 
-        resultados.forEach(p => {
-          const div = document.createElement("div");
-          div.className = "list-group-item list-group-item-action";
-          div.innerHTML = `<b>${p.PRODUCTO}</b> - ${p.DESCRIPCION} <span class="text-success">S/ ${p.PRECIO_L_KG}</span>`;
-          div.onclick = () => {
-            document.getElementById("producto").value = `${p.PRODUCTO} - ${p.DESCRIPCION} (S/ ${p.PRECIO_L_KG})`;
-            sugerencias.innerHTML = "";
-          };
-          sugerencias.appendChild(div);
-        });
-      }
-    }
+        fila.innerHTML = `
+          <td>${p.PRODUCTO}</td>
+          <td>${p.DESCRIPCION}</td>
+          <td>S/ ${p.PRECIO_L_KG}</td>
+          <td><input type="number" id="cant_${index}" value="1" min="1" style="width:60px"></td>
+          <td><button onclick="enviarPedido(${index})">Enviar</button></td>
+        `;
 
-    // Agregar producto a la lista
-    function agregarProducto() {
-      const producto = document.getElementById("producto").value.trim();
-      const cantidad = document.getElementById("cantidad").value;
-      const descripcion = document.getElementById("descripcion").value.trim();
-
-      if (!producto || cantidad <= 0) {
-        alert("Por favor selecciona un producto y cantidad válida");
-        return;
-      }
-
-      pedido.push({ producto, cantidad, descripcion });
-      mostrarPedido();
-
-      // limpiar campos
-      document.getElementById("producto").value = "";
-      document.getElementById("cantidad").value = 1;
-      document.getElementById("descripcion").value = "";
-    }
-
-    // Mostrar lista en pantalla
-    function mostrarPedido() {
-      const lista = document.getElementById("listaPedido");
-      lista.innerHTML = "";
-      pedido.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.className = "list-group-item d-flex justify-content-between align-items-center";
-        li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} - ${item.descripcion || "Sin detalles"}</span>
-                        <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>`;
-        lista.appendChild(li);
+        tbody.appendChild(fila);
       });
     }
 
-    // Eliminar producto
-    function eliminarProducto(index) {
-      pedido.splice(index, 1);
-      mostrarPedido();
-    }
+    // Buscar productos
+    document.getElementById("buscar").addEventListener("input", e => {
+      const filtro = e.target.value.toLowerCase();
+      const filtrados = productos.filter(p =>
+        p.PRODUCTO.toLowerCase().includes(filtro) ||
+        p.DESCRIPCION.toLowerCase().includes(filtro)
+      );
+      mostrarProductos(filtrados);
+    });
 
-    // Enviar pedido a WhatsApp
-    function enviarPedido() {
-      if (pedido.length === 0) {
-        alert("Agrega al menos un producto al pedido.");
-        return;
-      }
-      const nombre = document.getElementById("nombre").value.trim();
-      if (!nombre) {
-        alert("Por favor ingresa tu nombre.");
-        return;
-      }
+    // Enviar pedido por WhatsApp
+    function enviarPedido(index) {
+      const p = productos[index];
+      const cantidad = document.getElementById(`cant_${index}`).value;
 
-      let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
-      pedido.forEach((item, i) => {
-        mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
-      });
+      const mensaje = `¡Hola! Quiero pedir:\n\nProducto: ${p.PRODUCTO}\nDescripción: ${p.DESCRIPCION}\nPrecio: S/ ${p.PRECIO_L_KG} x Kg\nCantidad: ${cantidad} Kg\n\nGracias.`;
+      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
 
-      const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
-
-    window.onload = cargarProductos;
   </script>
 </body>
 </html>
