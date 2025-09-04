@@ -52,21 +52,30 @@
         </div>
         
         <!-- Opciones de delivery (solo si se elige Delivery) -->
-        <div id="deliveryOptions" style="display:none;">
-          <!-- Dirección manual -->
+        <!-- Opción Delivery -->
+        <div class="mb-3">
+          <label for="delivery" class="form-label">¿Deseas delivery?</label>
+          <select id="delivery" class="form-control" onchange="toggleDelivery(this.value)">
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="no">No</option>
+            <option value="si">Sí (S/ 13 de envío)</option>
+          </select>
+        </div>
+        
+        <!-- Campos de delivery (ocultos al inicio) -->
+        <div id="deliveryFields" style="display:none;">
           <div class="mb-3">
             <label for="direccion" class="form-label">Dirección de entrega:</label>
-            <input type="text" id="direccion" class="form-control" placeholder="Ejemplo: Av. Primavera 123, San Borja">
+            <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima">
           </div>
         
-          <!-- Google Maps -->
           <div class="mb-3">
-            <p class="text-muted">O comparte tu ubicación con Google Maps:</p>
-            <a href="https://www.google.com/maps" target="_blank" class="btn btn-outline-primary w-100">
-              🌍 Abrir Google Maps
-            </a>
+            <label for="mapsLink" class="form-label">Link de Google Maps:</label>
+            <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
+            <small class="text-muted">Puedes abrir Google Maps, seleccionar un punto y copiar el link.</small>
           </div>
         </div>
+
 
         <!-- Descripción -->
         <div class="mb-3">
@@ -151,10 +160,8 @@
     }
 
     // Enviar pedido a WhatsApp
-    function toggleDelivery() {
-  const lugar = document.getElementById("lugar").value;
-  document.getElementById("deliveryOptions").style.display = 
-    (lugar === "Delivery") ? "block" : "none";
+function toggleDelivery(value) {
+  document.getElementById("deliveryFields").style.display = (value === "si") ? "block" : "none";
 }
 
 function enviarPedido() {
@@ -165,29 +172,29 @@ function enviarPedido() {
 
   const nombre = document.getElementById("nombre").value.trim();
   const lugar = document.getElementById("lugar").value;
+  const delivery = document.getElementById("delivery").value;
   const direccion = document.getElementById("direccion").value.trim();
+  const mapsLink = document.getElementById("mapsLink").value.trim();
 
-  if (!nombre || !lugar) {
-    alert("Por favor completa todos los campos obligatorios.");
+  if (!nombre) {
+    alert("Por favor ingresa tu nombre.");
     return;
   }
 
-  // Construcción del mensaje
-  let mensaje = `*Nuevo pedido de:* ${nombre}\n📍 *Lugar:* ${lugar}\n`;
-
-  if (lugar === "Delivery") {
-    if (direccion) {
-      mensaje += `🏠 Dirección: ${direccion}\n`;
-    } else {
-      mensaje += `🌍 Ubicación enviada desde Google Maps\n`;
-    }
-    mensaje += `💰 *Costo de envío:* S/ 13.00\n`;
-  }
-
-  mensaje += "\n*Productos:*\n";
+  let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
   pedido.forEach((item, i) => {
     mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
   });
+
+  mensaje += `\n📍 Lugar: ${lugar || "No especificado"}`;
+
+  if (delivery === "si") {
+    mensaje += `\n🚚 Delivery: Sí (S/ 13)\n`;
+    if (direccion) mensaje += `🏠 Dirección: ${direccion}\n`;
+    if (mapsLink) mensaje += `🗺️ Google Maps: ${mapsLink}\n`;
+  } else {
+    mensaje += `\n🚚 Delivery: No\n`;
+  }
 
   const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
@@ -197,6 +204,7 @@ function enviarPedido() {
   </script>
 </body>
 </html>
+
 
 
 
