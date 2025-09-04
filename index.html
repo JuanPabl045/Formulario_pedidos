@@ -9,7 +9,7 @@
 
   <style>
     body {
-      background: linear-gradient(135deg, #f0f9ff, #cbebff);
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
       padding: 20px 0;
@@ -17,7 +17,7 @@
     .card {
       border-radius: 20px;
       padding: 25px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       background: #fff;
       max-width: 800px;
       margin: 0 auto;
@@ -35,9 +35,14 @@
     }
     input, select, textarea {
       font-size: 1rem;
-      padding: 10px;
-      border-radius: 10px !important;
+      padding: 12px;
+      border-radius: 12px !important;
       border: 1px solid #ced4da;
+      transition: all 0.3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+      border-color: #86b7fe;
     }
     button {
       font-size: 1.1rem !important;
@@ -47,13 +52,25 @@
     }
     .btn-maps {
       border-radius: 10px !important;
-      padding: 10px 15px;
+      padding: 12px 16px;
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+    }
+    .btn-maps:hover {
+      background-color: #0b5ed7;
+      transform: translateY(-2px);
     }
     /* Mejorar lista de productos añadidos */
     #listaPedido li {
       font-size: 0.95rem;
       border-radius: 10px;
       margin-bottom: 8px;
+      transition: all 0.3s;
+    }
+    #listaPedido li:hover {
+      background-color: #f8f9fa;
+      transform: translateX(5px);
     }
     .input-group {
       border-radius: 10px;
@@ -64,6 +81,27 @@
     .input-group .btn {
       border-radius: 10px 0 0 10px !important;
     }
+    .delivery-option {
+      padding: 15px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .delivery-option:hover {
+      border-color: #86b7fe;
+      background-color: #f8f9fa;
+    }
+    .delivery-option.selected {
+      border-color: #0d6efd;
+      background-color: #e8f4ff;
+    }
+    .delivery-icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      color: #0d6efd;
+    }
     /* Ajuste para móviles */
     @media (max-width: 576px) {
       h1 {
@@ -73,7 +111,7 @@
         padding: 15px;
       }
       .btn-maps {
-        padding: 8px 12px;
+        padding: 10px 12px;
         font-size: 0.9rem !important;
       }
     }
@@ -114,27 +152,29 @@
           <input type="text" id="nombre" class="form-control" required>
         </div>
 
-        <!-- Lugar -->
-        <div class="mb-3" id="lugarField">
-          <label for="lugar">Lugar de entrega:</label>
-          <select id="lugar" class="form-control" required>
-            <option value="" disabled selected>Selecciona un lugar</option>
-            <option value="San Borja">San Borja</option>
-            <option value="Magdalena del Mar">Magdalena del Mar</option>
-          </select>
-        </div>
-
-        <!-- Delivery -->
+        <!-- Método de entrega -->
         <div class="mb-3">
-          <label for="delivery">¿Deseas delivery?</label>
-          <select id="delivery" class="form-control" onchange="toggleDelivery(this.value)">
-            <option value="" disabled selected>Selecciona una opción</option>
-            <option value="no">No</option>
-            <option value="si">Sí (S/ 13)</option>
-          </select>
+          <label class="mb-2">Método de entrega:</label>
+          
+          <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
+            <i class="fas fa-store delivery-icon"></i>
+            <span>San Borja (Recojo en tienda)</span>
+          </div>
+          
+          <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
+            <i class="fas fa-store delivery-icon"></i>
+            <span>Magdalena del Mar (Recojo en tienda)</span>
+          </div>
+          
+          <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
+            <i class="fas fa-truck delivery-icon"></i>
+            <span>Delivery (S/ 13 adicional)</span>
+          </div>
+          
+          <input type="hidden" id="metodoEntrega" required>
         </div>
 
-        <!-- Campos delivery -->
+        <!-- Campos delivery (inicialmente ocultos) -->
         <div id="deliveryFields" style="display:none;">
           <div class="mb-3">
             <label for="direccion">Dirección:</label>
@@ -143,8 +183,8 @@
           <div class="mb-3">
             <label for="mapsLink">Link de Google Maps:</label>
             <div class="input-group">
-              <button type="button" class="btn btn-outline-secondary btn-maps" onclick="abrirGoogleMaps()">
-                <i class="fas fa-map-marked-alt"></i>
+              <button type="button" class="btn btn-maps" onclick="abrirGoogleMaps()">
+                <i class="fas fa-map-marked-alt"></i> Maps
               </button>
               <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
             </div>
@@ -160,6 +200,7 @@
     const DEFAULT_NUMERO_DESTINO = "51TU_NUMERO"; // 👈 cambia aquí
 
     let pedido = [];
+    let metodoSeleccionado = "";
 
     // Cargar productos desde JSON
     async function cargarProductos() {
@@ -218,18 +259,25 @@
       mostrarPedido();
     }
 
-    function toggleDelivery(value) {
-      const deliveryFields = document.getElementById("deliveryFields");
-      const lugarField = document.getElementById("lugarField");
+    function seleccionarMetodo(metodo) {
+      metodoSeleccionado = metodo;
+      document.getElementById("metodoEntrega").value = metodo;
       
-      if (value === "si") {
+      // Remover la clase 'selected' de todas las opciones
+      const opciones = document.querySelectorAll('.delivery-option');
+      opciones.forEach(opcion => {
+        opcion.classList.remove('selected');
+      });
+      
+      // Agregar la clase 'selected' a la opción clickeada
+      event.currentTarget.classList.add('selected');
+      
+      // Mostrar u ocultar campos de delivery
+      const deliveryFields = document.getElementById("deliveryFields");
+      if (metodo === "Delivery") {
         deliveryFields.style.display = "block";
-        lugarField.style.display = "none";
-        document.getElementById("lugar").required = false;
       } else {
         deliveryFields.style.display = "none";
-        lugarField.style.display = "block";
-        document.getElementById("lugar").required = true;
       }
     }
 
@@ -242,14 +290,19 @@
         alert("Agrega al menos un producto al pedido.");
         return;
       }
+      
       const nombre = document.getElementById("nombre").value.trim();
-      const lugar = document.getElementById("lugar").value;
-      const delivery = document.getElementById("delivery").value;
+      const metodo = document.getElementById("metodoEntrega").value;
       const direccion = document.getElementById("direccion").value.trim();
       const mapsLink = document.getElementById("mapsLink").value.trim();
 
       if (!nombre) {
         alert("Por favor ingresa tu nombre.");
+        return;
+      }
+      
+      if (!metodo) {
+        alert("Por favor selecciona un método de entrega.");
         return;
       }
 
@@ -258,13 +311,12 @@
         mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
       });
 
-      if (delivery === "si") {
-        mensaje += `\n🚚 Delivery: Sí (S/ 13)\n`;
-        mensaje += `📍 Dirección: ${direccion || "No especificada"}\n`;
+      mensaje += `\n📍 Método de entrega: ${metodo}`;
+      
+      if (metodo === "Delivery") {
+        mensaje += ` (S/ 13)\n`;
+        mensaje += `🏠 Dirección: ${direccion || "No especificada"}\n`;
         if (mapsLink) mensaje += `🗺️ Google Maps: ${mapsLink}\n`;
-      } else {
-        mensaje += `\n📍 Lugar: ${lugar || "No especificado"}`;
-        mensaje += `\n🚚 Delivery: No\n`;
       }
 
       const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
