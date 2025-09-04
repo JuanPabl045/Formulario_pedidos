@@ -102,6 +102,15 @@
       margin-right: 10px;
       color: #0d6efd;
     }
+    .producto-info {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-top: 5px;
+    }
+    .precio-info {
+      font-weight: bold;
+      color: #198754;
+    }
     /* Ajuste para móviles */
     @media (max-width: 576px) {
       h1 {
@@ -125,26 +134,37 @@
         <!-- Producto -->
         <div class="mb-3">
           <label for="producto">Producto:</label>
-          <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
+          <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto" onchange="mostrarInfoProducto()">
           <datalist id="listaProductos"></datalist>
+          <div id="infoProducto" class="producto-info"></div>
         </div>
 
         <!-- Cantidad -->
         <div class="mb-3">
-          <label for="cantidad">Cantidad:</label>
-          <input type="number" id="cantidad" class="form-control" min="1" value="1">
+          <label for="cantidad">Cantidad (kilos):</label>
+          <input type="number" id="cantidad" class="form-control" min="0.1" step="0.1" value="1">
         </div>
 
-        <!-- Descripción -->
+        <!-- Descripción adicional -->
         <div class="mb-3">
-          <label for="descripcion">Descripción adicional:</label>
-          <textarea id="descripcion" class="form-control" placeholder="Ejemplo: entregar en la tarde..."></textarea>
+          <label for="descripcion">Notas adicionales:</label>
+          <textarea id="descripcion" class="form-control" placeholder="Ejemplo: cortar en trozos, sin hueso, etc."></textarea>
         </div>
 
         <button type="button" class="btn btn-primary w-100 mb-3" onclick="agregarProducto()">➕ Agregar producto</button>
 
         <h4 class="mt-3">📝 Productos añadidos:</h4>
         <ul id="listaPedido" class="list-group mb-3"></ul>
+
+        <!-- Resumen del pedido -->
+        <div class="mb-3 p-3 border rounded">
+          <h5>Resumen del Pedido</h5>
+          <div id="resumenPedido">
+            <p class="mb-1">Subtotal: S/ <span id="subtotal">0.00</span></p>
+            <p class="mb-1">Delivery: S/ <span id="costoDelivery">0.00</span></p>
+            <p class="mb-0 fw-bold">Total: S/ <span id="total">0.00</span></p>
+          </div>
+        </div>
 
         <!-- Nombre -->
         <div class="mb-3">
@@ -198,9 +218,11 @@
 
   <script>
     const DEFAULT_NUMERO_DESTINO = "51TU_NUMERO"; // 👈 Reemplaza con tu número real
+    const COSTO_DELIVERY = 13;
 
     let pedido = [];
     let metodoSeleccionado = "";
+    let productosData = [];
 
     // Cargar productos desde JSON
     async function cargarProductos() {
@@ -209,15 +231,15 @@
         if (!response.ok) {
           throw new Error("No se pudo cargar el archivo productos.json");
         }
-        const productos = await response.json();
+        productosData = await response.json();
         const lista = document.getElementById("listaProductos");
         lista.innerHTML = "";
         
-        // Verificar la estructura del JSON y adaptarse a ella
-        productos.forEach(p => {
+        // Llenar la lista de opciones con productos y descripciones
+        productosData.forEach(p => {
           const option = document.createElement("option");
-          // Usar el campo PRODUCTO según tu estructura JSON
-          option.value = p.PRODUCTO;
+          option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
+          option.setAttribute("data-precio", p.PRECIO);
           lista.appendChild(option);
         });
       } catch (error) {
@@ -226,29 +248,83 @@
       }
     }
 
-    function agregarProducto() {
-      const producto = document.getElementById("producto").value.trim();
-      const cantidad = document.getElementById("cantidad").value;
-      const descripcion = document.getElementById("descripcion").value.trim();
-      if (!producto || cantidad <= 0) {
-        alert("Por favor selecciona un producto y cantidad válida");
+    function mostrarInfoProducto() {
+      const productoInput = document.getElementById("producto").value;
+      const infoDiv = document.getElementById("infoProducto");
+      
+      if (!productoInput) {
+        infoDiv.innerHTML = "";
         return;
       }
-      pedido.push({ producto, cantidad, descripcion });
+      
+      // Buscar el producto en los datos cargados
+      const producto = productosData.find(p => 
+        `${p.PRODUCTO} - ${p.DESCRIPCION}` === productoInput
+      );
+      
+      if (producto) {
+        infoDiv.innerHTML = `<span class="precio-info">Precio: S/ ${producto.PRECIO} por kilo</span>`;
+      } else {
+        infoDiv.innerHTML = "";
+      }
+    }
+
+    function agregarProducto() {
+      const productoCompleto = document.getElementById("producto").value.trim();
+      const cantidad = parseFloat(document.getElementById("cantidad").value);
+      const descripcion = document.getElementById("descripcion").value.trim();
+      
+      if (!productoCompleto || isNaN(cantidad) || cantidad <= 0) {
+        alert("Por favor selecciona un producto y ingresa una cantidad válida");
+        return;
+      }
+      
+      // Separar producto y descripción
+      const partes = productoCompleto.split(" - ");
+      const producto = partes[0];
+      const descripcionProducto = partes.length > 1 ? partes[1] : "";
+      
+      // Buscar el precio del producto
+      const productoData = productosData.find(p => 
+        p.PRODUCTO === producto && p.DESCRIPCION === descripcionProducto
+      );
+      
+      const precio = productoData ? parseFloat(productoData.PRECIO) : 0;
+      const subtotal = precio * cantidad;
+      
+      pedido.push({ 
+        producto, 
+        descripcion: descripcionProducto,
+        cantidad, 
+        notas: descripcion,
+        precio,
+        subtotal
+      });
+      
       mostrarPedido();
+      actualizarResumen();
+      
       document.getElementById("producto").value = "";
       document.getElementById("cantidad").value = 1;
       document.getElementById("descripcion").value = "";
+      document.getElementById("infoProducto").innerHTML = "";
     }
 
     function mostrarPedido() {
       const lista = document.getElementById("listaPedido");
       lista.innerHTML = "";
+      
       pedido.forEach((item, index) => {
         const li = document.createElement("li");
         li.className = "list-group-item d-flex justify-content-between align-items-center";
-        li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} - ${item.descripcion || "Sin detalles"}</span>
-                        <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>`;
+        li.innerHTML = `
+          <div>
+            <b>${item.cantidad} kg</b> ${item.producto} - ${item.descripcion}
+            ${item.notas ? `<br><small>Notas: ${item.notas}</small>` : ''}
+            <br><small class="precio-info">S/ ${item.precio.toFixed(2)}/kg → S/ ${item.subtotal.toFixed(2)}</small>
+          </div>
+          <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>
+        `;
         lista.appendChild(li);
       });
     }
@@ -256,6 +332,17 @@
     function eliminarProducto(index) {
       pedido.splice(index, 1);
       mostrarPedido();
+      actualizarResumen();
+    }
+
+    function actualizarResumen() {
+      const subtotal = pedido.reduce((sum, item) => sum + item.subtotal, 0);
+      const delivery = metodoSeleccionado === "Delivery" ? COSTO_DELIVERY : 0;
+      const total = subtotal + delivery;
+      
+      document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+      document.getElementById("costoDelivery").textContent = delivery.toFixed(2);
+      document.getElementById("total").textContent = total.toFixed(2);
     }
 
     function seleccionarMetodo(metodo) {
@@ -278,6 +365,8 @@
       } else {
         deliveryFields.style.display = "none";
       }
+      
+      actualizarResumen();
     }
 
     function abrirGoogleMaps() {
@@ -305,15 +394,32 @@
         return;
       }
 
+      // Calcular totales
+      const subtotal = pedido.reduce((sum, item) => sum + item.subtotal, 0);
+      const delivery = metodo === "Delivery" ? COSTO_DELIVERY : 0;
+      const total = subtotal + delivery;
+
       let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
+      mensaje += `*Productos:*\n`;
+      
       pedido.forEach((item, i) => {
-        mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
+        mensaje += `${i+1}. ${item.cantidad} kg de ${item.producto} - ${item.descripcion} (S/ ${item.precio.toFixed(2)}/kg)\n`;
+        if (item.notas) {
+          mensaje += `   Notas: ${item.notas}\n`;
+        }
+        mensaje += `   Subtotal: S/ ${item.subtotal.toFixed(2)}\n\n`;
       });
 
-      mensaje += `\n📍 Método de entrega: ${metodo}`;
+      mensaje += `*Resumen de pago:*\n`;
+      mensaje += `Subtotal: S/ ${subtotal.toFixed(2)}\n`;
+      if (delivery > 0) {
+        mensaje += `Delivery: S/ ${delivery.toFixed(2)}\n`;
+      }
+      mensaje += `*Total: S/ ${total.toFixed(2)}*\n\n`;
+
+      mensaje += `📍 Método de entrega: ${metodo}\n`;
       
       if (metodo === "Delivery") {
-        mensaje += ` (S/ 13)\n`;
         mensaje += `🏠 Dirección: ${direccion || "No especificada"}\n`;
         if (mapsLink) mensaje += `🗺️ Google Maps: ${mapsLink}\n`;
       }
@@ -324,11 +430,13 @@
       // Limpiar el formulario después de enviar
       pedido = [];
       mostrarPedido();
+      actualizarResumen();
       document.getElementById("pedidoForm").reset();
       document.querySelectorAll('.delivery-option').forEach(opt => {
         opt.classList.remove('selected');
       });
       document.getElementById("deliveryFields").style.display = "none";
+      metodoSeleccionado = "";
     }
 
     window.onload = cargarProductos;
