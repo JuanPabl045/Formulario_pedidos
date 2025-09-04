@@ -2,481 +2,481 @@
   {
     "PRODUCTO": "Trucha",
     "DESCRIPCION": "Trucha",
-    "PRECIO_L_KG": "26"
+    "PRECIO": "26"
   },
   {
     "PRODUCTO": "Trucha",
     "DESCRIPCION": "Filete de trucha",
-    "PRECIO_L_KG": "44"
+    "PRECIO": "44"
   },
   {
     "PRODUCTO": "Trucha",
     "DESCRIPCION": "Filete de Trucha cuarto",
-    "PRECIO_L_KG": "44"
+    "PRECIO": "44"
   },
   {
     "PRODUCTO": "Trucha",
     "DESCRIPCION": "Mariposa",
-    "PRECIO_L_KG": "34"
+    "PRECIO": "34"
   },
   {
     "PRODUCTO": "Cuy",
     "DESCRIPCION": "Carcasa",
-    "PRECIO_L_KG": "70"
+    "PRECIO": "70"
   },
   {
     "PRODUCTO": "Cuy",
     "DESCRIPCION": "Sangre",
-    "PRECIO_L_KG": "3.5"
+    "PRECIO": "3.5"
   },
   {
     "PRODUCTO": "Cuy",
     "DESCRIPCION": "finas hiervas",
-    "PRECIO_L_KG": "57"
+    "PRECIO": "57"
   },
   {
     "PRODUCTO": "Cuy",
     "DESCRIPCION": "deshuesado",
-    "PRECIO_L_KG": "121"
+    "PRECIO": "121"
   },
   {
     "PRODUCTO": "Cuy",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "125"
+    "PRECIO": "125"
   },
   {
     "PRODUCTO": "Cuy",
     "DESCRIPCION": "Chorizo",
-    "PRECIO_L_KG": "120"
+    "PRECIO": "120"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Carcasa",
-    "PRECIO_L_KG": "50"
+    "PRECIO": "50"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Finas hierbas",
-    "PRECIO_L_KG": "55"
+    "PRECIO": "55"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Medallones",
-    "PRECIO_L_KG": "50"
+    "PRECIO": "50"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "77"
+    "PRECIO": "77"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Chorizo",
-    "PRECIO_L_KG": "65"
+    "PRECIO": "65"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Paletilla",
-    "PRECIO_L_KG": "48"
+    "PRECIO": "48"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Lomito",
-    "PRECIO_L_KG": "48"
+    "PRECIO": "48"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Barbiquiu",
-    "PRECIO_L_KG": "58"
+    "PRECIO": "58"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Higado",
-    "PRECIO_L_KG": "20"
+    "PRECIO": "20"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Carne Molida",
-    "PRECIO_L_KG": "80"
+    "PRECIO": "80"
   },
   {
     "PRODUCTO": "Conejo ",
     "DESCRIPCION": "Tripas",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Pato",
     "DESCRIPCION": "Carcasa",
-    "PRECIO_L_KG": "29"
+    "PRECIO": "29"
   },
   {
     "PRODUCTO": "Codorniz",
     "DESCRIPCION": "Carcasa",
-    "PRECIO_L_KG": "50"
+    "PRECIO": "50"
   },
   {
     "PRODUCTO": "Codorniz",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "70"
+    "PRECIO": "70"
   },
   {
     "PRODUCTO": "Codorniz",
     "DESCRIPCION": "chorizo",
-    "PRECIO_L_KG": "70"
+    "PRECIO": "70"
   },
   {
     "PRODUCTO": "Cerdo",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "40"
+    "PRECIO": "40"
   },
   {
     "PRODUCTO": "Cerdo",
     "DESCRIPCION": "chorizo",
-    "PRECIO_L_KG": "38"
+    "PRECIO": "38"
   },
   {
     "PRODUCTO": "Alpaca",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "65"
+    "PRECIO": "65"
   },
   {
     "PRODUCTO": "pollo ",
     "DESCRIPCION": "carcasa",
-    "PRECIO_L_KG": "28"
+    "PRECIO": "28"
   },
   {
     "PRODUCTO": "pollo ",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "45"
+    "PRECIO": "45"
   },
   {
     "PRODUCTO": "Pavo",
     "DESCRIPCION": "Carcasa",
-    "PRECIO_L_KG": "29"
+    "PRECIO": "29"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Lomo fino",
-    "PRECIO_L_KG": "70"
+    "PRECIO": "70"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Huachalomo",
-    "PRECIO_L_KG": "38"
+    "PRECIO": "38"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Bife",
-    "PRECIO_L_KG": "39"
+    "PRECIO": "39"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Bistek cadera",
-    "PRECIO_L_KG": "38"
+    "PRECIO": "38"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Pejerrey",
-    "PRECIO_L_KG": "35"
+    "PRECIO": "35"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Asado",
-    "PRECIO_L_KG": "34"
+    "PRECIO": "34"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Arañita",
-    "PRECIO_L_KG": "35"
+    "PRECIO": "35"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Bistek tapa",
-    "PRECIO_L_KG": "36"
+    "PRECIO": "36"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Bola de pierna",
-    "PRECIO_L_KG": "35"
+    "PRECIO": "35"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Carne picada",
-    "PRECIO_L_KG": "29"
+    "PRECIO": "29"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Paloma",
-    "PRECIO_L_KG": "35"
+    "PRECIO": "35"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Entraña",
-    "PRECIO_L_KG": "30"
+    "PRECIO": "30"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Churrasco",
-    "PRECIO_L_KG": "32"
+    "PRECIO": "32"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Carne molida",
-    "PRECIO_L_KG": "29"
+    "PRECIO": "29"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Malaya",
-    "PRECIO_L_KG": "26"
+    "PRECIO": "26"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Matahambre",
-    "PRECIO_L_KG": "25"
+    "PRECIO": "25"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Cara",
-    "PRECIO_L_KG": "23"
+    "PRECIO": "23"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Choclo",
-    "PRECIO_L_KG": "28"
+    "PRECIO": "28"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Costilla",
-    "PRECIO_L_KG": "26"
+    "PRECIO": "26"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Osobuco",
-    "PRECIO_L_KG": "26"
+    "PRECIO": "26"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Cuello",
-    "PRECIO_L_KG": "24"
+    "PRECIO": "24"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Sancochado",
-    "PRECIO_L_KG": "25"
+    "PRECIO": "25"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Hueso",
-    "PRECIO_L_KG": "8"
+    "PRECIO": "8"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Churrasco Redondo",
-    "PRECIO_L_KG": "34"
+    "PRECIO": "34"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Carne Molida cadera",
-    "PRECIO_L_KG": "36"
+    "PRECIO": "36"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Carne Molida tapa",
-    "PRECIO_L_KG": "35"
+    "PRECIO": "35"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Cola",
-    "PRECIO_L_KG": "17"
+    "PRECIO": "17"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Criadilla",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Corazón",
-    "PRECIO_L_KG": "20"
+    "PRECIO": "20"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Lengua",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Bazo",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Higado",
-    "PRECIO_L_KG": "20"
+    "PRECIO": "20"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Mondongo",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Pata",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Rachi",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Riñon",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Tripa",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Bofe",
-    "PRECIO_L_KG": "16"
+    "PRECIO": "16"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "Ubre",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "cuajar",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Res viscera",
     "DESCRIPCION": "cerebro",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "60"
+    "PRECIO": "60"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Chorizo",
-    "PRECIO_L_KG": "50"
+    "PRECIO": "50"
   },
   {
     "PRODUCTO": "Res",
     "DESCRIPCION": "Costilla Deshuesada",
-    "PRECIO_L_KG": "27"
+    "PRECIO": "27"
   },
   {
     "PRODUCTO": "Cordero",
     "DESCRIPCION": "pierna",
-    "PRECIO_L_KG": "34"
+    "PRECIO": "34"
   },
   {
     "PRODUCTO": "Cordero",
     "DESCRIPCION": "Cabeza",
-    "PRECIO_L_KG": "30"
+    "PRECIO": "30"
   },
   {
     "PRODUCTO": "Cordero",
     "DESCRIPCION": "mariposa",
-    "PRECIO_L_KG": "34"
+    "PRECIO": "34"
   },
   {
     "PRODUCTO": "Cordero",
     "DESCRIPCION": "Costilla",
-    "PRECIO_L_KG": "30"
+    "PRECIO": "30"
   },
   {
     "PRODUCTO": "cordero",
     "DESCRIPCION": "carcasa",
-    "PRECIO_L_KG": "34"
+    "PRECIO": "34"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Criadilla",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Corazón",
-    "PRECIO_L_KG": "20"
+    "PRECIO": "20"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Lengua",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Bazo",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Higado",
-    "PRECIO_L_KG": "20"
+    "PRECIO": "20"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Mondongo",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Pata",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Rachi",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Riñon",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Tripa",
-    "PRECIO_L_KG": "14"
+    "PRECIO": "14"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "Bofe",
-    "PRECIO_L_KG": "16"
+    "PRECIO": "16"
   },
   {
     "PRODUCTO": "Cordero viscera",
     "DESCRIPCION": "cuajar",
-    "PRECIO_L_KG": "18"
+    "PRECIO": "18"
   },
   {
     "PRODUCTO": "cordero",
     "DESCRIPCION": "Hamburguesa",
-    "PRECIO_L_KG": "65"
+    "PRECIO": "65"
   },
   {
     "PRODUCTO": "Cordero",
     "DESCRIPCION": "Chorizo",
-    "PRECIO_L_KG": "60"
+    "PRECIO": "60"
   },
   {
     "PRODUCTO": "Cordero",
     "DESCRIPCION": "Cuello",
-    "PRECIO_L_KG": "30"
+    "PRECIO": "30"
   },
   {
     "PRODUCTO": "Gallina ",
     "DESCRIPCION": "carcasa",
-    "PRECIO_L_KG": "28"
+    "PRECIO": "28"
   }
 ]
