@@ -186,7 +186,7 @@
               <button type="button" class="btn btn-maps" onclick="abrirGoogleMaps()">
                 <i class="fas fa-map-marked-alt"></i> Maps
               </button>
-              <input type="url" id="mapsLink" class="form-control" placeholder=" O pegue aquí el link de Google Maps">
+              <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
             </div>
           </div>
         </div>
@@ -197,7 +197,7 @@
   </div>
 
   <script>
-    const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 Reemplaza con tu número real
+    const DEFAULT_NUMERO_DESTINO = "51TU_NUMERO"; // 👈 Reemplaza con tu número real
 
     let pedido = [];
     let metodoSeleccionado = "";
@@ -213,8 +213,10 @@
         const lista = document.getElementById("listaProductos");
         lista.innerHTML = "";
         
+        // Verificar la estructura del JSON y adaptarse a ella
         productos.forEach(p => {
           const option = document.createElement("option");
+          // Usar el campo PRODUCTO según tu estructura JSON
           option.value = p.PRODUCTO;
           lista.appendChild(option);
         });
