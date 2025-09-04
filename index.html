@@ -7,8 +7,8 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f9f9f9;
+      background: #f5f5f5;
+      padding: 20px;
     }
     h1 {
       text-align: center;
@@ -19,30 +19,30 @@
       text-align: center;
     }
     input {
-      padding: 8px;
+      padding: 10px;
       width: 80%;
       max-width: 400px;
       border: 1px solid #ccc;
       border-radius: 5px;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: auto;
+    }
+    li {
       background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    th, td {
+      margin: 8px 0;
       padding: 12px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    th {
-      background: #007BFF;
-      color: white;
-    }
-    tr:hover {
-      background: #f1f1f1;
+    .info {
+      flex: 1;
     }
     button {
       padding: 8px 12px;
@@ -58,58 +58,25 @@
   </style>
 </head>
 <body>
-  <h1>Catálogo de Productos</h1>
+  <h1>Haz tu pedido</h1>
 
   <div class="buscador">
-    <input type="text" id="buscar" placeholder="Buscar producto o descripción...">
+    <input type="text" id="buscar" placeholder="Buscar producto...">
   </div>
 
-  <table id="tablaProductos">
-    <thead>
-      <tr>
-        <th>Producto</th>
-        <th>Descripción</th>
-        <th>Precio (S/ por Kg)</th>
-        <th>Cantidad (Kg)</th>
-        <th>Pedir</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <ul id="listaProductos"></ul>
 
   <script>
-    const NUMERO_WHATSAPP = "51TU_NUMERO_AQUI"; // 👈 Reemplaza con tu número real
-
+    const NUMERO_WHATSAPP = "51TU_NUMERO_AQUI"; // 👈 Reemplaza con tu número
     let productos = [];
 
-    // Cargar productos desde productos.json
+    // Cargar productos desde JSON
     fetch("productos.json")
       .then(res => res.json())
       .then(data => {
         productos = data;
-        mostrarProductos(productos);
       })
       .catch(err => console.error("Error cargando productos:", err));
-
-    // Mostrar productos en la tabla
-    function mostrarProductos(lista) {
-      const tbody = document.querySelector("#tablaProductos tbody");
-      tbody.innerHTML = "";
-
-      lista.forEach((p, index) => {
-        const fila = document.createElement("tr");
-
-        fila.innerHTML = `
-          <td>${p.PRODUCTO}</td>
-          <td>${p.DESCRIPCION}</td>
-          <td>S/ ${p.PRECIO}</td>
-          <td><input type="number" id="cant_${index}" value="1" min="1" style="width:60px"></td>
-          <td><button onclick="enviarPedido(${index})">Enviar</button></td>
-        `;
-
-        tbody.appendChild(fila);
-      });
-    }
 
     // Buscar productos
     document.getElementById("buscar").addEventListener("input", e => {
@@ -117,17 +84,34 @@
       const filtrados = productos.filter(p =>
         p.PRODUCTO.toLowerCase().includes(filtro) ||
         p.DESCRIPCION.toLowerCase().includes(filtro)
-      );
-      mostrarProductos(filtrados);
+      ).slice(0, 5); // máximo 5 resultados
+
+      mostrarResultados(filtrados);
     });
 
-    // Enviar pedido por WhatsApp
-    function enviarPedido(index) {
-      const p = productos[index];
-      const cantidad = document.getElementById(`cant_${index}`).value;
-      const mensaje = `¡Hola! Quiero pedir:\n\nProducto: ${p.PRODUCTO}\nDescripción: ${p.DESCRIPCION}\nPrecio: S/ ${p.PRECIO} x Kg\nCantidad: ${cantidad} Kg\n\nGracias.`;
-      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
+    // Mostrar productos en lista
+    function mostrarResultados(lista) {
+      const ul = document.getElementById("listaProductos");
+      ul.innerHTML = "";
 
+      lista.forEach(p => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <div class="info">
+            <strong>${p.PRODUCTO}</strong><br>
+            ${p.DESCRIPCION}<br>
+            <em>S/ ${p.PRECIO} por Kg</em>
+          </div>
+          <button onclick='enviarPedido(${JSON.stringify(p)})'>Pedir</button>
+        `;
+        ul.appendChild(li);
+      });
+    }
+
+    // Enviar pedido por WhatsApp
+    function enviarPedido(producto) {
+      const mensaje = `¡Hola! Quiero pedir:\n\nProducto: ${producto.PRODUCTO}\nDescripción: ${producto.DESCRIPCION}\nPrecio: S/ ${producto.PRECIO} x Kg\nCantidad: 1 Kg\n\nGracias.`;
+      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
   </script>
