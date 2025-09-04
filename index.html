@@ -39,6 +39,17 @@
           <input type="number" id="cantidad" class="form-control" min="1" value="1">
         </div>
 
+        <!-- Lugar -->
+        <div class="mb-3">
+          <label for="lugar" class="form-label">Lugar de entrega:</label>
+            <select id="lugar" class="form-control" required>
+              <option value="" disabled selected>Selecciona un lugar</option>
+              <option value="San Borja">San Borja</option>
+              <option value="Magdalena del Mar">Magdalena del Mar</option>
+            </select>
+        </div>
+
+
         <!-- Descripción -->
         <div class="mb-3">
           <label for="descripcion" class="form-label">Descripción adicional:</label>
@@ -123,28 +134,31 @@
 
     // Enviar pedido a WhatsApp
     function enviarPedido() {
-      if (pedido.length === 0) {
-        alert("Agrega al menos un producto al pedido.");
-        return;
-      }
-      const nombre = document.getElementById("nombre").value.trim();
-      if (!nombre) {
-        alert("Por favor ingresa tu nombre.");
-        return;
-      }
+  if (pedido.length === 0) {
+    alert("Agrega al menos un producto al pedido.");
+    return;
+  }
+  const nombre = document.getElementById("nombre").value.trim();
+  const lugar = document.getElementById("lugar").value;
 
-      let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
-      pedido.forEach((item, i) => {
-        mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
-      });
+  if (!nombre || !lugar) {
+    alert("Por favor ingresa tu nombre y selecciona el lugar de entrega.");
+    return;
+  }
 
-      const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, "_blank");
-    }
+  let mensaje = `*Nuevo pedido de:* ${nombre}\n📍 *Lugar:* ${lugar}\n\n`;
+  pedido.forEach((item, i) => {
+    mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
+  });
+
+  const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
+}
 
     window.onload = cargarProductos;
   </script>
 </body>
 </html>
+
 
 
