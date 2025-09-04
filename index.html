@@ -40,15 +40,33 @@
         </div>
 
         <!-- Lugar -->
+              <!-- Lugar -->
         <div class="mb-3">
           <label for="lugar" class="form-label">Lugar de entrega:</label>
-            <select id="lugar" class="form-control" required>
-              <option value="" disabled selected>Selecciona un lugar</option>
-              <option value="San Borja">San Borja</option>
-              <option value="Magdalena del Mar">Magdalena del Mar</option>
-            </select>
+          <select id="lugar" class="form-control" onchange="toggleDelivery()" required>
+            <option value="" disabled selected>Selecciona un lugar</option>
+            <option value="San Borja">San Borja</option>
+            <option value="Magdalena del Mar">Magdalena del Mar</option>
+            <option value="Delivery">Delivery (S/13)</option>
+          </select>
         </div>
-
+        
+        <!-- Opciones de delivery (solo si se elige Delivery) -->
+        <div id="deliveryOptions" style="display:none;">
+          <!-- Dirección manual -->
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección de entrega:</label>
+            <input type="text" id="direccion" class="form-control" placeholder="Ejemplo: Av. Primavera 123, San Borja">
+          </div>
+        
+          <!-- Google Maps -->
+          <div class="mb-3">
+            <p class="text-muted">O comparte tu ubicación con Google Maps:</p>
+            <a href="https://www.google.com/maps" target="_blank" class="btn btn-outline-primary w-100">
+              🌍 Abrir Google Maps
+            </a>
+          </div>
+        </div>
 
         <!-- Descripción -->
         <div class="mb-3">
@@ -133,20 +151,40 @@
     }
 
     // Enviar pedido a WhatsApp
-    function enviarPedido() {
+    function toggleDelivery() {
+  const lugar = document.getElementById("lugar").value;
+  document.getElementById("deliveryOptions").style.display = 
+    (lugar === "Delivery") ? "block" : "none";
+}
+
+function enviarPedido() {
   if (pedido.length === 0) {
     alert("Agrega al menos un producto al pedido.");
     return;
   }
+
   const nombre = document.getElementById("nombre").value.trim();
   const lugar = document.getElementById("lugar").value;
+  const direccion = document.getElementById("direccion").value.trim();
 
   if (!nombre || !lugar) {
-    alert("Por favor ingresa tu nombre y selecciona el lugar de entrega.");
+    alert("Por favor completa todos los campos obligatorios.");
     return;
   }
 
-  let mensaje = `*Nuevo pedido de:* ${nombre}\n📍 *Lugar:* ${lugar}\n\n`;
+  // Construcción del mensaje
+  let mensaje = `*Nuevo pedido de:* ${nombre}\n📍 *Lugar:* ${lugar}\n`;
+
+  if (lugar === "Delivery") {
+    if (direccion) {
+      mensaje += `🏠 Dirección: ${direccion}\n`;
+    } else {
+      mensaje += `🌍 Ubicación enviada desde Google Maps\n`;
+    }
+    mensaje += `💰 *Costo de envío:* S/ 13.00\n`;
+  }
+
+  mensaje += "\n*Productos:*\n";
   pedido.forEach((item, i) => {
     mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
   });
@@ -159,6 +197,7 @@
   </script>
 </body>
 </html>
+
 
 
 
