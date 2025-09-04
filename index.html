@@ -78,7 +78,7 @@
   </table>
 
   <script>
-    const NUMERO_WHATSAPP = "51949776123"; // 👈 Reemplaza con tu número real
+    const NUMERO_WHATSAPP = "51TU_NUMERO_AQUI"; // 👈 Reemplaza con tu número real
 
     let productos = [];
 
@@ -102,9 +102,9 @@
         fila.innerHTML = `
           <td>${p.PRODUCTO}</td>
           <td>${p.DESCRIPCION}</td>
-          <td>S/ ${p.PRECIO_L_KG}</td>
+          <td>S/ ${p.PRECIO}</td>
           <td><input type="number" id="cant_${index}" value="1" min="1" style="width:60px"></td>
-          <td><button onclick='enviarPedido(${JSON.stringify(p)})'>Enviar</button></td>
+          <td><button onclick="enviarPedido(${index})">Enviar</button></td>
         `;
 
         tbody.appendChild(fila);
@@ -122,14 +122,14 @@
     });
 
     // Enviar pedido por WhatsApp
-    function enviarPedido(producto) {
-  const cantidad = 1;
-  const mensaje = `¡Hola! Quiero pedir:\n\nProducto: ${producto.PRODUCTO}\nDescripción: ${producto.DESCRIPCION}\nPrecio: S/ ${producto.PRECIO_L_KG} x Kg\nCantidad: ${cantidad} Kg\n\nGracias.`;
-  const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
-  window.open(url, "_blank");
-}
+    function enviarPedido(index) {
+      const p = productos[index];
+      const cantidad = document.getElementById(`cant_${index}`).value;
+      const mensaje = `¡Hola! Quiero pedir:\n\nProducto: ${p.PRODUCTO}\nDescripción: ${p.DESCRIPCION}\nPrecio: S/ ${p.PRECIO} x Kg\nCantidad: ${cantidad} Kg\n\nGracias.`;
+      const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
 
+      window.open(url, "_blank");
+    }
   </script>
 </body>
 </html>
-
