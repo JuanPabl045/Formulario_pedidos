@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Pedidos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f8f9fa;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, button, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 20px;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #20b955;
+    }
+    ul {
+      margin-top: 10px;
+      padding: 0;
+      list-style: none;
+    }
+    ul li {
+      background: #e9ecef;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Formulario de Pedido</h1>
+  <form id="pedidoForm">
+    <label for="producto">Producto:</label>
+    <input list="listaProductos" id="producto" placeholder="Escribe o selecciona un producto">
+    <datalist id="listaProductos">
+      <option value="Tubería negra con rosca azul 1/2''">
+      <option value="Tubería negra con rosca azul 3/4''">
+      <option value="Conexión PVC codo 90°">
+      <option value="Válvula de bola 1''">
+      <option value="Pegamento para PVC">
+    </datalist>
+
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" min="1" value="1">
+
+    <label for="descripcion">Descripción adicional:</label>
+    <textarea id="descripcion" placeholder="Ejemplo: entrega urgente, marca específica..."></textarea>
+
+    <button type="button" onclick="agregarProducto()">Agregar producto al pedido</button>
+
+    <h3>Productos añadidos:</h3>
+    <ul id="listaPedido"></ul>
+
+    <label for="nombre">Tu nombre:</label>
+    <input type="text" id="nombre" required>
+
+    <label for="numero">Número de WhatsApp destino:</label>
+    <input type="tel" id="numero" placeholder="Ej: 51987654321">
+
+    <button type="button" onclick="enviarPedido()">Enviar pedido por WhatsApp</button>
+  </form>
+
+  <script>
+    const pedido = [];
+    const DEFAULT_NUMERO_DESTINO = ""; // 👉 aquí puedes poner fijo tu número ej: "51987654321"
+
+    function agregarProducto() {
+      const producto = document.getElementById("producto").value;
+      const cantidad = document.getElementById("cantidad").value;
+      const descripcion = document.getElementById("descripcion").value;
+
+      if (!producto || !cantidad) {
+        alert("Por favor completa el producto y la cantidad.");
+        return;
+      }
+
+      pedido.push({ producto, cantidad, descripcion });
+      mostrarPedido();
+      guardarEnLocalStorage();
+      limpiarCampos();
+    }
+
+    function mostrarPedido() {
+      const lista = document.getElementById("listaPedido");
+      lista.innerHTML = "";
+      pedido.forEach((item, i) => {
+        lista.innerHTML += `<li>${item.cantidad} x ${item.producto} - ${item.descripcion || ""}</li>`;
+      });
+    }
+
+    function limpiarCampos() {
+      document.getElementById("producto").value = "";
+      document.getElementById("cantidad").value = 1;
+      document.getElementById("descripcion").value = "";
+    }
+
+    function enviarPedido() {
+      const nombre = document.getElementById("nombre").value;
+      let numero = document.getElementById("numero").value || DEFAULT_NUMERO_DESTINO;
+
+      if (!nombre) {
+        alert("Por favor ingresa tu nombre.");
+        return;
+      }
+      if (!numero) {
+        alert("Por favor ingresa un número de WhatsApp destino.");
+        return;
+      }
+      if (pedido.length === 0) {
+        alert("Agrega al menos un producto.");
+        return;
+      }
+
+      let mensaje = `*Nuevo Pedido*%0A`;
+      mensaje += `Cliente: ${nombre}%0A%0A`;
+      pedido.forEach((item, i) => {
+        mensaje += `- ${item.cantidad} x ${item.producto} ${item.descripcion ? "(" + item.descripcion + ")" : ""}%0A`;
+      });
+
+      const url = `https://wa.me/${numero}?text=${mensaje}`;
+      window.open(url, "_blank");
+    }
+
+    function guardarEnLocalStorage() {
+      localStorage.setItem("pedido", JSON.stringify(pedido));
+    }
+
+    function cargarDesdeLocalStorage() {
+      const guardado = localStorage.getItem("pedido");
+      if (guardado) {
+        const items = JSON.parse(guardado);
+        items.forEach(item => pedido.push(item));
+        mostrarPedido();
+      }
+    }
+
+    window.onload = cargarDesdeLocalStorage;
+  </script>
+</body>
+</html>
