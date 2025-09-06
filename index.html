@@ -286,17 +286,13 @@
           <div class="section-title">
             <i class="fas fa-utensils"></i> Selecciona tu producto
           </div>
+        
           <label for="producto" class="form-label">Producto:</label>
-          <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto" onchange="mostrarInfoProducto()">
-          <label for="producto">Producto:</label>
-          <input list="listaProductos" id="producto" class="form-control">
+          <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
           <datalist id="listaProductos"></datalist>
           
           <!-- Precio solo lectura -->
           <input id="precioProducto" class="form-control mt-2" type="text" readonly placeholder="Precio por Kg">
-
-          <datalist id="listaProductos"></datalist>
-          <div id="infoProducto" class="producto-info"></div>
         </div>
 
         <!-- Cantidad -->
@@ -488,6 +484,7 @@ async function cargarProductos() {
 </script>
 </body>
 </html>
+
 
 
 
