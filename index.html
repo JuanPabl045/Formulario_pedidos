@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* Fondo general */
     body {
       background: linear-gradient(135deg, #F2DCD9 0%, #DA2A30 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,18 +24,6 @@
       max-width: 800px;
       margin: 0 auto;
       border: 2px solid #B96454;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .main-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 5px;
-      background: linear-gradient(to right, #DA2A30, #B96454);
     }
 
     h1 {
@@ -43,20 +32,12 @@
       color: #DA2A30;
       margin-bottom: 1.8rem;
       text-align: center;
-      position: relative;
-      padding-bottom: 15px;
     }
 
-    h1::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(to right, #DA2A30, #B96454);
-      border-radius: 3px;
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
     }
 
     input, select, textarea {
@@ -64,12 +45,6 @@
       padding: 14px;
       border-radius: 12px !important;
       border: 1px solid #ced4da;
-      transition: all 0.3s;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      box-shadow: 0 0 0 3px rgba(218, 42, 48, 0.25);
-      border-color: #B96454;
     }
 
     button {
@@ -92,7 +67,6 @@
     }
 
     #listaPedido li {
-      font-size: 0.95rem;
       border-radius: 12px;
       margin-bottom: 10px;
       padding: 15px;
@@ -102,18 +76,12 @@
       align-items: center;
     }
 
-    #listaPedido li:hover {
-      background-color: #f8f9fa;
-      transform: translateX(5px);
-    }
-
     .delete-btn {
       background: none;
       border: none;
       color: #DA2A30;
       cursor: pointer;
       font-size: 1.1rem;
-      transition: all 0.2s;
     }
 
     .delete-btn:hover {
@@ -121,86 +89,115 @@
       transform: scale(1.1);
     }
 
-    @media (max-width: 576px) {
-      h1 { font-size: 1.6rem; }
-      .main-card { padding: 20px; }
+    /* Opciones de entrega */
+    .delivery-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .delivery-option {
+      padding: 20px;
+      border: 2px solid #e9ecef;
+      border-radius: 15px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .delivery-option.selected {
+      border-color: #DA2A30;
+      background-color: #F2DCD9;
+    }
+
+    .delivery-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: #DA2A30;
     }
   </style>
 </head>
 <body>
   <div class="container my-4">
     <div class="main-card">
-      <h1><i class="fas fa-shopping-cart me-2"></i> Pedido Online</h1>
+      <h1><i class="fas fa-shopping-cart me-2"></i> Pedido Online Molino Viejo</h1>
       <form id="pedidoForm">
-        
         <!-- Producto -->
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="producto" class="form-label">Producto:</label>
           <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
           <datalist id="listaProductos"></datalist>
         </div>
 
         <!-- Cantidad -->
-        <div class="mb-3">
-          <label for="cantidad" class="form-label">Cantidad:</label>
+        <div class="mb-4">
+          <label for="cantidad" class="form-label">Cantidad (unidades):</label>
           <input type="number" id="cantidad" class="form-control" min="1" value="1">
         </div>
 
         <!-- Descripción -->
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="descripcion" class="form-label">Descripción adicional:</label>
-          <textarea id="descripcion" class="form-control" placeholder="Ejemplo: entregar el viernes en la tarde..."></textarea>
+          <textarea id="descripcion" class="form-control" placeholder="Ejemplo: cortar en trozos, sin hueso, etc." rows="3"></textarea>
         </div>
 
-        <button type="button" class="btn btn-primary w-100 mb-3" onclick="agregarProducto()">➕ Agregar producto</button>
+        <button type="button" class="btn btn-primary w-100 mb-4" onclick="agregarProducto()">➕ Agregar producto</button>
 
-        <h4 class="mt-4">📝 Productos añadidos:</h4>
-        <ul id="listaPedido" class="list-group mb-3"></ul>
+        <h4>Productos añadidos:</h4>
+        <ul id="listaPedido" class="list-group mb-4"></ul>
 
         <!-- Nombre -->
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="nombre" class="form-label">Tu nombre:</label>
           <input type="text" id="nombre" class="form-control" required>
         </div>
 
-        <!-- Lugar -->
-        <div class="mb-3">
-          <label for="lugar" class="form-label">Lugar de entrega:</label>
-          <select id="lugar" class="form-control" required>
-            <option value="" disabled selected>Selecciona un lugar</option>
-            <option value="San Borja">San Borja</option>
-            <option value="Magdalena del Mar">Magdalena del Mar</option>
-            <option value="Delivery">Delivery (S/ 13)</option>
-          </select>
+        <!-- Método de entrega -->
+        <div class="mb-4">
+          <label class="form-label">Método de entrega:</label>
+          <div class="delivery-options">
+            <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
+              <i class="fas fa-store delivery-icon"></i>
+              <div class="fw-bold">San Borja</div>
+            </div>
+            <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
+              <i class="fas fa-store delivery-icon"></i>
+              <div class="fw-bold">Magdalena del Mar</div>
+            </div>
+            <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
+              <i class="fas fa-truck delivery-icon"></i>
+              <div class="fw-bold">Delivery (S/ 13)</div>
+            </div>
+          </div>
+          <input type="hidden" id="metodoEntrega" required>
         </div>
 
-        <!-- Dirección si es delivery -->
+        <!-- Dirección para delivery -->
         <div id="deliveryFields" style="display:none;">
           <div class="mb-3">
             <label for="direccion" class="form-label">Dirección:</label>
             <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima">
           </div>
-          <div class="mb-3">
+          <div class="mb-4">
             <label for="mapsLink" class="form-label">Link de Google Maps:</label>
             <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
           </div>
         </div>
 
-        <button type="button" class="btn btn-success w-100" onclick="enviarPedido()">📲 Enviar pedido por WhatsApp</button>
+        <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()">📲 Enviar pedido</button>
       </form>
     </div>
   </div>
 
   <script>
-    const DEFAULT_NUMERO_DESTINO = "51TU_NUMERO_AQUI"; // 👈 cambia esto por tu número real
+    const DEFAULT_NUMERO_DESTINO = "51TU_NUMERO_AQUI"; // <- cambia por tu número
     let pedido = [];
 
+    // Productos desde JSON
     async function cargarProductos() {
       try {
         const response = await fetch("productos.json");
         const productos = await response.json();
         const lista = document.getElementById("listaProductos");
-
         productos.forEach(p => {
           const option = document.createElement("option");
           option.value = p.nombre;
@@ -211,6 +208,15 @@
       }
     }
 
+    // Seleccionar método de entrega
+    function seleccionarMetodo(metodo) {
+      document.getElementById('metodoEntrega').value = metodo;
+      document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      document.getElementById('deliveryFields').style.display = metodo === 'Delivery' ? 'block' : 'none';
+    }
+
+    // Agregar producto
     function agregarProducto() {
       const producto = document.getElementById("producto").value.trim();
       const cantidad = document.getElementById("cantidad").value;
@@ -246,15 +252,21 @@
       mostrarPedido();
     }
 
+    // Enviar pedido a WhatsApp
     function enviarPedido() {
       if (pedido.length === 0) {
         alert("Agrega al menos un producto al pedido.");
         return;
       }
       const nombre = document.getElementById("nombre").value.trim();
-      const lugar = document.getElementById("lugar").value;
-      if (!nombre || !lugar) {
-        alert("Por favor completa tu nombre y lugar.");
+      if (!nombre) {
+        alert("Por favor ingresa tu nombre.");
+        return;
+      }
+
+      const metodoEntrega = document.getElementById("metodoEntrega").value;
+      if (!metodoEntrega) {
+        alert("Selecciona un método de entrega.");
         return;
       }
 
@@ -263,25 +275,18 @@
         mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
       });
 
-      if (lugar === "Delivery") {
-        mensaje += `\n📍 *Entrega:* Delivery (S/ 13)\n`;
+      mensaje += `\n📍 *Entrega:* ${metodoEntrega}`;
+      if (metodoEntrega === "Delivery") {
         const direccion = document.getElementById("direccion").value.trim();
-        const maps = document.getElementById("mapsLink").value.trim();
-        if (direccion) mensaje += `Dirección: ${direccion}\n`;
-        if (maps) mensaje += `Ubicación: ${maps}\n`;
-      } else {
-        mensaje += `\n📍 *Entrega en:* ${lugar}\n`;
+        const mapsLink = document.getElementById("mapsLink").value.trim();
+        mensaje += `\n🏠 Dirección: ${direccion || "No especificada"}`;
+        if (mapsLink) mensaje += `\n📌 Maps: ${mapsLink}`;
+        mensaje += `\n💵 Costo de envío: S/ 13`;
       }
 
       const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
-
-    // Mostrar campos de delivery si se selecciona
-    document.getElementById("lugar").addEventListener("change", function() {
-      document.getElementById("deliveryFields").style.display = 
-        this.value === "Delivery" ? "block" : "none";
-    });
 
     window.onload = cargarProductos;
   </script>
