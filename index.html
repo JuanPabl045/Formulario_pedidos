@@ -288,6 +288,13 @@
           </div>
           <label for="producto" class="form-label">Producto:</label>
           <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto" onchange="mostrarInfoProducto()">
+          <label for="producto">Producto:</label>
+          <input list="listaProductos" id="producto" class="form-control">
+          <datalist id="listaProductos"></datalist>
+          
+          <!-- Precio solo lectura -->
+          <input id="precioProducto" class="form-control mt-2" type="text" readonly placeholder="Precio por Kg">
+
           <datalist id="listaProductos"></datalist>
           <div id="infoProducto" class="producto-info"></div>
         </div>
@@ -390,20 +397,25 @@ async function cargarProductos() {
     const productos = await response.json();
     const lista = document.getElementById("listaProductos");
 
-    // Agregar opciones
+    // Agregar opciones al datalist (nombre + descripción)
     productos.forEach(p => {
       const option = document.createElement("option");
-      option.value = p.PRODUCTO;
-      option.textContent = `${p.PRODUCTO} - ${p.DESCRIPCION} (S/ ${p.PRECIO} por Kg)`; 
+      option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
       lista.appendChild(option);
     });
 
-    // Evento para mostrar todo al seleccionar
+    // Detectar selección y mostrar precio aparte
     const productoInput = document.getElementById("producto");
+    const precioExtra = document.getElementById("precioProducto");
+
     productoInput.addEventListener("change", () => {
-      const seleccionado = [...lista.options].find(opt => opt.value === productoInput.value);
+      const seleccionado = productos.find(
+        p => `${p.PRODUCTO} - ${p.DESCRIPCION}` === productoInput.value
+      );
       if (seleccionado) {
-        productoInput.value = seleccionado.textContent; // muestra todo el texto
+        precioExtra.value = `S/ ${seleccionado.PRECIO} por Kg`;
+      } else {
+        precioExtra.value = ""; // limpiar si no coincide
       }
     });
 
@@ -476,6 +488,7 @@ async function cargarProductos() {
 </script>
 </body>
 </html>
+
 
 
 
