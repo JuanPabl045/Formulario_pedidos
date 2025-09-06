@@ -384,30 +384,33 @@
   let pedido = [];
 
   // Cargar productos desde JSON
-  async function cargarProductos() {
-    try {
-      const response = await fetch("productos.json");
-      const productos = await response.json();
-      const lista = document.getElementById("listaProductos");
+async function cargarProductos() {
+  try {
+    const response = await fetch("productos.json");
+    const productos = await response.json();
+    const lista = document.getElementById("listaProductos");
 
-      productos.forEach(p => {
-        const option = document.createElement("option");
-         option.value = p.PRODUCTO; 
-        option.textContent = `${p.PRODUCTO} - ${p.DESCRIPCION} (S/ ${p.PRECIO})`; 
-        lista.appendChild(option);
-        const productoInput = document.getElementById("producto");
-productoInput.addEventListener("change", () => {
-  const seleccionado = [...lista.options].find(opt => opt.value === productoInput.value);
-  if (seleccionado) {
-    productoInput.value = seleccionado.textContent;
-  }
-});
+    // Agregar opciones
+    productos.forEach(p => {
+      const option = document.createElement("option");
+      option.value = p.PRODUCTO;
+      option.textContent = `${p.PRODUCTO} - ${p.DESCRIPCION} (S/ ${p.PRECIO} por Kg)`; 
+      lista.appendChild(option);
+    });
 
-      });
-    } catch (error) {
-      console.error("Error al cargar productos:", error);
-    }
+    // Evento para mostrar todo al seleccionar
+    const productoInput = document.getElementById("producto");
+    productoInput.addEventListener("change", () => {
+      const seleccionado = [...lista.options].find(opt => opt.value === productoInput.value);
+      if (seleccionado) {
+        productoInput.value = seleccionado.textContent; // muestra todo el texto
+      }
+    });
+
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
   }
+}
 
   // Agregar producto a la lista
   function agregarProducto() {
@@ -473,6 +476,7 @@ productoInput.addEventListener("change", () => {
 </script>
 </body>
 </html>
+
 
 
 
