@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* FONDO GENERAL CON GRADIENTE */
+    /* FONDO GENERAL CON GRADIENTE SUAVE */
     body {
       background: linear-gradient(135deg, #F2DCD9 0%, #DA2A30 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,141 +16,225 @@
       padding: 20px 0;
     }
 
-    .card {
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      background: #fff;
+    /* CONTENEDOR PRINCIPAL */
+    .main-container {
       max-width: 800px;
       margin: 0 auto;
-      border: 2px solid #B96454; /* borde secundario */
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      padding: 0;
     }
 
-    h1 {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #DA2A30; /* color principal */
-      margin-bottom: 1.5rem;
+    /* CABECERA */
+    .header {
+      background: linear-gradient(to right, #DA2A30, #B96454);
+      color: white;
+      padding: 25px 30px;
       text-align: center;
+      border-radius: 20px 20px 0 0;
     }
 
-    label {
-      font-weight: 500;
-      margin-bottom: 5px;
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin: 0;
+      color: white;
+    }
+
+    /* CONTENIDO */
+    .content {
+      padding: 30px;
+    }
+
+    /* TÍTULOS DE SECCIÓN */
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #DA2A30;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #F2DCD9;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-title i {
+      margin-right: 10px;
+      font-size: 1.4rem;
+    }
+
+    /* FORMULARIOS */
+    .form-label {
+      font-weight: 600;
+      margin-bottom: 8px;
       color: #333;
+      font-size: 0.95rem;
     }
 
-    input, select, textarea {
+    .form-control, .form-select {
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 2px solid #e9ecef;
       font-size: 1rem;
-      padding: 12px;
-      border-radius: 12px !important;
-      border: 1px solid #ced4da;
       transition: all 0.3s;
     }
 
-    input:focus, select:focus, textarea:focus {
-      box-shadow: 0 0 0 3px rgba(218, 42, 48, 0.25); /* foco color principal */
-      border-color: #B96454; /* borde secundario */
+    .form-control:focus, .form-select:focus {
+      border-color: #B96454;
+      box-shadow: 0 0 0 3px rgba(185, 100, 84, 0.2);
     }
 
-    button {
-      font-size: 1.1rem !important;
-      padding: 12px;
-      border-radius: 12px !important;
-      transition: all 0.3s;
+    textarea.form-control {
+      min-height: 100px;
     }
 
     /* BOTONES */
+    .btn {
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
     .btn-primary {
-      background-color: #DA2A30 !important;
-      border-color: #DA2A30 !important;
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background-color: #B96454 !important;
-      border-color: #B96454 !important;
-    }
-
-    .btn-success {
-      background-color: #DA2A30 !important;
-      border-color: #DA2A30 !important;
-      color: #fff;
-    }
-
-    .btn-success:hover {
-      background-color: #B96454 !important;
-      border-color: #B96454 !important;
-    }
-
-    .btn-maps {
-      border-radius: 10px !important;
-      padding: 12px 16px;
-      background-color: #DA2A30;
-      color: white;
+      background: linear-gradient(to right, #DA2A30, #B96454);
       border: none;
     }
 
+    .btn-primary:hover {
+      background: linear-gradient(to right, #B96454, #DA2A30);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.3);
+    }
+
+    .btn-success {
+      background: linear-gradient(to right, #28a745, #20c997);
+      border: none;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(to right, #20c997, #28a745);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    .btn-maps {
+      border-radius: 10px;
+      padding: 12px 16px;
+      background: linear-gradient(to right, #DA2A30, #B96454);
+      color: white;
+      border: none;
+      font-weight: 500;
+    }
+
     .btn-maps:hover {
-      background-color: #B96454;
+      background: linear-gradient(to right, #B96454, #DA2A30);
       transform: translateY(-2px);
     }
 
-    /* Lista de productos añadidos */
-    #listaPedido li {
-      font-size: 0.95rem;
-      border-radius: 10px;
-      margin-bottom: 8px;
-      transition: all 0.3s;
+    /* LISTA DE PRODUCTOS */
+    .product-list {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
 
-    #listaPedido li:hover {
+    .list-group-item {
+      padding: 15px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .list-group-item:hover {
       background-color: #f8f9fa;
-      transform: translateX(5px);
     }
 
-    .input-group {
-      border-radius: 10px;
+    .product-name {
+      font-weight: 500;
     }
 
-    .input-group .form-control {
-      border-radius: 0 10px 10px 0 !important;
+    .product-details {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-top: 5px;
     }
 
-    .input-group .btn {
-      border-radius: 10px 0 0 10px !important;
+    .delete-btn {
+      color: #DA2A30;
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    /* Opciones de entrega */
+    .delete-btn:hover {
+      color: #B96454;
+      transform: scale(1.1);
+    }
+
+    /* OPCIONES DE ENTREGA */
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
     .delivery-option {
-      padding: 15px;
+      padding: 20px;
       border: 2px solid #e9ecef;
-      border-radius: 12px;
-      margin-bottom: 15px;
+      border-radius: 15px;
       cursor: pointer;
       transition: all 0.3s;
+      text-align: center;
     }
 
     .delivery-option:hover {
       border-color: #B96454;
-      background-color: #F2DCD9;
+      background-color: rgba(242, 220, 217, 0.3);
+      transform: translateY(-3px);
     }
 
     .delivery-option.selected {
       border-color: #DA2A30;
-      background-color: #F2DCD9;
+      background-color: rgba(242, 220, 217, 0.5);
+      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.1);
     }
 
     .delivery-icon {
-      font-size: 1.5rem;
-      margin-right: 10px;
+      font-size: 2rem;
+      margin-bottom: 10px;
       color: #DA2A30;
     }
 
-    .producto-info {
+    .delivery-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .delivery-desc {
       font-size: 0.9rem;
       color: #6c757d;
-      margin-top: 5px;
+    }
+
+    /* INFORMACIÓN DE PRODUCTO */
+    .producto-info {
+      padding: 12px 15px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
     }
 
     .precio-info {
@@ -158,74 +242,113 @@
       color: #198754;
     }
 
-    /* Ajuste para móviles */
-    @media (max-width: 576px) {
-      h1 {
-        font-size: 1.5rem;
+    /* ANIMACIONES */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .content {
+        padding: 20px;
       }
-      .card {
-        padding: 15px;
+      
+      .header h1 {
+        font-size: 1.6rem;
       }
-      .btn-maps {
-        padding: 10px 12px;
-        font-size: 0.9rem !important;
+      
+      .delivery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        padding: 12px 16px;
+        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container my-4">
-    <div class="card">
-      <h1>🛒 Pedido Online Molino Viejo</h1>
+  <div class="main-container">
+    <div class="header">
+      <h1><i class="fas fa-shopping-cart me-2"></i> Pedido Online Molino Viejo</h1>
+    </div>
+    
+    <div class="content">
       <form id="pedidoForm">
         <!-- Producto -->
-        <div class="mb-3">
-          <label for="producto">Producto:</label>
+        <div class="mb-4">
+          <div class="section-title">
+            <i class="fas fa-utensils"></i> Selecciona tu producto
+          </div>
+          <label for="producto" class="form-label">Producto:</label>
           <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto" onchange="mostrarInfoProducto()">
           <datalist id="listaProductos"></datalist>
           <div id="infoProducto" class="producto-info"></div>
         </div>
 
         <!-- Cantidad -->
-        <div class="mb-3">
-          <label for="cantidad">Cantidad (unidades):</label>
+        <div class="mb-4">
+          <label for="cantidad" class="form-label">Cantidad (unidades):</label>
           <input type="number" id="cantidad" class="form-control" min="1" value="1">
         </div>
 
         <!-- Descripción adicional -->
-        <div class="mb-3">
-          <label for="descripcion">Información adicionales:</label>
+        <div class="mb-4">
+          <label for="descripcion" class="form-label">Información adicional:</label>
           <textarea id="descripcion" class="form-control" placeholder="Ejemplo: cortar en trozos, sin hueso, etc."></textarea>
         </div>
 
-        <button type="button" class="btn btn-primary w-100 mb-3" onclick="agregarProducto()">➕ Agregar producto</button>
+        <button type="button" class="btn btn-primary w-100 mb-4" onclick="agregarProducto()">
+          <i class="fas fa-plus-circle"></i> Agregar producto
+        </button>
 
-        <h4 class="mt-3">📝 Productos añadidos:</h4>
-        <ul id="listaPedido" class="list-group mb-3"></ul>
+        <!-- Lista de productos añadidos -->
+        <div class="mb-4">
+          <div class="section-title">
+            <i class="fas fa-list"></i> Productos añadidos
+          </div>
+          <ul id="listaPedido" class="list-group product-list"></ul>
+        </div>
 
-        <!-- Nombre -->
-        <div class="mb-3">
-          <label for="nombre">Nombre :</label>
+        <!-- Información del cliente -->
+        <div class="mb-4">
+          <div class="section-title">
+            <i class="fas fa-user"></i> Información personal
+          </div>
+          <label for="nombre" class="form-label">Nombre:</label>
           <input type="text" id="nombre" class="form-control" required>
         </div>
 
         <!-- Método de entrega -->
-        <div class="mb-3">
-          <label class="mb-2">Método de entrega:</label>
-          
-          <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
-            <i class="fas fa-store delivery-icon"></i>
-            <span>San Borja (Recojo en tienda)</span>
+        <div class="mb-4">
+          <div class="section-title">
+            <i class="fas fa-truck"></i> Método de entrega
           </div>
           
-          <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
-            <i class="fas fa-store delivery-icon"></i>
-            <span>Magdalena del Mar (Recojo en tienda)</span>
-          </div>
-          
-          <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
-            <i class="fas fa-truck delivery-icon"></i>
-            <span>Delivery (S/ 13 adicional)</span>
+          <div class="delivery-grid">
+            <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
+              <i class="fas fa-store delivery-icon"></i>
+              <div class="delivery-title">San Borja</div>
+              <div class="delivery-desc">Recojo en tienda</div>
+            </div>
+            
+            <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
+              <i class="fas fa-store delivery-icon"></i>
+              <div class="delivery-title">Magdalena del Mar</div>
+              <div class="delivery-desc">Recojo en tienda</div>
+            </div>
+            
+            <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
+              <i class="fas fa-truck delivery-icon"></i>
+              <div class="delivery-title">Delivery</div>
+              <div class="delivery-desc">S/ 13 adicional</div>
+            </div>
           </div>
           
           <input type="hidden" id="metodoEntrega" required>
@@ -234,11 +357,11 @@
         <!-- Campos delivery (inicialmente ocultos) -->
         <div id="deliveryFields" style="display:none;">
           <div class="mb-3">
-            <label for="direccion">Dirección:</label>
+            <label for="direccion" class="form-label">Dirección:</label>
             <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima">
           </div>
-          <div class="mb-3">
-            <label for="mapsLink">Link de Google Maps:</label>
+          <div class="mb-4">
+            <label for="mapsLink" class="form-label">Link de Google Maps:</label>
             <div class="input-group">
               <button type="button" class="btn btn-maps" onclick="abrirGoogleMaps()">
                 <i class="fas fa-map-marked-alt"></i> Maps
@@ -248,10 +371,159 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()">📲 Enviar pedido</button>
+        <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()">
+          <i class="fas fa-paper-plane"></i> Enviar pedido
+        </button>
       </form>
     </div>
   </div>
+
+  <script>
+    // Datos de ejemplo para productos (deberías reemplazarlos con tus productos reales)
+    const productos = [
+      { nombre: "Lomo fino", precio: 35.00, descripcion: "Corte premium de res" },
+      { nombre: "Pechuga de pollo", precio: 15.00, descripcion: "Sin hueso y sin piel" },
+      { nombre: "Chuleta de cerdo", precio: 18.00, descripcion: "Cortes frescos y jugosos" },
+      { nombre: "Carne molida", precio: 22.00, descripcion: "90% magra" },
+      { nombre: "Costillas de res", precio: 28.00, descripcion: "Ideales para parrilla" }
+    ];
+
+    // Llenar datalist con productos
+    const datalist = document.getElementById('listaProductos');
+    productos.forEach(producto => {
+      const option = document.createElement('option');
+      option.value = producto.nombre;
+      datalist.appendChild(option);
+    });
+
+    // Mostrar información del producto seleccionado
+    function mostrarInfoProducto() {
+      const productoInput = document.getElementById('producto');
+      const infoDiv = document.getElementById('infoProducto');
+      const producto = productos.find(p => p.nombre === productoInput.value);
+      
+      if (producto) {
+        infoDiv.innerHTML = `
+          <strong>${producto.nombre}</strong> - 
+          <span class="precio-info">S/ ${producto.precio.toFixed(2)}</span><br>
+          <span>${producto.descripcion}</span>
+        `;
+      } else {
+        infoDiv.innerHTML = '';
+      }
+    }
+
+    // Seleccionar método de entrega
+    function seleccionarMetodo(metodo) {
+      document.getElementById('metodoEntrega').value = metodo;
+      
+      // Remover clase selected de todas las opciones
+      document.querySelectorAll('.delivery-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      
+      // Agregar clase selected a la opción clickeada
+      event.currentTarget.classList.add('selected');
+      
+      // Mostrar u ocultar campos de delivery
+      const deliveryFields = document.getElementById('deliveryFields');
+      deliveryFields.style.display = metodo === 'Delivery' ? 'block' : 'none';
+    }
+
+    // Agregar producto a la lista
+    function agregarProducto() {
+      const productoInput = document.getElementById('producto');
+      const cantidadInput = document.getElementById('cantidad');
+      const descripcionInput = document.getElementById('descripcion');
+      const listaPedido = document.getElementById('listaPedido');
+      
+      if (!productoInput.value) {
+        alert('Por favor, selecciona un producto');
+        return;
+      }
+      
+      const producto = productos.find(p => p.nombre === productoInput.value);
+      if (!producto) {
+        alert('Producto no válido');
+        return;
+      }
+      
+      const li = document.createElement('li');
+      li.className = 'list-group-item fade-in';
+      li.innerHTML = `
+        <div>
+          <div class="product-name">${producto.nombre} x${cantidadInput.value}</div>
+          <div class="product-details">${descripcionInput.value || 'Sin especificaciones'}</div>
+        </div>
+        <button type="button" class="delete-btn" onclick="eliminarProducto(this)">
+          <i class="fas fa-trash"></i>
+        </button>
+      `;
+      
+      listaPedido.appendChild(li);
+      
+      // Limpiar campos
+      productoInput.value = '';
+      cantidadInput.value = '1';
+      descripcionInput.value = '';
+      document.getElementById('infoProducto').innerHTML = '';
+    }
+
+    // Eliminar producto de la lista
+    function eliminarProducto(boton) {
+      const li = boton.parentElement;
+      li.style.opacity = '0';
+      setTimeout(() => {
+        li.remove();
+      }, 300);
+    }
+
+    // Abrir Google Maps
+    function abrirGoogleMaps() {
+      window.open('https://www.google.com/maps', '_blank');
+    }
+
+    // Enviar pedido
+    function enviarPedido() {
+      const nombre = document.getElementById('nombre').value;
+      const metodoEntrega = document.getElementById('metodoEntrega').value;
+      const productos = document.getElementById('listaPedido').children;
+      
+      if (!nombre) {
+        alert('Por favor, ingresa tu nombre');
+        return;
+      }
+      
+      if (!metodoEntrega) {
+        alert('Por favor, selecciona un método de entrega');
+        return;
+      }
+      
+      if (productos.length === 0) {
+        alert('Por favor, agrega al menos un producto');
+        return;
+      }
+      
+      if (metodoEntrega === 'Delivery') {
+        const direccion = document.getElementById('direccion').value;
+        if (!direccion) {
+          alert('Por favor, ingresa tu dirección para el delivery');
+          return;
+        }
+      }
+      
+      // Aquí iría la lógica para enviar el pedido
+      alert('¡Pedido realizado con éxito! En breve nos comunicaremos contigo para confirmar.');
+      document.getElementById('pedidoForm').reset();
+      document.getElementById('listaPedido').innerHTML = '';
+      document.querySelectorAll('.delivery-option').forEach(opt => {
+        opt.classList.remove('selected');
+      });
+      document.getElementById('deliveryFields').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
 
   <script>
     const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 Reemplaza con tu número real
@@ -444,6 +716,7 @@
   </script>
 </body>
 </html>
+
 
 
 
