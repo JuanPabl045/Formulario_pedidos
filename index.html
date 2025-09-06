@@ -379,7 +379,7 @@
   </div>
 
 <script>
-  const DEFAULT_NUMERO_DESTINO = "51TU_NUMERO_AQUI"; // 👈 Cambia esto por tu número real
+  const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 Cambia esto por tu número real
   
   let pedido = [];
 
@@ -392,9 +392,17 @@
 
       productos.forEach(p => {
         const option = document.createElement("option");
-        option.value = `${p.PRODUCTO} - ${p.DESCRIPCION} (S/ ${p.PRECIO} por Kg)`; 
+         option.value = p.PRODUCTO; 
         option.textContent = `${p.PRODUCTO} - ${p.DESCRIPCION} (S/ ${p.PRECIO})`; 
         lista.appendChild(option);
+        const productoInput = document.getElementById("producto");
+productoInput.addEventListener("change", () => {
+  const seleccionado = [...lista.options].find(opt => opt.value === productoInput.value);
+  if (seleccionado) {
+    productoInput.value = seleccionado.textContent;
+  }
+});
+
       });
     } catch (error) {
       console.error("Error al cargar productos:", error);
@@ -465,6 +473,7 @@
 </script>
 </body>
 </html>
+
 
 
 
