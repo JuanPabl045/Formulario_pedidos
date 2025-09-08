@@ -506,4 +506,36 @@
     }
     const metodo = document.getElementById("metodoEntrega").value;
     if (!metodo) {
-      alert("
+      alert("Selecciona un método de entrega.");
+      return;
+    }
+
+    let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
+    pedido.forEach((item, index) => {
+      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
+    });
+
+    mensaje += `\n*Método de entrega:* ${metodo}`;
+    if (metodo === "Delivery") {
+      const direccion = document.getElementById("direccion").value.trim();
+      const mapsLink = document.getElementById("mapsLink").value.trim();
+      if (!direccion) {
+        alert("Por favor ingresa tu dirección para el delivery.");
+        return;
+      }
+      mensaje += `\n*Dirección:* ${direccion}`;
+      if (mapsLink) {
+        mensaje += `\n*Link de Maps:* ${mapsLink}`;
+      }
+      mensaje += `\n*Cargo adicional:* S/ 13`;
+    }
+
+    const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+  }
+
+  // Inicializar
+  cargarProductos();
+</script>
+</body>
+</html>
