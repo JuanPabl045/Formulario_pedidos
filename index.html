@@ -488,18 +488,16 @@
   }
 
   // Abrir Google Maps
-  function abrirGoogleMaps() {
-    const mapsLink = document.getElementById('mapsLink').value.trim();
-    const direccion = document.getElementById('direccion').value.trim();
-    if (mapsLink) {
-      window.open(mapsLink, '_blank');
-    } else if (direccion) {
-      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(direccion)}`;
-      window.open(url, '_blank');
-    } else {
-      alert('Ingresa una dirección o un link de Google Maps.');
+    function abrirGoogleMaps() {
+      const direccion = document.getElementById("direccion").value.trim();
+      let url = "https://www.google.com/maps/search/?api=1";
+    
+      if (direccion) {
+        url += `&query=${encodeURIComponent(direccion)}`;
+      }
+    
+      window.open(url, "_blank");
     }
-  }
 
   // Enviar pedido a WhatsApp
   function enviarPedido() {
@@ -547,5 +545,6 @@
 </script>
 </body>
 </html>
+
 
 
