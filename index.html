@@ -393,28 +393,34 @@
   async function cargarProductos() {
     try {
       const response = await fetch("productos.json");
-      productos = await response.json();
+      const productos = await response.json();
       const lista = document.getElementById("listaProductos");
+  
+      // Limpiar lista previa (por si acaso)
       lista.innerHTML = "";
-
-      const productoInput = document.getElementById("producto");
-      const precioExtra = document.getElementById("precioProducto");
-
+  
+      // Agregar opciones al datalist (producto + descripción)
       productos.forEach(p => {
         const option = document.createElement("option");
-        option.value = p.PRODUCTO; // solo el nombre
+        option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
         lista.appendChild(option);
       });
-
-      productoInput.addEventListener("input", () => {
-        const seleccionado = productos.find(p => p.PRODUCTO === productoInput.value);
+  
+      // Detectar selección y mostrar precio aparte
+      const productoInput = document.getElementById("producto");
+      const precioExtra = document.getElementById("precioProducto");
+  
+      productoInput.addEventListener("change", () => {
+        const seleccionado = productos.find(
+          p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
+        );
         if (seleccionado) {
-          precioExtra.textContent = `S/ ${Number(seleccionado.PRECIO).toFixed(2)} por Kg`;
+          precioExtra.textContent = `S/ ${seleccionado.PRECIO} por Kg (referencial)`;
         } else {
           precioExtra.textContent = "—";
         }
       });
-
+  
     } catch (error) {
       console.error("Error al cargar productos:", error);
     }
@@ -539,3 +545,4 @@
 </script>
 </body>
 </html>
+
