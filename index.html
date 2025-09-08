@@ -289,7 +289,7 @@
             <datalist id="listaProductos"></datalist>
           </div>
         
-          <!-- Precio solo lectura -->
+          <!-- Precio referencial -->
           <div class="col-4">
             <label class="form-label">Precio:</label>
             <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">
@@ -385,51 +385,48 @@
   </div>
 
 <script>
-  const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 Cambia esto por tu número real
-  
+  const DEFAULT_NUMERO_DESTINO = "51949776123"; // 👈 Cambia este número por el real
   let pedido = [];
+  let productos = [];
 
   // Cargar productos desde JSON
-async function cargarProductos() {
-  try {
-    const response = await fetch("productos.json");
-    const productos = await response.json();
-    const lista = document.getElementById("listaProductos");
+  async function cargarProductos() {
+    try {
+      const response = await fetch("productos.json");
+      productos = await response.json();
+      const lista = document.getElementById("listaProductos");
+      lista.innerHTML = "";
 
-    // Agregar opciones al datalist (nombre + descripción)
-    productos.forEach(p => {
-      const option = document.createElement("option");
-      option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
-      lista.appendChild(option);
-    });
+      const productoInput = document.getElementById("producto");
+      const precioExtra = document.getElementById("precioProducto");
 
-    // Detectar selección y mostrar precio aparte
-    const productoInput = document.getElementById("producto");
-    const precioExtra = document.getElementById("precioProducto");
+      productos.forEach(p => {
+        const option = document.createElement("option");
+        option.value = p.PRODUCTO; // solo el nombre
+        lista.appendChild(option);
+      });
 
-    productoInput.addEventListener("change", () => {
-      const seleccionado = productos.find(
-        p => `${p.PRODUCTO} - ${p.DESCRIPCION}` === productoInput.value
-      );
-      if (seleccionado) {
-        precioExtra.value = `S/ ${seleccionado.PRECIO} por Kg`;
-      } else {
-        precioExtra.value = ""; // limpiar si no coincide
-      }
-    });
+      productoInput.addEventListener("input", () => {
+        const seleccionado = productos.find(p => p.PRODUCTO === productoInput.value);
+        if (seleccionado) {
+          precioExtra.textContent = `S/ ${Number(seleccionado.PRECIO).toFixed(2)} por Kg`;
+        } else {
+          precioExtra.textContent = "—";
+        }
+      });
 
-  } catch (error) {
-    console.error("Error al cargar productos:", error);
+    } catch (error) {
+      console.error("Error al cargar productos:", error);
+    }
   }
-}
 
   // Agregar producto a la lista
   function agregarProducto() {
     const producto = document.getElementById("producto").value.trim();
-    const cantidad = document.getElementById("cantidad").value;
+    const cantidad = parseInt(document.getElementById("cantidad").value);
     const descripcion = document.getElementById("descripcion").value.trim();
 
-    if (!producto || cantidad <= 0) {
+    if (!producto || isNaN(cantidad) || cantidad <= 0) {
       alert("Por favor selecciona un producto y cantidad válida");
       return;
     }
@@ -441,6 +438,7 @@ async function cargarProductos() {
     document.getElementById("producto").value = "";
     document.getElementById("cantidad").value = 1;
     document.getElementById("descripcion").value = "";
+    document.getElementById("precioProducto").textContent = "—";
   }
 
   // Mostrar lista en pantalla
@@ -462,6 +460,39 @@ async function cargarProductos() {
     mostrarPedido();
   }
 
+  // Seleccionar método de entrega
+  function seleccionarMetodo(metodo) {
+    document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('selected'));
+    const opciones = document.querySelectorAll('.delivery-option');
+    opciones.forEach(opt => {
+      const titulo = opt.querySelector('.delivery-title')?.textContent.trim();
+      if (titulo === metodo) {
+        opt.classList.add('selected');
+      }
+    });
+    document.getElementById("metodoEntrega").value = metodo;
+    const deliveryFields = document.getElementById("deliveryFields");
+    if (metodo === "Delivery") {
+      deliveryFields.style.display = "block";
+    } else {
+      deliveryFields.style.display = "none";
+    }
+  }
+
+  // Abrir Google Maps
+  function abrirGoogleMaps() {
+    const mapsLink = document.getElementById('mapsLink').value.trim();
+    const direccion = document.getElementById('direccion').value.trim();
+    if (mapsLink) {
+      window.open(mapsLink, '_blank');
+    } else if (direccion) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(direccion)}`;
+      window.open(url, '_blank');
+    } else {
+      alert('Ingresa una dirección o un link de Google Maps.');
+    }
+  }
+
   // Enviar pedido a WhatsApp
   function enviarPedido() {
     if (pedido.length === 0) {
@@ -473,25 +504,6 @@ async function cargarProductos() {
       alert("Por favor ingresa tu nombre.");
       return;
     }
-
-    let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
-    pedido.forEach((item, i) => {
-      mensaje += `${i+1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
-    });
-
-    const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
-  }
-
-  window.onload = cargarProductos;
-</script>
-</body>
-</html>
-
-
-
-
-
-
-
-
+    const metodo = document.getElementById("metodoEntrega").value;
+    if (!metodo) {
+      alert("
