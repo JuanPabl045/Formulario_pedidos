@@ -1,0 +1,10 @@
+{
+  "name": "formulario-pedidos",
+  "version": "1.0.0",
+  "description": "Formulario de pedidos para Molino Viejo",
+  "scripts": {
+    "build": "echo 'Build script completado con éxito'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {}
+}
