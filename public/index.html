@@ -404,7 +404,7 @@ const firebaseConfig = {
 };
 
     // 2. Inicializa la app y Firestore
-    const app = firebase.initializeApp(firebaseConfig);
+    const app = firebase.app();;
     const db = firebase.firestore();
 
     // 3. NUEVA FUNCIÓN PARA GUARDAR EN FIRESTORE
