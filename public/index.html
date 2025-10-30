@@ -400,24 +400,36 @@ const firebaseConfig = {
     measurementId: "G-RS7M0JYMWD"
 };
 
-// 2. Inicializa la app y Firestore (Versión compatible del SDK)
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// 3. Variables Globales (Aseguramos que sean visibles)
+// 2. Variables Globales (Aseguramos que sean visibles)
 const DEFAULT_NUMERO_DESTINO = "51949776123";
 let pedido = [];
-let productos = [];
+let productos = []; 
+let db; // Variable para la instancia de Firestore
+
+// 3. Inicializa Firebase dentro de una función de inicio
+window.onload = function() {
+    try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        cargarProductos();
+    } catch (e) {
+        console.error("Fallo crítico al iniciar Firebase. Revisar Credenciales.", e);
+        // Permite que la app siga usando WhatsApp aunque la DB falle
+        cargarProductos(); 
+    }
+};
 
 // 4. FUNCIÓN DE BACKEND: Guardar en Firestore
 async function guardarPedidoEnDB(datosPedido) {
+    if (!db) {
+        console.warn("Firestore no está inicializado. Solo se enviará por WhatsApp.");
+        return "NO_DB";
+    }
     try {
         const docRef = await db.collection("pedidos_online").add(datosPedido);
-        console.log("Pedido guardado en Firestore con ID:", docRef.id);
         return docRef.id;
     } catch (e) {
         console.error("Error al guardar en Firestore: ", e);
-        // Si la DB falla, retorna un ID de error, pero permite seguir al WhatsApp
         return "ERROR-DB"; 
     }
 }
@@ -531,8 +543,9 @@ function abrirGoogleMaps() {
 }
 
 // 6. MODIFICACIÓN: Enviar pedido (Guarda en DB y luego WhatsApp)
-async function enviarPedido() {
-    if (pedido.length === 0) {
+// 🔄 FUNCIÓN MODIFICADA: Enviar pedido (Guarda en DB y luego WhatsApp)
+async function enviarPedido() { 
+    if (pedido.length === 0) { 
         alert("Agrega al menos un producto al pedido.");
         return;
     }
@@ -547,6 +560,7 @@ async function enviarPedido() {
         return;
     }
 
+    // Preparar el objeto para la base de datos
     const direccion = document.getElementById("direccion").value.trim();
     const mapsLink = document.getElementById("mapsLink").value.trim();
     
@@ -555,7 +569,6 @@ async function enviarPedido() {
         return;
     }
     
-    // Preparar el objeto para la base de datos
     const datosCompletos = {
         nombreCliente: nombre,
         productos: pedido, 
@@ -565,12 +578,12 @@ async function enviarPedido() {
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     };
 
-    // GUARDAR EN EL BACKEND (Firestore)
+    // 1. GUARDAR EN EL BACKEND (Firestore)
     const pedidoId = await guardarPedidoEnDB(datosCompletos);
 
-    // Construir mensaje de WhatsApp (Incluyendo el ID de Referencia)
+    // 2. Construir mensaje de WhatsApp (Incluyendo el ID de Referencia)
     let mensaje = `*Nuevo pedido de:* ${nombre}\n`;
-    mensaje += `*ID de Referencia (DB):* ${pedidoId}\n\n`; // Referencia para seguimiento
+    mensaje += `*ID de Referencia (DB):* ${pedidoId}\n\n`; 
     
     pedido.forEach((item, index) => {
         mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
@@ -585,11 +598,11 @@ async function enviarPedido() {
         mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
-    // Enviar a WhatsApp
+    // 3. Enviar a WhatsApp
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
     
-    // Limpiar el formulario después de enviar
+    // 4. Limpiar
     pedido = [];
     mostrarPedido();
 }
