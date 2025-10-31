@@ -389,9 +389,9 @@
   </div>
 
 <script>
-// 🔥🔥🔥 VARIABLES GLOBALES Y CONFIGURACIÓN 🔥🔥🔥
+// 🔥🔥🔥 1. DECLARACIONES GLOBALES Y CONFIGURACIÓN 🔥🔥🔥
     
-// 1. OBJETO DE CONFIGURACIÓN (REEMPLAZA ESTO con tus CREDENCIALES REALES)
+// 1. OBJETO DE CONFIGURACIÓN (TUS CREDENCIALES REALES)
 const firebaseConfig = {
     apiKey: "AIzaSyCBO5qJE9JKety7wjr2p5rLKDsUujUaR2I", // TU CLAVE REAL
     authDomain: "pedidos-mv-app.firebaseapp.com",
@@ -403,23 +403,20 @@ const firebaseConfig = {
 };
 
 // Variables de la aplicación
-const DEFAULT_NUMERO_DESTINO = "51989719386"; // Tu número de destino
+const DEFAULT_NUMERO_DESTINO = "51989719386"; 
 let pedido = [];
 let productos = []; 
 let db; // Variable global para la instancia de Firestore
-let firebaseApp = null; // Variable para la app de Firebase
 
 // -------------------------------------------------------------------------
 // 2. FUNCIÓN DE BACKEND: Guardar en Firestore
 // -------------------------------------------------------------------------
 async function guardarPedidoEnDB(datosPedido) {
     if (!db) {
-        // Esto captura el fallo de inicialización
         console.warn("Firestore no está inicializado. Solo se enviará por WhatsApp.");
         return "NO_DB_FALLO";
     }
     try {
-        // Uso de sintaxis V8: db.collection().add()
         const docRef = await db.collection("pedidos_online").add(datosPedido);
         return docRef.id;
     } catch (e) {
@@ -432,42 +429,44 @@ async function guardarPedidoEnDB(datosPedido) {
 // 3. FUNCIONES DE LÓGICA DEL FORMULARIO (Agregar, Mostrar, etc.)
 // -------------------------------------------------------------------------
 
-// Cargar productos desde JSON
+// FUNCIÓN: Cargar productos desde JSON (TU CÓDIGO ORIGINAL)
 async function cargarProductos() {
     try {
-      const response = await fetch("productos.json");
-      productos = await response.json(); 
-      const lista = document.getElementById("listaProductos");
-      
-      lista.innerHTML = "";
-      
-      productos.forEach(p => {
-        const option = document.createElement("option");
-        option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
-        lista.appendChild(option);
-      });
-      
-      const productoInput = document.getElementById("producto");
-      const precioExtra = document.getElementById("precioProducto");
-      
-      productoInput.addEventListener("change", () => {
-        const seleccionado = productos.find(
-          p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
-        );
-        if (seleccionado) {
-          precioExtra.textContent = `S/ ${seleccionado.PRECIO} por Kg (referencial)`;
-        } else {
-          precioExtra.textContent = "—";
-        }
-      });
-      
+        const response = await fetch("productos.json");
+        productos = await response.json(); 
+        const lista = document.getElementById("listaProductos");
+        
+        lista.innerHTML = "";
+        
+        productos.forEach(p => {
+            const option = document.createElement("option");
+            option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
+            lista.appendChild(option);
+        });
+        
+        const productoInput = document.getElementById("producto");
+        const precioExtra = document.getElementById("precioProducto");
+        
+        productoInput.addEventListener("change", () => {
+            const seleccionado = productos.find(
+                p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
+            );
+            if (seleccionado) {
+                precioExtra.textContent = `S/ ${seleccionado.PRECIO} por Kg (referencial)`;
+            } else {
+                precioExtra.textContent = "—";
+            }
+        });
+        
     } catch (error) {
-      console.error("Error al cargar productos (Verifique productos.json en public/):", error);
-      alert("Error: No se pudo cargar la lista de productos.");
+        // Mantenemos este error para verificar si productos.json está en public/
+        console.error("Error al cargar productos (Verifique productos.json en public/):", error);
+        alert("Error: No se pudo cargar la lista de productos.");
     }
 }
 
-// Agregar producto a la lista
+// [TUS OTRAS FUNCIONES ORIGINALES: agregarProducto, mostrarPedido, eliminarProducto, etc. VAN AQUÍ]
+
 function agregarProducto() {
     const producto = document.getElementById("producto").value.trim();
     const cantidad = parseInt(document.getElementById("cantidad").value);
@@ -488,7 +487,6 @@ function agregarProducto() {
     document.getElementById("precioProducto").textContent = "—";
 }
 
-// Mostrar lista en pantalla
 function mostrarPedido() {
     const lista = document.getElementById("listaPedido");
     lista.innerHTML = "";
@@ -501,13 +499,11 @@ function mostrarPedido() {
     });
 }
 
-// Eliminar producto
 function eliminarProducto(index) {
     pedido.splice(index, 1);
     mostrarPedido();
 }
 
-// Seleccionar método de entrega
 function seleccionarMetodo(metodo) {
     document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('selected'));
     const opciones = document.querySelectorAll('.delivery-option');
@@ -526,7 +522,6 @@ function seleccionarMetodo(metodo) {
     }
 }
 
-// Abrir Google Maps
 function abrirGoogleMaps() {
     const direccion = document.getElementById("direccion").value.trim();
     let url = "https://www.google.com/maps/search/?api=1";
@@ -537,7 +532,6 @@ function abrirGoogleMaps() {
     
     window.open(url, "_blank");
 }
-
 
 // -------------------------------------------------------------------------
 // 4. 🔄 FUNCIÓN ENVIAR PEDIDO (Final y Asíncrona)
@@ -566,14 +560,12 @@ async function enviarPedido() {
         return;
     }
     
-    // Preparar el objeto para la base de datos
     const datosCompletos = {
         nombreCliente: nombre,
         productos: pedido, 
         metodoEntrega: metodo,
         direccion: (metodo === "Delivery" ? direccion : null),
         mapsLink: (metodo === "Delivery" ? mapsLink : null),
-        // Sintaxis V8 de Timestamp:
         timestamp: firebase.firestore.FieldValue.serverTimestamp() 
     };
 
@@ -582,7 +574,6 @@ async function enviarPedido() {
 
     // 2. Construir mensaje de WhatsApp
     let mensaje = `*Nuevo pedido de:* ${nombre}\n`;
-    // Añadir ID si fue exitoso
     if (pedidoId && !pedidoId.includes('ERROR')) {
         mensaje += `*ID de Referencia (DB):* ${pedidoId}\n\n`; 
     } else if (pedidoId === 'ERROR-DB') {
@@ -604,7 +595,7 @@ async function enviarPedido() {
 
     // 3. Enviar a WhatsApp
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank"); // Esto se ejecuta al final, sin bloqueo.
+    window.open(url, "_blank");
     
     // 4. Limpiar
     pedido = [];
@@ -615,27 +606,21 @@ async function enviarPedido() {
 // -------------------------------------------------------------------------
 // 🔥 FUNCIÓN DE SEGURIDAD (SOLUCIONA EL REFERENCE ERROR) 🔥
 // -------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Verificar si el objeto firebase existe (por si falla la carga CDN)
-    if (typeof firebase === 'undefined') {
-        console.error("Fallo crítico: El objeto 'firebase' no está definido. Revisar la carga de CDN.");
-        alert("Error de conexión al servidor. Recarga la página.");
-        cargarProductos(); // Asegura al menos que los productos carguen
-        return; 
-    }
+try {
+    // 1. Inicializa la app y Firestore
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
 
-    // 2. Inicialización
-    try {
-        firebaseApp = firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-        console.log("✅ Firebase y Firestore inicializados.");
-    } catch (e) {
-        console.error("❌ Fallo crítico al iniciar Firebase. Causa:", e);
-    }
-    
-    // 3. Inicializar la carga de productos (siempre)
+    // 2. Iniciar el formulario y cargar productos
     cargarProductos(); 
-});
+
+    console.log("Firebase y Firestore inicializados.");
+
+} catch (e) {
+    console.error("Fallo crítico al iniciar Firebase. El formulario no guardará en DB.", e);
+    // Si la conexión falla, solo carga los productos para permitir el WhatsApp.
+    cargarProductos(); 
+}
 </script>
 
 </body>
