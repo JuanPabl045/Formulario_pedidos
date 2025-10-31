@@ -564,8 +564,7 @@ async function enviarPedido() {
         metodoEntrega: metodo,
         direccion: (metodo === "Delivery" ? direccion : null),
         mapsLink: (metodo === "Delivery" ? mapsLink : null),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    };
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()    };
 
     // 1. GUARDAR EN EL BACKEND (Firestore)
     const pedidoId = await guardarPedidoEnDB(datosCompletos);
@@ -587,21 +586,10 @@ async function enviarPedido() {
         mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
-    try {
-    // 1. Inicializa la app y Firestore (AHORA ESTÁ FUERA DE window.onload)
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
-    
-    // 2. Llama a la función de inicio después de la conexión
-    cargarProductos();
-    
-    console.log("Firebase y Firestore inicializados.");
+argarProductos();
 
-} catch (e) {
-    console.error("Fallo crítico al iniciar Firebase. El formulario no guardará en DB.", e);
-    // Si la conexión falla, solo carga los productos para permitir el WhatsApp
-    cargarProductos();
-}
+ firebase.inittializeApp(firebaseConfig);;
+  db = firebase.firestore();
     // 3. Enviar a WhatsApp
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
