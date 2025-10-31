@@ -391,9 +391,9 @@
 <script>
 // 🔥🔥🔥 1. DECLARACIONES GLOBALES Y CONFIGURACIÓN 🔥🔥🔥
     
-// 1. OBJETO DE CONFIGURACIÓN (TUS CREDENCIALES REALES)
+// 1. OBJETO DE CONFIGURACIÓN (TUS CREDENCIALES)
 const firebaseConfig = {
-    apiKey: "AIzaSyCBO5qJE9JKety7wjr2p5rLKDsUujUaR2I", // TU CLAVE REAL
+    apiKey: "AIzaSyCBO5qJE9JKety7wjr2p5rLKDsUujUaR2I", // Tu clave REAL
     authDomain: "pedidos-mv-app.firebaseapp.com",
     projectId: "pedidos-mv-app",
     storageBucket: "pedidos-mv-app.firebasestorage.app",
@@ -402,34 +402,38 @@ const firebaseConfig = {
     measurementId: "G-RS7M0JYMWD"
 };
 
-// Variables de la aplicación
+// Variables globales de la aplicación
 const DEFAULT_NUMERO_DESTINO = "51989719386"; 
-let pedido = [];
-let productos = []; 
+let pedido = []; // Corregido: Variable global inicializada
+let productos = []; // Corregido: Variable global inicializada
 let db; // Variable global para la instancia de Firestore
 
 // -------------------------------------------------------------------------
-// 2. FUNCIÓN DE BACKEND: Guardar en Firestore
+// 2. FUNCIÓN DE BACKEND: Guardar en Firestore (Función auxiliar)
 // -------------------------------------------------------------------------
-async function guardarPedidoEnDB(datosPedido) {
+
+// Esta función es asíncrona pero la llamaremos sin 'await' para que no bloquee.
+function intentarGuardarPedido(datosCompletos) {
     if (!db) {
-        console.warn("Firestore no está inicializado. Solo se enviará por WhatsApp.");
-        return "NO_DB_FALLO";
+        console.warn("Firestore no está inicializado. Guardado en DB fallido.");
+        return;
     }
-    try {
-        const docRef = await db.collection("pedidos_online").add(datosPedido);
-        return docRef.id;
-    } catch (e) {
-        console.error("Error al guardar en Firestore: ", e);
-        return "ERROR-DB"; 
-    }
+
+    // Usamos .then() y .catch() para que la promesa se resuelva en segundo plano
+    db.collection("pedidos_online").add(datosCompletos)
+        .then(docRef => {
+            console.log("✅ Pedido guardado en DB. ID:", docRef.id);
+        })
+        .catch(error => {
+            console.error("❌ Fallo crítico al guardar en Firestore:", error);
+        });
 }
 
 // -------------------------------------------------------------------------
-// 3. FUNCIONES DE LÓGICA DEL FORMULARIO (Agregar, Mostrar, etc.)
+// 3. FUNCIONES DE LÓGICA DEL FORMULARIO (Agregar, Mostrar, Cargar, etc.)
 // -------------------------------------------------------------------------
 
-// FUNCIÓN: Cargar productos desde JSON (TU CÓDIGO ORIGINAL)
+// FUNCIÓN: Cargar productos desde JSON
 async function cargarProductos() {
     try {
         const response = await fetch("productos.json");
@@ -459,13 +463,10 @@ async function cargarProductos() {
         });
         
     } catch (error) {
-        // Mantenemos este error para verificar si productos.json está en public/
         console.error("Error al cargar productos (Verifique productos.json en public/):", error);
         alert("Error: No se pudo cargar la lista de productos.");
     }
 }
-
-// [TUS OTRAS FUNCIONES ORIGINALES: agregarProducto, mostrarPedido, eliminarProducto, etc. VAN AQUÍ]
 
 function agregarProducto() {
     const producto = document.getElementById("producto").value.trim();
@@ -534,10 +535,10 @@ function abrirGoogleMaps() {
 }
 
 // -------------------------------------------------------------------------
-// 4. 🔄 FUNCIÓN ENVIAR PEDIDO (Final y Asíncrona)
+// 4. 🔄 FUNCIÓN ENVIAR PEDIDO (Síncrona y No Bloqueante)
 // -------------------------------------------------------------------------
-// 🔄 FUNCIÓN ENVIAR PEDIDO (Final y Asíncrona — Simplificada)
 function enviarPedido() { // NOTA: Quitamos el 'async'
+    // --- Validaciones ---
     if (pedido.length === 0) {
         alert("Agrega al menos un producto al pedido.");
         return;
@@ -561,7 +562,7 @@ function enviarPedido() { // NOTA: Quitamos el 'async'
         return;
     }
     
-    // Preparar el objeto de datos
+    // --- Construcción de datos ---
     const datosCompletos = {
         nombreCliente: nombre,
         productos: pedido, 
@@ -571,21 +572,13 @@ function enviarPedido() { // NOTA: Quitamos el 'async'
         timestamp: firebase.firestore.FieldValue.serverTimestamp() 
     };
 
-    // 1. LLAMADA NO BLOQUEANTE AL BACKEND (FIREBASE)
-    // Usamos .then() y .catch() para que la función principal NO espere.
-    guardarPedidoEnDB(datosCompletos)
-        .then(pedidoId => {
-            console.log("Pedido enviado a DB con ID:", pedidoId);
-            // El mensaje de WhatsApp ya se abrió, solo registramos el resultado.
-        })
-        .catch(error => {
-            console.error("Fallo al guardar en DB, pero WhatsApp continúa:", error);
-        });
+    // 1. LLAMADA NO BLOQUEANTE AL BACKEND
+    // La función intentaGuardarPedido gestiona el guardado en segundo plano.
+    intentarGuardarPedido(datosCompletos);
 
-
-    // 2. Construir mensaje de WhatsApp (Simplificado, SIN ID DE BASE DE DATOS)
+    // 2. Construir mensaje de WhatsApp
     let mensaje = `*Nuevo pedido de:* ${nombre}\n`;
-    mensaje += `*ADVERTENCIA:* La referencia de la base de datos se enviará más tarde o falló.\n\n`; // Mensaje de advertencia
+    mensaje += `*ADVERTENCIA:* La referencia de la base de datos se enviará en segundo plano.\n\n`;
     
     pedido.forEach((item, index) => {
         mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
@@ -600,7 +593,7 @@ function enviarPedido() { // NOTA: Quitamos el 'async'
         mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
-    // 3. Enviar a WhatsApp (SE EJECUTA INMEDIATAMENTE)
+    // 3. Enviar a WhatsApp (SE EJECUTA SIEMPRE, SIN BLOQUEOS)
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
     
@@ -611,23 +604,29 @@ function enviarPedido() { // NOTA: Quitamos el 'async'
 
 
 // -------------------------------------------------------------------------
-// 🔥 FUNCIÓN DE SEGURIDAD (SOLUCIONA EL REFERENCE ERROR) 🔥
+// 🔥 BLOQUE DE INICIALIZACIÓN FINAL CORREGIDO (SOLUCIÓN AL ReferenceError) 🔥
 // -------------------------------------------------------------------------
-try {
-    // 1. Inicializa la app y Firestore
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
 
-    // 2. Iniciar el formulario y cargar productos
-    cargarProductos(); 
+// Esto asegura que NADA que use la variable 'firebase' se ejecute hasta que el navegador 
+// haya cargado completamente los archivos del CDN (los <script src="...">).
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        // Inicializa la app y Firestore SÓLO CUANDO el DOM está listo
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        console.log("✅ Firebase y Firestore inicializados.");
+        
+        // Cargar productos y añadir listeners de formulario
+        cargarProductos();
 
-    console.log("Firebase y Firestore inicializados.");
-
-} catch (e) {
-    console.error("Fallo crítico al iniciar Firebase. El formulario no guardará en DB.", e);
-    // Si la conexión falla, solo carga los productos para permitir el WhatsApp.
-    cargarProductos(); 
-}
+    } catch (e) {
+        // Si hay un error de conexión o de 'firebase is not defined', 
+        // al menos cargamos los productos para que la función de WhatsApp funcione.
+        console.error("❌ Fallo crítico al iniciar Firebase. El formulario no guardará en DB. Causa:", e);
+        // Intentamos cargar productos por si el fallo no fue del CDN.
+        cargarProductos(); 
+    }
+});
 </script>
 
 </body>
