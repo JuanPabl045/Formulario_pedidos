@@ -536,7 +536,8 @@ function abrirGoogleMaps() {
 // -------------------------------------------------------------------------
 // 4. 🔄 FUNCIÓN ENVIAR PEDIDO (Final y Asíncrona)
 // -------------------------------------------------------------------------
-async function enviarPedido() {
+// 🔄 FUNCIÓN ENVIAR PEDIDO (Final y Asíncrona — Simplificada)
+function enviarPedido() { // NOTA: Quitamos el 'async'
     if (pedido.length === 0) {
         alert("Agrega al menos un producto al pedido.");
         return;
@@ -560,6 +561,7 @@ async function enviarPedido() {
         return;
     }
     
+    // Preparar el objeto de datos
     const datosCompletos = {
         nombreCliente: nombre,
         productos: pedido, 
@@ -569,16 +571,21 @@ async function enviarPedido() {
         timestamp: firebase.firestore.FieldValue.serverTimestamp() 
     };
 
-    // 1. GUARDAR EN EL BACKEND (Firestore)
-    const pedidoId = await guardarPedidoEnDB(datosCompletos);
+    // 1. LLAMADA NO BLOQUEANTE AL BACKEND (FIREBASE)
+    // Usamos .then() y .catch() para que la función principal NO espere.
+    guardarPedidoEnDB(datosCompletos)
+        .then(pedidoId => {
+            console.log("Pedido enviado a DB con ID:", pedidoId);
+            // El mensaje de WhatsApp ya se abrió, solo registramos el resultado.
+        })
+        .catch(error => {
+            console.error("Fallo al guardar en DB, pero WhatsApp continúa:", error);
+        });
 
-    // 2. Construir mensaje de WhatsApp
+
+    // 2. Construir mensaje de WhatsApp (Simplificado, SIN ID DE BASE DE DATOS)
     let mensaje = `*Nuevo pedido de:* ${nombre}\n`;
-    if (pedidoId && !pedidoId.includes('ERROR')) {
-        mensaje += `*ID de Referencia (DB):* ${pedidoId}\n\n`; 
-    } else if (pedidoId === 'ERROR-DB') {
-        mensaje += `*ADVERTENCIA:* Falló el registro en base de datos. Usar datos de WhatsApp.\n\n`;
-    }
+    mensaje += `*ADVERTENCIA:* La referencia de la base de datos se enviará más tarde o falló.\n\n`; // Mensaje de advertencia
     
     pedido.forEach((item, index) => {
         mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
@@ -593,7 +600,7 @@ async function enviarPedido() {
         mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
-    // 3. Enviar a WhatsApp
+    // 3. Enviar a WhatsApp (SE EJECUTA INMEDIATAMENTE)
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
     
