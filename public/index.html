@@ -407,17 +407,6 @@ let productos = [];
 let db; // Variable para la instancia de Firestore
 
 // 3. Inicializa Firebase dentro de una función de inicio
-window.onload = function() {
-    try {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-        cargarProductos();
-    } catch (e) {
-        console.error("Fallo crítico al iniciar Firebase. Revisar Credenciales.", e);
-        // Permite que la app siga usando WhatsApp aunque la DB falle
-        cargarProductos(); 
-    }
-};
 
 // 4. FUNCIÓN DE BACKEND: Guardar en Firestore
 async function guardarPedidoEnDB(datosPedido) {
@@ -598,6 +587,21 @@ async function enviarPedido() {
         mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
+    try {
+    // 1. Inicializa la app y Firestore (AHORA ESTÁ FUERA DE window.onload)
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    
+    // 2. Llama a la función de inicio después de la conexión
+    cargarProductos();
+    
+    console.log("Firebase y Firestore inicializados.");
+
+} catch (e) {
+    console.error("Fallo crítico al iniciar Firebase. El formulario no guardará en DB.", e);
+    // Si la conexión falla, solo carga los productos para permitir el WhatsApp
+    cargarProductos();
+}
     // 3. Enviar a WhatsApp
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
