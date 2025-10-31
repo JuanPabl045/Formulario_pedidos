@@ -389,9 +389,9 @@
 <script src="https://www.gstatic.com/firebasejs/9/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9/firebase-firestore.js"></script>
 <script>
-// 1. OBJETO DE CONFIGURACIÓN (REEMPLAZA ESTO CON TUS CREDENCIALES REALES)
+// 1. OBJETO DE CONFIGURACIÓN (TUS CREDENCIALES REALES)
 const firebaseConfig = {
-    apiKey: "AIzaSyCBO5qJE9JKety7wjr2p5rLKDsUujUaR2I", // TU CLAVE REAL
+    apiKey: "AIzaSyCBO5qJE9JKety7wjr2p5rLKDsUujUaR2I", // REEMPLAZA
     authDomain: "pedidos-mv-app.firebaseapp.com",
     projectId: "pedidos-mv-app",
     storageBucket: "pedidos-mv-app.firebasestorage.app",
@@ -400,67 +400,83 @@ const firebaseConfig = {
     measurementId: "G-RS7M0JYMWD"
 };
 
-// 2. Variables Globales (Aseguramos que sean visibles)
+// 2. Variables Globales (SOLUCIÓN al "Cannot access 'pedido'")
 const DEFAULT_NUMERO_DESTINO = "51949776123";
 let pedido = [];
-let productos = []; 
+let productos = [];
 let db; // Variable para la instancia de Firestore
 
-// 3. Inicializa Firebase dentro de una función de inicio
+// 3. 🔥 FUNCIÓN DE INICIALIZACIÓN SEGURA Y BACKEND (SOLUCIÓN AL REFERENCERERROR) 🔥
+// El código dentro de esta función se ejecuta SÓLO cuando todo el DOM está cargado.
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        // Inicializa la app y Firestore
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+        console.log("✅ Firebase y Firestore inicializados correctamente.");
+        
+        // Carga de productos (inicia la interactividad del formulario)
+        cargarProductos();
+
+    } catch (e) {
+        console.error("❌ Fallo crítico al iniciar Firebase. El formulario no guardará en DB.", e);
+        // Si la conexión falla, al menos intenta cargar productos para que funcione WhatsApp.
+        cargarProductos(); 
+    }
+});
+// --------------------------------------------------------------------------
 
 // 4. FUNCIÓN DE BACKEND: Guardar en Firestore
 async function guardarPedidoEnDB(datosPedido) {
     if (!db) {
-        console.warn("Firestore no está inicializado. Solo se enviará por WhatsApp.");
-        return "NO_DB";
+        console.warn("Firestore no está inicializado. Se omitirá el guardado en DB.");
+        return "NO_DB_FALLO";
     }
     try {
         const docRef = await db.collection("pedidos_online").add(datosPedido);
         return docRef.id;
     } catch (e) {
         console.error("Error al guardar en Firestore: ", e);
-        return "ERROR-DB"; 
+        return "ERROR-DB";
     }
 }
 
-// 5. FUNCIONES DE LÓGICA DEL FORMULARIO
+// 5. FUNCIONES DE LÓGICA DEL FORMULARIO (Agregar producto, Mostrar lista, etc.)
 
-// Cargar productos desde JSON (código original...)
 async function cargarProductos() {
+    // ... [Tu código original de cargarProductos] ...
+    // Nota: Esta función es llamada dentro del DOMContentLoaded.
     try {
-      const response = await fetch("productos.json");
-      productos = await response.json(); // Ahora 'productos' es global
-      const lista = document.getElementById("listaProductos");
-      
-      lista.innerHTML = "";
-      
-      productos.forEach(p => {
-        const option = document.createElement("option");
-        option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
-        lista.appendChild(option);
-      });
-      
-      const productoInput = document.getElementById("producto");
-      const precioExtra = document.getElementById("precioProducto");
-      
-      productoInput.addEventListener("change", () => {
-        const seleccionado = productos.find(
-          p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
-        );
-        if (seleccionado) {
-          precioExtra.textContent = `S/ ${seleccionado.PRECIO} por Kg (referencial)`;
-        } else {
-          precioExtra.textContent = "—";
-        }
-      });
-      
+        const response = await fetch("productos.json");
+        productos = await response.json(); 
+        const lista = document.getElementById("listaProductos");
+        
+        lista.innerHTML = "";
+        productos.forEach(p => {
+            const option = document.createElement("option");
+            option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
+            lista.appendChild(option);
+        });
+        
+        const productoInput = document.getElementById("producto");
+        const precioExtra = document.getElementById("precioProducto");
+        
+        productoInput.addEventListener("change", () => {
+            const seleccionado = productos.find(
+                p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
+            );
+            if (seleccionado) {
+                precioExtra.textContent = `S/ ${seleccionado.PRECIO} por Kg (referencial)`;
+            } else {
+                precioExtra.textContent = "—";
+            }
+        });
     } catch (error) {
-      console.error("Error al cargar productos (Verifique productos.json en public/):", error);
-      alert("Error: No se pudo cargar la lista de productos.");
+        console.error("Error al cargar productos (Verifique productos.json en public/):", error);
+        alert("Error: No se pudo cargar la lista de productos.");
     }
 }
 
-// Agregar producto a la lista (código original...)
 function agregarProducto() {
     const producto = document.getElementById("producto").value.trim();
     const cantidad = parseInt(document.getElementById("cantidad").value);
@@ -471,7 +487,7 @@ function agregarProducto() {
         return;
     }
 
-    pedido.push({ producto, cantidad, descripcion }); // Esta línea ahora funciona
+    pedido.push({ producto, cantidad, descripcion });
     mostrarPedido();
 
     // limpiar campos
@@ -481,7 +497,6 @@ function agregarProducto() {
     document.getElementById("precioProducto").textContent = "—";
 }
 
-// Mostrar lista en pantalla (código original...)
 function mostrarPedido() {
     const lista = document.getElementById("listaPedido");
     lista.innerHTML = "";
@@ -494,13 +509,11 @@ function mostrarPedido() {
     });
 }
 
-// Eliminar producto (código original...)
 function eliminarProducto(index) {
     pedido.splice(index, 1);
     mostrarPedido();
 }
 
-// Seleccionar método de entrega (código original...)
 function seleccionarMetodo(metodo) {
     document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('selected'));
     const opciones = document.querySelectorAll('.delivery-option');
@@ -519,7 +532,6 @@ function seleccionarMetodo(metodo) {
     }
 }
 
-// Abrir Google Maps (código original...)
 function abrirGoogleMaps() {
     const direccion = document.getElementById("direccion").value.trim();
     let url = "https://www.google.com/maps/search/?api=1";
@@ -531,52 +543,46 @@ function abrirGoogleMaps() {
     window.open(url, "_blank");
 }
 
-// 6. MODIFICACIÓN: Enviar pedido (Guarda en DB y luego WhatsApp)
-// 🔄 FUNCIÓN MODIFICADA: Enviar pedido (Guarda en DB y luego WhatsApp)
-async function enviarPedido() { 
-    if (pedido.length === 0) { 
-        alert("Agrega al menos un producto al pedido.");
-        return;
-    }
-    const nombre = document.getElementById("nombre").value.trim();
-    if (!nombre) {
-        alert("Por favor ingresa tu nombre.");
-        return;
-    }
-    const metodo = document.getElementById("metodoEntrega").value;
-    if (!metodo) {
-        alert("Selecciona un método de entrega.");
+// 6. 🔄 FUNCIÓN ENVIAR PEDIDO (Final)
+async function enviarPedido() {
+    // Validaciones
+    if (pedido.length === 0 || !document.getElementById("nombre").value.trim() || !document.getElementById("metodoEntrega").value) {
+        alert("Por favor completa al menos un producto, tu nombre y el método de entrega.");
         return;
     }
 
-    // Preparar el objeto para la base de datos
+    const nombre = document.getElementById("nombre").value.trim();
+    const metodo = document.getElementById("metodoEntrega").value;
     const direccion = document.getElementById("direccion").value.trim();
     const mapsLink = document.getElementById("mapsLink").value.trim();
-    
-    if (metodo === "Delivery" && !direccion) {
-        alert("Por favor ingresa tu dirección para el delivery.");
-        return;
-    }
-    
+
+    // 1. Estructurar el objeto para la base de datos
     const datosCompletos = {
         nombreCliente: nombre,
         productos: pedido, 
         metodoEntrega: metodo,
         direccion: (metodo === "Delivery" ? direccion : null),
         mapsLink: (metodo === "Delivery" ? mapsLink : null),
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()    };
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    };
 
-    // 1. GUARDAR EN EL BACKEND (Firestore)
+    // 2. GUARDAR EN EL BACKEND (Firestore)
     const pedidoId = await guardarPedidoEnDB(datosCompletos);
 
-    // 2. Construir mensaje de WhatsApp (Incluyendo el ID de Referencia)
+    // 3. Construir mensaje de WhatsApp (Incluyendo ID)
     let mensaje = `*Nuevo pedido de:* ${nombre}\n`;
-    mensaje += `*ID de Referencia (DB):* ${pedidoId}\n\n`; 
+    // Solo incluir el ID si NO hubo un error crítico de inicialización
+    if (pedidoId && !pedidoId.includes('ERROR')) {
+        mensaje += `*ID de Referencia (DB):* ${pedidoId}\n\n`; 
+    } else if (pedidoId === 'ERROR-DB') {
+        mensaje += `*ADVERTENCIA:* Falló el guardado en base de datos. Pedido enviado solo por WhatsApp.\n\n`;
+    }
     
     pedido.forEach((item, index) => {
         mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
     });
 
+    // ... (Resto de la lógica del mensaje WhatsApp) ...
     mensaje += `\n*Método de entrega:* ${metodo}`;
     if (metodo === "Delivery") {
         mensaje += `\n*Dirección:* ${direccion}`;
@@ -586,25 +592,17 @@ async function enviarPedido() {
         mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
-argarProductos();
-
- firebase.inittializeApp(firebaseConfig);;
-  db = firebase.firestore();
-    // 3. Enviar a WhatsApp
+    // 4. Enviar a WhatsApp
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
+    
+    // Abrir la ventana (soluciona el bloqueo si el await fue muy rápido)
     window.open(url, "_blank");
     
-    // 4. Limpiar
+    // Limpiar
     pedido = [];
     mostrarPedido();
 }
-
-// Inicializar
-cargarProductos();
-
 </script>
-</body>
-</html>
 
 
 
