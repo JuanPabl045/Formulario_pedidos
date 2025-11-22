@@ -386,7 +386,31 @@
     </div>
   </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
 <script>
+  // ⚙️ CONFIGURACIÓN DE FIREBASE - Reemplaza con tus credenciales
+  const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "TU_PROJECT_ID.firebaseapp.com",
+    projectId: "TU_PROJECT_ID",
+    storageBucket: "TU_PROJECT_ID.appspot.com",
+    messagingSenderId: "TU_MESSAGING_ID",
+    appId: "TU_APP_ID"
+  };
+
+  // Inicializar Firebase
+  let db;
+  try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    console.log("✅ Firebase inicializado correctamente");
+  } catch (error) {
+    console.error("❌ Error al inicializar Firebase:", error);
+  }
+
   const DEFAULT_NUMERO_DESTINO = "51989719386"; // 👈 Cambia este número por el real
   let pedido = [];
   let productos = [];
@@ -539,6 +563,28 @@
         mensaje += `\n*Link de Maps:* ${mapsLink}`;
       }
       mensaje += `\n*Cargo adicional:* S/ 13`;
+    }
+
+    // 💾 Guardar en Firebase primero
+    const pedidoData = {
+      nombre: nombre,
+      productos: pedido,
+      metodoEntrega: metodo,
+      direccion: metodo === "Delivery" ? document.getElementById("direccion").value.trim() : null,
+      mapsLink: metodo === "Delivery" ? document.getElementById("mapsLink").value.trim() : null,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      estado: "pendiente"
+    };
+
+    // Intentar guardar en Firebase
+    if (db) {
+      db.collection("pedidos").add(pedidoData)
+        .then((docRef) => {
+          console.log("✅ Pedido guardado en Firebase con ID:", docRef.id);
+        })
+        .catch((error) => {
+          console.error("❌ Error al guardar en Firebase:", error);
+        });
     }
 
     // Construir URL de WhatsApp
