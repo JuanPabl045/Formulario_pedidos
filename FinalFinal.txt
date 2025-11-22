@@ -1,0 +1,625 @@
+import com.fazecast.jSerialComm.SerialPort;
+import org.opencv.core.*;
+import org.opencv.core.Point;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
+import org.opencv.videoio.VideoCapture;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ControlIntensidad extends JFrame {
+
+    private volatile boolean running = false;
+    private VideoCapture camera;
+    private SerialPort serialPort;
+
+    private JLabel cameraLabel;
+    private JLabel maskLabel;
+    private JProgressBar powerBar;
+    private JLabel powerLabel;
+
+    private String userSelectedAction = "LUZ"; // acción elegida por usuario
+    private boolean autoMode = true; // si true: usar detección por dedos; si false: usar userSelectedAction
+
+    // HSV sliders y etiquetas
+    private JSlider hMinSlider, sMinSlider, vMinSlider;
+    private JSlider hMaxSlider, sMaxSlider, vMaxSlider;
+
+    // Estado adicional para suavizado / estabilidad / envío
+    private int lightStableIntensity = 0;
+    private int motorStableIntensity = 0;
+    private String lastSentCommand = "";
+    private String lastConfirmedAction = "INACTIVO";
+    private String lastDetectedCandidate = "INACTIVO";
+    private int candidateConfirmCount = 0;
+
+    // Parámetros ajustables
+    private final int ACTION_CONFIRM_THRESHOLD = 5;    // frames requeridos para confirmar cambio de acción
+    private final int SEND_MIN_DELTA = 3;              // mínimo cambio para enviar (0-255)
+    private final long SEND_INTERVAL_MS = 150;         // mínimo intervalo entre envíos seriales
+    private final double SMOOTHING_ALPHA = 0.45;       // 0..1 (mayor = más reactivo)
+    private final boolean USE_GAMMA = true;
+    private final double GAMMA = 2.2;
+
+    // Zona útil vertical (fracciones de la altura del frame)
+    // Ajusta estos valores si necesitas "subir el suelo" o ampliar/estrechar rango.
+    private double controlMinY = 0.00; // 30% desde arriba = límite superior de la zona útil
+    private double controlMaxY = 0.90; // 95% desde arriba = límite inferior de la zona útil
+
+    private long lastSendTime = 0;
+
+    public ControlIntensidad() {
+        super("Control de Intensidad");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        initializeCamera();
+        add(createSerialPanel(), BorderLayout.NORTH);
+        add(createVisionPanel(), BorderLayout.CENTER);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                stopProcessingAndReleaseResources();
+            }
+        });
+    }
+
+    private void initializeCamera() {
+        camera = new VideoCapture(1);
+        if (!camera.isOpened()) {
+            JOptionPane.showMessageDialog(this,
+                    "❌ No se detecta la cámara o está en uso.",
+                    "Error de Cámara",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private JPanel createSerialPanel() {
+        JPanel panel = new JPanel(new FlowLayout());
+        JComboBox<String> portComboBox = new JComboBox<>();
+        SerialPort[] ports = SerialPort.getCommPorts();
+        for (SerialPort port : ports) {
+            portComboBox.addItem(port.getSystemPortName());
+        }
+
+        JButton connectButton = new JButton("Conectar y Empezar");
+        connectButton.addActionListener(e -> startProcessing(portComboBox));
+
+        JButton sendMaxLight = new JButton("Enviar L255 (máx LUZ)");
+        sendMaxLight.addActionListener(e -> {
+            if (serialPort == null || !serialPort.isOpen()) {
+                JOptionPane.showMessageDialog(this, "Puerto no conectado.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            enviarComando("L255");
+            lastSentCommand = "L255";
+            System.out.println("Enviado: L255");
+        });
+
+        JButton sendMaxMotor = new JButton("Enviar M255 (máx MOTOR)");
+        sendMaxMotor.addActionListener(e -> {
+            if (serialPort == null || !serialPort.isOpen()) {
+                JOptionPane.showMessageDialog(this, "Puerto no conectado.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            enviarComando("M255");
+            lastSentCommand = "M255";
+            System.out.println("Enviado: M255");
+        });
+
+        JButton sendOff = new JButton("Apagar (L0/M0)");
+        sendOff.addActionListener(e -> {
+            if (serialPort == null || !serialPort.isOpen()) {
+                JOptionPane.showMessageDialog(this, "Puerto no conectado.", "Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            enviarComando("L0");
+            enviarComando("M0");
+            lastSentCommand = "L0";
+            System.out.println("Enviado: L0 y M0");
+        });
+
+        panel.add(new JLabel("Puerto COM:"));
+        panel.add(portComboBox);
+        panel.add(connectButton);
+        panel.add(sendMaxLight);
+        panel.add(sendMaxMotor);
+        panel.add(sendOff);
+        return panel;
+    }
+
+    private JPanel createVisionPanel() {
+        cameraLabel = new JLabel();
+        maskLabel = new JLabel();
+        powerBar = new JProgressBar(0, 100);
+        powerBar.setStringPainted(true);
+        powerBar.setValue(0);
+        powerLabel = new JLabel("Modo: INACTIVO", SwingConstants.CENTER);
+
+        // split cámara / máscara
+        JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                new JScrollPane(cameraLabel), new JScrollPane(maskLabel));
+        split.setResizeWeight(0.7);
+        split.setDividerSize(4);
+        split.setPreferredSize(new Dimension(900, 520));
+
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(split, BorderLayout.CENTER);
+
+        JPanel bottom = new JPanel(new BorderLayout());
+        JPanel leftControls = new JPanel(new GridLayout(3, 1));
+        leftControls.add(createActionPanel());
+        leftControls.add(powerLabel);
+        leftControls.add(powerBar);
+
+        bottom.add(leftControls, BorderLayout.WEST);
+        bottom.add(createHSVPanel(), BorderLayout.CENTER);
+
+        panel.add(bottom, BorderLayout.SOUTH);
+        return panel;
+    }
+
+    private JPanel createActionPanel() {
+        JPanel panel = new JPanel(new FlowLayout());
+
+        JButton luzButton = new JButton("LUZ");
+        JButton motorButton = new JButton("MOTOR");
+        JCheckBox autoCheck = new JCheckBox("Auto (dedos)", true);
+
+        luzButton.addActionListener(e -> {
+            userSelectedAction = "LUZ";
+            autoMode = false;
+            autoCheck.setSelected(false);
+            powerLabel.setText("Modo: LUZ (manual)");
+        });
+
+        motorButton.addActionListener(e -> {
+            userSelectedAction = "MOTOR";
+            autoMode = false;
+            autoCheck.setSelected(false);
+            powerLabel.setText("Modo: MOTOR (manual)");
+        });
+
+        autoCheck.addActionListener(e -> {
+            autoMode = autoCheck.isSelected();
+            if (autoMode) powerLabel.setText("Modo: AUTO (dedos)");
+            else powerLabel.setText("Modo: " + userSelectedAction + " (manual)");
+        });
+
+        panel.add(new JLabel("Selecciona acción:"));
+        panel.add(luzButton);
+        panel.add(motorButton);
+        panel.add(autoCheck);
+
+        return panel;
+    }
+
+    private JPanel createHSVPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBorder(BorderFactory.createTitledBorder("Ajuste HSV (mask preview)"));
+
+        // sliders panel
+        JPanel sliders = new JPanel(new GridLayout(3, 4));
+
+        // valores por defecto (coinciden con original)
+        int hMin = 0, sMin = 30, vMin = 60;
+        int hMax = 20, sMax = 150, vMax = 255;
+
+        hMinSlider = new JSlider(0, 179, hMin);
+        sMinSlider = new JSlider(0, 255, sMin);
+        vMinSlider = new JSlider(0, 255, vMin);
+
+        hMaxSlider = new JSlider(0, 179, hMax);
+        sMaxSlider = new JSlider(0, 255, sMax);
+        vMaxSlider = new JSlider(0, 255, vMax);
+
+        ChangeListener cl = new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                // labels no necesarios, usar para debug si se desea
+            }
+        };
+        hMinSlider.addChangeListener(cl);
+        sMinSlider.addChangeListener(cl);
+        vMinSlider.addChangeListener(cl);
+        hMaxSlider.addChangeListener(cl);
+        sMaxSlider.addChangeListener(cl);
+        vMaxSlider.addChangeListener(cl);
+
+        sliders.add(new JLabel("H Min"));
+        sliders.add(hMinSlider);
+        sliders.add(new JLabel("H Max"));
+        sliders.add(hMaxSlider);
+
+        sliders.add(new JLabel("S Min"));
+        sliders.add(sMinSlider);
+        sliders.add(new JLabel("S Max"));
+        sliders.add(sMaxSlider);
+
+        sliders.add(new JLabel("V Min"));
+        sliders.add(vMinSlider);
+        sliders.add(new JLabel("V Max"));
+        sliders.add(vMaxSlider);
+
+        panel.add(sliders, BorderLayout.CENTER);
+
+        return panel;
+    }
+
+    private void startProcessing(JComboBox<String> portComboBox) {
+        if (!camera.isOpened()) return;
+
+        String portName = (String) portComboBox.getSelectedItem();
+        if (portName == null) return;
+
+        serialPort = SerialPort.getCommPort(portName);
+        serialPort.setComPortParameters(9600, 8, SerialPort.ONE_STOP_BIT, SerialPort.NO_PARITY);
+        serialPort.setComPortTimeouts(SerialPort.TIMEOUT_WRITE_BLOCKING, 0, 0);
+
+        if (!serialPort.openPort()) {
+            JOptionPane.showMessageDialog(this,
+                    "❌ No se pudo abrir el puerto " + portName,
+                    "Error Serial",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        running = true;
+        new Thread(this::runVisionLoop).start();
+    }
+
+    private int parseLastSentValue() {
+        if (lastSentCommand == null) return 0;
+        String digits = lastSentCommand.replaceAll("\\D+", "");
+        if (digits.isEmpty()) return 0;
+        try {
+            return Integer.parseInt(digits);
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    private void runVisionLoop() {
+        Mat frame = new Mat();
+        Mat blurred = new Mat();
+        Mat hsv = new Mat();
+        Mat mask = new Mat();
+        Mat hierarchy = new Mat();
+        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_ELLIPSE, new Size(5, 5));
+
+        int fingerSmoothed = 0;   // suavizado simple para el conteo de dedos
+
+        while (running) {
+            if (!camera.read(frame) || frame.empty()) continue;
+
+            Imgproc.GaussianBlur(frame, blurred, new Size(5, 5), 0);
+            Imgproc.cvtColor(blurred, hsv, Imgproc.COLOR_BGR2HSV);
+
+            // leer HSV desde sliders (pueden cambiar en tiempo real)
+            Scalar lower = new Scalar(hMinSlider.getValue(), sMinSlider.getValue(), vMinSlider.getValue());
+            Scalar upper = new Scalar(hMaxSlider.getValue(), sMaxSlider.getValue(), vMaxSlider.getValue());
+
+            Core.inRange(hsv, lower, upper, mask);
+            Imgproc.morphologyEx(mask, mask, Imgproc.MORPH_OPEN, kernel);
+            Imgproc.morphologyEx(mask, mask, Imgproc.MORPH_CLOSE, kernel);
+
+            List<MatOfPoint> contours = new ArrayList<>();
+            Imgproc.findContours(mask, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+            int fingerCount = 0;
+            double maxArea = 0;
+            final MatOfPoint[] maxContourHolder = {null};
+            Point center = null;
+
+            for (MatOfPoint contour : contours) {
+                double area = Imgproc.contourArea(contour);
+                if (area > maxArea) {
+                    maxArea = area;
+                    maxContourHolder[0] = contour;
+                }
+            }
+
+            // CAMBIO: reducir umbral de área y permitir detección en todo el frame
+            if (maxContourHolder[0] != null && maxArea > 300) {  // ERA 1000, AHORA 300
+                Moments mu = Imgproc.moments(maxContourHolder[0]);
+                if (mu.m00 != 0) {
+                    center = new Point(mu.m10 / mu.m00, mu.m01 / mu.m00);
+                }
+
+                MatOfInt hull = new MatOfInt();
+                MatOfInt4 defects = new MatOfInt4();
+                try {
+                    Imgproc.convexHull(maxContourHolder[0], hull);
+                    Imgproc.convexityDefects(maxContourHolder[0], hull, defects);
+
+                    if (defects.rows() > 0) {
+                        fingerCount = 0;
+                        Point[] contourArray = maxContourHolder[0].toArray();
+                        for (int i = 0; i < defects.rows(); i++) {
+                            double[] defect = defects.get(i, 0);
+                            Point start = contourArray[(int) defect[0]];
+                            Point end = contourArray[(int) defect[1]];
+                            Point far = contourArray[(int) defect[2]];
+                            double depth = defect[3] / 256.0;
+
+                            double angle = angleBetween(start, far, end);
+                            if (depth > 15 && angle < 80) {
+                                fingerCount++;
+                                Imgproc.circle(frame, far, 5, new Scalar(0, 0, 255), -1);
+                            }
+                        }
+                    }
+                } finally {
+                    hull.release();
+                    defects.release();
+                }
+            } else {
+                // Si no hay contorno, acelerar decaimiento del contador suavizado
+                fingerCount = 0;
+                fingerSmoothed = (int) Math.round(fingerSmoothed * 0.5); // decae más rápido cuando no hay mano
+            }
+
+            // debug: dibujar el contorno detectado en el frame
+            if (maxContourHolder[0] != null && maxArea > 300) {
+                Imgproc.drawContours(frame, new ArrayList<MatOfPoint>() {{ add(maxContourHolder[0]); }}, 0, new Scalar(0, 255, 0), 2);
+            }
+
+            // suavizado simple del conteo de dedos (evita saltos bruscos)
+            fingerSmoothed = (int) Math.round(fingerSmoothed * 0.7 + fingerCount * 0.3);
+
+            // Detección automática según dedos (mapeo base)
+            String detectedAction;
+            if (fingerSmoothed >= 1 && fingerSmoothed <= 2) {
+                detectedAction = "LUZ";
+            } else if (fingerSmoothed >= 3 && fingerSmoothed <= 4) {
+                detectedAction = "MOTOR";
+            } else {
+                detectedAction = "INACTIVO";
+            }
+
+            // Histeresis: confirmar candidato N frames antes de cambiar
+            if (!detectedAction.equals(lastDetectedCandidate)) {
+                lastDetectedCandidate = detectedAction;
+                candidateConfirmCount = 1;
+            } else {
+                candidateConfirmCount++;
+            }
+
+            String confirmedAutoAction = lastConfirmedAction;
+            if (candidateConfirmCount >= ACTION_CONFIRM_THRESHOLD) {
+                // confirmar cambio
+                lastConfirmedAction = lastDetectedCandidate;
+                confirmedAutoAction = lastConfirmedAction;
+                candidateConfirmCount = 0;
+            }
+
+            // elegir acción final según modo (auto/manual)
+            String finalAction = autoMode ? confirmedAutoAction : userSelectedAction;
+
+            // Mostrar el número de dedos detectados y el modo actual en el frame
+            Imgproc.putText(frame, "Dedos: " + fingerSmoothed, new Point(10, 30),
+                    Imgproc.FONT_HERSHEY_SIMPLEX, 1.0, new Scalar(255, 255, 255), 2);
+
+            String modoText = "Modo: " + finalAction;
+            Scalar modoColor;
+            if ("LUZ".equals(finalAction)) {
+                modoColor = new Scalar(255, 255, 0); // Cian para LUZ
+            } else if ("MOTOR".equals(finalAction)) {
+                modoColor = new Scalar(0, 255, 255); // Amarillo para MOTOR
+            } else {
+                modoColor = new Scalar(0, 0, 255); // Rojo para INACTIVO
+            }
+            Imgproc.putText(frame, modoText, new Point(10, 70),
+                    Imgproc.FONT_HERSHEY_SIMPLEX, 1.0, modoColor, 2);
+
+            // Ejecutar acción seleccionada (suavizado exponencial por acción, gamma opcional)
+            long now = System.currentTimeMillis();
+            int lastSentVal = parseLastSentValue();
+
+            if ("LUZ".equals(finalAction)) {
+                if (center == null) {
+                    // No se detectó mano: asegurar 0
+                    if (lightStableIntensity != 0) {
+                        lightStableIntensity = 0;
+                        if (lastSentVal != 0) {
+                            enviarComando("L0");
+                            lastSentCommand = "L0";
+                            lastSendTime = now;
+                            System.out.println("Enviado: L0 (no detectado)");
+                        }
+                    }
+                    powerBar.setValue(0);
+                    powerLabel.setText("Foco: Intensidad 0%");
+                } else {
+                    double frameHeight = frame.height();
+                    double yPos = center.y;
+
+                    // NUEVO: base donde detecta bien = 0%, arriba = 100%
+                    // controlMaxY = donde detecta bien (base, 0%)
+                    // controlMinY = límite superior (máximo, 100%)
+                    double baseY = frameHeight * 0.60;  // 60% = distancia mínima donde detecta bien → 0%
+                    double topY = frameHeight * 0.20;   // 20% = límite superior → 100%
+                    
+                    int raw;
+                    if (yPos >= baseY) {
+                        raw = 0;   // en la base o más abajo → 0%
+                    } else if (yPos <= topY) {
+                        raw = 255; // arriba del límite → 100%
+                    } else {
+                        // mapeo lineal invertido: más arriba = más intensidad
+                        double range = baseY - topY;
+                        double offset = baseY - yPos;
+                        raw = (int) ((offset / range) * 255.0);
+                    }
+                    raw = Math.max(0, Math.min(255, raw));
+
+                    int corrected = raw;
+                    if (USE_GAMMA) corrected = (int) (Math.pow(raw / 255.0, 1.0 / GAMMA) * 255.0 + 0.5);
+
+                    lightStableIntensity = (int) Math.round(SMOOTHING_ALPHA * corrected + (1.0 - SMOOTHING_ALPHA) * lightStableIntensity);
+
+                    int pct = lightStableIntensity * 100 / 255;
+                    powerBar.setValue(pct);
+                    powerLabel.setText("Foco: Intensidad " + pct + "%");
+
+                    if (Math.abs(lightStableIntensity - lastSentVal) >= SEND_MIN_DELTA || (now - lastSendTime) >= SEND_INTERVAL_MS) {
+                        String cmd = "L" + lightStableIntensity;
+                        enviarComando(cmd);
+                        lastSentCommand = cmd;
+                        lastSendTime = now;
+                        System.out.println("Enviado: " + cmd);
+                    }
+                }
+            } else if ("MOTOR".equals(finalAction)) {
+                if (center == null) {
+                    if (motorStableIntensity != 0) {
+                        motorStableIntensity = 0;
+                        if (lastSentVal != 0) {
+                            enviarComando("M0");
+                            lastSentCommand = "M0";
+                            lastSendTime = now;
+                            System.out.println("Enviado: M0 (no detectado)");
+                        }
+                    }
+                    powerBar.setValue(0);
+                    powerLabel.setText("Motor: Velocidad 0%");
+                } else {
+                    double frameHeight = frame.height();
+                    double yPos = center.y;
+
+                    // MISMO mapeo para motor
+                    double baseY = frameHeight * 0.60;
+                    double topY = frameHeight * 0.20;
+                    
+                    int raw;
+                    if (yPos >= baseY) {
+                        raw = 0;
+                    } else if (yPos <= topY) {
+                        raw = 255;
+                    } else {
+                        double range = baseY - topY;
+                        double offset = baseY - yPos;
+                        raw = (int) ((offset / range) * 255.0);
+                    }
+                    raw = Math.max(0, Math.min(255, raw));
+
+                    int corrected = raw;
+                    if (USE_GAMMA) corrected = (int) (Math.pow(raw / 255.0, 1.0 / GAMMA) * 255.0 + 0.5);
+
+                    motorStableIntensity = (int) Math.round(SMOOTHING_ALPHA * corrected + (1.0 - SMOOTHING_ALPHA) * motorStableIntensity);
+
+                    int pct = motorStableIntensity * 100 / 255;
+                    powerBar.setValue(pct);
+                    powerLabel.setText("Motor: Velocidad " + pct + "%");
+
+                    if (Math.abs(motorStableIntensity - lastSentVal) >= SEND_MIN_DELTA || (now - lastSendTime) >= SEND_INTERVAL_MS) {
+                        String cmd = "M" + motorStableIntensity;
+                        enviarComando(cmd);
+                        lastSentCommand = cmd;
+                        lastSendTime = now;
+                        System.out.println("Enviado: " + cmd);
+                    }
+                }
+            } else { // INACTIVO
+                // cuando el modo es INACTIVO forzar 0 en ambas salidas
+                if (lightStableIntensity != 0 || motorStableIntensity != 0) {
+                    lightStableIntensity = 0;
+                    motorStableIntensity = 0;
+                }
+                powerBar.setValue(0);
+                powerLabel.setText("Punto muerto: OFF");
+                if (parseLastSentValue() != 0 || (now - lastSendTime) >= SEND_INTERVAL_MS) {
+                    enviarComando("L0");
+                    enviarComando("M0");
+                    lastSentCommand = "L0";
+                    lastSendTime = now;
+                    System.out.println("Enviado: L0 y M0 (INACTIVO)");
+                }
+            }
+
+            // Actualizar vistas en EDT (frame y máscara)
+            BufferedImage frameImg = matToBufferedImage(frame);
+            BufferedImage maskImg = matToBufferedImage(mask);
+            SwingUtilities.invokeLater(() -> {
+                cameraLabel.setIcon(new ImageIcon(frameImg));
+                maskLabel.setIcon(new ImageIcon(maskImg));
+            });
+
+            try {
+                Thread.sleep(33);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                running = false;
+            }
+        }
+
+        frame.release();
+        blurred.release();
+        hsv.release();
+        mask.release();
+        hierarchy.release();
+        kernel.release();
+    }
+
+    private double angleBetween(Point a, Point b, Point c) {
+        double[] v1 = {a.x - b.x, a.y - b.y};
+        double[] v2 = {c.x - b.x, c.y - b.y};
+        double dot = v1[0] * v2[0] + v1[1] * v2[1];
+        double mag1 = Math.hypot(v1[0], v1[1]);
+        double mag2 = Math.hypot(v2[0], v2[1]);
+        if (mag1 * mag2 == 0) return 180.0;
+        double cos = dot / (mag1 * mag2);
+        cos = Math.max(-1.0, Math.min(1.0, cos));
+        return Math.toDegrees(Math.acos(cos));
+    }
+
+    private void enviarComando(String command) {
+        if (serialPort == null || !serialPort.isOpen()) return;
+        try {
+            serialPort.writeBytes((command + "\n").getBytes(), command.length() + 1);
+        } catch (Exception ignored) {}
+    }
+
+    public static BufferedImage matToBufferedImage(Mat mat) {
+        int type = mat.channels() == 1 ? BufferedImage.TYPE_BYTE_GRAY : BufferedImage.TYPE_3BYTE_BGR;
+        int bufferSize = mat.channels() * mat.cols() * mat.rows();
+        byte[] b = new byte[bufferSize];
+        mat.get(0, 0, b);
+        BufferedImage image = new BufferedImage(mat.cols(), mat.rows(), type);
+        final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+        System.arraycopy(b, 0, targetPixels, 0, b.length);
+        return image;
+    }
+
+    private void stopProcessingAndReleaseResources() {
+        running = false;
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        if (camera != null) camera.release();
+        if (serialPort != null && serialPort.isOpen()) serialPort.closePort();
+        System.exit(0);
+    }
+
+    public static void main(String[] args) {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        SwingUtilities.invokeLater(ControlIntensidad::new);
+    }
+}

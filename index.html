@@ -391,6 +391,11 @@
   let pedido = [];
   let productos = [];
 
+  // Detectar si es dispositivo móvil
+  function esMobil() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
   // Cargar productos desde JSON
   async function cargarProductos() {
     try {
@@ -536,8 +541,28 @@
       mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
+    // Construir URL de WhatsApp
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
+    
+    // En móviles, usar location.href para mejor compatibilidad
+    // En desktop, usar window.open
+    if (esMobil()) {
+      // Intentar primero con el esquema de WhatsApp
+      window.location.href = `whatsapp://send?phone=${DEFAULT_NUMERO_DESTINO}&text=${encodeURIComponent(mensaje)}`;
+      
+      // Fallback a wa.me después de 1 segundo si no funciona
+      setTimeout(() => {
+        window.location.href = url;
+      }, 1000);
+    } else {
+      // En desktop, abrir en nueva pestaña
+      const nuevaVentana = window.open(url, "_blank");
+      
+      // Si window.open fue bloqueado, usar location.href
+      if (!nuevaVentana || nuevaVentana.closed || typeof nuevaVentana.closed === 'undefined') {
+        window.location.href = url;
+      }
+    }
   }
 
   // Inicializar
