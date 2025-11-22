@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario de Pedido</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <style>
+    /* FONDO GENERAL CON GRADIENTE SUAVE */
+    body {
+      background: linear-gradient(135deg, #F2DCD9 0%, #DA2A30 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      padding: 20px 0;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .main-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      padding: 0;
+    }
+
+    /* CABECERA */
+    .header {
+      background: linear-gradient(to right, #DA2A30, #B96454);
+      color: white;
+      padding: 25px 30px;
+      text-align: center;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin: 0;
+      color: white;
+    }
+
+    /* CONTENIDO */
+    .content {
+      padding: 30px;
+    }
+
+    /* TÍTULOS DE SECCIÓN */
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #DA2A30;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #F2DCD9;
+      display: flex;
+      align-items: center;
+    }
+
+    .section-title i {
+      margin-right: 10px;
+      font-size: 1.4rem;
+    }
+
+    /* FORMULARIOS */
+    .form-label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .form-control, .form-select {
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 2px solid #e9ecef;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #B96454;
+      box-shadow: 0 0 0 3px rgba(185, 100, 84, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+    }
+
+    /* BOTONES */
+    .btn {
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #DA2A30, #B96454);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(to right, #B96454, #DA2A30);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.3);
+    }
+
+    .btn-success {
+      background: linear-gradient(to right, #28a745, #20c997);
+      border: none;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(to right, #20c997, #28a745);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    .btn-maps {
+      border-radius: 10px;
+      padding: 12px 16px;
+      background: linear-gradient(to right, #DA2A30, #B96454);
+      color: white;
+      border: none;
+      font-weight: 500;
+    }
+
+    .btn-maps:hover {
+      background: linear-gradient(to right, #B96454, #DA2A30);
+      transform: translateY(-2px);
+    }
+
+    /* LISTA DE PRODUCTOS */
+    .product-list {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .list-group-item {
+      padding: 15px 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .list-group-item:hover {
+      background-color: #f8f9fa;
+    }
+
+    .product-name {
+      font-weight: 500;
+    }
+
+    .product-details {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-top: 5px;
+    }
+
+    .delete-btn {
+      color: #DA2A30;
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .delete-btn:hover {
+      color: #B96454;
+      transform: scale(1.1);
+    }
+
+    /* OPCIONES DE ENTREGA */
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .delivery-option {
+      padding: 20px;
+      border: 2px solid #e9ecef;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .delivery-option:hover {
+      border-color: #B96454;
+      background-color: rgba(242, 220, 217, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .delivery-option.selected {
+      border-color: #DA2A30;
+      background-color: rgba(242, 220, 217, 0.5);
+      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.1);
+    }
+
+    .delivery-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #DA2A30;
+    }
+
+    .delivery-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .delivery-desc {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    /* INFORMACIÓN DE PRODUCTO */
+    .producto-info {
+      padding: 12px 15px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .precio-info {
+      font-weight: bold;
+      color: #198754;
+    }
+
+    /* ANIMACIONES */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .content {
+        padding: 20px;
+      }
+      
+      .header h1 {
+        font-size: 1.6rem;
+      }
+      
+      .delivery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        padding: 12px 16px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #DA2A30, #B96454); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); padding: 15px 0; margin-bottom: 20px;">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="nosotros.html" style="color: white !important; font-weight: 700; font-size: 1.5rem;">
+        <i class="fas fa-store me-2"></i> Molino Viejo
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background: white;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="nosotros.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
+              <i class="fas fa-home me-1"></i> Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="catalogo.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
+              <i class="fas fa-book me-1"></i> Cat�logo
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="pedidos.html" style="color: white !important; font-weight: 500; margin: 0 10px; border-bottom: 3px solid white;">
+              <i class="fas fa-shopping-cart me-1"></i> Hacer Pedido
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
+              <i class="fas fa-user-shield me-1"></i> Admin
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+  <div class="header">
+    <img src="img/logo.png" alt="Logo Molino Viejo" style="height:70px; width:auto; margin-bottom:10px;">
+    <h1><i class="fas fa-shopping-cart me-2"></i> Pedido Online Molino Viejo</h1>
+  </div>
+    
+    <div class="content">
+      <form id="pedidoForm">
+        <div class="row mb-4 align-items-center">
+          <!-- Producto -->
+          <div class="col-8">
+            <label for="producto" class="form-label">Producto:</label>
+            <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
+            <datalist id="listaProductos"></datalist>
+          </div>
+        
+          <!-- Precio referencial -->
+          <div class="col-4">
+            <label class="form-label">Precio:</label>
+            <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">
+              —
+            </div>
+          </div>
+        </div>
+
+        <!-- Cantidad -->
+        <div class="mb-4">
+          <label for="cantidad" class="form-label"> Unidades:</label>
+          <input type="number" id="cantidad" class="form-control" min="1" value="1">
+        </div>
+
+        <!-- Descripción adicional -->
+        <div class="mb-4">
+          <label for="descripcion" class="form-label"> Especificaciones :</label>
+          <textarea id="descripcion" class="form-control" placeholder="Ejemplo: cortar en trozos, sin hueso, etc."></textarea>
+        </div>
+
+        <button type="button" class="btn btn-primary w-100 mb-4" onclick="agregarProducto()">
+          <i class="fas fa-plus-circle"></i> Agregar producto
+        </button>
+
+        <!-- Lista de productos añadidos -->
+        <div class="mb-4">
+          <div class="section-title">
+            <i class="fas fa-list"></i> Productos añadidos
+          </div>
+          <ul id="listaPedido" class="list-group product-list"></ul>
+        </div>
+
+        <!-- Información del cliente -->
+        <div class="mb-4">
+          <div class="section-title">
+            <i class="fas fa-user"></i> Información personal
+          </div>
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" id="nombre" class="form-control" required>
+        </div>
+
+        <!-- Método de entrega -->
+        <div class="mb-4">
+          <div class="section-title">
+            <i class="fas fa-truck"></i> Método de entrega
+          </div>
+          
+          <div class="delivery-grid">
+            <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
+              <i class="fas fa-store delivery-icon"></i>
+              <div class="delivery-title">San Borja</div>
+              <div class="delivery-desc">Recojo en tienda</div>
+            </div>
+            
+            <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
+              <i class="fas fa-store delivery-icon"></i>
+              <div class="delivery-title">Magdalena del Mar</div>
+              <div class="delivery-desc">Recojo en tienda</div>
+            </div>
+            
+            <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
+              <i class="fas fa-truck delivery-icon"></i>
+              <div class="delivery-title">Delivery</div>
+              <div class="delivery-desc">S/ 13 adicional</div>
+            </div>
+          </div>
+          
+          <input type="hidden" id="metodoEntrega" required>
+        </div>
+
+        <!-- Campos delivery (inicialmente ocultos) -->
+        <div id="deliveryFields" style="display:none;">
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección:</label>
+            <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima">
+          </div>
+          <div class="mb-4">
+            <label for="mapsLink" class="form-label">Link de Google Maps:</label>
+            <div class="input-group">
+              <button type="button" class="btn btn-maps" onclick="abrirGoogleMaps()">
+                <i class="fas fa-map-marked-alt"></i> Maps
+              </button>
+              <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()">
+          <i class="fas fa-paper-plane"></i> Enviar pedido
+        </button>
+      </form>
+    </div>
+  </div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<script>
+  // ⚙️ CONFIGURACIÓN DE FIREBASE - Reemplaza con tus credenciales
+  const firebaseConfig = {
+    apiKey: "AIzaSyCFvAXW--jQkrvmK0jHEPtTyAUmWQqQ7y4",
+    authDomain: "studio-8205095748-bad39.firebaseapp.com",
+    projectId: "studio-8205095748-bad39",
+    storageBucket: "studio-8205095748-bad39.firebasestorage.app",
+    messagingSenderId: "187526350487",
+    appId: "1:187526350487:web:f3c29edc80cfb6d71f8bd2"  
+  };
+
+  // Inicializar Firebase
+  let db;
+  try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    console.log("✅ Firebase inicializado correctamente");
+  } catch (error) {
+    console.error("❌ Error al inicializar Firebase:", error);
+  }
+
+  const DEFAULT_NUMERO_DESTINO = "51989719386"; // 👈 Cambia este número por el real
+  let pedido = [];
+  let productos = [];
+
+  // Detectar si es dispositivo móvil
+  function esMobil() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  }
+
+  // Cargar productos desde JSON
+  async function cargarProductos() {
+    try {
+      const response = await fetch("productos.json");
+      const productos = await response.json();
+      const lista = document.getElementById("listaProductos");
+  
+      // Limpiar lista previa (por si acaso)
+      lista.innerHTML = "";
+  
+      // Agregar opciones al datalist (producto + descripción)
+      productos.forEach(p => {
+        const option = document.createElement("option");
+        option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
+        lista.appendChild(option);
+      });
+  
+      // Detectar selección y mostrar precio aparte
+      const productoInput = document.getElementById("producto");
+      const precioExtra = document.getElementById("precioProducto");
+  
+      productoInput.addEventListener("change", () => {
+        const seleccionado = productos.find(
+          p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
+        );
+        if (seleccionado) {
+          precioExtra.textContent = `S/ ${seleccionado.PRECIO} por Kg (referencial)`;
+        } else {
+          precioExtra.textContent = "—";
+        }
+      });
+  
+    } catch (error) {
+      console.error("Error al cargar productos:", error);
+    }
+  }
+
+  // Agregar producto a la lista
+  function agregarProducto() {
+    const producto = document.getElementById("producto").value.trim();
+    const cantidad = parseInt(document.getElementById("cantidad").value);
+    const descripcion = document.getElementById("descripcion").value.trim();
+
+    if (!producto || isNaN(cantidad) || cantidad <= 0) {
+      alert("Por favor selecciona un producto y cantidad válida");
+      return;
+    }
+
+    pedido.push({ producto, cantidad, descripcion });
+    mostrarPedido();
+
+    // limpiar campos
+    document.getElementById("producto").value = "";
+    document.getElementById("cantidad").value = 1;
+    document.getElementById("descripcion").value = "";
+    document.getElementById("precioProducto").textContent = "—";
+  }
+
+  // Mostrar lista en pantalla
+  function mostrarPedido() {
+    const lista = document.getElementById("listaPedido");
+    lista.innerHTML = "";
+    pedido.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+      li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} - ${item.descripcion || "Sin detalles"}</span>
+                      <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>`;
+      lista.appendChild(li);
+    });
+  }
+
+  // Eliminar producto
+  function eliminarProducto(index) {
+    pedido.splice(index, 1);
+    mostrarPedido();
+  }
+
+  // Seleccionar método de entrega
+  function seleccionarMetodo(metodo) {
+    document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('selected'));
+    const opciones = document.querySelectorAll('.delivery-option');
+    opciones.forEach(opt => {
+      const titulo = opt.querySelector('.delivery-title')?.textContent.trim();
+      if (titulo === metodo) {
+        opt.classList.add('selected');
+      }
+    });
+    document.getElementById("metodoEntrega").value = metodo;
+    const deliveryFields = document.getElementById("deliveryFields");
+    if (metodo === "Delivery") {
+      deliveryFields.style.display = "block";
+    } else {
+      deliveryFields.style.display = "none";
+    }
+  }
+
+  // Abrir Google Maps
+    function abrirGoogleMaps() {
+      const direccion = document.getElementById("direccion").value.trim();
+      let url = "https://www.google.com/maps/search/?api=1";
+    
+      if (direccion) {
+        url += `&query=${encodeURIComponent(direccion)}`;
+      }
+    
+      window.open(url, "_blank");
+    }
+
+  // Enviar pedido a WhatsApp
+  function enviarPedido() {
+    if (pedido.length === 0) {
+      alert("Agrega al menos un producto al pedido.");
+      return;
+    }
+    const nombre = document.getElementById("nombre").value.trim();
+    if (!nombre) {
+      alert("Por favor ingresa tu nombre.");
+      return;
+    }
+    const metodo = document.getElementById("metodoEntrega").value;
+    if (!metodo) {
+      alert("Selecciona un método de entrega.");
+      return;
+    }
+
+    let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
+    pedido.forEach((item, index) => {
+      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
+    });
+
+    mensaje += `\n*Método de entrega:* ${metodo}`;
+    if (metodo === "Delivery") {
+      const direccion = document.getElementById("direccion").value.trim();
+      const mapsLink = document.getElementById("mapsLink").value.trim();
+      if (!direccion) {
+        alert("Por favor ingresa tu dirección para el delivery.");
+        return;
+      }
+      mensaje += `\n*Dirección:* ${direccion}`;
+      if (mapsLink) {
+        mensaje += `\n*Link de Maps:* ${mapsLink}`;
+      }
+      mensaje += `\n*Cargo adicional:* S/ 13`;
+    }
+
+    // 💾 Guardar en Firebase primero
+    const pedidoData = {
+      nombre: nombre,
+      productos: pedido,
+      metodoEntrega: metodo,
+      direccion: metodo === "Delivery" ? document.getElementById("direccion").value.trim() : null,
+      mapsLink: metodo === "Delivery" ? document.getElementById("mapsLink").value.trim() : null,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      estado: "pendiente"
+    };
+
+    // Intentar guardar en Firebase
+    if (db) {
+      db.collection("pedidos").add(pedidoData)
+        .then((docRef) => {
+          console.log("✅ Pedido guardado en Firebase con ID:", docRef.id);
+        })
+        .catch((error) => {
+          console.error("❌ Error al guardar en Firebase:", error);
+        });
+    }
+
+    // Construir URL de WhatsApp
+    const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
+    
+    // Abrir WhatsApp (funciona en móvil y desktop)
+    if (esMobil()) {
+      // En móviles, redirigir directamente
+      window.location.href = url;
+    } else {
+      // En desktop, abrir en nueva pestaña
+      const nuevaVentana = window.open(url, "_blank");
+      
+      // Si window.open fue bloqueado, usar location.href
+      if (!nuevaVentana || nuevaVentana.closed || typeof nuevaVentana.closed === 'undefined') {
+        window.location.href = url;
+      }
+    }
+  }
+
+  // Inicializar
+  cargarProductos();
+</script>
+</body>
+</html>
+
+
+
+
+
