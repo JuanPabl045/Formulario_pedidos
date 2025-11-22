@@ -393,12 +393,12 @@
 <script>
   // ⚙️ CONFIGURACIÓN DE FIREBASE - Reemplaza con tus credenciales
   const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "TU_PROJECT_ID.firebaseapp.com",
-    projectId: "TU_PROJECT_ID",
-    storageBucket: "TU_PROJECT_ID.appspot.com",
-    messagingSenderId: "TU_MESSAGING_ID",
-    appId: "TU_APP_ID"
+    apiKey: "AIzaSyCFvAXW--jQkrvmK0jHEPtTyAUmWQqQ7y4",
+    authDomain: "studio-8205095748-bad39.firebaseapp.com",
+    projectId: "studio-8205095748-bad39",
+    storageBucket: "studio-8205095748-bad39.firebasestorage.app",
+    messagingSenderId: "187526350487",
+    appId: "1:187526350487:web:f3c29edc80cfb6d71f8bd2"  
   };
 
   // Inicializar Firebase
@@ -590,16 +590,10 @@
     // Construir URL de WhatsApp
     const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
     
-    // En móviles, usar location.href para mejor compatibilidad
-    // En desktop, usar window.open
+    // Abrir WhatsApp (funciona en móvil y desktop)
     if (esMobil()) {
-      // Intentar primero con el esquema de WhatsApp
-      window.location.href = `whatsapp://send?phone=${DEFAULT_NUMERO_DESTINO}&text=${encodeURIComponent(mensaje)}`;
-      
-      // Fallback a wa.me después de 1 segundo si no funciona
-      setTimeout(() => {
-        window.location.href = url;
-      }, 1000);
+      // En móviles, redirigir directamente
+      window.location.href = url;
     } else {
       // En desktop, abrir en nueva pestaña
       const nuevaVentana = window.open(url, "_blank");
