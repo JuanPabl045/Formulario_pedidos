@@ -13,7 +13,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #fff5f5 0%, #ffe9e9 100%);
     }
 
     /* NAVBAR */
@@ -50,7 +49,7 @@
     .hero {
       background: linear-gradient(135deg, rgba(196, 33, 39, 0.92), rgba(168, 56, 50, 0.92)),
                   url('img/hero-bg.jpg') center/cover;
-      min-height: 420px;
+      min-height: 520px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -95,7 +94,7 @@
 
     .btn-hero-primary {
       background: white;
-      color: #C42127;
+      color: #DA2A30;
       border: 3px solid white;
     }
 
@@ -412,18 +411,8 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="fas fa-home me-1"></i> Inicio
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link active" href="nosotros.html">
-              <i class="fas fa-drumstick-bite me-1"></i> Carnes
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="lacteos.html">
-              <i class="fas fa-cheese me-1"></i> Lácteos
+              <i class="fas fa-home me-1"></i> Inicio
             </a>
           </li>
           <li class="nav-item">
@@ -436,6 +425,11 @@
               <i class="fas fa-shopping-cart me-1"></i> Hacer Pedido
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">
+              <i class="fas fa-user-shield me-1"></i> Admin
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -444,29 +438,101 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <i class="fas fa-drumstick-bite" style="font-size: 5rem; margin-bottom: 20px;"></i>
-      <h1>Carnes Premium</h1>
-      <p>Las mejores carnes frescas: res, cerdo, aves, pescados y especialidades. Calidad garantizada desde 1980.</p>
+      <img src="img/logo.png" alt="Logo Molino Viejo" style="height:100px; width:auto; margin-bottom:30px;">
+      <h1>Bienvenidos a Molino Viejo</h1>
+      <p>Carnes frescas y de calidad premium. Desde 1980 llevando lo mejor a tu mesa con dedicación y pasión por la excelencia.</p>
       <div class="hero-buttons">
         <a href="pedidos.html" class="btn-hero btn-hero-primary">
           <i class="fas fa-shopping-cart"></i> Hacer Pedido
         </a>
-        <a href="lacteos.html" class="btn-hero btn-hero-secondary">
-          <i class="fas fa-cheese"></i> Ver Lácteos
+        <a href="catalogo.html" class="btn-hero btn-hero-secondary">
+          <i class="fas fa-book-open"></i> Ver Catálogo
         </a>
       </div>
     </div>
   </section>
 
-  <!-- CATEGORÍAS DE CARNES -->
+  <!-- NUESTROS VALORES -->
   <section class="section">
     <div class="container">
       <div class="section-title">
-        <h2><i class="fas fa-th-large me-3"></i> Categorías de Carnes</h2>
-        <p>Explora nuestra variedad de carnes premium y frescas</p>
+        <h2><i class="fas fa-heart me-3"></i> Nuestros Valores</h2>
+        <p>Lo que nos hace diferentes y nos mantiene como líderes en carnes de calidad</p>
+      </div>
+      
+      <div class="valores-grid">
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="valor-title">Calidad Premium</div>
+          <div class="valor-text">
+            Seleccionamos cuidadosamente cada producto para garantizar la mejor calidad y frescura en cada entrega.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <div class="valor-title">Productos Frescos</div>
+          <div class="valor-text">
+            Carnes frescas del día, sin conservantes ni químicos. Directamente de productores confiables a tu mesa.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-truck-fast"></i>
+          </div>
+          <div class="valor-title">Entrega Rápida</div>
+          <div class="valor-text">
+            Delivery en Lima en menos de 24 horas. También puedes recoger en nuestras tiendas de San Borja y Magdalena.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="valor-title">Atención Personalizada</div>
+          <div class="valor-text">
+            Nuestro equipo te asesora en cada compra para que encuentres el corte perfecto según tus necesidades.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="section productos-destacados">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-star me-3"></i> Productos Destacados</h2>
+        <p>Descubre nuestras especialidades más solicitadas</p>
       </div>
 
       <div class="productos-preview">
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-fish"></i>
+          </div>
+          <div class="producto-preview-name">Trucha Fresca</div>
+          <div class="producto-preview-text">
+            Trucha de primera, filete, mariposa y más presentaciones
+          </div>
+        </div>
+
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-drumstick-bite"></i>
+          </div>
+          <div class="producto-preview-name">Cuy Especial</div>
+          <div class="producto-preview-text">
+            Carcasa, deshuesado, hamburguesas y chorizos de cuy
+          </div>
+        </div>
+
         <div class="producto-preview">
           <div class="producto-preview-icon">
             <i class="fas fa-cow"></i>
@@ -479,62 +545,73 @@
 
         <div class="producto-preview">
           <div class="producto-preview-icon">
-            <i class="fas fa-piggy-bank"></i>
+            <i class="fas fa-rabbit"></i>
           </div>
-          <div class="producto-preview-name">Cerdo Selecto</div>
+          <div class="producto-preview-name">Conejo Gourmet</div>
           <div class="producto-preview-text">
-            Chuletas, costillas, lomo y todos los cortes frescos
-          </div>
-        </div>
-
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-drumstick-bite"></i>
-          </div>
-          <div class="producto-preview-name">Aves Frescas</div>
-          <div class="producto-preview-text">
-            Pollo, pato, pavo y codorniz de primera calidad
-          </div>
-        </div>
-
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-fish"></i>
-          </div>
-          <div class="producto-preview-name">Pescados y Mariscos</div>
-          <div class="producto-preview-text">
-            Trucha fresca, filete, mariposa y más variedades
-          </div>
-        </div>
-
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-paw"></i>
-          </div>
-          <div class="producto-preview-name">Cuy y Conejo</div>
-          <div class="producto-preview-text">
-            Carcasa, deshuesado, hamburguesas y chorizos especiales
-          </div>
-        </div>
-
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-cheese"></i>
-          </div>
-          <div class="producto-preview-name">También Lácteos</div>
-          <div class="producto-preview-text">
-            Explora nuestra línea de quesos y productos lácteos
+            Medallones, hamburguesas y cortes especiales de conejo
           </div>
         </div>
       </div>
 
-      <div class="text-center mt-5" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+      <div class="text-center mt-5">
         <a href="catalogo.html" class="btn btn-lg" style="background: #C42127; color: white; border-radius: 50px; padding: 15px 40px; font-weight: 700; letter-spacing: 0.5px; transition: all 0.3s;">
-          <i class="fas fa-book me-2"></i> Ver Catálogo Completo
+          <i class="fas fa-arrow-right me-2"></i> Ver Todos los Productos
         </a>
-        <a href="lacteos.html" class="btn btn-lg" style="background: #2980b9; color: white; border-radius: 50px; padding: 15px 40px; font-weight: 700; letter-spacing: 0.5px; transition: all 0.3s;">
-          <i class="fas fa-cheese me-2"></i> Ver Lácteos
-        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIONES -->
+  <section class="section ubicaciones">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-map-marker-alt me-3"></i> Nuestras Tiendas</h2>
+        <p>Visítanos o solicita delivery a domicilio</p>
+      </div>
+
+      <div class="ubicaciones-grid">
+        <div class="ubicacion-card">
+          <div class="ubicacion-title">
+            <i class="fas fa-store"></i>
+            San Borja
+          </div>
+          <div class="ubicacion-info">
+            <div class="ubicacion-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Av. Principal San Borja, Lima</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-clock"></i>
+              <div>Lun - Sáb: 8:00 AM - 7:00 PM<br>Dom: 8:00 AM - 2:00 PM</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-phone"></i>
+              <div>+51 989 719 386</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ubicacion-card">
+          <div class="ubicacion-title">
+            <i class="fas fa-store"></i>
+            Magdalena del Mar
+          </div>
+          <div class="ubicacion-info">
+            <div class="ubicacion-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Av. Principal Magdalena, Lima</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-clock"></i>
+              <div>Lun - Sáb: 8:00 AM - 7:00 PM<br>Dom: 8:00 AM - 2:00 PM</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-phone"></i>
+              <div>+51 989 719 386</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -542,7 +619,7 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="container">
-      <h2>¿Listo para tu pedido de carnes?</h2>
+      <h2>¿Listo para tu próximo pedido?</h2>
       <p>Haz tu pedido ahora y recibe carnes frescas de la mejor calidad directamente en tu hogar</p>
       <a href="pedidos.html" class="btn-hero btn-hero-primary">
         <i class="fas fa-shopping-cart"></i> Hacer Pedido Ahora
@@ -556,7 +633,7 @@
       <!-- Sobre Nosotros -->
       <div class="footer-section">
         <h4><i class="fas fa-store me-2"></i>Molino Viejo</h4>
-        <p>Carnes frescas y lácteos de calidad premium desde 1980. Comprometidos con la excelencia y la satisfacción de nuestros clientes.</p>
+        <p>Carnes frescas y de calidad premium desde 1980. Comprometidos con la excelencia y la satisfacción de nuestros clientes.</p>
         <div class="footer-social">
           <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
           <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -568,10 +645,11 @@
       <div class="footer-section">
         <h4>Productos</h4>
         <ul>
-          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
-          <li><a href="lacteos.html"><i class="fas fa-cheese me-2"></i>Lácteos</a></li>
-          <li><a href="catalogo.html"><i class="fas fa-book me-2"></i>Catálogo</a></li>
-          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
+          <li><a href="catalogo.html#pescados"><i class="fas fa-fish me-2"></i>Pescados</a></li>
+          <li><a href="catalogo.html#res"><i class="fas fa-cow me-2"></i>Res</a></li>
+          <li><a href="catalogo.html#cerdo"><i class="fas fa-piggy-bank me-2"></i>Cerdo</a></li>
+          <li><a href="catalogo.html#aves"><i class="fas fa-drumstick-bite me-2"></i>Aves</a></li>
+          <li><a href="catalogo.html#cuy"><i class="fas fa-paw me-2"></i>Cuy y Conejo</a></li>
         </ul>
       </div>
 
@@ -579,7 +657,7 @@
       <div class="footer-section">
         <h4>Enlaces Rápidos</h4>
         <ul>
-          <li><a href="index.html"><i class="fas fa-home me-2"></i>Inicio</a></li>
+          <li><a href="nosotros.html"><i class="fas fa-home me-2"></i>Inicio</a></li>
           <li><a href="catalogo.html"><i class="fas fa-book me-2"></i>Catálogo</a></li>
           <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
           <li><a href="admin.html"><i class="fas fa-user-shield me-2"></i>Admin</a></li>
@@ -600,7 +678,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2025 Molino Viejo. Todos los derechos reservados. | Carnes y lácteos de calidad desde 1980</p>
+      <p>&copy; 2025 Molino Viejo. Todos los derechos reservados. | Carnes frescas y de calidad desde 1980</p>
     </div>
   </footer>
 
