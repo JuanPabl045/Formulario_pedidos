@@ -1,282 +1,322 @@
 [
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Trucha",
-    "PRECIO": "26",
-    "IMAGEN": "img/productos/trucha.jpg",
-    "CATEGORIA": "Pescados"
-  },
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Filete de trucha",
-    "PRECIO": "44",
-    "IMAGEN": "img/productos/trucha-filete.jpg",
-    "CATEGORIA": "Pescados"
-  },
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Filete de Trucha cuarto",
-    "PRECIO": "44",
-    "IMAGEN": "img/productos/trucha-filete.jpg",
-    "CATEGORIA": "Pescados"
-  },
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Mariposa",
-    "PRECIO": "34",
-    "IMAGEN": "img/productos/trucha-mariposa.jpg",
-    "CATEGORIA": "Pescados"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "70",
-    "IMAGEN": "img/productos/cuy.jpg",
-    "CATEGORIA": "Cuy"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Sangre",
-    "PRECIO": "3.5",
-    "IMAGEN": "img/productos/cuy.jpg",
-    "CATEGORIA": "Cuy"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "finas hiervas",
-    "PRECIO": "57",
-    "IMAGEN": "img/productos/cuy.jpg",
-    "CATEGORIA": "Cuy"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "deshuesado",
-    "PRECIO": "121",
-    "IMAGEN": "img/productos/cuy.jpg",
-    "CATEGORIA": "Cuy"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "125",
-    "IMAGEN": "img/productos/cuy-hamburguesa.jpg",
-    "CATEGORIA": "Cuy"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "120",
-    "IMAGEN": "img/productos/cuy-chorizo.jpg",
-    "CATEGORIA": "Cuy"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "50",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Finas hierbas",
-    "PRECIO": "55",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Medallones",
-    "PRECIO": "50",
-    "IMAGEN": "img/productos/conejo-medallones.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "77",
-    "IMAGEN": "img/productos/conejo-hamburguesa.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "65",
-    "IMAGEN": "img/productos/conejo-chorizo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Paletilla",
-    "PRECIO": "48",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Lomito",
-    "PRECIO": "48",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Barbiquiu",
-    "PRECIO": "58",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Higado",
-    "PRECIO": "20",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Carne Molida",
-    "PRECIO": "80",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Conejo",
-    "DESCRIPCION": "Tripas",
-    "PRECIO": "14",
-    "IMAGEN": "img/productos/conejo.jpg",
-    "CATEGORIA": "Conejo"
-  },
-  {
-    "PRODUCTO": "Pato",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "29",
-    "IMAGEN": "img/productos/pato.jpg",
-    "CATEGORIA": "Aves"
-  },
-  {
-    "PRODUCTO": "Codorniz",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "50",
-    "IMAGEN": "img/productos/codorniz.jpg",
-    "CATEGORIA": "Aves"
-  },
-  {
-    "PRODUCTO": "Codorniz",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "70",
-    "IMAGEN": "img/productos/codorniz.jpg",
-    "CATEGORIA": "Aves"
-  },
-  {
-    "PRODUCTO": "Codorniz",
-    "DESCRIPCION": "chorizo",
-    "PRECIO": "70",
-    "IMAGEN": "img/productos/codorniz.jpg",
-    "CATEGORIA": "Aves"
-  },
-  {
-    "PRODUCTO": "Cerdo",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "40",
-    "IMAGEN": "img/productos/cerdo-hamburguesa.jpg",
-    "CATEGORIA": "Cerdo"
-  },
-  {
-    "PRODUCTO": "Cerdo",
-    "DESCRIPCION": "chorizo",
-    "PRECIO": "38",
-    "IMAGEN": "img/productos/cerdo-chorizo.jpg",
-    "CATEGORIA": "Cerdo"
-  },
-  {
-    "PRODUCTO": "Alpaca",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "65",
-    "IMAGEN": "img/productos/alpaca.jpg",
-    "CATEGORIA": "Carnes Especiales"
-  },
-  {
-    "PRODUCTO": "Pollo",
-    "DESCRIPCION": "carcasa",
-    "PRECIO": "28",
-    "IMAGEN": "img/productos/pollo.jpg",
-    "CATEGORIA": "Aves"
-  },
-  {
-    "PRODUCTO": "Pollo",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "45",
-    "IMAGEN": "img/productos/pollo-hamburguesa.jpg",
-    "CATEGORIA": "Aves"
-  },
-  {
-    "PRODUCTO": "Pavo",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "29",
-    "IMAGEN": "img/productos/pavo.jpg",
-    "CATEGORIA": "Aves"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Lomo fino",
-    "PRECIO": "70",
-    "IMAGEN": "img/productos/res-lomo.jpg",
-    "CATEGORIA": "Res"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Huachalomo",
-    "PRECIO": "38",
-    "IMAGEN": "img/productos/res.jpg",
-    "CATEGORIA": "Res"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Bife",
-    "PRECIO": "39",
-    "IMAGEN": "img/productos/res-bife.jpg",
-    "CATEGORIA": "Res"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "60",
-    "IMAGEN": "img/productos/res-hamburguesa.jpg",
-    "CATEGORIA": "Res"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "50",
-    "IMAGEN": "img/productos/res-chorizo.jpg",
-    "CATEGORIA": "Res"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "pierna",
-    "PRECIO": "34",
-    "IMAGEN": "img/productos/cordero.jpg",
-    "CATEGORIA": "Cordero"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "65",
-    "IMAGEN": "img/productos/cordero-hamburguesa.jpg",
-    "CATEGORIA": "Cordero"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "60",
-    "IMAGEN": "img/productos/cordero-chorizo.jpg",
-    "CATEGORIA": "Cordero"
-  },
-  {
-    "PRODUCTO": "Gallina",
-    "DESCRIPCION": "carcasa",
-    "PRECIO": "28",
-    "IMAGEN": "img/productos/gallina.jpg",
-    "CATEGORIA": "Aves"
-  }
+    {
+        "PRODUCTO":  "Trucha",
+        "DESCRIPCION":  "Trucha",
+        "PRECIO":  "26",
+        "IMAGEN":  "img/productos/trucha.jpg",
+        "CATEGORIA":  "Pescados"
+    },
+    {
+        "PRODUCTO":  "Trucha",
+        "DESCRIPCION":  "Filete de trucha",
+        "PRECIO":  "44",
+        "IMAGEN":  "img/productos/trucha-filete.jpg",
+        "CATEGORIA":  "Pescados"
+    },
+    {
+        "PRODUCTO":  "Trucha",
+        "DESCRIPCION":  "Filete de Trucha cuarto",
+        "PRECIO":  "44",
+        "IMAGEN":  "img/productos/trucha-filete.jpg",
+        "CATEGORIA":  "Pescados"
+    },
+    {
+        "PRODUCTO":  "Trucha",
+        "DESCRIPCION":  "Mariposa",
+        "PRECIO":  "34",
+        "IMAGEN":  "img/productos/trucha-mariposa.jpg",
+        "CATEGORIA":  "Pescados"
+    },
+    {
+        "PRODUCTO":  "Cuy",
+        "DESCRIPCION":  "Carcasa",
+        "PRECIO":  "70",
+        "IMAGEN":  "img/productos/cuy.jpg",
+        "CATEGORIA":  "Cuy"
+    },
+    {
+        "PRODUCTO":  "Cuy",
+        "DESCRIPCION":  "Sangre",
+        "PRECIO":  "3.5",
+        "IMAGEN":  "img/productos/cuy.jpg",
+        "CATEGORIA":  "Cuy"
+    },
+    {
+        "PRODUCTO":  "Cuy",
+        "DESCRIPCION":  "finas hiervas",
+        "PRECIO":  "57",
+        "IMAGEN":  "img/productos/cuy.jpg",
+        "CATEGORIA":  "Cuy"
+    },
+    {
+        "PRODUCTO":  "Cuy",
+        "DESCRIPCION":  "deshuesado",
+        "PRECIO":  "121",
+        "IMAGEN":  "img/productos/cuy.jpg",
+        "CATEGORIA":  "Cuy"
+    },
+    {
+        "PRODUCTO":  "Cuy",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "125",
+        "IMAGEN":  "img/productos/cuy-hamburguesa.jpg",
+        "CATEGORIA":  "Cuy"
+    },
+    {
+        "PRODUCTO":  "Cuy",
+        "DESCRIPCION":  "Chorizo",
+        "PRECIO":  "120",
+        "IMAGEN":  "img/productos/cuy-chorizo.jpg",
+        "CATEGORIA":  "Cuy"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Carcasa",
+        "PRECIO":  "50",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Finas hierbas",
+        "PRECIO":  "55",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Medallones",
+        "PRECIO":  "50",
+        "IMAGEN":  "img/productos/conejo-medallones.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "77",
+        "IMAGEN":  "img/productos/conejo-hamburguesa.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Chorizo",
+        "PRECIO":  "65",
+        "IMAGEN":  "img/productos/conejo-chorizo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Paletilla",
+        "PRECIO":  "48",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Lomito",
+        "PRECIO":  "48",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Barbiquiu",
+        "PRECIO":  "58",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Higado",
+        "PRECIO":  "20",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Carne Molida",
+        "PRECIO":  "80",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Conejo",
+        "DESCRIPCION":  "Tripas",
+        "PRECIO":  "14",
+        "IMAGEN":  "img/productos/conejo.jpg",
+        "CATEGORIA":  "Conejo"
+    },
+    {
+        "PRODUCTO":  "Pato",
+        "DESCRIPCION":  "Carcasa",
+        "PRECIO":  "29",
+        "IMAGEN":  "img/productos/pato.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "PRODUCTO":  "Codorniz",
+        "DESCRIPCION":  "Carcasa",
+        "PRECIO":  "50",
+        "IMAGEN":  "img/productos/codorniz.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "PRODUCTO":  "Codorniz",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "70",
+        "IMAGEN":  "img/productos/codorniz.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "PRODUCTO":  "Codorniz",
+        "DESCRIPCION":  "chorizo",
+        "PRECIO":  "70",
+        "IMAGEN":  "img/productos/codorniz.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "PRODUCTO":  "Cerdo",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "40",
+        "IMAGEN":  "img/productos/cerdo-hamburguesa.jpg",
+        "CATEGORIA":  "Cerdo"
+    },
+    {
+        "PRODUCTO":  "Cerdo",
+        "DESCRIPCION":  "chorizo",
+        "PRECIO":  "38",
+        "IMAGEN":  "img/productos/cerdo-chorizo.jpg",
+        "CATEGORIA":  "Cerdo"
+    },
+    {
+        "PRODUCTO":  "Alpaca",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "65",
+        "IMAGEN":  "img/productos/alpaca.jpg",
+        "CATEGORIA":  "Carnes Especiales"
+    },
+    {
+        "PRODUCTO":  "Pollo",
+        "DESCRIPCION":  "carcasa",
+        "PRECIO":  "28",
+        "IMAGEN":  "img/productos/pollo.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "PRODUCTO":  "Pollo",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "45",
+        "IMAGEN":  "img/productos/pollo-hamburguesa.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "PRODUCTO":  "Pavo",
+        "DESCRIPCION":  "Carcasa",
+        "PRECIO":  "29",
+        "IMAGEN":  "img/productos/pavo.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "PRODUCTO":  "Res",
+        "DESCRIPCION":  "Lomo fino",
+        "PRECIO":  "70",
+        "IMAGEN":  "img/productos/res-lomo.jpg",
+        "CATEGORIA":  "Res"
+    },
+    {
+        "PRODUCTO":  "Res",
+        "DESCRIPCION":  "Huachalomo",
+        "PRECIO":  "38",
+        "IMAGEN":  "img/productos/res.jpg",
+        "CATEGORIA":  "Res"
+    },
+    {
+        "PRODUCTO":  "Res",
+        "DESCRIPCION":  "Bife",
+        "PRECIO":  "39",
+        "IMAGEN":  "img/productos/res-bife.jpg",
+        "CATEGORIA":  "Res"
+    },
+    {
+        "PRODUCTO":  "Res",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "60",
+        "IMAGEN":  "img/productos/res-hamburguesa.jpg",
+        "CATEGORIA":  "Res"
+    },
+    {
+        "PRODUCTO":  "Res",
+        "DESCRIPCION":  "Chorizo",
+        "PRECIO":  "50",
+        "IMAGEN":  "img/productos/res-chorizo.jpg",
+        "CATEGORIA":  "Res"
+    },
+    {
+        "PRODUCTO":  "Cordero",
+        "DESCRIPCION":  "pierna",
+        "PRECIO":  "34",
+        "IMAGEN":  "img/productos/cordero.jpg",
+        "CATEGORIA":  "Cordero"
+    },
+    {
+        "PRODUCTO":  "Cordero",
+        "DESCRIPCION":  "Hamburguesa",
+        "PRECIO":  "65",
+        "IMAGEN":  "img/productos/cordero-hamburguesa.jpg",
+        "CATEGORIA":  "Cordero"
+    },
+    {
+        "PRODUCTO":  "Cordero",
+        "DESCRIPCION":  "Chorizo",
+        "PRECIO":  "60",
+        "IMAGEN":  "img/productos/cordero-chorizo.jpg",
+        "CATEGORIA":  "Cordero"
+    },
+    {
+        "PRODUCTO":  "Gallina",
+        "DESCRIPCION":  "carcasa",
+        "PRECIO":  "28",
+        "IMAGEN":  "img/productos/gallina.jpg",
+        "CATEGORIA":  "Aves"
+    },
+    {
+        "DESCRIPCION":  "Queso fresco artesanal",
+        "PRECIO":  "",
+        "COLOR":  "#2D498A",
+        "IMAGEN":  "img/productos/queso.jpg",
+        "PRODUCTO":  "Queso",
+        "CATEGORIA":  "Lácteos"
+    },
+    {
+        "DESCRIPCION":  "Mantequilla natural sin sal",
+        "PRECIO":  "",
+        "COLOR":  "#D1CA32",
+        "IMAGEN":  "img/productos/mantequilla.jpg",
+        "PRODUCTO":  "Mantequilla",
+        "CATEGORIA":  "Lácteos"
+    },
+    {
+        "DESCRIPCION":  "Requesón fresco del día",
+        "PRECIO":  "",
+        "COLOR":  "#35BDCC",
+        "IMAGEN":  "img/productos/requeson.jpg",
+        "PRODUCTO":  "Requesón",
+        "CATEGORIA":  "Lácteos"
+    },
+    {
+        "DESCRIPCION":  "Queso Paria madurado",
+        "PRECIO":  "",
+        "COLOR":  "#749C33",
+        "IMAGEN":  "img/productos/queso-paria.jpg",
+        "PRODUCTO":  "Queso Paria",
+        "CATEGORIA":  "Lácteos"
+    },
+    {
+        "DESCRIPCION":  "Queso maduro premium",
+        "PRECIO":  "",
+        "COLOR":  "#CFA24A",
+        "IMAGEN":  "img/productos/queso-maduro.jpg",
+        "PRODUCTO":  "Queso Maduro",
+        "CATEGORIA":  "Lácteos"
+    }
 ]

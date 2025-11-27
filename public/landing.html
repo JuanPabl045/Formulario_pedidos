@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Molino Viejo - Carnes y Lácteos de Calidad</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #2d3436;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      padding: 15px 0;
+    }
+
+    .navbar-brand {
+      color: white !important;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .navbar-brand:hover {
+      transform: scale(1.05);
+      transition: transform 0.3s;
+    }
+
+    /* HERO SECTION */
+    .hero-landing {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .hero-landing h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: #2d3436;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero-landing p {
+      font-size: 1.3rem;
+      color: #636e72;
+      margin-bottom: 60px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .logo-landing {
+      height: 120px;
+      width: auto;
+      margin-bottom: 30px;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    /* CARDS DE SELECCIÓN */
+    .selection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .selection-card {
+      background: white;
+      border-radius: 20px;
+      padding: 50px 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .selection-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--card-color);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+
+    .selection-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .selection-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-carnes {
+      --card-color: #C42127;
+    }
+
+    .card-lacteos {
+      --card-color: #3498db;
+    }
+
+    .selection-icon {
+      font-size: 5rem;
+      margin-bottom: 30px;
+      transition: transform 0.4s;
+    }
+
+    .selection-card:hover .selection-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .card-carnes .selection-icon {
+      color: #C42127;
+    }
+
+    .card-lacteos .selection-icon {
+      color: #3498db;
+    }
+
+    .selection-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #2d3436;
+      margin-bottom: 15px;
+      letter-spacing: -0.5px;
+    }
+
+    .selection-description {
+      font-size: 1.1rem;
+      color: #636e72;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .selection-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--card-color);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+      color: white;
+      padding: 60px 20px 20px;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section {
+      text-align: left;
+    }
+
+    .footer-section h4 {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .footer-section ul li a:hover {
+      color: #fff;
+      padding-left: 5px;
+    }
+
+    .footer-section p {
+      color: #ccc;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .footer-social a:hover {
+      background: #3498db;
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-landing h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-landing p {
+        font-size: 1.1rem;
+      }
+
+      .selection-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .selection-card {
+        padding: 40px 30px;
+      }
+
+      .selection-icon {
+        font-size: 4rem;
+      }
+
+      .selection-title {
+        font-size: 1.7rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="landing.html">
+        <i class="fas fa-store me-2"></i> Molino Viejo
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <div class="hero-landing">
+    <div class="hero-content">
+      <img src="img/logo.png" alt="Logo Molino Viejo" class="logo-landing">
+      <h1>Bienvenido a Molino Viejo</h1>
+      <p>Carnes frescas y lácteos de calidad premium desde 1980. Selecciona tu categoría para comenzar.</p>
+      
+      <div class="selection-grid">
+        <!-- CARD CARNES -->
+        <a href="nosotros.html" class="selection-card card-carnes">
+          <span class="selection-badge">Premium</span>
+          <div class="selection-icon">
+            <i class="fas fa-drumstick-bite"></i>
+          </div>
+          <h2 class="selection-title">Carnes</h2>
+          <p class="selection-description">
+            Res, cerdo, aves, pescados y carnes especiales de la más alta calidad.
+          </p>
+        </a>
+
+        <!-- CARD LÁCTEOS -->
+        <a href="lacteos.html" class="selection-card card-lacteos">
+          <span class="selection-badge">Fresco</span>
+          <div class="selection-icon">
+            <i class="fas fa-cheese"></i>
+          </div>
+          <h2 class="selection-title">Lácteos</h2>
+          <p class="selection-description">
+            Quesos, mantequilla y requesón artesanales y frescos todos los días.
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- Sobre Nosotros -->
+      <div class="footer-section">
+        <h4><i class="fas fa-store me-2"></i>Molino Viejo</h4>
+        <p>Carnes frescas y lácteos de calidad premium desde 1980. Comprometidos con la excelencia y la satisfacción de nuestros clientes.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/51989719386" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Enlaces Rápidos -->
+      <div class="footer-section">
+        <h4>Nuestros Productos</h4>
+        <ul>
+          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes Premium</a></li>
+          <li><a href="lacteos.html"><i class="fas fa-cheese me-2"></i>Lácteos Frescos</a></li>
+          <li><a href="catalogo.html"><i class="fas fa-book me-2"></i>Catálogo Completo</a></li>
+          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <ul>
+          <li><i class="fas fa-phone me-2"></i>+51 989 719 386</li>
+          <li><i class="fas fa-map-marker-alt me-2"></i>San Borja, Lima</li>
+          <li><i class="fas fa-map-marker-alt me-2"></i>Magdalena del Mar, Lima</li>
+          <li><i class="fas fa-clock me-2"></i>Lun-Sáb: 8AM-7PM</li>
+          <li><i class="fas fa-clock me-2"></i>Dom: 8AM-2PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Molino Viejo. Todos los derechos reservados. | Carnes y lácteos de calidad desde 1980</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
