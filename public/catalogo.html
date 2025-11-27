@@ -53,14 +53,14 @@
 
     .page-title {
       text-align: center;
-      color: white;
+      color: #1a1a1a;
       margin-bottom: 40px;
     }
 
     .page-title h1 {
       font-size: 2.5rem;
       font-weight: 700;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      text-shadow: none;
     }
 
     /* FILTROS */
@@ -351,7 +351,12 @@
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a class="nav-link" href="nosotros.html">
-              <i class="fas fa-shopping-cart me-1"></i> Pedidos
+              <i class="fas fa-home me-1"></i> Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pedidos.html">
+              <i class="fas fa-shopping-cart me-1"></i> Hacer Pedido
             </a>
           </li>
           <li class="nav-item">
@@ -520,10 +525,10 @@
       return card;
     }
 
-    // Hacer pedido (redirige a index con producto pre-seleccionado)
+    // Hacer pedido (redirige a pedidos.html con producto pre-seleccionado)
     function hacerPedido(producto, descripcion) {
       const productoCompleto = `${producto} - ${descripcion}`;
-      window.location.href = `index.html?producto=${encodeURIComponent(productoCompleto)}`;
+      window.location.href = `pedidos.html?producto=${encodeURIComponent(productoCompleto)}`;
     }
 
     // Inicializar
