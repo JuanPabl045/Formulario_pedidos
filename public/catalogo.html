@@ -377,17 +377,14 @@
   <!-- CONTENIDO -->
   <div class="container-fluid">
     <div class="page-title">
-      <h1><i class="fas fa-book-open me-3"></i> Catálogo de Productos</h1>
-      <p>Encuentra los mejores cortes y carnes especiales</p>
+      <h1><i class="fas fa-cow me-3"></i> Catálogo de Res</h1>
+      <p>Los mejores cortes de res frescos y de calidad</p>
     </div>
 
     <div class="container">
       <!-- FILTROS -->
       <div class="filters" id="filtros">
-        <button class="filter-btn active" data-categoria="Todos">
-          <i class="fas fa-th me-2"></i> Todos
-        </button>
-        <!-- Se llenarán dinámicamente -->
+        <!-- Se llenarán solo con Res -->
       </div>
 
       <!-- GRID DE PRODUCTOS -->
@@ -405,7 +402,7 @@
   <script>
     let productos = [];
     let categorias = new Set();
-    let categoriaActual = 'Todos';
+    let categoriaActual = 'Res';
 
     // Iconos por categoría
     const iconosCategorias = {
@@ -427,10 +424,9 @@
         const response = await fetch('productos_con_imagenes.json');
         productos = await response.json();
         
-        // Extraer categorías únicas
-        productos.forEach(p => {
-          if (p.CATEGORIA) categorias.add(p.CATEGORIA);
-        });
+        // Filtrar solo Res
+        productos = productos.filter(p => p.CATEGORIA === 'Res');
+        categorias.add('Res');
         
         crearFiltros();
         mostrarProductos();
@@ -554,11 +550,10 @@
       <div class="footer-section">
         <h4>Productos</h4>
         <ul>
-          <li><a href="catalogo.html#pescados"><i class="fas fa-fish me-2"></i>Pescados</a></li>
-          <li><a href="catalogo.html#res"><i class="fas fa-cow me-2"></i>Res</a></li>
-          <li><a href="catalogo.html#cerdo"><i class="fas fa-piggy-bank me-2"></i>Cerdo</a></li>
-          <li><a href="catalogo.html#aves"><i class="fas fa-drumstick-bite me-2"></i>Aves</a></li>
-          <li><a href="catalogo.html#cuy"><i class="fas fa-paw me-2"></i>Cuy y Conejo</a></li>
+          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
+          <li><a href="catalogo.html"><i class="fas fa-cow me-2"></i>Catálogo Res</a></li>
+          <li><a href="lacteos.html"><i class="fas fa-cheese me-2"></i>Lácteos</a></li>
+          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
         </ul>
       </div>
 
