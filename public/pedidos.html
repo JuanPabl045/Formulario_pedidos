@@ -140,6 +140,47 @@
       transform: translateY(-2px);
     }
 
+    /* SIDEBAR Y PRODUCTOS SUGERIDOS */
+    .sidebar {
+      padding: 20px;
+      border-left: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .suggested-title {
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .suggested-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .suggested-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .suggested-card:hover { transform: translateY(-4px); }
+
+    .order-summary {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .summary-item { display:flex; justify-content:space-between; margin-bottom:8px; }
+    .total-amount { font-size:1.2rem; font-weight:800; color:#C42127; }
+
     /* LISTA DE PRODUCTOS */
     .product-list {
       border-radius: 15px;
@@ -291,13 +332,18 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="nosotros.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
+            <a class="nav-link" href="index.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
               <i class="fas fa-home me-1"></i> Inicio
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="nosotros.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
               <i class="fas fa-drumstick-bite me-1"></i> Carnes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="lacteos.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
+              <i class="fas fa-cheese me-1"></i> Lácteos
             </a>
           </li>
           <li class="nav-item">
@@ -322,107 +368,98 @@
   </div>
     
     <div class="content">
-      <form id="pedidoForm">
-        <div class="row mb-4 align-items-center">
-          <!-- Producto -->
-          <div class="col-8">
-            <label for="producto" class="form-label">Producto:</label>
-            <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
-            <datalist id="listaProductos"></datalist>
-          </div>
-        
-          <!-- Precio referencial -->
-          <div class="col-4">
-            <label class="form-label">Precio:</label>
-            <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">
-              —
+      <div class="row gx-4">
+        <div class="col-lg-8">
+          <form id="pedidoForm">
+            <div class="row mb-4 align-items-center">
+              <div class="col-8">
+                <label for="producto" class="form-label">Producto:</label>
+                <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
+                <datalist id="listaProductos"></datalist>
+              </div>
+              <div class="col-4">
+                <label class="form-label">Precio:</label>
+                <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">—</div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Cantidad -->
-        <div class="mb-4">
-          <label for="cantidad" class="form-label"> Unidades:</label>
-          <input type="number" id="cantidad" class="form-control" min="1" value="1">
-        </div>
-
-        <!-- Descripción adicional -->
-        <div class="mb-4">
-          <label for="descripcion" class="form-label"> Especificaciones :</label>
-          <textarea id="descripcion" class="form-control" placeholder="Ejemplo: cortar en trozos, sin hueso, etc."></textarea>
-        </div>
-
-        <button type="button" class="btn btn-primary w-100 mb-4" onclick="agregarProducto()">
-          <i class="fas fa-plus-circle"></i> Agregar producto
-        </button>
-
-        <!-- Lista de productos añadidos -->
-        <div class="mb-4">
-          <div class="section-title">
-            <i class="fas fa-list"></i> Productos añadidos
-          </div>
-          <ul id="listaPedido" class="list-group product-list"></ul>
-        </div>
-
-        <!-- Información del cliente -->
-        <div class="mb-4">
-          <div class="section-title">
-            <i class="fas fa-user"></i> Información personal
-          </div>
-          <label for="nombre" class="form-label">Nombre:</label>
-          <input type="text" id="nombre" class="form-control" required>
-        </div>
-
-        <!-- Método de entrega -->
-        <div class="mb-4">
-          <div class="section-title">
-            <i class="fas fa-truck"></i> Método de entrega
-          </div>
-          
-          <div class="delivery-grid">
-            <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
-              <i class="fas fa-store delivery-icon"></i>
-              <div class="delivery-title">San Borja</div>
-              <div class="delivery-desc">Recojo en tienda</div>
+            <div class="mb-4">
+              <label for="cantidad" class="form-label"> Unidades:</label>
+              <input type="number" id="cantidad" class="form-control" min="1" value="1">
             </div>
-            
-            <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
-              <i class="fas fa-store delivery-icon"></i>
-              <div class="delivery-title">Magdalena del Mar</div>
-              <div class="delivery-desc">Recojo en tienda</div>
+
+            <div class="mb-4">
+              <label for="descripcion" class="form-label"> Especificaciones :</label>
+              <textarea id="descripcion" class="form-control" placeholder="Ejemplo: cortar en trozos, sin hueso, etc."></textarea>
             </div>
-            
-            <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
-              <i class="fas fa-truck delivery-icon"></i>
-              <div class="delivery-title">Delivery</div>
-              <div class="delivery-desc">S/ 13 adicional</div>
+
+            <button type="button" class="btn btn-primary w-100 mb-4" onclick="agregarProducto()">
+              <i class="fas fa-plus-circle"></i> Agregar producto
+            </button>
+
+            <div class="mb-4">
+              <div class="section-title"><i class="fas fa-list"></i> Productos añadidos</div>
+              <ul id="listaPedido" class="list-group product-list"></ul>
             </div>
-          </div>
-          
-          <input type="hidden" id="metodoEntrega" required>
+
+            <div class="mb-4">
+              <div class="section-title"><i class="fas fa-user"></i> Información personal</div>
+              <label for="nombre" class="form-label">Nombre:</label>
+              <input type="text" id="nombre" class="form-control" required>
+            </div>
+
+            <div class="mb-4">
+              <div class="section-title"><i class="fas fa-truck"></i> Método de entrega</div>
+              <div class="delivery-grid">
+                <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
+                  <i class="fas fa-store delivery-icon"></i>
+                  <div class="delivery-title">San Borja</div>
+                  <div class="delivery-desc">Recojo en tienda</div>
+                </div>
+                <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
+                  <i class="fas fa-store delivery-icon"></i>
+                  <div class="delivery-title">Magdalena del Mar</div>
+                  <div class="delivery-desc">Recojo en tienda</div>
+                </div>
+                <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
+                  <i class="fas fa-truck delivery-icon"></i>
+                  <div class="delivery-title">Delivery</div>
+                  <div class="delivery-desc">S/ 13 adicional</div>
+                </div>
+              </div>
+              <input type="hidden" id="metodoEntrega" required>
+            </div>
+
+            <div id="deliveryFields" style="display:none;">
+              <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección:</label>
+                <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima">
+              </div>
+              <div class="mb-4">
+                <label for="mapsLink" class="form-label">Link de Google Maps:</label>
+                <div class="input-group">
+                  <button type="button" class="btn btn-maps" onclick="abrirGoogleMaps()"><i class="fas fa-map-marked-alt"></i> Maps</button>
+                  <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
 
-        <!-- Campos delivery (inicialmente ocultos) -->
-        <div id="deliveryFields" style="display:none;">
-          <div class="mb-3">
-            <label for="direccion" class="form-label">Dirección:</label>
-            <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima">
+        <div class="col-lg-4 sidebar">
+          <div class="suggested-section">
+            <div class="suggested-title">Productos sugeridos</div>
+            <div id="suggestedProducts" class="suggested-grid"></div>
           </div>
-          <div class="mb-4">
-            <label for="mapsLink" class="form-label">Link de Google Maps:</label>
-            <div class="input-group">
-              <button type="button" class="btn btn-maps" onclick="abrirGoogleMaps()">
-                <i class="fas fa-map-marked-alt"></i> Maps
-              </button>
-              <input type="url" id="mapsLink" class="form-control" placeholder="Pega aquí el link de Google Maps">
-            </div>
+
+          <div id="orderSummary" class="order-summary">
+            <h5>Resumen del pedido</h5>
+            <div id="summaryItems"></div>
+            <div class="summary-item"><span>Total</span><span class="total-amount">S/ 0.00</span></div>
+            <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()"><i class="fas fa-paper-plane"></i> Enviar pedido</button>
           </div>
         </div>
-
-        <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()">
-          <i class="fas fa-paper-plane"></i> Enviar pedido
-        </button>
-      </form>
+      </div>
     </div>
   </div>
 
@@ -464,23 +501,23 @@
   async function cargarProductos() {
     try {
       const response = await fetch("productos.json");
-      const productos = await response.json();
+      productos = await response.json();
       const lista = document.getElementById("listaProductos");
-  
-      // Limpiar lista previa (por si acaso)
+
+      // Limpiar lista previa
       lista.innerHTML = "";
-  
+
       // Agregar opciones al datalist (producto + descripción)
       productos.forEach(p => {
         const option = document.createElement("option");
         option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
         lista.appendChild(option);
       });
-  
+
       // Detectar selección y mostrar precio aparte
       const productoInput = document.getElementById("producto");
       const precioExtra = document.getElementById("precioProducto");
-  
+
       productoInput.addEventListener("change", () => {
         const seleccionado = productos.find(
           p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
@@ -491,10 +528,55 @@
           precioExtra.textContent = "—";
         }
       });
-  
+
+      // Renderizar productos sugeridos en el sidebar
+      renderSuggestedProducts();
+
     } catch (error) {
       console.error("Error al cargar productos:", error);
     }
+  }
+
+  // Renderiza productos sugeridos en la barra lateral
+  function renderSuggestedProducts() {
+    const container = document.getElementById('suggestedProducts');
+    if (!container || !productos) return;
+    container.innerHTML = '';
+    // Tomar hasta 8 productos recientes o destacados (prefiero carnes)
+    const sugeridos = productos.filter(p => p.CATEGORIA !== 'Lácteos').slice(0, 8);
+    sugeridos.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'suggested-card';
+      card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${p.PRODUCTO}</div><div style="font-size:0.85rem; color:#666;">S/ ${p.PRECIO}</div>`;
+      card.onclick = () => addSuggestedProduct(p);
+      container.appendChild(card);
+    });
+  }
+
+  function addSuggestedProduct(p) {
+    const nombre = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
+    pedido.push({ producto: nombre, cantidad: 1, descripcion: '' });
+    mostrarPedido();
+  }
+
+  function updateOrderSummary() {
+    const summaryEl = document.getElementById('summaryItems');
+    const totalEl = document.querySelector('.total-amount');
+    if (!summaryEl || !totalEl) return;
+    summaryEl.innerHTML = '';
+    let total = 0;
+    pedido.forEach(item => {
+      // intentar buscar precio en productos
+      const found = productos.find(p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === item.producto.toLowerCase());
+      const price = found ? parseFloat(found.PRECIO) : 0;
+      const subtotal = (isNaN(price) ? 0 : price) * (item.cantidad || 1);
+      total += subtotal;
+      const div = document.createElement('div');
+      div.className = 'summary-item';
+      div.innerHTML = `<span>${item.cantidad}x ${item.producto}</span><span>S/ ${subtotal.toFixed(2)}</span>`;
+      summaryEl.appendChild(div);
+    });
+    totalEl.textContent = `S/ ${total.toFixed(2)}`;
   }
 
   // Agregar producto a la lista
@@ -529,6 +611,8 @@
                       <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>`;
       lista.appendChild(li);
     });
+    // Actualizar resumen lateral
+    updateOrderSummary();
   }
 
   // Eliminar producto
