@@ -427,13 +427,17 @@
 
             <div id="deliveryFields" style="display:none;">
               <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección (autocompletar):</label>
-                <input type="text" id="direccion" class="form-control" placeholder="Busca tu dirección" autocomplete="off">
+                <label for="direccion" class="form-label">Dirección (puedes escribirla o usar autocompletado):</label>
+                <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima" autocomplete="off">
               </div>
               <div class="mb-3">
                 <div id="map" style="width:100%;height:250px;border-radius:10px;border:1px solid #ccc;"></div>
                 <input type="hidden" id="latitud">
                 <input type="hidden" id="longitud">
+              </div>
+              <div class="mb-3">
+                <label for="especificacionesDelivery" class="form-label">Especificaciones para el repartidor (llamar, timbre, piso, etc):</label>
+                <textarea id="especificacionesDelivery" class="form-control" placeholder="Ej: Llamar al 999999999, tocar timbre 3B, piso 2, etc"></textarea>
               </div>
             </div>
           </form>
@@ -655,7 +659,7 @@
       map,
       draggable: true,
     });
-    // Geolocalización (opcional)
+    // Geolocalización (opcional, centra y marca si posible)
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -669,7 +673,7 @@
         { enableHighAccuracy: true, timeout: 5000 }
       );
     }
-    // Autocompletado
+    // Autocompletado (opcional, pero el usuario puede escribir manualmente)
     autocomplete = new google.maps.places.Autocomplete(
       document.getElementById("direccion"),
       { types: ["geocode"] }
@@ -683,6 +687,20 @@
       marker.setPosition(place.geometry.location);
       document.getElementById("latitud").value = place.geometry.location.lat();
       document.getElementById("longitud").value = place.geometry.location.lng();
+    });
+    // Si el usuario edita manualmente la dirección, intentar geocodificarla al salir del campo
+    document.getElementById("direccion").addEventListener("blur", function() {
+      const dir = this.value.trim();
+      if (!dir) return;
+      const geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ address: dir }, (results, status) => {
+        if (status === "OK" && results[0]) {
+          map.setCenter(results[0].geometry.location);
+          marker.setPosition(results[0].geometry.location);
+          document.getElementById("latitud").value = results[0].geometry.location.lat();
+          document.getElementById("longitud").value = results[0].geometry.location.lng();
+        }
+      });
     });
     marker.addListener("dragend", () => {
       const pos = marker.getPosition();
@@ -725,17 +743,21 @@
     });
 
     mensaje += `\n*Método de entrega:* ${metodo}`;
-    let direccion = null, latitud = null, longitud = null;
+    let direccion = null, latitud = null, longitud = null, especificacionesDelivery = null;
     if (metodo === "Delivery") {
       direccion = document.getElementById("direccion").value.trim();
       latitud = document.getElementById("latitud").value;
       longitud = document.getElementById("longitud").value;
+      especificacionesDelivery = document.getElementById("especificacionesDelivery").value.trim();
       if (!direccion || !latitud || !longitud) {
         alert("Por favor selecciona tu dirección en el mapa para el delivery.");
         return;
       }
       mensaje += `\n*Dirección:* ${direccion}`;
       mensaje += `\n*Ubicación:* https://www.google.com/maps?q=${latitud},${longitud}`;
+      if (especificacionesDelivery) {
+        mensaje += `\n*Especificaciones:* ${especificacionesDelivery}`;
+      }
       mensaje += `\n*Cargo adicional:* S/ 13`;
     }
 
@@ -747,6 +769,7 @@
       direccion: direccion,
       latitud: latitud ? parseFloat(latitud) : null,
       longitud: longitud ? parseFloat(longitud) : null,
+      especificacionesDelivery: especificacionesDelivery || null,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       estado: "pendiente"
     };
