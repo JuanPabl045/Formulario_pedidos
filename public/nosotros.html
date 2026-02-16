@@ -675,6 +675,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
   <script>
+
     let productos = [];
     let categorias = new Set();
     let categoriaActual = 'Todos';
@@ -682,33 +683,53 @@
     // Iconos por categoría
     const iconosCategorias = {
       'Pescados': 'fa-fish',
+      'Trucha': 'fa-fish',
       'Cuy': 'fa-drumstick-bite',
       'Conejo': 'fa-rabbit',
       'Aves': 'fa-dove',
-      'Carnes Especiales': 'fa-star',
+      'Pato': 'fa-dove',
+      'Codorniz': 'fa-dove',
+      'Cerdo': 'fa-piggy-bank',
+      'Alpaca': 'fa-hippo',
+      'pollo': 'fa-drumstick-bite',
+      'Pavo': 'fa-dove',
       'Res': 'fa-cow',
+      'Res viscera': 'fa-cow',
       'Cordero': 'fa-sheep',
-      'Lácteos': 'fa-cheese',
+      'Cordero viscera': 'fa-sheep',
+      'Gallina': 'fa-dove',
       'Todos': 'fa-th'
     };
 
-    // Cargar productos
+    // Cargar productos desde productos.json y asignar categorías
     async function cargarProductos() {
       try {
-        const response = await fetch('productos_con_imagenes.json');
-        productos = await response.json();
-        
-        // Filtrar solo carnes (excluir Lácteos)
-        productos = productos.filter(p => p.CATEGORIA !== 'Lácteos');
-        
+        const response = await fetch('productos.json');
+        let data = await response.json();
+        // Asignar categoría por nombre de producto
+        productos = data.map(p => {
+          let cat = 'Otros';
+          let prod = (p.PRODUCTO || '').trim().toLowerCase();
+          if (prod.includes('res')) cat = 'Res';
+          else if (prod.includes('trucha')) cat = 'Trucha';
+          else if (prod.includes('cuy')) cat = 'Cuy';
+          else if (prod.includes('conejo')) cat = 'Conejo';
+          else if (prod.includes('cordero')) cat = 'Cordero';
+          else if (prod.includes('pato')) cat = 'Pato';
+          else if (prod.includes('codorniz')) cat = 'Codorniz';
+          else if (prod.includes('cerdo')) cat = 'Cerdo';
+          else if (prod.includes('alpaca')) cat = 'Alpaca';
+          else if (prod.includes('pollo')) cat = 'Pollo';
+          else if (prod.includes('gallina')) cat = 'Gallina';
+          else if (prod.includes('viscera')) cat = 'Visceras';
+          return { ...p, CATEGORIA: cat };
+        });
         // Extraer categorías únicas
         productos.forEach(p => {
           if (p.CATEGORIA) categorias.add(p.CATEGORIA);
         });
-        
         crearFiltros();
         mostrarProductos();
-        
       } catch (error) {
         console.error('Error al cargar productos:', error);
         document.getElementById('productosGrid').innerHTML = `
@@ -724,8 +745,16 @@
     // Crear botones de filtros
     function crearFiltros() {
       const filtrosContainer = document.getElementById('filtros');
-      
-      categorias.forEach(cat => {
+      filtrosContainer.innerHTML = '';
+      // Botón Todos
+      const btnTodos = document.createElement('button');
+      btnTodos.className = 'filter-btn active';
+      btnTodos.dataset.categoria = 'Todos';
+      btnTodos.innerHTML = `<i class="fas ${iconosCategorias['Todos']} me-2"></i> Todos`;
+      btnTodos.onclick = () => filtrarPorCategoria('Todos');
+      filtrosContainer.appendChild(btnTodos);
+      // Botones por categoría
+      Array.from(categorias).sort().forEach(cat => {
         const icono = iconosCategorias[cat] || 'fa-tag';
         const btn = document.createElement('button');
         btn.className = 'filter-btn';
@@ -739,12 +768,11 @@
     // Filtrar productos
     function filtrarPorCategoria(categoria) {
       categoriaActual = categoria;
-      
       // Actualizar botones activos
       document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.categoria === categoria);
+        btn.classList.remove('active');
+        if (btn.dataset.categoria === categoria) btn.classList.add('active');
       });
-      
       mostrarProductos();
     }
 
@@ -752,11 +780,9 @@
     function mostrarProductos() {
       const grid = document.getElementById('productosGrid');
       grid.innerHTML = '';
-      
-      const productosFiltrados = categoriaActual === 'Todos' 
+      let productosFiltrados = categoriaActual === 'Todos' 
         ? productos 
         : productos.filter(p => p.CATEGORIA === categoriaActual);
-      
       if (productosFiltrados.length === 0) {
         grid.innerHTML = `
           <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #C42127;">
@@ -766,7 +792,6 @@
         `;
         return;
       }
-      
       productosFiltrados.forEach(producto => {
         const card = crearCardProducto(producto);
         grid.appendChild(card);
@@ -777,9 +802,7 @@
     function crearCardProducto(producto) {
       const card = document.createElement('div');
       card.className = 'producto-card';
-      
       const icono = iconosCategorias[producto.CATEGORIA] || 'fa-utensils';
-      
       card.innerHTML = `
         <div class="producto-imagen">
           <i class="fas ${icono}"></i>
@@ -789,14 +812,13 @@
           <div class="producto-nombre">${producto.PRODUCTO}</div>
           <div class="producto-descripcion">${producto.DESCRIPCION}</div>
           <div class="producto-precio">
-            S/ ${producto.PRECIO} <small>/ Kg</small>
+            S/ ${producto.PRECIO || producto["PRECIO L/KG"] || '--'} <small>/ Kg</small>
           </div>
           <button class="btn btn-pedir" onclick="hacerPedido('${producto.PRODUCTO}', '${producto.DESCRIPCION}')">
             <i class="fas fa-shopping-cart me-2"></i> Hacer Pedido
           </button>
         </div>
       `;
-      
       return card;
     }
 

@@ -427,7 +427,7 @@
 
             <div id="deliveryFields" style="display:none;">
               <div class="mb-3">
-                <label for="direccion" class="form-label">Dirección (puedes escribirla o usar autocompletado):</label>
+                <label for="direccion" class="form-label">Dirección (o puede escribirla):</label>
                 <input type="text" id="direccion" class="form-control" placeholder="Ej. Av. Los Próceres 123, Lima" autocomplete="off">
               </div>
               <div class="mb-3">
@@ -436,8 +436,8 @@
                 <input type="hidden" id="longitud">
               </div>
               <div class="mb-3">
-                <label for="especificacionesDelivery" class="form-label">Especificaciones para el repartidor (llamar, timbre, piso, etc):</label>
-                <textarea id="especificacionesDelivery" class="form-control" placeholder="Ej: Llamar al 999999999, tocar timbre 3B, piso 2, etc"></textarea>
+                <label for="especificacionesDelivery" class="form-label">Especificaciones para el repartidor (llamar, timbre, n° piso, ...):</label>
+                <textarea id="especificacionesDelivery" class="form-control" placeholder="Ej: Llamar, tocar timbre, piso 2, etc"></textarea>
               </div>
             </div>
           </form>
@@ -728,7 +728,7 @@
     }
     const nombre = document.getElementById("nombre").value.trim();
     if (!nombre) {
-      alert("Por favor ingresa tu nombre.");
+      alert("Por favor ingrese su nombre.");
       return;
     }
     const metodo = document.getElementById("metodoEntrega").value;
@@ -737,7 +737,7 @@
       return;
     }
 
-    let mensaje = `*Pedido de: * ${nombre}\n\n`;
+    let mensaje = `Pedido de:  ${nombre}\n\n`;
     pedido.forEach((item, index) => {
       mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || " "}\n`;
     });
@@ -756,9 +756,9 @@
       mensaje += `\n*Dirección:* ${direccion}`;
       mensaje += `\n*Ubicación:* https://www.google.com/maps?q=${latitud},${longitud}`;
       if (especificacionesDelivery) {
-        mensaje += `\n*Especificaciones:* ${especificacionesDelivery}`;
+        mensaje += `\n*Especificaciones de entrega:* ${especificacionesDelivery}`;
       }
-      mensaje += `\n*Cargo adicional:* S/ 13`;
+      mensaje += `\n*Costo por envío:* S/ 13`;
     }
 
     // 💾 Guardar en Firebase primero
