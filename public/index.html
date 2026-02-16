@@ -31,19 +31,23 @@
 
     .nav-link {
       color: rgba(255, 255, 255, 0.9) !important;
-      font-weight: 500;
-      margin: 0 10px;
+      font-weight: 600;
+      margin: 0 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
       transition: all 0.3s;
     }
 
     .nav-link:hover {
       color: white !important;
+      background: rgba(255, 255, 255, 0.12);
       transform: translateY(-2px);
     }
 
     .nav-link.active {
       color: white !important;
-      border-bottom: 3px solid white;
+      background: rgba(255, 255, 255, 0.2);
+      border-bottom: none;
     }
 
     /* HERO */
@@ -208,6 +212,27 @@
       font-size: 1rem;
       color: #636e72;
       margin-bottom: 15px;
+    }
+
+    .categoria-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .categoria-cta-carnes {
+      background: #C42127;
+    }
+
+    .categoria-cta-lacteos {
+      background: #2980b9;
     }
 
     /* VALORES */
@@ -468,9 +493,8 @@
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid px-4">
-      <a class="navbar-brand" href="index.html" style="display: inline-flex; align-items: center; gap: 10px;">
-        <img src="img/Logo_Molino.jpg" alt="Logo Molino Viejo" style="height: 32px; width: auto;">
-        <span>Molino Viejo</span>
+      <a class="navbar-brand" href="index.html" style="display: inline-flex; align-items: center;">
+        <img src="img/Logo_Molino.jpg" alt="Logo Molino Viejo" style="height: 44px; width: auto;">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background: white;">
         <span class="navbar-toggler-icon"></span>
@@ -505,7 +529,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <img src="https://img1.wsimg.com/isteam/ip/e4799748-99b6-4912-a111-1cacb9a9c576/LOGOWEB.png/:/rs=w:234,h:75,cg:true,m/cr=w:234,h:75/qt=q:95" alt="Logo Molino Viejo" style="height:75px; width:auto; margin-bottom:30px;">
+      <img src="img/Logo_Molino.jpg" alt="Logo Molino Viejo" style="height:120px; width:auto; margin-bottom:30px;">
       <h1>Bienvenidos a Molino Viejo</h1>
       <p>Carnes frescas y lácteos de calidad premium. Desde 1980 llevando lo mejor a tu mesa con dedicación y pasión por la excelencia.</p>
       <div class="hero-buttons">
@@ -537,6 +561,9 @@
             <div class="categoria-descripcion">
               Res, cerdo, aves, pescados y carnes especiales de la más alta calidad
             </div>
+            <span class="categoria-cta categoria-cta-carnes">
+              <i class="fas fa-arrow-right"></i> Ver Carnes
+            </span>
           </div>
         </a>
 
@@ -549,6 +576,9 @@
             <div class="categoria-descripcion">
               Quesos artesanales, mantequilla natural y requesón fresco del día
             </div>
+            <span class="categoria-cta categoria-cta-lacteos">
+              <i class="fas fa-arrow-right"></i> Ver Lácteos
+            </span>
           </div>
         </a>
       </div>
