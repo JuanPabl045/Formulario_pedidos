@@ -351,11 +351,6 @@
               <i class="fas fa-shopping-cart me-1"></i> Hacer Pedido
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="admin.html" style="color: rgba(255, 255, 255, 0.9) !important; font-weight: 500; margin: 0 10px;">
-              <i class="fas fa-user-shield me-1"></i> Admin
-            </a>
-          </li>
         </ul>
       </div>
     </div>
@@ -390,7 +385,7 @@
 
             <div class="mb-4">
               <label for="descripcion" class="form-label"> Especificaciones :</label>
-              <textarea id="descripcion" class="form-control" placeholder="Ejemplo: cortar en trozos, sin hueso, etc."></textarea>
+              <textarea id="descripcion" class="form-control" placeholder="Ejemplo: Corte grande o pequeño, parte en especifico, etc"></textarea>
             </div>
 
             <button type="button" class="btn btn-primary w-100 mb-4" onclick="agregarProducto()">
@@ -607,7 +602,7 @@
     pedido.forEach((item, index) => {
       const li = document.createElement("li");
       li.className = "list-group-item d-flex justify-content-between align-items-center";
-      li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} - ${item.descripcion || "Sin detalles"}</span>
+      li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} - ${item.descripcion || " "}</span>
                       <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>`;
       lista.appendChild(li);
     });
@@ -665,13 +660,13 @@
     }
     const metodo = document.getElementById("metodoEntrega").value;
     if (!metodo) {
-      alert("Selecciona un método de entrega.");
+      alert("Selecciona un modo de entrega.");
       return;
     }
 
-    let mensaje = `*Nuevo pedido de:* ${nombre}\n\n`;
+    let mensaje = `*Pedido de: * ${nombre}\n\n`;
     pedido.forEach((item, index) => {
-      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || "Sin detalles"}\n`;
+      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || " "}\n`;
     });
 
     mensaje += `\n*Método de entrega:* ${metodo}`;
