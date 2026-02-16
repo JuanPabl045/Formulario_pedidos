@@ -1,18 +1,24 @@
-rules_version='2'
+rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    
+    // Regla para tu colección de "pedidos"
+    match /pedidos/{pedidoId} {
+      // Cualquiera puede crear un pedido (tus clientes)
+      allow create: if true; 
+      
+      // Solo tú (autenticado) puedes leer o borrar los pedidos
+      // Si no usas Firebase Auth todavía, cámbialo a 'if true' temporalmente para leerlos
+      allow read, delete: if request.auth != null;
+      
+      // Nadie puede editar un pedido una vez enviado para evitar fraudes
+      allow update: if false;
+    }
+
+    // Regla global de seguridad: denegar todo lo demás por defecto
     match /{document=**} {
-      // This rule allows anyone with your database reference to view, edit,
-      // and delete all data in your database. It is useful for getting
-      // started, but it is configured to expire after 30 days because it
-      // leaves your app open to attackers. At that time, all client
-      // requests to your database will be denied.
-      //
-      // Make sure to write security rules for your app before that time, or
-      // else all client requests to your database will be denied until you
-      // update your rules.
-      allow read, write: if request.time < timestamp.date(2025, 11, 28);
+      allow read, write: if false;
     }
   }
 }

@@ -130,24 +130,9 @@
     "PRECIO": "40"
   },
   {
-    "PRODUCTO": "Cerdo",
-    "DESCRIPCION": "chorizo",
-    "PRECIO": "38"
-  },
-  {
-    "PRODUCTO": "Alpaca",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "65"
-  },
-  {
     "PRODUCTO": "pollo ",
     "DESCRIPCION": "carcasa",
     "PRECIO": "28"
-  },
-  {
-    "PRODUCTO": "pollo ",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "45"
   },
   {
     "PRODUCTO": "Pavo",
@@ -478,5 +463,20 @@
     "PRODUCTO": "Gallina ",
     "DESCRIPCION": "carcasa",
     "PRECIO": "28"
-  }
+  },
+  {
+  "PRODUCTO": "Res",
+  "DESCRIPCION": "Tomahawk",
+  "PRECIO L\/KG": 38
+},
+{
+    "PRODUCTO": "Res",
+  "DESCRIPCION": "Diamante",
+  "PRECIO L\/KG": 38
+},
+{
+  "PRODUCTO": "Res",
+  "DESCRIPCION": "Picaña",
+  "PRECIO L\/KG": 38
+}
 ]

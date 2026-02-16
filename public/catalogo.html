@@ -501,6 +501,12 @@
       card.className = 'producto-card';
       
       const icono = iconosCategorias[producto.CATEGORIA] || 'fa-utensils';
+      const descripcion = (producto.DESCRIPCION || '').trim();
+      const nombre = (producto.PRODUCTO || '').trim();
+      const titulo = descripcion || nombre || 'Producto';
+      const subtitulo = descripcion && nombre && descripcion.toLowerCase() !== nombre.toLowerCase()
+        ? nombre
+        : '';
       
       card.innerHTML = `
         <div class="producto-imagen">
@@ -508,12 +514,12 @@
         </div>
         <div class="producto-info">
           <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
-          <div class="producto-nombre">${producto.PRODUCTO}</div>
-          <div class="producto-descripcion">${producto.DESCRIPCION}</div>
+          <div class="producto-nombre">${titulo}</div>
+          ${subtitulo ? `<div class="producto-descripcion">${subtitulo}</div>` : ''}
           <div class="producto-precio">
             S/ ${producto.PRECIO} <small>/ Kg</small>
           </div>
-          <button class="btn btn-pedir" onclick="hacerPedido('${producto.PRODUCTO}', '${producto.DESCRIPCION}')">
+          <button class="btn btn-pedir" onclick="hacerPedido('${nombre}', '${descripcion}')">
             <i class="fas fa-shopping-cart me-2"></i> Hacer Pedido
           </button>
         </div>
@@ -524,7 +530,14 @@
 
     // Hacer pedido (redirige a pedidos.html con producto pre-seleccionado)
     function hacerPedido(producto, descripcion) {
-      const productoCompleto = `${producto} - ${descripcion}`;
+      const productoLimpio = (producto || '').trim();
+      const descripcionLimpia = (descripcion || '').trim();
+      let productoCompleto = descripcionLimpia || productoLimpio;
+
+      if (descripcionLimpia && productoLimpio && descripcionLimpia.toLowerCase() !== productoLimpio.toLowerCase()) {
+        productoCompleto = `${descripcionLimpia} - ${productoLimpio}`;
+      }
+
       window.location.href = `pedidos.html?producto=${encodeURIComponent(productoCompleto)}`;
     }
 
