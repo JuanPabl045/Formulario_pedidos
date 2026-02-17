@@ -498,6 +498,26 @@
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   }
 
+  function formatLabel(p) {
+    const corte = (p.DESCRIPCION || '').trim();
+    const categoria = (p.PRODUCTO || '').trim();
+    if (corte && categoria && corte.toLowerCase() !== categoria.toLowerCase()) {
+      return `${corte} - ${categoria}`;
+    }
+    return corte || categoria || 'Producto';
+  }
+
+  function formatMetaLines(p) {
+    const lines = [];
+    const peso = (p.PESO_APROX || '').trim();
+    const precio = (p.PRECIO || '').trim();
+    if (peso && precio) lines.push(`Peso aprox: ${peso} | S/ ${precio}`);
+    const precioKg = (p.PRECIO_KG || '').trim();
+    if (precioKg) lines.push(`S/ ${precioKg} / Kg`);
+    if (!lines.length && precio) lines.push(`S/ ${precio}`);
+    return lines.length ? lines : ['—'];
+  }
+
   // Cargar productos desde JSON
   async function cargarProductos() {
     try {
@@ -508,10 +528,10 @@
       // Limpiar lista previa
       lista.innerHTML = "";
 
-      // Agregar opciones al datalist (producto + descripción)
+      // Agregar opciones al datalist (corte + categoria)
       productos.forEach(p => {
         const option = document.createElement("option");
-        option.value = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
+        option.value = formatLabel(p);
         lista.appendChild(option);
       });
 
@@ -521,10 +541,10 @@
 
       productoInput.addEventListener("change", () => {
         const seleccionado = productos.find(
-          p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === productoInput.value.toLowerCase()
+          p => formatLabel(p).toLowerCase() === productoInput.value.toLowerCase()
         );
         if (seleccionado) {
-          precioExtra.textContent = `S/ ${seleccionado.PRECIO} por Kg (referencial)`;
+          precioExtra.innerHTML = formatMetaLines(seleccionado).join('<br>');
         } else {
           precioExtra.textContent = "—";
         }
@@ -548,14 +568,14 @@
     sugeridos.forEach(p => {
       const card = document.createElement('div');
       card.className = 'suggested-card';
-      card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${p.PRODUCTO}</div><div style="font-size:0.85rem; color:#666;">S/ ${p.PRECIO}</div>`;
+      card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${formatLabel(p)}</div><div style="font-size:0.85rem; color:#666;">S/ ${p.PRECIO}</div>`;
       card.onclick = () => addSuggestedProduct(p);
       container.appendChild(card);
     });
   }
 
   function addSuggestedProduct(p) {
-    const nombre = `${p.PRODUCTO} - ${p.DESCRIPCION}`;
+    const nombre = formatLabel(p);
     pedido.push({ producto: nombre, cantidad: 1, descripcion: '' });
     mostrarPedido();
   }
@@ -568,7 +588,7 @@
     let total = 0;
     pedido.forEach(item => {
       // intentar buscar precio en productos
-      const found = productos.find(p => `${p.PRODUCTO} - ${p.DESCRIPCION}`.toLowerCase() === item.producto.toLowerCase());
+      const found = productos.find(p => formatLabel(p).toLowerCase() === item.producto.toLowerCase());
       const price = found ? parseFloat(found.PRECIO) : 0;
       const subtotal = (isNaN(price) ? 0 : price) * (item.cantidad || 1);
       total += subtotal;

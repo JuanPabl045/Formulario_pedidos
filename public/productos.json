@@ -2,315 +2,442 @@
     {
         "PRODUCTO": "Trucha",
         "DESCRIPCION": "Trucha Eviscerada",
-        "PRECIO": "26.00"
+        "PRECIO": "26.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Trucha",
-        "DESCRIPCION": "Filete De Trucha [Ref: S/ 44.00/kg. Peso: 595g aprox. (Rango: S/ 11.22 - S/ 43.78)]",
-        "PRECIO": "26.20"
+        "DESCRIPCION": "Filete De Trucha",
+        "PRECIO": "26.20",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Trucha",
         "DESCRIPCION": "Filete De Trucha Cuarto",
-        "PRECIO": "44.00"
+        "PRECIO": "44.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Trucha",
-        "DESCRIPCION": "Mariposa de Trucha [Ref: S/ 34.00/kg. Peso: 500g aprox. (Rango: S/ 5.27 - S/ 34.68)]",
-        "PRECIO": "17.00"
+        "DESCRIPCION": "Mariposa de Trucha",
+        "PRECIO": "17.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cuy",
-        "DESCRIPCION": "Carcasa de Cuy [Ref: S/ 70.00/kg. Peso: 615g aprox. (Rango: S/ 31.50 - S/ 53.90)]",
-        "PRECIO": "43.00"
+        "DESCRIPCION": "Carcasa de Cuy",
+        "PRECIO": "43.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cuy",
-        "DESCRIPCION": "Sangre de Cuy [Ref: S/ 35.00/kg. Peso: 100g aprox. (Rango: S/ 3.50 - S/ 3.50)]",
-        "PRECIO": "3.50"
+        "DESCRIPCION": "Sangre de Cuy",
+        "PRECIO": "3.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cuy",
-        "DESCRIPCION": "Hamburguesa de Cuy [Ref: S/ 125.00/kg. Peso: 205g aprox. (Rango: S/ 25.00 - S/ 26.88)]",
-        "PRECIO": "25.60"
+        "DESCRIPCION": "Hamburguesa de Cuy",
+        "PRECIO": "25.60",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Carcasa de Conejo [Ref: S/ 50.00/kg. Peso: 1240g aprox. (Rango: S/ 48.50 - S/ 81.50)]",
-        "PRECIO": "62.00"
+        "DESCRIPCION": "Carcasa de Conejo",
+        "PRECIO": "62.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Conejo",
         "DESCRIPCION": "Finas Hierbas",
-        "PRECIO": "25.00"
+        "PRECIO": "25.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Hamburguesa de Conejo [Ref: S/ 77.00/kg. Peso: 205g aprox. (Rango: S/ 15.40 - S/ 16.55)]",
-        "PRECIO": "15.80"
+        "DESCRIPCION": "Hamburguesa de Conejo",
+        "PRECIO": "15.80",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Chorizo de Conejo [Ref: S/ 65.00/kg. Peso: 225g aprox. (Rango: S/ 7.80 - S/ 21.45)]",
-        "PRECIO": "14.60"
+        "DESCRIPCION": "Chorizo de Conejo",
+        "PRECIO": "14.60",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Higado de Conejo [Ref: S/ 20.00/kg. Peso: 280g aprox. (Rango: S/ 2.70 - S/ 8.50)]",
-        "PRECIO": "5.60"
+        "DESCRIPCION": "Higado de Conejo",
+        "PRECIO": "5.60",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Lomo Fino de Res [Ref: S/ 70.00/kg. Peso: 335g aprox. (Rango: S/ 8.75 - S/ 39.20)]",
-        "PRECIO": "23.50"
+        "DESCRIPCION": "Lomo Fino de Res",
+        "PRECIO": "23.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Huachalomo de Res [Ref: S/ 38.00/kg. Peso: 395g aprox. (Rango: S/ 6.08 - S/ 26.22)]",
-        "PRECIO": "15.00"
+        "DESCRIPCION": "Huachalomo de Res",
+        "PRECIO": "15.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bife de Res [Ref: S/ 39.00/kg. Peso: 400g aprox. (Rango: S/ 5.46 - S/ 27.30)]",
-        "PRECIO": "15.60"
+        "DESCRIPCION": "Bife de Res",
+        "PRECIO": "15.60",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bistek Cadera de Res [Ref: S/ 38.00/kg. Peso: 470g aprox. (Rango: S/ 11.78 - S/ 24.13)]",
-        "PRECIO": "17.90"
+        "DESCRIPCION": "Bistek Cadera de Res",
+        "PRECIO": "17.90",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Pejerrey de Res [Ref: S/ 35.00/kg. Peso: 1055g aprox. (Rango: S/ 14.35 - S/ 62.82)]",
-        "PRECIO": "36.90"
+        "DESCRIPCION": "Pejerrey de Res",
+        "PRECIO": "36.90",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Asado de Res [Ref: S/ 34.00/kg. Peso: 665g aprox. (Rango: S/ 9.35 - S/ 36.38)]",
-        "PRECIO": "22.60"
+        "DESCRIPCION": "Asado de Res",
+        "PRECIO": "22.60",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
         "DESCRIPCION": "Arañita",
-        "PRECIO": "12.00"
+        "PRECIO": "12.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bistek Tapa de Res [Ref: S/ 36.00/kg. Peso: 475g aprox. (Rango: S/ 10.80 - S/ 23.76)]",
-        "PRECIO": "17.10"
+        "DESCRIPCION": "Bistek Tapa de Res",
+        "PRECIO": "17.10",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bola De Pierna de Res [Ref: S/ 35.00/kg. Peso: 595g aprox. (Rango: S/ 9.10 - S/ 34.65)]",
-        "PRECIO": "20.80"
+        "DESCRIPCION": "Bola De Pierna de Res",
+        "PRECIO": "20.80",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Picada de Res [Ref: S/ 29.00/kg. Peso: 525g aprox. (Rango: S/ 11.31 - S/ 19.43)]",
-        "PRECIO": "15.20"
+        "DESCRIPCION": "Carne Picada de Res",
+        "PRECIO": "15.20",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Paloma de Res [Ref: S/ 35.00/kg. Peso: 740g aprox. (Rango: S/ 9.62 - S/ 45.85)]",
-        "PRECIO": "25.90"
+        "DESCRIPCION": "Paloma de Res",
+        "PRECIO": "25.90",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Churrasco de Res [Ref: S/ 32.00/kg. Peso: 610g aprox. (Rango: S/ 13.44 - S/ 26.24)]",
-        "PRECIO": "19.50"
+        "DESCRIPCION": "Churrasco de Res",
+        "PRECIO": "19.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Molida de Res [Ref: S/ 29.00/kg. Peso: 565g aprox. (Rango: S/ 11.60 - S/ 21.32)]",
-        "PRECIO": "16.40"
+        "DESCRIPCION": "Carne Molida de Res",
+        "PRECIO": "16.40",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Malaya de Res [Ref: S/ 26.00/kg. Peso: 320g aprox. (Rango: S/ 2.94 - S/ 17.29)]",
-        "PRECIO": "8.30"
+        "DESCRIPCION": "Malaya de Res",
+        "PRECIO": "8.30",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Matahambre de Res [Ref: S/ 25.00/kg. Peso: 415g aprox. (Rango: S/ 4.38 - S/ 21.00)]",
-        "PRECIO": "10.40"
+        "DESCRIPCION": "Matahambre de Res",
+        "PRECIO": "10.40",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Cara de Res [Ref: S/ 23.00/kg. Peso: 415g aprox. (Rango: S/ 3.68 - S/ 16.10)]",
-        "PRECIO": "9.50"
+        "DESCRIPCION": "Cara de Res",
+        "PRECIO": "9.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Choclo de Res [Ref: S/ 28.00/kg. Peso: 685g aprox. (Rango: S/ 6.72 - S/ 48.58)]",
-        "PRECIO": "19.20"
+        "DESCRIPCION": "Choclo de Res",
+        "PRECIO": "19.20",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Costilla de Res [Ref: S/ 26.00/kg. Peso: 655g aprox. (Rango: S/ 9.23 - S/ 25.22)]",
-        "PRECIO": "17.00"
+        "DESCRIPCION": "Costilla de Res",
+        "PRECIO": "17.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Osobuco de Res [Ref: S/ 26.00/kg. Peso: 610g aprox. (Rango: S/ 10.66 - S/ 21.32)]",
-        "PRECIO": "15.90"
+        "DESCRIPCION": "Osobuco de Res",
+        "PRECIO": "15.90",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Sancochado de Res [Ref: S/ 25.00/kg. Peso: 685g aprox. (Rango: S/ 10.75 - S/ 25.00)]",
-        "PRECIO": "17.10"
+        "DESCRIPCION": "Sancochado de Res",
+        "PRECIO": "17.10",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Hueso de Res [Ref: S/ 8.00/kg. Peso: 1120g aprox. (Rango: S/ 5.56 - S/ 12.04)]",
-        "PRECIO": "9.00"
+        "DESCRIPCION": "Hueso de Res",
+        "PRECIO": "9.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Churrasco Redondo de Res [Ref: S/ 34.00/kg. Peso: 575g aprox. (Rango: S/ 13.94 - S/ 25.33)]",
-        "PRECIO": "19.50"
+        "DESCRIPCION": "Churrasco Redondo de Res",
+        "PRECIO": "19.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Molida Cadera de Res [Ref: S/ 36.00/kg. Peso: 550g aprox. (Rango: S/ 13.86 - S/ 25.92)]",
-        "PRECIO": "19.80"
+        "DESCRIPCION": "Carne Molida Cadera de Res",
+        "PRECIO": "19.80",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Molida Tapa de Res [Ref: S/ 35.00/kg. Peso: 550g aprox. (Rango: S/ 13.47 - S/ 25.72)]",
-        "PRECIO": "19.20"
+        "DESCRIPCION": "Carne Molida Tapa de Res",
+        "PRECIO": "19.20",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Cola de Res Viscera [Ref: S/ 17.00/kg. Peso: 505g aprox. (Rango: S/ 4.25 - S/ 14.62)]",
-        "PRECIO": "8.60"
+        "DESCRIPCION": "Cola de Res Viscera",
+        "PRECIO": "8.60",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Criadilla de Res Viscera [Ref: S/ 14.00/kg. Peso: 375g aprox. (Rango: S/ 2.59 - S/ 8.96)]",
-        "PRECIO": "5.20"
+        "DESCRIPCION": "Criadilla de Res Viscera",
+        "PRECIO": "5.20",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
         "DESCRIPCION": "Corazón",
-        "PRECIO": "20.00"
+        "PRECIO": "20.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Lengua de Res Viscera [Ref: S/ 18.00/kg. Peso: 725g aprox. (Rango: S/ 6.30 - S/ 20.43)]",
-        "PRECIO": "13.00"
+        "DESCRIPCION": "Lengua de Res Viscera",
+        "PRECIO": "13.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Bazo de Res Viscera [Ref: S/ 14.00/kg. Peso: 530g aprox. (Rango: S/ 2.17 - S/ 13.23)]",
-        "PRECIO": "7.40"
+        "DESCRIPCION": "Bazo de Res Viscera",
+        "PRECIO": "7.40",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Higado de Res Viscera [Ref: S/ 20.00/kg. Peso: 655g aprox. (Rango: S/ 3.80 - S/ 22.80)]",
-        "PRECIO": "13.10"
+        "DESCRIPCION": "Higado de Res Viscera",
+        "PRECIO": "13.10",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Mondongo de Res Viscera [Ref: S/ 18.00/kg. Peso: 625g aprox. (Rango: S/ 3.60 - S/ 19.08)]",
-        "PRECIO": "11.20"
+        "DESCRIPCION": "Mondongo de Res Viscera",
+        "PRECIO": "11.20",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Pata de Res Viscera [Ref: S/ 18.00/kg. Peso: 725g aprox. (Rango: S/ 6.21 - S/ 20.61)]",
-        "PRECIO": "13.00"
+        "DESCRIPCION": "Pata de Res Viscera",
+        "PRECIO": "13.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
         "DESCRIPCION": "Rachi de Res Viscera",
-        "PRECIO": "8.40"
+        "PRECIO": "8.40",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Riñon ",
-        "PRECIO": "14.00"
+        "DESCRIPCION": "Riñon",
+        "PRECIO": "14.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Bofe de Res Viscera [Ref: S/ 16.00/kg. Peso: 720g aprox. (Rango: S/ 4.88 - S/ 18.96)]",
-        "PRECIO": "11.50"
+        "DESCRIPCION": "Bofe de Res Viscera",
+        "PRECIO": "11.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Cuajar de Res Viscera [Ref: S/ 18.00/kg. Peso: 570g aprox. (Rango: S/ 3.51 - S/ 19.53)]",
-        "PRECIO": "10.30"
+        "DESCRIPCION": "Cuajar de Res Viscera",
+        "PRECIO": "10.30",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Hamburguesa de Res [Ref: S/ 60.00/kg. Peso: 205g aprox. ( S/ 12.00 - S/ 12.90)]",
-        "PRECIO": "12.30"
+        "DESCRIPCION": "Hamburguesa de Res",
+        "PRECIO": "12.30",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Costilla Deshuesada de Res [Ref: S/ 27.00/kg. Peso: 530g aprox. (Rango: S/ 9.99 - S/ 18.90)]",
-        "PRECIO": "14.30"
+        "DESCRIPCION": "Costilla Deshuesada de Res",
+        "PRECIO": "14.30",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Pierna de Cordero [Ref: S/ 34.00/kg. Peso: 565g aprox. (Rango: S/ 13.60 - S/ 24.82)]",
-        "PRECIO": "19.20"
+        "DESCRIPCION": "Pierna de Cordero",
+        "PRECIO": "19.20",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Cabeza de Cordero [Ref: S/ 30.00/kg. Peso: 482g aprox. (Rango: S/ 9.45 - S/ 20.10)]",
-        "PRECIO": "14.50"
+        "DESCRIPCION": "Cabeza de Cordero",
+        "PRECIO": "14.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Mariposa de Cordero [Ref: S/ 34.00/kg. Peso: 545g aprox. (Rango: S/ 13.09 - S/ 24.82)]",
-        "PRECIO": "18.50"
+        "DESCRIPCION": "Mariposa de Cordero",
+        "PRECIO": "18.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Costilla de Cordero [Ref: S/ 30.00/kg. Peso: 550g aprox. (Rango: S/ 10.65 - S/ 22.50)]",
-        "PRECIO": "16.50"
+        "DESCRIPCION": "Costilla de Cordero",
+        "PRECIO": "16.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Carcasa de Cordero [Ref: S/ 34.00/kg. Peso: 570g aprox. (Rango: S/ 13.60 - S/ 25.67)]",
-        "PRECIO": "19.40"
+        "DESCRIPCION": "Carcasa de Cordero",
+        "PRECIO": "19.40",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero Viscera",
         "DESCRIPCION": "Corazón",
-        "PRECIO": "20.00"
+        "PRECIO": "20.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero Viscera",
-        "DESCRIPCION": "Mondongo de Cordero Viscera [Ref: S/ 18.00/kg. Peso: 530g aprox. (Rango: S/ 6.75 - S/ 12.15)]",
-        "PRECIO": "9.50"
+        "DESCRIPCION": "Mondongo de Cordero Viscera",
+        "PRECIO": "9.50",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Hamburguesa de Cordero [Ref: S/ 65.00/kg. Peso: 205g aprox. (Rango: S/ 13.00 - S/ 13.97)]",
-        "PRECIO": "13.30"
+        "DESCRIPCION": "Hamburguesa de Cordero",
+        "PRECIO": "13.30",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Cuello de Cordero [Ref: S/ 30.00/kg. Peso: 520g aprox. (Rango: S/ 9.15 - S/ 23.25)]",
-        "PRECIO": "15.60"
+        "DESCRIPCION": "Cuello de Cordero",
+        "PRECIO": "15.60",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Gallina",
-        "DESCRIPCION": "Carcasa de Gallina [Ref: S/ 28.00/kg. Peso: 1105g aprox. (Rango: S/ 16.10 - S/ 50.54)]",
-        "PRECIO": "30.90"
+        "DESCRIPCION": "Carcasa de Gallina",
+        "PRECIO": "30.90",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
         "DESCRIPCION": "Tomahawk",
-        "PRECIO": "0.00"
+        "PRECIO": "0.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Diamante de Res [Ref: S/ 38.00/kg. Peso: 250g aprox. (Rango: S/ 5.51 - S/ 19.95)]",
-        "PRECIO": "10.00"
+        "DESCRIPCION": "Diamante de Res",
+        "PRECIO": "10.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
     },
     {
         "PRODUCTO": "Res",
         "DESCRIPCION": "Picaña",
-        "PRECIO": "20.00"
-    }]
+        "PRECIO": "20.00",
+        "PESO_APROX": "",
+        "PRECIO_KG": ""
+    }
+]

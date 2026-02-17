@@ -807,20 +807,21 @@
       const descripcion = (producto.DESCRIPCION || '').trim();
       const nombre = (producto.PRODUCTO || '').trim();
       const titulo = descripcion || nombre || 'Producto';
-      const subtitulo = descripcion && nombre && descripcion.toLowerCase() !== nombre.toLowerCase()
-        ? nombre
-        : '';
+      const peso = (producto.PESO_APROX || '').trim();
+      const precio = (producto.PRECIO || '').trim();
+      const precioKg = (producto.PRECIO_KG || '').trim();
+      const meta = peso && precio ? `Peso aprox: ${peso} · S/ ${precio}` : '';
       card.innerHTML = `
         <div class="producto-imagen">
           <i class="fas ${icono}"></i>
         </div>
         <div class="producto-info">
-          <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
           <div class="producto-nombre">${titulo}</div>
-          ${subtitulo ? `<div class="producto-descripcion">${subtitulo}</div>` : ''}
           <div class="producto-precio">
-            S/ ${producto.PRECIO || producto["PRECIO L/KG"] || '--'} <small>/ Kg</small>
+            S/ ${precioKg || producto.PRECIO || producto["PRECIO L/KG"] || '--'} <small>/ Kg</small>
           </div>
+          <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
+          ${meta ? `<div class="producto-descripcion">${meta}</div>` : ''}
           <button class="btn btn-pedir" onclick="hacerPedido('${nombre}', '${descripcion}')">
             <i class="fas fa-shopping-cart me-2"></i> Hacer Pedido
           </button>
