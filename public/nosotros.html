@@ -282,6 +282,13 @@
       margin-bottom: 14px;
     }
 
+    .producto-peso-aprox {
+      font-size: 0.85rem;
+      color: #7a7a7a;
+      margin-top: -10px;
+      margin-bottom: 12px;
+    }
+
     .btn-pedir {
       width: 100%;
       background: #C42127;
@@ -836,6 +843,7 @@
       } else if (precio) {
         meta = `Precio aprox: S/ ${precio}`;
       }
+      const pesoAproxHtml = pesoAprox ? `<div class="producto-peso-aprox">Por peso aproximado: ${pesoAprox} por unidad</div>` : '';
       const precioKgHtml = precioKg ? `<div class="producto-precio-kg">Precio por kg: S/ ${precioKg}/kg</div>` : '';
       card.innerHTML = `
         <div class="producto-imagen">
@@ -846,6 +854,7 @@
           <div class="producto-precio">
             S/ ${precio || producto["PRECIO APROXIMADO"] || '--'} <small class="precio-aprox">aprox por unidad</small>
           </div>
+          ${pesoAproxHtml}
           ${precioKgHtml}
           ${meta ? `<div class="producto-descripcion">${meta}</div>` : ''}
           <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
