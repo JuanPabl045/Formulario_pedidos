@@ -529,9 +529,6 @@
       const gramos = Math.round((precioNum / precioKgNum) * 1000);
       pesoAprox = `${gramos} g`;
     }
-    if (pesoAprox && precio) lines.push(`Peso aprox: ${pesoAprox} | <span class="precio-aprox">Precio aprox por unidad: S/ ${precio}</span>`);
-    if (!lines.length && precio) lines.push(`<span class="precio-aprox">Precio aprox por unidad: S/ ${precio}</span>`);
-    if (!lines.length && pesoAprox) lines.push(`Peso aprox: ${pesoAprox}`);
     if (pesoAprox) lines.push(`<span class="precio-kg">Por peso aproximado: ${pesoAprox} por unidad</span>`);
     if (precioKg) lines.push(`<span class="precio-kg">Precio por kg: S/ ${precioKg}/kg</span>`);
     return lines.length ? lines : ['—'];

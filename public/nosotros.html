@@ -835,14 +835,6 @@
         const gramos = Math.round((precioNum / precioKgNum) * 1000);
         pesoAprox = `${gramos} g`;
       }
-      let meta = '';
-      if (pesoAprox && precio) {
-        meta = `Peso aprox: ${pesoAprox} · Precio aprox: S/ ${precio}`;
-      } else if (pesoAprox) {
-        meta = `Peso aprox: ${pesoAprox}`;
-      } else if (precio) {
-        meta = `Precio aprox: S/ ${precio}`;
-      }
       const pesoAproxHtml = pesoAprox ? `<div class="producto-peso-aprox">Por peso aproximado: ${pesoAprox} por unidad</div>` : '';
       const precioKgHtml = precioKg ? `<div class="producto-precio-kg">Precio por kg: S/ ${precioKg}/kg</div>` : '';
       card.innerHTML = `
@@ -852,11 +844,10 @@
         <div class="producto-info">
           <div class="producto-nombre">${titulo}</div>
           <div class="producto-precio">
-            S/ ${precio || producto["PRECIO APROXIMADO"] || '--'} <small class="precio-aprox">aprox por unidad</small>
+            S/ ${precio || producto["PRECIO APROXIMADO"] || '--'}
           </div>
           ${pesoAproxHtml}
           ${precioKgHtml}
-          ${meta ? `<div class="producto-descripcion">${meta}</div>` : ''}
           <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
           <button class="btn btn-pedir" onclick="hacerPedido('${nombre}', '${descripcion}')">
             <i class="fas fa-shopping-cart me-2"></i> Hacer Pedido
