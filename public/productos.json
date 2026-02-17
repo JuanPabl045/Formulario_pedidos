@@ -1,482 +1,317 @@
 [
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Trucha",
-    "PRECIO": "26"
-  },
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Filete de trucha",
-    "PRECIO": "44"
-  },
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Filete de Trucha cuarto",
-    "PRECIO": "44"
-  },
-  {
-    "PRODUCTO": "Trucha",
-    "DESCRIPCION": "Mariposa",
-    "PRECIO": "34"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "70"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Sangre",
-    "PRECIO": "3.5"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "finas hiervas",
-    "PRECIO": "57"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "deshuesado",
-    "PRECIO": "121"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "125"
-  },
-  {
-    "PRODUCTO": "Cuy",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "120"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "50"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Finas hierbas",
-    "PRECIO": "55"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Medallones",
-    "PRECIO": "50"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "77"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "65"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Paletilla",
-    "PRECIO": "48"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Lomito",
-    "PRECIO": "48"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Barbiquiu",
-    "PRECIO": "58"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Higado",
-    "PRECIO": "20"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Carne Molida",
-    "PRECIO": "80"
-  },
-  {
-    "PRODUCTO": "Conejo ",
-    "DESCRIPCION": "Tripas",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Pato",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "29"
-  },
-  {
-    "PRODUCTO": "Codorniz",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "50"
-  },
-  {
-    "PRODUCTO": "Codorniz",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "70"
-  },
-  {
-    "PRODUCTO": "Codorniz",
-    "DESCRIPCION": "chorizo",
-    "PRECIO": "70"
-  },
-  {
-    "PRODUCTO": "Cerdo",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "40"
-  },
-  {
-    "PRODUCTO": "pollo ",
-    "DESCRIPCION": "carcasa",
-    "PRECIO": "28"
-  },
-  {
-    "PRODUCTO": "Pavo",
-    "DESCRIPCION": "Carcasa",
-    "PRECIO": "29"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Lomo fino",
-    "PRECIO": "70"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Huachalomo",
-    "PRECIO": "38"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Bife",
-    "PRECIO": "39"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Bistek cadera",
-    "PRECIO": "38"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Pejerrey",
-    "PRECIO": "35"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Asado",
-    "PRECIO": "34"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Arañita",
-    "PRECIO": "35"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Bistek tapa",
-    "PRECIO": "36"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Bola de pierna",
-    "PRECIO": "35"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Carne picada",
-    "PRECIO": "29"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Paloma",
-    "PRECIO": "35"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Entraña",
-    "PRECIO": "30"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Churrasco",
-    "PRECIO": "32"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Carne molida",
-    "PRECIO": "29"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Malaya",
-    "PRECIO": "26"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Matahambre",
-    "PRECIO": "25"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Cara",
-    "PRECIO": "23"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Choclo",
-    "PRECIO": "28"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Costilla",
-    "PRECIO": "26"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Osobuco",
-    "PRECIO": "26"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Cuello",
-    "PRECIO": "24"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Sancochado",
-    "PRECIO": "25"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Hueso",
-    "PRECIO": "8"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Churrasco Redondo",
-    "PRECIO": "34"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Carne Molida cadera",
-    "PRECIO": "36"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Carne Molida tapa",
-    "PRECIO": "35"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Cola",
-    "PRECIO": "17"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Criadilla",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Corazón",
-    "PRECIO": "20"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Lengua",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Bazo",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Higado",
-    "PRECIO": "20"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Mondongo",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Pata",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Rachi",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Riñon",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Tripa",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Bofe",
-    "PRECIO": "16"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "Ubre",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "cuajar",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Res viscera",
-    "DESCRIPCION": "cerebro",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "60"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "50"
-  },
-  {
-    "PRODUCTO": "Res",
-    "DESCRIPCION": "Costilla Deshuesada",
-    "PRECIO": "27"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "pierna",
-    "PRECIO": "34"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "Cabeza",
-    "PRECIO": "30"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "mariposa",
-    "PRECIO": "34"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "Costilla",
-    "PRECIO": "30"
-  },
-  {
-    "PRODUCTO": "cordero",
-    "DESCRIPCION": "carcasa",
-    "PRECIO": "34"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Criadilla",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Corazón",
-    "PRECIO": "20"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Lengua",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Bazo",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Higado",
-    "PRECIO": "20"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Mondongo",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Pata",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Rachi",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Riñon",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Tripa",
-    "PRECIO": "14"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "Bofe",
-    "PRECIO": "16"
-  },
-  {
-    "PRODUCTO": "Cordero viscera",
-    "DESCRIPCION": "cuajar",
-    "PRECIO": "18"
-  },
-  {
-    "PRODUCTO": "cordero",
-    "DESCRIPCION": "Hamburguesa",
-    "PRECIO": "65"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "Chorizo",
-    "PRECIO": "60"
-  },
-  {
-    "PRODUCTO": "Cordero",
-    "DESCRIPCION": "Cuello",
-    "PRECIO": "30"
-  },
-  {
-    "PRODUCTO": "Gallina ",
-    "DESCRIPCION": "carcasa",
-    "PRECIO": "28"
-  },
-  {
-  "PRODUCTO": "Res",
-  "DESCRIPCION": "Tomahawk",
-  "PRECIO L\/KG": 38
-},
-{
-    "PRODUCTO": "Res",
-  "DESCRIPCION": "Diamante",
-  "PRECIO L\/KG": 38
-},
-{
-  "PRODUCTO": "Res",
-  "DESCRIPCION": "Picaña",
-  "PRECIO L\/KG": 38
-}
+    {
+        "PRODUCTO": "Trucha",
+        "DESCRIPCION": "Trucha Eviscerada",
+        "PRECIO": "26.00"
+    },
+    {
+        "PRODUCTO": "Trucha",
+        "DESCRIPCION": "Filete De Trucha [Ref: S/ 44.00/kg. Peso: 595g aprox. (Rango: S/ 11.22 - S/ 43.78)]",
+        "PRECIO": "26.20"
+    },
+    {
+        "PRODUCTO": "Trucha",
+        "DESCRIPCION": "Filete De Trucha Cuarto",
+        "PRECIO": "44.00"
+    },
+    {
+        "PRODUCTO": "Trucha",
+        "DESCRIPCION": "Mariposa de Trucha [Ref: S/ 34.00/kg. Peso: 500g aprox. (Rango: S/ 5.27 - S/ 34.68)]",
+        "PRECIO": "17.00"
+    },
+    {
+        "PRODUCTO": "Cuy",
+        "DESCRIPCION": "Carcasa de Cuy [Ref: S/ 70.00/kg. Peso: 615g aprox. (Rango: S/ 31.50 - S/ 53.90)]",
+        "PRECIO": "43.00"
+    },
+    {
+        "PRODUCTO": "Cuy",
+        "DESCRIPCION": "Sangre de Cuy [Ref: S/ 35.00/kg. Peso: 100g aprox. (Rango: S/ 3.50 - S/ 3.50)]",
+        "PRECIO": "3.50"
+    },
+    {
+        "PRODUCTO": "Cuy",
+        "DESCRIPCION": "Hamburguesa de Cuy [Ref: S/ 125.00/kg. Peso: 205g aprox. (Rango: S/ 25.00 - S/ 26.88)]",
+        "PRECIO": "25.60"
+    },
+    {
+        "PRODUCTO": "Conejo",
+        "DESCRIPCION": "Carcasa de Conejo [Ref: S/ 50.00/kg. Peso: 1240g aprox. (Rango: S/ 48.50 - S/ 81.50)]",
+        "PRECIO": "62.00"
+    },
+    {
+        "PRODUCTO": "Conejo",
+        "DESCRIPCION": "Finas Hierbas",
+        "PRECIO": "25.00"
+    },
+    {
+        "PRODUCTO": "Conejo",
+        "DESCRIPCION": "Hamburguesa de Conejo [Ref: S/ 77.00/kg. Peso: 205g aprox. (Rango: S/ 15.40 - S/ 16.55)]",
+        "PRECIO": "15.80"
+    },
+    {
+        "PRODUCTO": "Conejo",
+        "DESCRIPCION": "Chorizo de Conejo [Ref: S/ 65.00/kg. Peso: 225g aprox. (Rango: S/ 7.80 - S/ 21.45)]",
+        "PRECIO": "14.60"
+    },
+    {
+        "PRODUCTO": "Conejo",
+        "DESCRIPCION": "Higado de Conejo [Ref: S/ 20.00/kg. Peso: 280g aprox. (Rango: S/ 2.70 - S/ 8.50)]",
+        "PRECIO": "5.60"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Lomo Fino de Res [Ref: S/ 70.00/kg. Peso: 335g aprox. (Rango: S/ 8.75 - S/ 39.20)]",
+        "PRECIO": "23.50"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Huachalomo de Res [Ref: S/ 38.00/kg. Peso: 395g aprox. (Rango: S/ 6.08 - S/ 26.22)]",
+        "PRECIO": "15.00"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Bife de Res [Ref: S/ 39.00/kg. Peso: 400g aprox. (Rango: S/ 5.46 - S/ 27.30)]",
+        "PRECIO": "15.60"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Bistek Cadera de Res [Ref: S/ 38.00/kg. Peso: 470g aprox. (Rango: S/ 11.78 - S/ 24.13)]",
+        "PRECIO": "17.90"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Pejerrey de Res [Ref: S/ 35.00/kg. Peso: 1055g aprox. (Rango: S/ 14.35 - S/ 62.82)]",
+        "PRECIO": "36.90"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Asado de Res [Ref: S/ 34.00/kg. Peso: 665g aprox. (Rango: S/ 9.35 - S/ 36.38)]",
+        "PRECIO": "22.60"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Arañita",
+        "PRECIO": "12.00"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Bistek Tapa de Res [Ref: S/ 36.00/kg. Peso: 475g aprox. (Rango: S/ 10.80 - S/ 23.76)]",
+        "PRECIO": "17.10"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Bola De Pierna de Res [Ref: S/ 35.00/kg. Peso: 595g aprox. (Rango: S/ 9.10 - S/ 34.65)]",
+        "PRECIO": "20.80"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Carne Picada de Res [Ref: S/ 29.00/kg. Peso: 525g aprox. (Rango: S/ 11.31 - S/ 19.43)]",
+        "PRECIO": "15.20"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Paloma de Res [Ref: S/ 35.00/kg. Peso: 740g aprox. (Rango: S/ 9.62 - S/ 45.85)]",
+        "PRECIO": "25.90"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Churrasco de Res [Ref: S/ 32.00/kg. Peso: 610g aprox. (Rango: S/ 13.44 - S/ 26.24)]",
+        "PRECIO": "19.50"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Carne Molida de Res [Ref: S/ 29.00/kg. Peso: 565g aprox. (Rango: S/ 11.60 - S/ 21.32)]",
+        "PRECIO": "16.40"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Malaya de Res [Ref: S/ 26.00/kg. Peso: 320g aprox. (Rango: S/ 2.94 - S/ 17.29)]",
+        "PRECIO": "8.30"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Matahambre de Res [Ref: S/ 25.00/kg. Peso: 415g aprox. (Rango: S/ 4.38 - S/ 21.00)]",
+        "PRECIO": "10.40"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Cara de Res [Ref: S/ 23.00/kg. Peso: 415g aprox. (Rango: S/ 3.68 - S/ 16.10)]",
+        "PRECIO": "9.50"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Choclo de Res [Ref: S/ 28.00/kg. Peso: 685g aprox. (Rango: S/ 6.72 - S/ 48.58)]",
+        "PRECIO": "19.20"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Costilla de Res [Ref: S/ 26.00/kg. Peso: 655g aprox. (Rango: S/ 9.23 - S/ 25.22)]",
+        "PRECIO": "17.00"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Osobuco de Res [Ref: S/ 26.00/kg. Peso: 610g aprox. (Rango: S/ 10.66 - S/ 21.32)]",
+        "PRECIO": "15.90"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Sancochado de Res [Ref: S/ 25.00/kg. Peso: 685g aprox. (Rango: S/ 10.75 - S/ 25.00)]",
+        "PRECIO": "17.10"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Hueso de Res [Ref: S/ 8.00/kg. Peso: 1120g aprox. (Rango: S/ 5.56 - S/ 12.04)]",
+        "PRECIO": "9.00"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Churrasco Redondo de Res [Ref: S/ 34.00/kg. Peso: 575g aprox. (Rango: S/ 13.94 - S/ 25.33)]",
+        "PRECIO": "19.50"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Carne Molida Cadera de Res [Ref: S/ 36.00/kg. Peso: 550g aprox. (Rango: S/ 13.86 - S/ 25.92)]",
+        "PRECIO": "19.80"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Carne Molida Tapa de Res [Ref: S/ 35.00/kg. Peso: 550g aprox. (Rango: S/ 13.47 - S/ 25.72)]",
+        "PRECIO": "19.20"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Cola de Res Viscera [Ref: S/ 17.00/kg. Peso: 505g aprox. (Rango: S/ 4.25 - S/ 14.62)]",
+        "PRECIO": "8.60"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Criadilla de Res Viscera [Ref: S/ 14.00/kg. Peso: 375g aprox. (Rango: S/ 2.59 - S/ 8.96)]",
+        "PRECIO": "5.20"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Corazón",
+        "PRECIO": "20.00"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Lengua de Res Viscera [Ref: S/ 18.00/kg. Peso: 725g aprox. (Rango: S/ 6.30 - S/ 20.43)]",
+        "PRECIO": "13.00"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Bazo de Res Viscera [Ref: S/ 14.00/kg. Peso: 530g aprox. (Rango: S/ 2.17 - S/ 13.23)]",
+        "PRECIO": "7.40"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Higado de Res Viscera [Ref: S/ 20.00/kg. Peso: 655g aprox. (Rango: S/ 3.80 - S/ 22.80)]",
+        "PRECIO": "13.10"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Mondongo de Res Viscera [Ref: S/ 18.00/kg. Peso: 625g aprox. (Rango: S/ 3.60 - S/ 19.08)]",
+        "PRECIO": "11.20"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Pata de Res Viscera [Ref: S/ 18.00/kg. Peso: 725g aprox. (Rango: S/ 6.21 - S/ 20.61)]",
+        "PRECIO": "13.00"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Rachi de Res Viscera",
+        "PRECIO": "8.40"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Riñon ",
+        "PRECIO": "14.00"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Bofe de Res Viscera [Ref: S/ 16.00/kg. Peso: 720g aprox. (Rango: S/ 4.88 - S/ 18.96)]",
+        "PRECIO": "11.50"
+    },
+    {
+        "PRODUCTO": "Res Viscera",
+        "DESCRIPCION": "Cuajar de Res Viscera [Ref: S/ 18.00/kg. Peso: 570g aprox. (Rango: S/ 3.51 - S/ 19.53)]",
+        "PRECIO": "10.30"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Hamburguesa de Res [Ref: S/ 60.00/kg. Peso: 205g aprox. ( S/ 12.00 - S/ 12.90)]",
+        "PRECIO": "12.30"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Costilla Deshuesada de Res [Ref: S/ 27.00/kg. Peso: 530g aprox. (Rango: S/ 9.99 - S/ 18.90)]",
+        "PRECIO": "14.30"
+    },
+    {
+        "PRODUCTO": "Cordero",
+        "DESCRIPCION": "Pierna de Cordero [Ref: S/ 34.00/kg. Peso: 565g aprox. (Rango: S/ 13.60 - S/ 24.82)]",
+        "PRECIO": "19.20"
+    },
+    {
+        "PRODUCTO": "Cordero",
+        "DESCRIPCION": "Cabeza de Cordero [Ref: S/ 30.00/kg. Peso: 482g aprox. (Rango: S/ 9.45 - S/ 20.10)]",
+        "PRECIO": "14.50"
+    },
+    {
+        "PRODUCTO": "Cordero",
+        "DESCRIPCION": "Mariposa de Cordero [Ref: S/ 34.00/kg. Peso: 545g aprox. (Rango: S/ 13.09 - S/ 24.82)]",
+        "PRECIO": "18.50"
+    },
+    {
+        "PRODUCTO": "Cordero",
+        "DESCRIPCION": "Costilla de Cordero [Ref: S/ 30.00/kg. Peso: 550g aprox. (Rango: S/ 10.65 - S/ 22.50)]",
+        "PRECIO": "16.50"
+    },
+    {
+        "PRODUCTO": "Cordero",
+        "DESCRIPCION": "Carcasa de Cordero [Ref: S/ 34.00/kg. Peso: 570g aprox. (Rango: S/ 13.60 - S/ 25.67)]",
+        "PRECIO": "19.40"
+    },
+    {
+        "PRODUCTO": "Cordero Viscera",
+        "DESCRIPCION": "Corazón",
+        "PRECIO": "20.00"
+    },
+    {
+        "PRODUCTO": "Cordero Viscera",
+        "DESCRIPCION": "Mondongo de Cordero Viscera [Ref: S/ 18.00/kg. Peso: 530g aprox. (Rango: S/ 6.75 - S/ 12.15)]",
+        "PRECIO": "9.50"
+    },
+    {
+        "PRODUCTO": "Cordero",
+        "DESCRIPCION": "Hamburguesa de Cordero [Ref: S/ 65.00/kg. Peso: 205g aprox. (Rango: S/ 13.00 - S/ 13.97)]",
+        "PRECIO": "13.30"
+    },
+    {
+        "PRODUCTO": "Cordero",
+        "DESCRIPCION": "Cuello de Cordero [Ref: S/ 30.00/kg. Peso: 520g aprox. (Rango: S/ 9.15 - S/ 23.25)]",
+        "PRECIO": "15.60"
+    },
+    {
+        "PRODUCTO": "Gallina",
+        "DESCRIPCION": "Carcasa de Gallina [Ref: S/ 28.00/kg. Peso: 1105g aprox. (Rango: S/ 16.10 - S/ 50.54)]",
+        "PRECIO": "30.90"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Tomahawk",
+        "PRECIO": "0.00"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Diamante de Res [Ref: S/ 38.00/kg. Peso: 250g aprox. (Rango: S/ 5.51 - S/ 19.95)]",
+        "PRECIO": "10.00"
+    },
+    {
+        "PRODUCTO": "Res",
+        "DESCRIPCION": "Picaña",
+        "PRECIO": "20.00"
+    }
 ]
