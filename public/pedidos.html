@@ -522,8 +522,16 @@
     const peso = (p.PESO_APROX || '').trim();
     const precio = (p["PRECIO APROXIMADO"] || '').trim();
     const precioKg = (p["PRECIO POR Kg"] || '').trim();
-    if (peso && precio) lines.push(`Peso aprox: ${peso} | <span class="precio-aprox">Precio aprox: S/ ${precio}</span>`);
-    if (!lines.length && precio) lines.push(`<span class="precio-aprox">Precio aprox: S/ ${precio}</span>`);
+    const precioNum = parseFloat((precio || '').replace(/[^0-9.]/g, ''));
+    const precioKgNum = parseFloat((precioKg || '').replace(/[^0-9.]/g, ''));
+    let pesoAprox = peso;
+    if (!pesoAprox && precioNum && precioKgNum) {
+      const gramos = Math.round((precioNum / precioKgNum) * 1000);
+      pesoAprox = `${gramos} g`;
+    }
+    if (pesoAprox && precio) lines.push(`Peso aprox: ${pesoAprox} | <span class="precio-aprox">Precio aprox por unidad: S/ ${precio}</span>`);
+    if (!lines.length && precio) lines.push(`<span class="precio-aprox">Precio aprox por unidad: S/ ${precio}</span>`);
+    if (!lines.length && pesoAprox) lines.push(`Peso aprox: ${pesoAprox}`);
     if (precioKg) lines.push(`<span class="precio-kg">Precio por kg: S/ ${precioKg}/kg</span>`);
     return lines.length ? lines : ['—'];
   }
