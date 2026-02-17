@@ -267,8 +267,19 @@
 
     .producto-precio small {
       font-size: 0.85rem;
-      color: #999;
+      color: #9b9b9b;
       font-weight: 500;
+    }
+
+    .producto-precio .precio-aprox {
+      letter-spacing: 0.3px;
+    }
+
+    .producto-precio-kg {
+      font-size: 0.85rem;
+      color: #8a8a8a;
+      margin-top: -12px;
+      margin-bottom: 14px;
     }
 
     .btn-pedir {
@@ -808,9 +819,10 @@
       const nombre = (producto.PRODUCTO || '').trim();
       const titulo = descripcion || nombre || 'Producto';
       const peso = (producto.PESO_APROX || '').trim();
-      const precio = (producto.PRECIO || '').trim();
-      const precioKg = (producto.PRECIO_KG || '').trim();
-      const meta = peso && precio ? `Peso aprox: ${peso} · S/ ${precio}` : '';
+      const precio = (producto["PRECIO APROXIMADO"] || '').trim();
+      const precioKg = (producto["PRECIO POR Kg"] || '').trim();
+      const meta = peso && precio ? `Peso aprox: ${peso} · Precio aprox: S/ ${precio}` : '';
+      const precioKgHtml = precioKg ? `<div class="producto-precio-kg">Precio por kg: S/ ${precioKg}/kg</div>` : '';
       card.innerHTML = `
         <div class="producto-imagen">
           <i class="fas ${icono}"></i>
@@ -818,8 +830,9 @@
         <div class="producto-info">
           <div class="producto-nombre">${titulo}</div>
           <div class="producto-precio">
-            S/ ${precioKg || producto.PRECIO || producto["PRECIO L/KG"] || '--'} <small>/ Kg</small>
+            S/ ${precio || producto["PRECIO APROXIMADO"] || '--'} <small class="precio-aprox">aprox</small>
           </div>
+          ${precioKgHtml}
           <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
           ${meta ? `<div class="producto-descripcion">${meta}</div>` : ''}
           <button class="btn btn-pedir" onclick="hacerPedido('${nombre}', '${descripcion}')">
