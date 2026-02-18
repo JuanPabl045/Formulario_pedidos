@@ -7,7 +7,7 @@
     },
     {
         "PRODUCTO": "Trucha",
-        "DESCRIPCION": "Filete De Trucha",
+        "DESCRIPCION": "Filete",
         "PRECIO APROXIMADO": "26.20",
         "PRECIO POR Kg": "44"
     },
@@ -19,31 +19,31 @@
     },
     {
         "PRODUCTO": "Trucha",
-        "DESCRIPCION": "Mariposa de Trucha",
+        "DESCRIPCION": "Mariposa",
         "PRECIO APROXIMADO": "17.00",
         "PRECIO POR Kg": "34"
     },
     {
         "PRODUCTO": "Cuy",
-        "DESCRIPCION": "Carcasa de Cuy",
+        "DESCRIPCION": "Carcasa",
         "PRECIO APROXIMADO": "43.00",
         "PRECIO POR Kg": "28"
     },
     {
         "PRODUCTO": "Cuy",
-        "DESCRIPCION": "Sangre de Cuy",
+        "DESCRIPCION": "Sangre",
         "PRECIO APROXIMADO": "3.50",
         "PRECIO POR Kg": "35"
     },
     {
         "PRODUCTO": "Cuy",
-        "DESCRIPCION": "Hamburguesa de Cuy",
+        "DESCRIPCION": "Hamburguesa",
         "PRECIO APROXIMADO": "25.60",
         "PRECIO POR Kg": "65"
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Carcasa de Conejo",
+        "DESCRIPCION": "Carcasa",
         "PRECIO APROXIMADO": "62.00",
         "PRECIO POR Kg": "28"
     },
@@ -55,55 +55,55 @@
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Hamburguesa de Conejo",
+        "DESCRIPCION": "Hamburguesa",
         "PRECIO APROXIMADO": "15.80",
         "PRECIO POR Kg": "65"
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Chorizo de Conejo",
+        "DESCRIPCION": "Chorizo",
         "PRECIO APROXIMADO": "14.60",
         "PRECIO POR Kg": "60"
     },
     {
         "PRODUCTO": "Conejo",
-        "DESCRIPCION": "Higado de Conejo",
+        "DESCRIPCION": "Higado",
         "PRECIO APROXIMADO": "5.60",
         "PRECIO POR Kg": "20"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Lomo Fino de Res",
+        "DESCRIPCION": "Lomo Fino",
         "PRECIO APROXIMADO": "23.50",
         "PRECIO POR Kg": "70"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Huachalomo de Res",
+        "DESCRIPCION": "Huachalomo",
         "PRECIO APROXIMADO": "15.00",
         "PRECIO POR Kg": "38"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bife de Res",
+        "DESCRIPCION": "Bife",
         "PRECIO APROXIMADO": "15.60",
         "PRECIO POR Kg": "39"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bistek Cadera de Res",
+        "DESCRIPCION": "Bistek Cadera",
         "PRECIO APROXIMADO": "17.90",
         "PRECIO POR Kg": "38"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Pejerrey de Res",
+        "DESCRIPCION": "Pejerrey",
         "PRECIO APROXIMADO": "36.90",
         "PRECIO POR Kg": "35"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Asado de Res",
+        "DESCRIPCION": "Asado",
         "PRECIO APROXIMADO": "22.60",
         "PRECIO POR Kg": "34"
     },
@@ -115,115 +115,115 @@
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bistek Tapa de Res",
+        "DESCRIPCION": "Bistek Tapa",
         "PRECIO APROXIMADO": "17.10",
         "PRECIO POR Kg": "36"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Bola De Pierna de Res",
+        "DESCRIPCION": "Bola De Pierna",
         "PRECIO APROXIMADO": "20.80",
         "PRECIO POR Kg": "35"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Picada de Res",
+        "DESCRIPCION": "Carne Picada",
         "PRECIO APROXIMADO": "15.20",
         "PRECIO POR Kg": "29"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Paloma de Res",
+        "DESCRIPCION": "Paloma",
         "PRECIO APROXIMADO": "25.90",
         "PRECIO POR Kg": "35"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Churrasco de Res",
+        "DESCRIPCION": "Churrasco",
         "PRECIO APROXIMADO": "19.50",
         "PRECIO POR Kg": "32"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Molida de Res",
+        "DESCRIPCION": "Carne Molida",
         "PRECIO APROXIMADO": "16.40",
         "PRECIO POR Kg": "80"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Malaya de Res",
+        "DESCRIPCION": "Malaya",
         "PRECIO APROXIMADO": "8.30",
         "PRECIO POR Kg": "26"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Matahambre de Res",
+        "DESCRIPCION": "Matahambre",
         "PRECIO APROXIMADO": "10.40",
         "PRECIO POR Kg": "25"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Cara de Res",
+        "DESCRIPCION": "Cara",
         "PRECIO APROXIMADO": "9.50",
         "PRECIO POR Kg": "23"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Choclo de Res",
+        "DESCRIPCION": "Choclo",
         "PRECIO APROXIMADO": "19.20",
         "PRECIO POR Kg": "28"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Costilla de Res",
+        "DESCRIPCION": "Costilla",
         "PRECIO APROXIMADO": "17.00",
         "PRECIO POR Kg": "30"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Osobuco de Res",
+        "DESCRIPCION": "Osobuco",
         "PRECIO APROXIMADO": "15.90",
         "PRECIO POR Kg": "26"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Sancochado de Res",
+        "DESCRIPCION": "Sancochado",
         "PRECIO APROXIMADO": "17.10",
         "PRECIO POR Kg": "25"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Hueso de Res",
+        "DESCRIPCION": "Hueso",
         "PRECIO APROXIMADO": "9.00",
         "PRECIO POR Kg": "8"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Churrasco Redondo de Res",
+        "DESCRIPCION": "Churrasco Redondo",
         "PRECIO APROXIMADO": "19.50",
         "PRECIO POR Kg": "34"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Molida Cadera de Res",
+        "DESCRIPCION": "Carne Molida Cadera",
         "PRECIO APROXIMADO": "19.80",
         "PRECIO POR Kg": "36"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Carne Molida Tapa de Res",
+        "DESCRIPCION": "Carne Molida Tapa",
         "PRECIO APROXIMADO": "19.20",
         "PRECIO POR Kg": "35"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Cola de Res Viscera",
+        "DESCRIPCION": "Cola",
         "PRECIO APROXIMADO": "8.60",
         "PRECIO POR Kg": "17"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Criadilla de Res Viscera",
+        "DESCRIPCION": "Criadilla",
         "PRECIO APROXIMADO": "5.20",
         "PRECIO POR Kg": "14"
     },
@@ -235,37 +235,37 @@
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Lengua de Res Viscera",
+        "DESCRIPCION": "Lengua",
         "PRECIO APROXIMADO": "13.00",
         "PRECIO POR Kg": "18"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Bazo de Res Viscera",
+        "DESCRIPCION": "Bazo",
         "PRECIO APROXIMADO": "7.40",
         "PRECIO POR Kg": "14"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Higado de Res Viscera",
+        "DESCRIPCION": "Higado",
         "PRECIO APROXIMADO": "13.10",
         "PRECIO POR Kg": "20"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Mondongo de Res Viscera",
+        "DESCRIPCION": "Mondongo",
         "PRECIO APROXIMADO": "11.20",
         "PRECIO POR Kg": "18"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Pata de Res Viscera",
+        "DESCRIPCION": "Pata",
         "PRECIO APROXIMADO": "13.00",
         "PRECIO POR Kg": "18"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Rachi de Res Viscera",
+        "DESCRIPCION": "Rachi",
         "PRECIO APROXIMADO": "8.40",
         "PRECIO POR Kg": "18"
     },
@@ -277,55 +277,55 @@
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Bofe de Res Viscera",
+        "DESCRIPCION": "Bofe",
         "PRECIO APROXIMADO": "11.50",
         "PRECIO POR Kg": "16"
     },
     {
         "PRODUCTO": "Res Viscera",
-        "DESCRIPCION": "Cuajar de Res Viscera",
+        "DESCRIPCION": "Cuajar",
         "PRECIO APROXIMADO": "10.30",
         "PRECIO POR Kg": "18"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Hamburguesa de Res",
+        "DESCRIPCION": "Hamburguesa",
         "PRECIO APROXIMADO": "12.30",
         "PRECIO POR Kg": "65"
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Costilla Deshuesada de Res",
+        "DESCRIPCION": "Costilla Deshuesada",
         "PRECIO APROXIMADO": "14.30",
         "PRECIO POR Kg": "27"
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Pierna de Cordero",
+        "DESCRIPCION": "Pierna",
         "PRECIO APROXIMADO": "19.20",
         "PRECIO POR Kg": "34"
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Cabeza de Cordero",
+        "DESCRIPCION": "Cabeza",
         "PRECIO APROXIMADO": "14.50",
         "PRECIO POR Kg": "30"
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Mariposa de Cordero",
+        "DESCRIPCION": "Mariposa",
         "PRECIO APROXIMADO": "18.50",
         "PRECIO POR Kg": "34"
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Costilla de Cordero",
+        "DESCRIPCION": "Costilla",
         "PRECIO APROXIMADO": "16.50",
         "PRECIO POR Kg": "30"
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Carcasa de Cordero",
+        "DESCRIPCION": "Carcasa",
         "PRECIO APROXIMADO": "19.40",
         "PRECIO POR Kg": "28"
     },
@@ -337,25 +337,25 @@
     },
     {
         "PRODUCTO": "Cordero Viscera",
-        "DESCRIPCION": "Mondongo de Cordero Viscera",
+        "DESCRIPCION": "Mondongo",
         "PRECIO APROXIMADO": "9.50",
         "PRECIO POR Kg": "18"
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Hamburguesa de Cordero",
+        "DESCRIPCION": "Hamburguesa",
         "PRECIO APROXIMADO": "13.30",
         "PRECIO POR Kg": "65"
     },
     {
         "PRODUCTO": "Cordero",
-        "DESCRIPCION": "Cuello de Cordero",
+        "DESCRIPCION": "Cuello",
         "PRECIO APROXIMADO": "15.60",
         "PRECIO POR Kg": "30"
     },
     {
         "PRODUCTO": "Gallina",
-        "DESCRIPCION": "Carcasa de Gallina",
+        "DESCRIPCION": "Carcasa",
         "PRECIO APROXIMADO": "30.90",
         "PRECIO POR Kg": "28"
     },
@@ -367,7 +367,7 @@
     },
     {
         "PRODUCTO": "Res",
-        "DESCRIPCION": "Diamante de Res",
+        "DESCRIPCION": "Diamante",
         "PRECIO APROXIMADO": "10.00",
         "PRECIO POR Kg": "38"
     },

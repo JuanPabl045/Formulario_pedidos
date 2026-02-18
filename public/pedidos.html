@@ -23,10 +23,11 @@
   <style>
     /* FONDO GENERAL CON GRADIENTE SUAVE */
     body {
-      background: linear-gradient(135deg, #fff5f5 0%, #ffe9e9 100%);
+      background: linear-gradient(135deg, #FAF5F0 0%, #F6F2ED 100%);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
       padding: 20px 0;
+      color: #3D2817;
     }
 
     /* CONTENEDOR PRINCIPAL */
@@ -42,7 +43,7 @@
 
     /* CABECERA */
     .header {
-      background: linear-gradient(to right, #DA2A30, #B96454);
+      background: linear-gradient(to right, #A88968, #8B6F47);
       color: white;
       padding: 25px 30px;
       text-align: center;
@@ -65,10 +66,10 @@
     .section-title {
       font-size: 1.2rem;
       font-weight: 600;
-      color: #DA2A30;
+      color: #8B6F47;
       margin-bottom: 20px;
       padding-bottom: 10px;
-      border-bottom: 2px solid #F2DCD9;
+      border-bottom: 2px solid #D4C5B9;
       display: flex;
       align-items: center;
     }
@@ -82,7 +83,7 @@
     .form-label {
       font-weight: 600;
       margin-bottom: 8px;
-      color: #333;
+      color: #5D4C3D;
       font-size: 0.95rem;
     }
 
@@ -95,8 +96,8 @@
     }
 
     .form-control:focus, .form-select:focus {
-      border-color: #B96454;
-      box-shadow: 0 0 0 3px rgba(185, 100, 84, 0.2);
+      border-color: #A88968;
+      box-shadow: 0 0 0 3px rgba(168, 137, 104, 0.2);
     }
 
     textarea.form-control {
@@ -117,38 +118,40 @@
     }
 
     .btn-primary {
-      background: linear-gradient(to right, #DA2A30, #B96454);
+      background: linear-gradient(to right, #A88968, #8B6F47);
       border: none;
+      color: white;
     }
 
     .btn-primary:hover {
-      background: linear-gradient(to right, #B96454, #DA2A30);
+      background: linear-gradient(to right, #8B6F47, #A88968);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.3);
+      box-shadow: 0 5px 15px rgba(168, 137, 104, 0.3);
     }
 
     .btn-success {
-      background: linear-gradient(to right, #28a745, #20c997);
+      background: linear-gradient(to right, #A88968, #8B6F47);
       border: none;
+      color: white;
     }
 
     .btn-success:hover {
-      background: linear-gradient(to right, #20c997, #28a745);
+      background: linear-gradient(to right, #8B6F47, #A88968);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+      box-shadow: 0 5px 15px rgba(168, 137, 104, 0.3);
     }
 
     .btn-maps {
       border-radius: 10px;
       padding: 12px 16px;
-      background: linear-gradient(to right, #DA2A30, #B96454);
+      background: linear-gradient(to right, #A88968, #8B6F47);
       color: white;
       border: none;
       font-weight: 500;
     }
 
     .btn-maps:hover {
-      background: linear-gradient(to right, #B96454, #DA2A30);
+      background: linear-gradient(to right, #8B6F47, #A88968);
       transform: translateY(-2px);
     }
 
@@ -161,7 +164,7 @@
     .suggested-title {
       font-weight: 700;
       margin-bottom: 12px;
-      color: #333;
+      color: #5D4C3D;
     }
 
     .suggested-grid {
@@ -191,12 +194,12 @@
     }
 
     .summary-item { display:flex; justify-content:space-between; margin-bottom:8px; }
-    .total-amount { font-size:1.2rem; font-weight:800; color:#C42127; }
+    .total-amount { font-size:1.2rem; font-weight:800; color:#A88968; }
 
     .notice-box {
-      background: #f7f7ff;
-      border: 1px solid #d8dcff;
-      color: #2f2f5a;
+      background: #F9F6F1;
+      border: 1px solid #D4C5B9;
+      color: #5D4C3D;
       border-radius: 12px;
       padding: 14px 16px;
       margin-bottom: 20px;
@@ -206,14 +209,14 @@
 
     .badge-limitado {
       display: inline-block;
-      background: #fff0d6;
-      color: #9a5a00;
+      background: #E8D5C4;
+      color: #5D4C3D;
       font-size: 0.75rem;
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 999px;
       margin-left: 6px;
-      border: 1px solid #ffd4a3;
+      border: 1px solid #D4C5B9;
     }
 
     /* LISTA DE PRODUCTOS */
@@ -287,27 +290,27 @@
     }
 
     .delivery-option:hover {
-      border-color: #B96454;
-      background-color: rgba(242, 220, 217, 0.3);
+      border-color: #A88968;
+      background-color: rgba(168, 137, 104, 0.1);
       transform: translateY(-3px);
     }
 
     .delivery-option.selected {
-      border-color: #DA2A30;
-      background-color: rgba(242, 220, 217, 0.5);
-      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.1);
+      border-color: #A88968;
+      background-color: rgba(168, 137, 104, 0.15);
+      box-shadow: 0 5px 15px rgba(168, 137, 104, 0.15);
     }
 
     .delivery-icon {
       font-size: 2rem;
       margin-bottom: 10px;
-      color: #DA2A30;
+      color: #A88968;
     }
 
     .delivery-title {
       font-weight: 600;
       margin-bottom: 5px;
-      color: #333;
+      color: #5D4C3D;
     }
 
     .delivery-desc {
@@ -318,7 +321,7 @@
     /* INFORMACIÓN DE PRODUCTO */
     .producto-info {
       padding: 12px 15px;
-      background-color: #f8f9fa;
+      background-color: #F6F2ED;
       border-radius: 10px;
       margin-top: 10px;
       font-size: 0.9rem;
@@ -380,7 +383,7 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #C42127, #A83832); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); padding: 15px 0; margin-bottom: 20px;">
+  <nav class="navbar navbar-expand-lg" style="background: linear-gradient(to right, #A88968, #8B6F47); box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); padding: 15px 0; margin-bottom: 20px;">
     <div class="container-fluid px-4">
       <a class="navbar-brand" href="index.html" style="color: white !important; font-weight: 700; font-size: 1.5rem; display: inline-flex; align-items: center; gap: 10px;">
         <img src="https://img1.wsimg.com/isteam/ip/e4799748-99b6-4912-a111-1cacb9a9c576/LOGOWEB.png/:/rs=w:234,h:75,cg:true,m/cr=w:234,h:75/qt=q:95" alt="Logo Molino Viejo" style="height: 32px; width: auto; background: rgba(255, 255, 255, 0.95); padding: 4px 8px; border-radius: 10px;">
