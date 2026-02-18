@@ -436,10 +436,10 @@
     
     <div class="content">
       <div class="notice-box">
-        <strong>Pedido a confirmar:</strong> El pedido se confirma por WhatsApp con la boleta.
-        <br><strong>Pedidos:</strong> Viernes (San Borja) y Sabado (Feria Magdalena).
-        <br><strong>Delivery:</strong> Cada dos semanas, un solo dia de 7-11AM, sujeto a confirmacion.
-        <br><strong>Nota:</strong> Algunos cortes son limitados; otros son de alta disponibilidad.
+          <strong>Pedido recibido:</strong> Tu pedido se esta registrando y sera confirmado por WhatsApp con la boleta.
+          <br><strong>Pedidos:</strong> Viernes (San Borja) y Sabado (Feria Magdalena).
+          <br><strong>Delivery:</strong> Cada dos semanas, un solo dia de 7-11AM.
+          <br><strong>Nota:</strong> Cortes pequenos y visceras son limitados.
       </div>
       <div class="row gx-4">
         <div class="col-lg-8">
@@ -452,7 +452,8 @@
               </div>
               <div class="col-4">
                 <label class="form-label">Pedido:</label>
-                <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">Sujeto a confirmacion</div>
+                <label class="form-label">Precio:</label>
+                <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">—</div>
               </div>
             </div>
 
@@ -530,7 +531,7 @@
           <div id="orderSummary" class="order-summary">
             <h5>Resumen del pedido</h5>
             <div id="summaryItems"></div>
-            <div class="summary-item"><span>Precio</span><span class="total-amount">Por confirmar</span></div>
+            <div class="summary-item"><span>Total</span><span class="total-amount">S/ 0.00</span></div>
             <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()"><i class="fas fa-paper-plane"></i> Enviar pedido</button>
           </div>
         </div>
@@ -584,14 +585,28 @@
     return corte || categoria || 'Producto';
   }
 
-  function formatMetaLines() {
-    return ['Pedido a confirmar'];
+  function formatMetaLines(p) {
+    const lines = [];
+    const peso = (p.PESO_APROX || '').trim();
+    const precio = (p["PRECIO APROXIMADO"] || '').trim();
+    const precioKg = (p["PRECIO POR Kg"] || '').trim();
+    const precioNum = parseFloat((precio || '').replace(/[^0-9.]/g, ''));
+    const precioKgNum = parseFloat((precioKg || '').replace(/[^0-9.]/g, ''));
+    let pesoAprox = peso;
+    if (!pesoAprox && precioNum && precioKgNum) {
+      const gramos = Math.round((precioNum / precioKgNum) * 1000);
+      pesoAprox = `${gramos} g`;
+    }
+    if (precio) lines.push(`<span class="precio-kg">Precio aprox: S/ ${precio}</span>`);
+    if (precioKg) lines.push(`<span class="precio-kg">Precio por kg: S/ ${precioKg}/kg</span>`);
+    if (pesoAprox) lines.push(`<span class="precio-kg">Peso aprox: ${pesoAprox} por unidad</span>`);
+    return lines.length ? lines : ['—'];
   }
 
   function getProductFlags(p) {
     const producto = (p.PRODUCTO || '').toLowerCase();
     const descripcion = (p.DESCRIPCION || '').toLowerCase();
-    const abundanKeywords = ['molida', 'churrasco', 'asado'];
+    const abundanKeywords = ['molida', 'churrasco', 'asado', 'bistek tapa'];
     const limitadosKeywords = ['lomo fino', 'higado', 'huachalomo', 'entraña', 'entrana'];
     const isViscera = producto.includes('viscera');
     const isAbunda = abundanKeywords.some(keyword => descripcion.includes(keyword));
@@ -630,7 +645,7 @@
         if (seleccionado) {
           precioExtra.innerHTML = formatMetaLines(seleccionado).join('<br>');
         } else {
-          precioExtra.textContent = "Pedido a confirmar";
+          precioExtra.textContent = "—";
         }
       });
 
@@ -648,13 +663,19 @@
     if (!container || !productos) return;
     container.innerHTML = '';
     // Tomar hasta 8 productos recientes o destacados (prefiero carnes)
-    const sugeridos = productos.filter(p => p.CATEGORIA !== 'Lácteos').slice(0, 8);
+    const sugeridosPreferidos = ['carne molida', 'asado', 'churrasco', 'bistek tapa'];
+    const sugeridos = productos.filter(p => {
+      const desc = (p.DESCRIPCION || '').toLowerCase();
+      return sugeridosPreferidos.some(keyword => desc.includes(keyword));
+    }).slice(0, 8);
     sugeridos.forEach(p => {
       const card = document.createElement('div');
       card.className = 'suggested-card';
       const flags = getProductFlags(p);
+      const precioAprox = (p["PRECIO APROXIMADO"] || '').trim();
       const badges = `${flags.abunda ? '<span class="badge-abunda">Abunda</span>' : ''}${flags.limitado ? '<span class="badge-limitado">Limitado</span>' : ''}`;
-      card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${formatLabel(p)}${badges}</div><div style="font-size:0.85rem; color:#666;">Pedido a confirmar</div>`;
+      const precioHtml = precioAprox ? `<div style="font-size:0.85rem; color:#666;">S/ ${precioAprox}</div>` : '';
+      card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${formatLabel(p)}${badges}</div>${precioHtml}`;
       card.onclick = () => addSuggestedProduct(p);
       container.appendChild(card);
     });
@@ -672,13 +693,18 @@
     const totalEl = document.querySelector('.total-amount');
     if (!summaryEl || !totalEl) return;
     summaryEl.innerHTML = '';
+    let total = 0;
     pedido.forEach(item => {
+      const found = productos.find(p => formatLabel(p).toLowerCase() === item.producto.toLowerCase());
+      const price = found ? parseFloat(found["PRECIO APROXIMADO"]) : 0;
+      const subtotal = (isNaN(price) ? 0 : price) * (item.cantidad || 1);
+      total += subtotal;
       const div = document.createElement('div');
       div.className = 'summary-item';
-      div.innerHTML = `<span>${item.cantidad}x ${item.producto}</span><span>Pedido a confirmar</span>`;
+      div.innerHTML = `<span>${item.cantidad}x ${item.producto}</span><span>S/ ${subtotal.toFixed(2)}</span>`;
       summaryEl.appendChild(div);
     });
-    totalEl.textContent = 'Pedido a confirmar';
+    totalEl.textContent = `S/ ${total.toFixed(2)}`;
   }
 
   // Agregar producto a la lista
@@ -703,7 +729,7 @@
     document.getElementById("producto").value = "";
     document.getElementById("cantidad").value = 1;
     document.getElementById("descripcion").value = "";
-    document.getElementById("precioProducto").textContent = "Pedido a confirmar";
+    document.getElementById("precioProducto").textContent = "—";
   }
 
   // Mostrar lista en pantalla
@@ -854,9 +880,9 @@
     });
 
     mensaje += `\n*Método de entrega:* ${metodo}`;
-    mensaje += `\n*Pedido:* A confirmar por WhatsApp con boleta`;
+    mensaje += `\n*Pedido:* Recibido y a confirmar por WhatsApp con boleta`;
     mensaje += `\n*Pedidos:* Viernes (San Borja) y Sabado (Feria Magdalena)`;
-    mensaje += `\n*Delivery:* Cada dos semanas, 7-11AM (sujeto a confirmacion)`;
+    mensaje += `\n*Delivery:* Cada dos semanas, 7-11AM`;
     let direccion = null, latitud = null, longitud = null, especificacionesDelivery = null;
     if (metodo === "Delivery") {
       direccion = document.getElementById("direccion").value.trim();
