@@ -216,18 +216,6 @@
       border: 1px solid #ffd4a3;
     }
 
-    .badge-abunda {
-      display: inline-block;
-      background: #e7f7e9;
-      color: #1f6b2a;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 999px;
-      margin-left: 6px;
-      border: 1px solid #bfe7c6;
-    }
-
     /* LISTA DE PRODUCTOS */
     .product-list {
       border-radius: 15px;
@@ -268,7 +256,7 @@
     }
 
     .delete-btn {
-      color: #DA2A30;
+      color: #6c757d;
       background: none;
       border: none;
       font-size: 1.1rem;
@@ -277,7 +265,7 @@
     }
 
     .delete-btn:hover {
-      color: #B96454;
+      color: #495057;
       transform: scale(1.1);
     }
 
@@ -437,7 +425,7 @@
     <div class="content">
       <div class="notice-box">
           <strong>Pedido recibido:</strong> Tu pedido se esta registrando y sera confirmado por WhatsApp con la boleta.
-          <br><strong>Pedidos:</strong> Viernes (San Borja) y Sabado (Feria Magdalena).
+        <br><strong>Pedidos:</strong> Lunes a Jueves.
           <br><strong>Delivery:</strong> Cada dos semanas, un solo dia de 7-11AM.
           <br><strong>Nota:</strong> Cortes pequenos y visceras son limitados.
       </div>
@@ -446,7 +434,7 @@
           <form id="pedidoForm">
             <div class="row mb-4 align-items-center">
               <div class="col-8">
-                <label for="producto" class="form-label">Producto:</label>
+                <label class="form-label">Precio aprox:</label>
                 <input list="listaProductos" id="producto" class="form-control" placeholder="Escribe o selecciona un producto">
                 <datalist id="listaProductos"></datalist>
               </div>
@@ -529,9 +517,9 @@
           </div>
 
           <div id="orderSummary" class="order-summary">
-            <h5>Resumen del pedido</h5>
+            <h5>Resumen del pedido (Aprox)</h5>
             <div id="summaryItems"></div>
-            <div class="summary-item"><span>Total</span><span class="total-amount">S/ 0.00</span></div>
+            <div class="summary-item"><span>Total aprox</span><span class="total-amount">S/ 0.00</span></div>
             <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()"><i class="fas fa-paper-plane"></i> Enviar pedido</button>
           </div>
         </div>
@@ -597,8 +585,8 @@
       const gramos = Math.round((precioNum / precioKgNum) * 1000);
       pesoAprox = `${gramos} g`;
     }
-    if (precio) lines.push(`<span class="precio-kg">Precio aprox: S/ ${precio}</span>`);
-    if (precioKg) lines.push(`<span class="precio-kg">Precio por kg: S/ ${precioKg}/kg</span>`);
+    if (precio) lines.push(`<span class="precio-kg">Aprox: S/ ${precio}</span>`);
+    if (precioKg) lines.push(`<span class="precio-kg">Aprox por kg: S/ ${precioKg}/kg</span>`);
     if (pesoAprox) lines.push(`<span class="precio-kg">Peso aprox: ${pesoAprox} por unidad</span>`);
     return lines.length ? lines : ['—'];
   }
@@ -606,13 +594,10 @@
   function getProductFlags(p) {
     const producto = (p.PRODUCTO || '').toLowerCase();
     const descripcion = (p.DESCRIPCION || '').toLowerCase();
-    const abundanKeywords = ['molida', 'churrasco', 'asado', 'bistek tapa'];
     const limitadosKeywords = ['lomo fino', 'higado', 'huachalomo', 'entraña', 'entrana'];
     const isViscera = producto.includes('viscera');
-    const isAbunda = abundanKeywords.some(keyword => descripcion.includes(keyword));
     const isLimitado = isViscera || limitadosKeywords.some(keyword => descripcion.includes(keyword));
     return {
-      abunda: isAbunda,
       limitado: isLimitado
     };
   }
@@ -673,8 +658,8 @@
       card.className = 'suggested-card';
       const flags = getProductFlags(p);
       const precioAprox = (p["PRECIO APROXIMADO"] || '').trim();
-      const badges = `${flags.abunda ? '<span class="badge-abunda">Abunda</span>' : ''}${flags.limitado ? '<span class="badge-limitado">Limitado</span>' : ''}`;
-      const precioHtml = precioAprox ? `<div style="font-size:0.85rem; color:#666;">S/ ${precioAprox}</div>` : '';
+      const badges = `${flags.limitado ? '<span class="badge-limitado">Limitado</span>' : ''}`;
+      const precioHtml = precioAprox ? `<div style="font-size:0.85rem; color:#666;">Aprox: S/ ${precioAprox}</div>` : '';
       card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${formatLabel(p)}${badges}</div>${precioHtml}`;
       card.onclick = () => addSuggestedProduct(p);
       container.appendChild(card);
@@ -701,7 +686,7 @@
       total += subtotal;
       const div = document.createElement('div');
       div.className = 'summary-item';
-      div.innerHTML = `<span>${item.cantidad}x ${item.producto}</span><span>S/ ${subtotal.toFixed(2)}</span>`;
+      div.innerHTML = `<span>${item.cantidad}x ${item.producto}</span><span>Aprox: S/ ${subtotal.toFixed(2)}</span>`;
       summaryEl.appendChild(div);
     });
     totalEl.textContent = `S/ ${total.toFixed(2)}`;
@@ -721,7 +706,7 @@
     const encontrado = productos.find(
       p => formatLabel(p).toLowerCase() === producto.toLowerCase()
     );
-    const flags = encontrado ? getProductFlags(encontrado) : { abunda: false, limitado: false };
+    const flags = encontrado ? getProductFlags(encontrado) : { limitado: false };
     pedido.push({ producto, cantidad, descripcion, flags });
     mostrarPedido();
 
@@ -739,9 +724,9 @@
     pedido.forEach((item, index) => {
       const li = document.createElement("li");
       li.className = "list-group-item d-flex justify-content-between align-items-center";
-      const badges = `${item.flags?.abunda ? '<span class="badge-abunda">Abunda</span>' : ''}${item.flags?.limitado ? '<span class="badge-limitado">Limitado</span>' : ''}`;
+      const badges = `${item.flags?.limitado ? '<span class="badge-limitado">Limitado</span>' : ''}`;
       li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} ${badges} - ${item.descripcion || " "}</span>
-                      <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>`;
+              <button class="delete-btn" onclick="eliminarProducto(${index})">✕</button>`;
       lista.appendChild(li);
     });
     // Actualizar resumen lateral
@@ -873,7 +858,6 @@
     let mensaje = `Pedido de:  ${nombre}\n\n`;
     pedido.forEach((item, index) => {
       const notas = [];
-      if (item.flags?.abunda) notas.push('abunda');
       if (item.flags?.limitado) notas.push('limitado');
       const notasTxt = notas.length ? ` (${notas.join(', ')})` : '';
       mensaje += `${index + 1}. ${item.cantidad}x ${item.producto}${notasTxt} - ${item.descripcion || " "}\n`;
@@ -881,8 +865,9 @@
 
     mensaje += `\n*Método de entrega:* ${metodo}`;
     mensaje += `\n*Pedido:* Recibido y a confirmar por WhatsApp con boleta`;
-    mensaje += `\n*Pedidos:* Viernes (San Borja) y Sabado (Feria Magdalena)`;
+    mensaje += `\n*Pedidos:* Lunes a Jueves`;
     mensaje += `\n*Delivery:* Cada dos semanas, 7-11AM`;
+    mensaje += `\n*Nota:* Cortes pequenos y visceras son limitados`;
     let direccion = null, latitud = null, longitud = null, especificacionesDelivery = null;
     if (metodo === "Delivery") {
       direccion = document.getElementById("direccion").value.trim();
@@ -898,7 +883,6 @@
       if (especificacionesDelivery) {
         mensaje += `\n*Especificaciones de entrega:* ${especificacionesDelivery}`;
       }
-      mensaje += `\n*Nota:* Delivery sujeto a confirmacion de ruta y stock`;
     }
 
     // 💾 Guardar en Firebase primero
