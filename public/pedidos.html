@@ -3,7 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Formulario de Pedido</title>
+  <title>MolinoViejo.com - Pedido Online</title>
+  <meta name="description" content="Realiza tu pedido online en Molino Viejo. Selecciona productos, agrega tu información y confirma tu compra.">
+  <link rel="canonical" href="https://molinoviejo.pe/pedidos.html">
+  <meta property="og:title" content="MolinoViejo.com - Pedido Online">
+  <meta property="og:description" content="Realiza tu pedido online en Molino Viejo. Selecciona productos, agrega tu información y confirma tu compra.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://molinoviejo.pe/pedidos.html">
+  <meta property="og:image" content="https://molinoviejo.pe/img/logo.png">
+  <meta property="og:site_name" content="Molino Viejo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MolinoViejo.com - Pedido Online">
+  <meta name="twitter:description" content="Realiza tu pedido online en Molino Viejo. Selecciona productos, agrega tu información y confirma tu compra.">
+  <meta name="twitter:image" content="https://molinoviejo.pe/img/logo.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
@@ -180,6 +192,41 @@
 
     .summary-item { display:flex; justify-content:space-between; margin-bottom:8px; }
     .total-amount { font-size:1.2rem; font-weight:800; color:#C42127; }
+
+    .notice-box {
+      background: #f7f7ff;
+      border: 1px solid #d8dcff;
+      color: #2f2f5a;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .badge-limitado {
+      display: inline-block;
+      background: #fff0d6;
+      color: #9a5a00;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 6px;
+      border: 1px solid #ffd4a3;
+    }
+
+    .badge-abunda {
+      display: inline-block;
+      background: #e7f7e9;
+      color: #1f6b2a;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 6px;
+      border: 1px solid #bfe7c6;
+    }
 
     /* LISTA DE PRODUCTOS */
     .product-list {
@@ -388,6 +435,12 @@
   </div>
     
     <div class="content">
+      <div class="notice-box">
+        <strong>Pedido a confirmar:</strong> El pedido se confirma por WhatsApp con la boleta.
+        <br><strong>Pedidos:</strong> Viernes (San Borja) y Sabado (Feria Magdalena).
+        <br><strong>Delivery:</strong> Cada dos semanas, un solo dia de 7-11AM, sujeto a confirmacion.
+        <br><strong>Nota:</strong> Algunos cortes son limitados; otros son de alta disponibilidad.
+      </div>
       <div class="row gx-4">
         <div class="col-lg-8">
           <form id="pedidoForm">
@@ -398,8 +451,8 @@
                 <datalist id="listaProductos"></datalist>
               </div>
               <div class="col-4">
-                <label class="form-label">Precio:</label>
-                <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">—</div>
+                <label class="form-label">Pedido:</label>
+                <div id="precioProducto" class="form-control-plaintext border rounded bg-light text-center">Sujeto a confirmacion</div>
               </div>
             </div>
 
@@ -434,17 +487,17 @@
                 <div class="delivery-option" onclick="seleccionarMetodo('San Borja')">
                   <i class="fas fa-store delivery-icon"></i>
                   <div class="delivery-title">San Borja</div>
-                  <div class="delivery-desc">Recojo en tienda</div>
+                  <div class="delivery-desc">Recojo viernes</div>
                 </div>
                 <div class="delivery-option" onclick="seleccionarMetodo('Magdalena del Mar')">
                   <i class="fas fa-store delivery-icon"></i>
                   <div class="delivery-title">Magdalena del Mar</div>
-                  <div class="delivery-desc">Recojo en tienda</div>
+                  <div class="delivery-desc">Feria sabado</div>
                 </div>
                 <div class="delivery-option" onclick="seleccionarMetodo('Delivery')">
                   <i class="fas fa-truck delivery-icon"></i>
                   <div class="delivery-title">Delivery</div>
-                  <div class="delivery-desc">S/ 13 adicional</div>
+                  <div class="delivery-desc">Quincenal 7-11AM</div>
                 </div>
               </div>
               <input type="hidden" id="metodoEntrega" required>
@@ -477,7 +530,7 @@
           <div id="orderSummary" class="order-summary">
             <h5>Resumen del pedido</h5>
             <div id="summaryItems"></div>
-            <div class="summary-item"><span>Total</span><span class="total-amount">S/ 0.00</span></div>
+            <div class="summary-item"><span>Precio</span><span class="total-amount">Por confirmar</span></div>
             <button type="button" class="btn btn-success w-100 mt-3" onclick="enviarPedido()"><i class="fas fa-paper-plane"></i> Enviar pedido</button>
           </div>
         </div>
@@ -531,21 +584,22 @@
     return corte || categoria || 'Producto';
   }
 
-  function formatMetaLines(p) {
-    const lines = [];
-    const peso = (p.PESO_APROX || '').trim();
-    const precio = (p["PRECIO APROXIMADO"] || '').trim();
-    const precioKg = (p["PRECIO POR Kg"] || '').trim();
-    const precioNum = parseFloat((precio || '').replace(/[^0-9.]/g, ''));
-    const precioKgNum = parseFloat((precioKg || '').replace(/[^0-9.]/g, ''));
-    let pesoAprox = peso;
-    if (!pesoAprox && precioNum && precioKgNum) {
-      const gramos = Math.round((precioNum / precioKgNum) * 1000);
-      pesoAprox = `${gramos} g`;
-    }
-    if (pesoAprox) lines.push(`<span class="precio-kg">Por peso aproximado: ${pesoAprox} por unidad</span>`);
-    if (precioKg) lines.push(`<span class="precio-kg">Precio por kg: S/ ${precioKg}/kg</span>`);
-    return lines.length ? lines : ['—'];
+  function formatMetaLines() {
+    return ['Pedido a confirmar'];
+  }
+
+  function getProductFlags(p) {
+    const producto = (p.PRODUCTO || '').toLowerCase();
+    const descripcion = (p.DESCRIPCION || '').toLowerCase();
+    const abundanKeywords = ['molida', 'churrasco', 'asado'];
+    const limitadosKeywords = ['lomo fino', 'higado', 'huachalomo', 'entraña', 'entrana'];
+    const isViscera = producto.includes('viscera');
+    const isAbunda = abundanKeywords.some(keyword => descripcion.includes(keyword));
+    const isLimitado = isViscera || limitadosKeywords.some(keyword => descripcion.includes(keyword));
+    return {
+      abunda: isAbunda,
+      limitado: isLimitado
+    };
   }
 
   // Cargar productos desde JSON
@@ -576,7 +630,7 @@
         if (seleccionado) {
           precioExtra.innerHTML = formatMetaLines(seleccionado).join('<br>');
         } else {
-          precioExtra.textContent = "—";
+          precioExtra.textContent = "Pedido a confirmar";
         }
       });
 
@@ -598,10 +652,9 @@
     sugeridos.forEach(p => {
       const card = document.createElement('div');
       card.className = 'suggested-card';
-      const precioKg = (p["PRECIO POR Kg"] || '').trim();
-      const precioAprox = (p["PRECIO APROXIMADO"] || '').trim();
-      const precioKgHtml = precioKg ? `<div class="precio-kg">S/ ${precioKg}/kg</div>` : '';
-      card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${formatLabel(p)}</div><div style="font-size:0.85rem; color:#666;">S/ ${precioAprox}</div>${precioKgHtml}`;
+      const flags = getProductFlags(p);
+      const badges = `${flags.abunda ? '<span class="badge-abunda">Abunda</span>' : ''}${flags.limitado ? '<span class="badge-limitado">Limitado</span>' : ''}`;
+      card.innerHTML = `<div style="font-weight:700; font-size:0.95rem; margin-bottom:6px;">${formatLabel(p)}${badges}</div><div style="font-size:0.85rem; color:#666;">Pedido a confirmar</div>`;
       card.onclick = () => addSuggestedProduct(p);
       container.appendChild(card);
     });
@@ -609,7 +662,8 @@
 
   function addSuggestedProduct(p) {
     const nombre = formatLabel(p);
-    pedido.push({ producto: nombre, cantidad: 1, descripcion: '' });
+    const flags = getProductFlags(p);
+    pedido.push({ producto: nombre, cantidad: 1, descripcion: '', flags });
     mostrarPedido();
   }
 
@@ -618,19 +672,13 @@
     const totalEl = document.querySelector('.total-amount');
     if (!summaryEl || !totalEl) return;
     summaryEl.innerHTML = '';
-    let total = 0;
     pedido.forEach(item => {
-      // intentar buscar precio en productos
-      const found = productos.find(p => formatLabel(p).toLowerCase() === item.producto.toLowerCase());
-      const price = found ? parseFloat(found["PRECIO APROXIMADO"]) : 0;
-      const subtotal = (isNaN(price) ? 0 : price) * (item.cantidad || 1);
-      total += subtotal;
       const div = document.createElement('div');
       div.className = 'summary-item';
-      div.innerHTML = `<span>${item.cantidad}x ${item.producto}</span><span>S/ ${subtotal.toFixed(2)}</span>`;
+      div.innerHTML = `<span>${item.cantidad}x ${item.producto}</span><span>Pedido a confirmar</span>`;
       summaryEl.appendChild(div);
     });
-    totalEl.textContent = `S/ ${total.toFixed(2)}`;
+    totalEl.textContent = 'Pedido a confirmar';
   }
 
   // Agregar producto a la lista
@@ -644,14 +692,18 @@
       return;
     }
 
-    pedido.push({ producto, cantidad, descripcion });
+    const encontrado = productos.find(
+      p => formatLabel(p).toLowerCase() === producto.toLowerCase()
+    );
+    const flags = encontrado ? getProductFlags(encontrado) : { abunda: false, limitado: false };
+    pedido.push({ producto, cantidad, descripcion, flags });
     mostrarPedido();
 
     // limpiar campos
     document.getElementById("producto").value = "";
     document.getElementById("cantidad").value = 1;
     document.getElementById("descripcion").value = "";
-    document.getElementById("precioProducto").textContent = "—";
+    document.getElementById("precioProducto").textContent = "Pedido a confirmar";
   }
 
   // Mostrar lista en pantalla
@@ -661,7 +713,8 @@
     pedido.forEach((item, index) => {
       const li = document.createElement("li");
       li.className = "list-group-item d-flex justify-content-between align-items-center";
-      li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} - ${item.descripcion || " "}</span>
+      const badges = `${item.flags?.abunda ? '<span class="badge-abunda">Abunda</span>' : ''}${item.flags?.limitado ? '<span class="badge-limitado">Limitado</span>' : ''}`;
+      li.innerHTML = `<span><b>${item.cantidad}x</b> ${item.producto} ${badges} - ${item.descripcion || " "}</span>
                       <button class="btn btn-sm btn-danger" onclick="eliminarProducto(${index})">❌</button>`;
       lista.appendChild(li);
     });
@@ -793,10 +846,17 @@
 
     let mensaje = `Pedido de:  ${nombre}\n\n`;
     pedido.forEach((item, index) => {
-      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto} - ${item.descripcion || " "}\n`;
+      const notas = [];
+      if (item.flags?.abunda) notas.push('abunda');
+      if (item.flags?.limitado) notas.push('limitado');
+      const notasTxt = notas.length ? ` (${notas.join(', ')})` : '';
+      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto}${notasTxt} - ${item.descripcion || " "}\n`;
     });
 
     mensaje += `\n*Método de entrega:* ${metodo}`;
+    mensaje += `\n*Pedido:* A confirmar por WhatsApp con boleta`;
+    mensaje += `\n*Pedidos:* Viernes (San Borja) y Sabado (Feria Magdalena)`;
+    mensaje += `\n*Delivery:* Cada dos semanas, 7-11AM (sujeto a confirmacion)`;
     let direccion = null, latitud = null, longitud = null, especificacionesDelivery = null;
     if (metodo === "Delivery") {
       direccion = document.getElementById("direccion").value.trim();
@@ -812,7 +872,7 @@
       if (especificacionesDelivery) {
         mensaje += `\n*Especificaciones de entrega:* ${especificacionesDelivery}`;
       }
-      mensaje += `\n*Costo por envío:* S/ 13`;
+      mensaje += `\n*Nota:* Delivery sujeto a confirmacion de ruta y stock`;
     }
 
     // 💾 Guardar en Firebase primero
