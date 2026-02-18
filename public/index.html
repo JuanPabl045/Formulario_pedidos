@@ -519,6 +519,22 @@
         gap: 30px;
       }
     }
+
+    /* Animación fade-in suave para imágenes */
+    @keyframes fadeInSmooth {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    img {
+      animation: fadeInSmooth 1.2s ease-out forwards;
+    }
   </style>
 </head>
 <body>
