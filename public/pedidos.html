@@ -379,78 +379,6 @@
     .navbar-toggler-icon {
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
-
-    /* ÍNDICE EXPANDIBLE PARA MÓVIL */
-    .table-of-contents {
-      display: none;
-      background: #FFFFFF;
-      border: 2px solid #957155;
-      border-radius: 12px;
-      margin: 20px 0;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(149, 113, 85, 0.1);
-    }
-
-    .toc-header {
-      background: linear-gradient(135deg, #957155 0%, #b0937c 100%);
-      color: white;
-      padding: 14px 16px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      user-select: none;
-    }
-
-    .toc-toggle {
-      font-size: 1.2rem;
-      transition: transform 0.3s;
-    }
-
-    .toc-toggle.open {
-      transform: rotate(180deg);
-    }
-
-    .toc-items {
-      display: none;
-      padding: 12px 0;
-      list-style: none;
-      margin: 0;
-    }
-
-    .toc-items.open {
-      display: block;
-    }
-
-    .toc-items li {
-      padding: 10px 20px;
-      border-bottom: 1px solid #e9ecef;
-    }
-
-    .toc-items li:last-child {
-      border-bottom: none;
-    }
-
-    .toc-items a {
-      color: #957155;
-      text-decoration: none;
-      font-weight: 500;
-      display: block;
-      transition: all 0.2s;
-    }
-
-    .toc-items a:hover {
-      color: white;
-      background: rgba(149, 113, 85, 0.1);
-      padding-left: 10px;
-    }
-
-    @media (max-width: 768px) {
-      .table-of-contents {
-        display: block;
-      }
-    }
   </style>
 </head>
 <body>
@@ -494,24 +422,9 @@
   <div class="main-container">
   <div class="header">
     <img src="https://img1.wsimg.com/isteam/ip/e4799748-99b6-4912-a111-1cacb9a9c576/LOGOWEB.png/:/rs=w:234,h:75,cg:true,m/cr=w:234,h:75/qt=q:95" alt="Logo Molino Viejo" style="height:75px; width:auto; margin-bottom:10px;">
-    <h1 style="color: #b0937c;">Hacer Pedido</h1>
   </div>
     
     <div class="content">
-
-      <!-- ÍNDICE EXPANDIBLE PARA MÓVIL -->
-      <div class="table-of-contents">
-        <div class="toc-header" onclick="toggleTOC()">
-          <span><i class="fas fa-list-ol me-2"></i> Índice</span>
-          <span class="toc-toggle" id="tocToggle">▼</span>
-        </div>
-        <ul class="toc-items" id="tocItems">
-          <li><a href="#sec-productos" onclick="closeTOC()">1. Seleccionar productos</a></li>
-          <li><a href="#sec-info" onclick="closeTOC()">2. Tu información</a></li>
-          <li><a href="#sec-entrega" onclick="closeTOC()">3. Método de entrega</a></li>
-          <li><a href="#sec-resumen" onclick="closeTOC()">4. Resumen</a></li>
-        </ul>
-      </div>
 
       <div class="row gx-4">
         <div class="col-lg-8">
@@ -658,21 +571,6 @@
   const DEFAULT_NUMERO_DESTINO = (whatsappNumber || '51989719386').replace(/[^0-9]/g, ''); // 👈 Loaded from config.js, cleaned
   let pedido = [];
   let productos = [];
-
-  // FUNCIONES DEL ÍNDICE EXPANDIBLE
-  function toggleTOC() {
-    const tocItems = document.getElementById("tocItems");
-    const tocToggle = document.getElementById("tocToggle");
-    tocItems.classList.toggle("open");
-    tocToggle.classList.toggle("open");
-  }
-
-  function closeTOC() {
-    const tocItems = document.getElementById("tocItems");
-    const tocToggle = document.getElementById("tocToggle");
-    tocItems.classList.remove("open");
-    tocToggle.classList.remove("open");
-  }
 
   // Detectar si es dispositivo móvil
   function esMobil() {
