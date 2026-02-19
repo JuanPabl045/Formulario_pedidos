@@ -970,32 +970,25 @@
       return;
     }
 
-    let mensaje = `Pedido de:  ${nombre}\n\n`;
-    let tieneProductoLimitado = false;
+    // Construir el mensaje limpio SIN información innecesaria
+    let mensaje = `🛒 *Nuevo Pedido*\n`;
+    mensaje += `👤 *Cliente:* ${nombre}\n`;
+    mensaje += `📦 *Productos:*\n\n`;
     
     pedido.forEach((item, index) => {
-      const notas = [];
-      if (item.flags?.limitado) {
-        notas.push('limitado');
-        tieneProductoLimitado = true;
-      }
-      const notasTxt = notas.length ? ` (${notas.join(', ')})` : '';
-      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto}${notasTxt}`;
+      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto}`;
       if (item.descripcion && item.descripcion.trim()) {
         mensaje += ` - ${item.descripcion}`;
+      }
+      if (item.flags?.limitado) {
+        mensaje += ` (limitado)`;
       }
       mensaje += `\n`;
     });
 
-    mensaje += `\n*Método de entrega:* ${metodo}`;
-    mensaje += `\n*Pedido:* Recibido y a confirmar por WhatsApp con boleta`;
-    mensaje += `\n*Pedidos:* Lunes a Jueves`;
-    mensaje += `\n*Delivery:* Cada dos semanas, 7-11AM`;
+    mensaje += `\n🚚 *Método de entrega:* ${metodo}`;
     
-    // Solo agregar nota si hay productos limitados
-    if (tieneProductoLimitado) {
-      mensaje += `\n*Nota importante:* Algunos de tus productos son limitados. Confirmaremos disponibilidad.`;
-    }
+    // Agregar detalles de delivery SOLO si es delivery
     let direccion = null, latitud = null, longitud = null, especificacionesDelivery = null;
     if (metodo === "Delivery") {
       direccion = document.getElementById("direccion").value.trim();
@@ -1006,14 +999,14 @@
         alert("Por favor selecciona tu dirección en el mapa para el delivery.");
         return;
       }
-      mensaje += `\n*Dirección:* ${direccion}`;
-      mensaje += `\n*Ubicación:* https://www.google.com/maps?q=${latitud},${longitud}`;
+      mensaje += `\n📍 *Dirección:* ${direccion}`;
+      mensaje += `\n🗺️ *Maps:* https://www.google.com/maps?q=${latitud},${longitud}`;
       if (especificacionesDelivery) {
-        mensaje += `\n*Especificaciones de entrega:* ${especificacionesDelivery}`;
+        mensaje += `\n📝 *Notas:* ${especificacionesDelivery}`;
       }
     }
 
-    // 💾 Guardar en Firebase primero
+    // 💾 Guardar en Firebase
     const pedidoData = {
       nombre: nombre,
       productos: pedido,
@@ -1026,7 +1019,6 @@
       estado: "pendiente"
     };
 
-    // Intentar guardar en Firebase
     if (db) {
       db.collection("pedidos").add(pedidoData)
         .then((docRef) => {
@@ -1037,18 +1029,17 @@
         });
     }
 
-    // Construir URL de WhatsApp (formato correcto: 51989719386)
-    const numeroLimpio = DEFAULT_NUMERO_DESTINO.replace(/[^0-9]/g, '');
-    const url = `https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`;
+    // Abrir WhatsApp con el número correcto
+    const numeroWhatsapp = "51989719386"; // Número fijo o desde config
+    const url = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(mensaje)}`;
     
-    // Abrir WhatsApp (funciona en móvil y desktop)
+    console.log("📞 Abriendo WhatsApp con URL:", url); // Debug
+    
+    // Abrir WhatsApp
     if (esMobil()) {
       window.location.href = url;
     } else {
-      const nuevaVentana = window.open(url, "_blank");
-      if (!nuevaVentana || nuevaVentana.closed || typeof nuevaVentana.closed === 'undefined') {
-        window.location.href = url;
-      }
+      window.open(url, "_blank");
     }
   }
 
