@@ -655,7 +655,7 @@
     console.error("❌ Error al inicializar Firebase:", error);
   }
 
-  const DEFAULT_NUMERO_DESTINO = whatsappNumber; // 👈 Loaded from config.js
+  const DEFAULT_NUMERO_DESTINO = (whatsappNumber || '51989719386').replace(/[^0-9]/g, ''); // 👈 Loaded from config.js, cleaned
   let pedido = [];
   let productos = [];
 
@@ -971,18 +971,31 @@
     }
 
     let mensaje = `Pedido de:  ${nombre}\n\n`;
+    let tieneProductoLimitado = false;
+    
     pedido.forEach((item, index) => {
       const notas = [];
-      if (item.flags?.limitado) notas.push('limitado');
+      if (item.flags?.limitado) {
+        notas.push('limitado');
+        tieneProductoLimitado = true;
+      }
       const notasTxt = notas.length ? ` (${notas.join(', ')})` : '';
-      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto}${notasTxt} - ${item.descripcion || " "}\n`;
+      mensaje += `${index + 1}. ${item.cantidad}x ${item.producto}${notasTxt}`;
+      if (item.descripcion && item.descripcion.trim()) {
+        mensaje += ` - ${item.descripcion}`;
+      }
+      mensaje += `\n`;
     });
 
     mensaje += `\n*Método de entrega:* ${metodo}`;
     mensaje += `\n*Pedido:* Recibido y a confirmar por WhatsApp con boleta`;
     mensaje += `\n*Pedidos:* Lunes a Jueves`;
     mensaje += `\n*Delivery:* Cada dos semanas, 7-11AM`;
-    mensaje += `\n*Nota:* Cortes pequenos y visceras son limitados`;
+    
+    // Solo agregar nota si hay productos limitados
+    if (tieneProductoLimitado) {
+      mensaje += `\n*Nota importante:* Algunos de tus productos son limitados. Confirmaremos disponibilidad.`;
+    }
     let direccion = null, latitud = null, longitud = null, especificacionesDelivery = null;
     if (metodo === "Delivery") {
       direccion = document.getElementById("direccion").value.trim();
@@ -1024,8 +1037,9 @@
         });
     }
 
-    // Construir URL de WhatsApp
-    const url = `https://wa.me/${DEFAULT_NUMERO_DESTINO}?text=${encodeURIComponent(mensaje)}`;
+    // Construir URL de WhatsApp (formato correcto: 51989719386)
+    const numeroLimpio = DEFAULT_NUMERO_DESTINO.replace(/[^0-9]/g, '');
+    const url = `https://wa.me/${numeroLimpio}?text=${encodeURIComponent(mensaje)}`;
     
     // Abrir WhatsApp (funciona en móvil y desktop)
     if (esMobil()) {
