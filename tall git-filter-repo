@@ -1,0 +1,41 @@
+[33mcommit 01e617d8f193a416f87b58c5904bdeefbf8599be[m
+Author: JuanPabl045 <jpm0230849@gmail.com>
+Date:   Mon Feb 16 03:13:58 2026 +0000
+
+    Arreglo de Pedido_mas_API
+
+[33mcommit c54f6afc5bdc9113c5d1ce65ac2f2596a5f4a1c4[m
+Author: JuanPabl045 <jpm0230849@gmail.com>
+Date:   Sat Nov 22 00:01:42 2025 -0500
+
+    Limpiar archivos duplicados fuera de public/
+
+[33mcommit 94aa9bfdc5659e443164d7220abb4bf4dbe6f34a[m
+Author: JuanPabl045 <jpm0230849@gmail.com>
+Date:   Fri Nov 21 23:50:16 2025 -0500
+
+    Agregar página Nosotros como inicio y navbar a todas las páginas
+
+[33mcommit a5f028fca196c7014992eeb85979484ef6094dce[m
+Author: JuanPabl045 <jpm0230849@gmail.com>
+Date:   Fri Nov 21 23:38:02 2025 -0500
+
+    Agregar panel admin con exportación Excel
+
+[33mcommit 0af07bb05be9f8bad3322395558803f6e0c2626c[m
+Author: JuanPabl045 <jpm0230849@gmail.com>
+Date:   Fri Nov 21 22:51:11 2025 -0500
+
+    Limpiar lógica WhatsApp - versión final
+
+[33mcommit 90501087a18b0aab145bd9aec04133272e38e421[m
+Author: JuanPabl045 <jpm0230849@gmail.com>
+Date:   Fri Nov 21 22:37:13 2025 -0500
+
+    Copiar archivos actualizados a public/
+
+[33mcommit 1979b040255de44365293a5ef555bfc6ee2a5f01[m
+Author: JuanPabl045 <jpm0230849@gmail.com>
+Date:   Thu Oct 30 01:28:19 2025 -0500
+
+    Integración completa de credenciales de Firebase y activación del backend
