@@ -1,5 +1,7 @@
 # Sistema de Pedidos de Carne 🥩
 
+> **⚠️ Nota:** Este proyecto se encuentra aún en progreso y en fase de desarrollo.
+
 Un sistema web profesional diseñado para la gestión y realización de pedidos de carne de manera eficiente. Este proyecto está construido para ser 100% viable en un entorno de producción, ofreciendo una experiencia de usuario fluida y un manejo de datos seguro en tiempo real.
 
 ## 🚀 Características Principales
