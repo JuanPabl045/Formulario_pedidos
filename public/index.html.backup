@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MolinoViejo.com - Carnes y Lácteos de Calidad</title>
+  <meta name="description" content="Molino Viejo: carnes y lácteos de calidad. Pedidos online y delivery con atención personalizada.">
+  <link rel="canonical" href="https://molinoviejo.pe/index.html">
+  <meta property="og:title" content="MolinoViejo.com - Carnes y Lácteos de Calidad">
+  <meta property="og:description" content="Molino Viejo: carnes y lácteos de calidad. Pedidos online y delivery con atención personalizada.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://molinoviejo.pe/index.html">
+  <meta property="og:image" content="https://molinoviejo.pe/img/logo.png">
+  <meta property="og:site_name" content="Molino Viejo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MolinoViejo.com - Carnes y Lácteos de Calidad">
+  <meta name="twitter:description" content="Molino Viejo: carnes y lácteos de calidad. Pedidos online y delivery con atención personalizada.">
+  <meta name="twitter:image" content="https://molinoviejo.pe/img/logo.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #2d3436;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      padding: 10px 0;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .navbar-brand span { display: none; }
+
+    .logo-animated {
+      animation: logoFloat 3.8s ease-in-out infinite;
+      transform-origin: center;
+      will-change: transform;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.9) !important;
+      font-weight: 600;
+      margin: 0 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active {
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.18);
+      border-bottom: none;
+    }
+
+    .navbar-toggler {
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, rgba(45, 52, 54, 0.6), rgba(99, 110, 114, 0.6)),
+                  url('img/ganado.jpg');
+      background-position: center 40%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero {
+      padding: 15px 35px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-hero-primary {
+      background: white;
+      color: #2d3436;
+      border: 3px solid white;
+    }
+
+    .btn-hero-primary:hover {
+      background: transparent;
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-hero-secondary {
+      background: transparent;
+      color: white;
+      border: 3px solid white;
+    }
+
+    .btn-hero-secondary:hover {
+      background: white;
+      color: #2d3436;
+      transform: translateY(-5px);
+    }
+
+    /* SECCIONES */
+    .section {
+      padding: 80px 20px;
+      background: white;
+    }
+
+    .section:nth-child(even) {
+      background: #f8f9fa;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2d3436;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: #636e72;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* CATEGORÍAS DESTACADAS */
+    .categorias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .categoria-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .categoria-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    }
+
+    .categoria-imagen {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: white;
+    }
+
+    .categoria-carnes {
+      background: linear-gradient(135deg, #C42127, #A83832);
+    }
+
+    .categoria-lacteos {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+    }
+
+    .categoria-info {
+      padding: 25px;
+      text-align: center;
+    }
+
+    .categoria-nombre {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #2d3436;
+      margin-bottom: 10px;
+    }
+
+    .categoria-descripcion {
+      font-size: 1rem;
+      color: #636e72;
+      margin-bottom: 15px;
+    }
+
+    .categoria-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .categoria-cta-carnes {
+      background: #C42127;
+    }
+
+    .categoria-cta-lacteos {
+      background: #2980b9;
+    }
+
+    /* VALORES */
+    .valores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .valor-card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .valor-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .valor-icon {
+      font-size: 3rem;
+      color: #2d3436;
+      margin-bottom: 20px;
+    }
+
+    .valor-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2d3436;
+      margin-bottom: 15px;
+    }
+
+    .valor-text {
+      color: #636e72;
+      line-height: 1.6;
+    }
+
+    /* PRODUCTOS DESTACADOS */
+    .productos-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .producto-preview {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s;
+    }
+
+    .producto-preview:hover {
+      transform: translateY(-10px);
+    }
+
+    .producto-preview-icon {
+      font-size: 3rem;
+      color: #2d3436;
+      margin-bottom: 15px;
+    }
+
+    .producto-preview-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2d3436;
+      margin-bottom: 10px;
+    }
+
+    .producto-preview-text {
+      color: #636e72;
+      font-size: 0.95rem;
+    }
+
+    /* UBICACIONES */
+    .ubicaciones-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .ubicacion-card {
+      background: linear-gradient(135deg, #2d3436, #636e72);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .ubicacion-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .ubicacion-info {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .ubicacion-item {
+      display: flex;
+      align-items: start;
+      gap: 15px;
+    }
+
+    .ubicacion-item i {
+      font-size: 1.3rem;
+      margin-top: 3px;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, #2d3436, #636e72);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+      color: white;
+      padding: 60px 20px 20px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section {
+      text-align: left;
+    }
+
+    .footer-section h4 {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .footer-section ul li a:hover {
+      color: #fff;
+      padding-left: 5px;
+    }
+
+    .footer-section p {
+      color: #ccc;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .footer-social a:hover {
+      background: #636e72;
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 8px 0;
+      }
+
+      .navbar-brand img {
+        height: 34px !important;
+        max-width: 70vw;
+      }
+
+      .hero {
+        min-height: 420px;
+        padding: 60px 16px;
+        background-position: center;
+      }
+
+      .hero img {
+        height: auto !important;
+        max-width: 70vw;
+        margin-bottom: 20px !important;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.08));
+      }
+      50% {
+        transform: translateY(-6px) scale(1.02);
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+      }
+    }
+
+    .logo-animated:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    body > nav,
+    body > .hero,
+    body > section,
+    body > footer {
+      animation: revealUp 0.85s ease both;
+    }
+
+    body > nav {
+      animation-delay: 0.02s;
+    }
+
+    body > .hero {
+      animation-delay: 0.08s;
+    }
+
+    body > section:nth-of-type(1) {
+      animation-delay: 0.14s;
+    }
+
+    body > section:nth-of-type(2) {
+      animation-delay: 0.26s;
+    }
+
+    body > section:nth-of-type(3) {
+      animation-delay: 0.38s;
+    }
+
+    body > section:nth-of-type(4) {
+      animation-delay: 0.50s;
+    }
+
+    body > section:nth-of-type(5) {
+      animation-delay: 0.62s;
+    }
+
+    body > footer {
+      animation-delay: 0.74s;
+    }
+
+    .section-title,
+    .categoria-card,
+    .valor-card,
+    .producto-preview,
+    .ubicacion-card,
+    .cta-section h2,
+    .cta-section p,
+    .footer-section {
+      animation: revealUp 0.8s ease both;
+    }
+
+    .categorias-grid .categoria-card:nth-child(1) {
+      animation-delay: 0.18s;
+    }
+
+    .categorias-grid .categoria-card:nth-child(2) {
+      animation-delay: 0.28s;
+    }
+
+    .valores-grid .valor-card:nth-child(1) { animation-delay: 0.18s; }
+    .valores-grid .valor-card:nth-child(2) { animation-delay: 0.28s; }
+    .valores-grid .valor-card:nth-child(3) { animation-delay: 0.38s; }
+    .valores-grid .valor-card:nth-child(4) { animation-delay: 0.48s; }
+
+    .productos-preview .producto-preview:nth-child(1) { animation-delay: 0.18s; }
+    .productos-preview .producto-preview:nth-child(2) { animation-delay: 0.28s; }
+    .productos-preview .producto-preview:nth-child(3) { animation-delay: 0.38s; }
+    .productos-preview .producto-preview:nth-child(4) { animation-delay: 0.48s; }
+
+    .ubicaciones-grid .ubicacion-card:nth-child(1) { animation-delay: 0.18s; }
+    .ubicaciones-grid .ubicacion-card:nth-child(2) { animation-delay: 0.28s; }
+
+    .footer-content .footer-section:nth-child(1) { animation-delay: 0.10s; }
+    .footer-content .footer-section:nth-child(2) { animation-delay: 0.18s; }
+    .footer-content .footer-section:nth-child(3) { animation-delay: 0.26s; }
+    .footer-content .footer-section:nth-child(4) { animation-delay: 0.34s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      body > nav,
+      body > .hero,
+      body > section,
+      body > footer,
+      .section-title,
+      .categoria-card,
+      .valor-card,
+      .producto-preview,
+      .ubicacion-card,
+      .cta-section h2,
+      .cta-section p,
+      .footer-section,
+      .logo-animated {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg"></nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <img src="https://img1.wsimg.com/isteam/ip/e4799748-99b6-4912-a111-1cacb9a9c576/LOGOWEB.png/:/rs=w:234,h:75,cg:true,m/cr=w:234,h:75/qt=q:95" alt="Logo Molino Viejo" class="logo-animated" style="height:120px; width:auto; margin-bottom:30px;">
+      <h1>Bienvenidos a Molino Viejo</h1>
+      <p>Carnes frescas y lácteos de calidad premium. Desde 1980 llevando lo mejor a tu mesa con dedicación y pasión por la excelencia.</p>
+      <div class="hero-buttons">
+        <a href="lacteos.html" class="btn-hero btn-hero-primary">
+          <i class="fas fa-cheese me-1"></i> Ver Lácteos
+        </a>
+        <a href="nosotros.html" class="btn-hero btn-hero-secondary">
+          <i class="fas fa-drumstick-bite me-1"></i> Ver Carnes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-th-large me-3"></i> Nuestras Categorías</h2>
+        <p>Explora nuestras líneas de productos premium</p>
+      </div>
+      
+      <div class="categorias-grid">
+        <a href="nosotros.html" class="categoria-card">
+          <div class="categoria-imagen categoria-carnes">
+            <i class="fas fa-drumstick-bite"></i>
+          </div>
+          <div class="categoria-info">
+            <div class="categoria-nombre">Carnes</div>
+            <div class="categoria-descripcion">
+              Res, cerdo, aves, pescados y carnes especiales de la más alta calidad
+            </div>
+            <span class="categoria-cta categoria-cta-carnes">
+              <i class="fas fa-arrow-right"></i> Ver Carnes
+            </span>
+          </div>
+        </a>
+
+        <a href="lacteos.html" class="categoria-card">
+          <div class="categoria-imagen categoria-lacteos">
+            <i class="fas fa-cheese"></i>
+          </div>
+          <div class="categoria-info">
+            <div class="categoria-nombre">Lácteos</div>
+            <div class="categoria-descripcion">
+              Quesos artesanales, mantequilla natural y requesón fresco del día
+            </div>
+            <span class="categoria-cta categoria-cta-lacteos">
+              <i class="fas fa-arrow-right"></i> Ver Lácteos
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUESTROS VALORES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-heart me-3"></i> Nuestros Valores</h2>
+        <p>Lo que nos hace diferentes y nos mantiene como líderes en productos de calidad</p>
+      </div>
+      
+      <div class="valores-grid">
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="valor-title">Calidad Premium</div>
+          <div class="valor-text">
+            Seleccionamos cuidadosamente cada producto para garantizar la mejor calidad y frescura en cada entrega.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <div class="valor-title">Productos Frescos</div>
+          <div class="valor-text">
+            Carnes y lácteos frescos del día, sin conservantes ni químicos. Directamente de productores confiables a tu mesa.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-truck-fast"></i>
+          </div>
+          <div class="valor-title">Entrega Rápida</div>
+          <div class="valor-text">
+            Delivery en Lima en menos de 24 horas. También puedes recoger en nuestras tiendas de San Borja y Magdalena.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="valor-title">Atención Personalizada</div>
+          <div class="valor-text">
+            Nuestro equipo te asesora en cada compra para que encuentres el producto perfecto según tus necesidades.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-star me-3"></i> Productos Destacados</h2>
+        <p>Descubre nuestras especialidades más solicitadas</p>
+      </div>
+
+      <div class="productos-preview">
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-fish"></i>
+          </div>
+          <div class="producto-preview-name">Trucha Fresca</div>
+          <div class="producto-preview-text">
+            Trucha de primera, filete, mariposa y más presentaciones
+          </div>
+        </div>
+
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-drumstick-bite"></i>
+          </div>
+          <div class="producto-preview-name">Cuy Especial</div>
+          <div class="producto-preview-text">
+            Carcasa, deshuesado, hamburguesas y chorizos de cuy
+          </div>
+        </div>
+
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-cow"></i>
+          </div>
+          <div class="producto-preview-name">Res Premium</div>
+          <div class="producto-preview-text">
+            Lomo fino, bife, churrasco y todos los cortes que necesites
+          </div>
+        </div>
+
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-cheese"></i>
+          </div>
+          <div class="producto-preview-name">Quesos Artesanales</div>
+          <div class="producto-preview-text">
+            Queso fresco, maduro y paria elaborados tradicionalmente
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="nosotros.html" class="btn btn-lg" style="background: #2d3436; color: white; border-radius: 50px; padding: 15px 40px; font-weight: 700; letter-spacing: 0.5px; transition: all 0.3s;">
+          <i class="fas fa-drumstick-bite me-2"></i> Ver Carnes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIONES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-map-marker-alt me-3"></i> Nuestras Tiendas</h2>
+        <p>Visítanos o solicita delivery a domicilio</p>
+      </div>
+
+      <div class="ubicaciones-grid">
+        <div class="ubicacion-card">
+          <div class="ubicacion-title">
+            <i class="fas fa-store"></i>
+            San Borja
+          </div>
+          <div class="ubicacion-info">
+            <div class="ubicacion-item">... (backup truncated)

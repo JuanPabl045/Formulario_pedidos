@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "description": "Formulario de pedidos para Molino Viejo - INTENTO FINAL",
   "scripts": {
-    "build": "echo 'Build script completado con éxito'",
+    "start": "npx serve public --single --listen 3000",
+    "build:css": "cleancss -o public/css/site.min.css public/css/site.css || echo 'clean-css not found'",
+    "minify:local": "node scripts/minify-css.js",
+    "images:convert": "node scripts/convert-images.js",
+    "optimize:images": "imagemin public/img/* --out-dir=public/img/optimized || echo 'imagemin not found'",
+    "build": "npm run build:css && npm run optimize:images",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "sharp": "^0.34.5"
+  }
 }

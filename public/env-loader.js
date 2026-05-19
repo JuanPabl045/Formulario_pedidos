@@ -5,26 +5,38 @@
  * Use this ONLY in development - in production, use proper environment configuration
  */
 
-async function loadEnvVariables() {
+function loadEnvVariables() {
   try {
-    // Only load in development (localhost)
-    if (!window.location.hostname.includes('localhost') && 
-        !window.location.hostname.includes('127.0.0.1')) {
+    const host = window.location.hostname;
+    const isPrivateIp = /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/.test(host);
+
+    // Only load in development (localhost or LAN IP)
+    if (!host.includes('localhost') && !host.includes('127.0.0.1') && !isPrivateIp) {
       console.log('⚠️ .env loading disabled in production');
       return;
     }
 
-    const response = await fetch('../.env');
-    
-    if (!response.ok) {
+    const envPaths = ['env.local', './env.local', '../.env', './.env', '.env'];
+    let envText = '';
+
+    for (const envPath of envPaths) {
+      const request = new XMLHttpRequest();
+      request.open('GET', envPath, false);
+      request.send(null);
+
+      if (request.status === 200 || request.status === 0) {
+        envText = request.responseText;
+        console.log(`✅ Loaded .env from ${envPath}`);
+        break;
+      }
+    }
+
+    if (!envText) {
       console.warn('⚠️ .env file not found. Using placeholder values.');
       return;
     }
 
-    const text = await response.text();
-    const lines = text.split('\n');
-
-    lines.forEach(line => {
+    envText.split('\n').forEach(line => {
       // Skip empty lines and comments
       if (!line.trim() || line.trim().startsWith('#')) {
         return;
@@ -34,7 +46,7 @@ async function loadEnvVariables() {
       if (key && valueParts.length > 0) {
         const envKey = key.trim();
         const envValue = valueParts.join('=').trim();
-        
+
         // Set as window variable for access in scripts
         window[envKey] = envValue;
         console.log(`✅ Loaded ${envKey}`);
@@ -48,8 +60,4 @@ async function loadEnvVariables() {
 }
 
 // Load env variables before other scripts run
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', loadEnvVariables);
-} else {
-  loadEnvVariables();
-}
+loadEnvVariables();

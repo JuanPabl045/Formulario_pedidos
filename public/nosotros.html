@@ -3,606 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MolinoViejo.com - Carnes Frescas y de Calidad</title>
-  <meta name="description" content="Conoce la historia, valores y compromiso de Molino Viejo con la calidad y el servicio.">
-  <link rel="canonical" href="https://molinoviejo.pe/nosotros.html">
-  <meta property="og:title" content="MolinoViejo.com - Carnes Frescas y de Calidad">
-  <meta property="og:description" content="Conoce la historia, valores y compromiso de Molino Viejo con la calidad y el servicio.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://molinoviejo.pe/nosotros.html">
-  <meta property="og:image" content="https://molinoviejo.pe/img/logo.png">
-  <meta property="og:site_name" content="Molino Viejo">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="MolinoViejo.com - Carnes Frescas y de Calidad">
-  <meta name="twitter:description" content="Conoce la historia, valores y compromiso de Molino Viejo con la calidad y el servicio.">
-  <meta name="twitter:image" content="https://molinoviejo.pe/img/logo.png">
+  <title>Molino Viejo - Carnes Frescas y de Calidad</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-  
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #fff5f5 0%, #ffe9e9 100%);
-    }
-
-    /* NAVBAR */
-    .navbar {
-      background: linear-gradient(to right, #C42127, #A83832);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      padding: 15px 0;
-    }
-
-    .navbar-brand {
-      color: white !important;
-      font-weight: 700;
-      font-size: 1.5rem;
-    }
-
-    .nav-link {
-      color: rgba(255, 255, 255, 0.9) !important;
-      font-weight: 500;
-      margin: 0 10px;
-      transition: all 0.3s;
-    }
-
-    .nav-link:hover {
-      color: white !important;
-      transform: translateY(-2px);
-    }
-
-    .nav-link.active {
-      color: white !important;
-      border-bottom: 3px solid white;
-    }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, rgba(196, 33, 39, 0.92), rgba(168, 56, 50, 0.92)),
-                  url('img/hero-bg.jpg') center/cover;
-      min-height: 420px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      padding: 80px 20px;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 30px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-hero {
-      padding: 15px 35px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-hero-primary {
-      background: white;
-      color: #C42127;
-      border: 3px solid white;
-    }
-
-    .btn-hero-primary:hover {
-      background: transparent;
-      color: white;
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn-hero-secondary {
-      background: transparent;
-      color: white;
-      border: 3px solid white;
-    }
-
-    .btn-hero-secondary:hover {
-      background: white;
-      color: #C42127;
-      transform: translateY(-5px);
-    }
-
-    /* SECCIONES */
-    .section {
-      padding: 80px 20px;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-title h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #C42127;
-      margin-bottom: 15px;
-    }
-
-    .section-title p {
-      font-size: 1.1rem;
-      color: #666;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* VALORES */
-    .valores-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .valor-card {
-      background: white;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      transition: all 0.3s;
-    }
-
-    .valor-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(218, 42, 48, 0.2);
-    }
-
-    .valor-icon {
-      font-size: 3rem;
-      color: #C42127;
-      margin-bottom: 20px;
-    }
-
-    .valor-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 15px;
-    }
-
-    .valor-text {
-      color: #6c757d;
-      line-height: 1.6;
-    }
-
-    /* PRODUCTO CARD STYLES */
-    .producto-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      position: relative;
-    }
-
-    .producto-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(196, 33, 39, 0.15);
-    }
-
-    .producto-imagen {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #C42127;
-      font-size: 5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .producto-card:hover .producto-imagen {
-      transform: scale(1.05);
-      transition: transform 0.4s ease;
-    }
-
-    .producto-imagen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .producto-info {
-      padding: 25px;
-    }
-
-    .producto-categoria {
-      display: inline-block;
-      background: #C42127;
-      color: white;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .producto-nombre {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 10px;
-      line-height: 1.3;
-      min-height: 56px;
-    }
-
-    .producto-descripcion {
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 18px;
-      line-height: 1.5;
-      min-height: 45px;
-    }
-
-    .producto-precio {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #C42127;
-      margin-bottom: 18px;
-      letter-spacing: -0.5px;
-    }
-
-    .producto-precio small {
-      font-size: 0.85rem;
-      color: #9b9b9b;
-      font-weight: 500;
-    }
-
-    .producto-precio .precio-aprox {
-      letter-spacing: 0.3px;
-    }
-
-    .producto-precio-kg {
-      font-size: 0.85rem;
-      color: #8a8a8a;
-      margin-top: -12px;
-      margin-bottom: 14px;
-    }
-
-    .producto-peso-aprox {
-      font-size: 0.85rem;
-      color: #7a7a7a;
-      margin-top: -10px;
-      margin-bottom: 12px;
-    }
-
-    .btn-pedir {
-      width: 100%;
-      background: #C42127;
-      border: none;
-      color: white;
-      padding: 14px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-pedir:hover {
-      background: #A01D22;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(196, 33, 39, 0.25);
-    }
-
-    .filter-btn {
-      padding: 10px 20px;
-      border: 2px solid #DA2A30;
-      background: white;
-      color: #DA2A30;
-      border-radius: 25px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-      background: #DA2A30;
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.3);
-    }
-
-    /* PRODUCTOS DESTACADOS */
-    .productos-destacados {
-      background: linear-gradient(135deg, #FAF7F5 0%, #FFF8F6 100%);
-    }
-
-    .productos-preview {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-    }
-
-    .producto-preview {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s;
-    }
-
-    .producto-preview:hover {
-      transform: translateY(-10px);
-    }
-
-    .producto-preview-icon {
-      font-size: 3rem;
-      color: #C42127;
-      margin-bottom: 15px;
-    }
-
-    .producto-preview-name {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    .producto-preview-text {
-      color: #6c757d;
-      font-size: 0.95rem;
-    }
-
-    /* UBICACIONES */
-    .ubicaciones {
-      background: white;
-    }
-
-    .ubicaciones-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .ubicacion-card {
-      background: linear-gradient(135deg, #E8D4D1 0%, #C42127 100%);
-      color: white;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .ubicacion-title {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .ubicacion-info {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .ubicacion-item {
-      display: flex;
-      align-items: start;
-      gap: 15px;
-    }
-
-    .ubicacion-item i {
-      font-size: 1.3rem;
-      margin-top: 3px;
-    }
-
-    /* CTA */
-    .cta-section {
-      background: linear-gradient(135deg, #C42127, #A83832);
-      color: white;
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .cta-section h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .cta-section p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* FOOTER */
-    .footer {
-      background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
-      color: white;
-      padding: 60px 20px 20px;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-section {
-      text-align: left;
-    }
-
-    .footer-section h4 {
-      color: #C42127;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .footer-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer-section ul li {
-      margin-bottom: 12px;
-    }
-
-    .footer-section ul li a {
-      color: #ccc;
-      text-decoration: none;
-      transition: all 0.3s;
-      font-size: 0.95rem;
-    }
-
-    .footer-section ul li a:hover {
-      color: #C42127;
-      padding-left: 5px;
-    }
-
-    .footer-section p {
-      color: #ccc;
-      line-height: 1.8;
-      font-size: 0.95rem;
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .footer-social a {
-      color: white;
-      font-size: 1.5rem;
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      transition: all 0.3s;
-    }
-
-    .footer-social a:hover {
-      background: #C42127;
-      transform: translateY(-5px);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 30px;
-      text-align: center;
-      color: #999;
-      font-size: 0.9rem;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .navbar {
-        padding: 8px 0;
-      }
-
-      .navbar-brand img {
-        height: 34px !important;
-        max-width: 70vw;
-      }
-
-      .hero {
-        min-height: 420px;
-        padding: 60px 16px;
-        background-position: center;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero p {
-        font-size: 1.1rem;
-      }
-      
-      .section-title h2 {
-        font-size: 2rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="css/site.min.css">
+  <meta name="theme-color" content="#C42127">
+  <link rel="manifest" href="/manifest.json">
 </head>
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid px-4">
-      <a class="navbar-brand" href="index.html" style="display: inline-flex; align-items: center; gap: 10px;">
-        <img src="https://img1.wsimg.com/isteam/ip/e4799748-99b6-4912-a111-1cacb9a9c576/LOGOWEB.png/:/rs=w:234,h:75,cg:true,m/cr=w:234,h:75/qt=q:95" alt="Logo Molino Viejo" style="height: 32px; width: auto; background: rgba(255, 255, 255, 0.95); padding: 4px 8px; border-radius: 10px;">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <picture>
+          <source type="image/webp" srcset="img/webp/logo-400.webp 400w, img/webp/logo-800.webp 800w, img/webp/logo-1200.webp 1200w" sizes="(max-width:600px) 400w, 800w">
+          <img src="img/logo.png" alt="Logo Molino Viejo" class="img-fluid mv-header-logo" loading="lazy" decoding="async">
+        </picture>
+        <span>Molino Viejo</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background: white;">
+      <button class="navbar-toggler navbar-toggler-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link active" href="nosotros.html">
               <i class="fas fa-home me-1"></i> Inicio
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="nosotros.html">
-              <i class="fas fa-drumstick-bite me-1"></i> Carnes
+            <a class="nav-link" href="catalogo.html">
+              <i class="fas fa-book me-1"></i> Catálogo
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="lacteos.html">
-              <i class="fas fa-cheese me-1"></i> Lácteos
-            </a>
-          </li>
-          
           <li class="nav-item">
             <a class="nav-link" href="pedidos.html">
               <i class="fas fa-shopping-cart me-1"></i> Hacer Pedido
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">
+              <i class="fas fa-user-shield me-1"></i> Admin
             </a>
           </li>
         </ul>
@@ -613,40 +56,182 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <i class="fas fa-drumstick-bite" style="font-size: 5rem; margin-bottom: 20px;"></i>
-      <h1>Carnes Frescas</h1>
-      <p>Las mejores carnes frescas: res, aves, pescados y cortes especiales.</p>
+      <picture>
+        <source type="image/webp" srcset="img/webp/logo-400.webp 400w, img/webp/logo-800.webp 800w, img/webp/logo-1200.webp 1200w" sizes="(max-width:600px) 400w, 800w">
+        <img src="img/logo.png" alt="Logo Molino Viejo" class="img-fluid logo-landing" loading="lazy" decoding="async">
+      </picture>
+      <h1>Bienvenidos a Molino Viejo</h1>
+      <p>Carnes frescas y de calidad premium. Desde 1980 llevando lo mejor a tu mesa con dedicación y pasión por la excelencia.</p>
       <div class="hero-buttons">
         <a href="pedidos.html" class="btn-hero btn-hero-primary">
           <i class="fas fa-shopping-cart"></i> Hacer Pedido
         </a>
-        <a href="lacteos.html" class="btn-hero btn-hero-secondary">
-          <i class="fas fa-cheese"></i> Ver Lácteos
+        <a href="catalogo.html" class="btn-hero btn-hero-secondary">
+          <i class="fas fa-book-open"></i> Ver Catálogo
         </a>
       </div>
     </div>
   </section>
 
-  <!-- CATÁLOGO DE CARNES -->
-  <section class="section" style="background: linear-gradient(135deg, #FAF7F5 0%, #FFF8F6 100%);">
+  <!-- NUESTROS VALORES -->
+  <section class="section">
     <div class="container">
       <div class="section-title">
-        <h2><i class="fas fa-th-large me-3"></i> Catálogo de Carnes Frescas</h2>
-        <p>Explora nuestra variedad de carnes naturales y frescas de la mejor calidad</p>
+        <h2><i class="fas fa-heart me-3"></i> Nuestros Valores</h2>
+        <p>Lo que nos hace diferentes y nos mantiene como líderes en carnes de calidad</p>
+      </div>
+      
+      <div class="valores-grid">
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <div class="valor-title">Calidad Premium</div>
+          <div class="valor-text">
+            Seleccionamos cuidadosamente cada producto para garantizar la mejor calidad y frescura en cada entrega.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <div class="valor-title">Productos Frescos</div>
+          <div class="valor-text">
+            Carnes frescas del día, sin conservantes ni químicos. Directamente de productores confiables a tu mesa.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-truck-fast"></i>
+          </div>
+          <div class="valor-title">Entrega Rápida</div>
+          <div class="valor-text">
+            Delivery en Lima en menos de 24 horas. También puedes recoger en nuestras tiendas de San Borja y Magdalena.
+          </div>
+        </div>
+
+        <div class="valor-card">
+          <div class="valor-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="valor-title">Atención Personalizada</div>
+          <div class="valor-text">
+            Nuestro equipo te asesora en cada compra para que encuentres el corte perfecto según tus necesidades.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="section productos-destacados">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-star me-3"></i> Productos Destacados</h2>
+        <p>Descubre nuestras especialidades más solicitadas</p>
       </div>
 
-      <!-- FILTROS -->
-      <div style="background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center; justify-content: center; max-width: 1200px; margin-left: auto; margin-right: auto;" id="filtros">
-        <button class="filter-btn active" data-categoria="Todos" style="padding: 10px 20px; border: 2px solid #DA2A30; background: #DA2A30; color: white; border-radius: 25px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
-          <i class="fas fa-th me-2"></i> Todos
-        </button>
+      <div class="productos-preview">
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-fish"></i>
+          </div>
+          <div class="producto-preview-name">Trucha Fresca</div>
+          <div class="producto-preview-text">
+            Trucha de primera, filete, mariposa y más presentaciones
+          </div>
+        </div>
+
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-drumstick-bite"></i>
+          </div>
+          <div class="producto-preview-name">Cuy Especial</div>
+          <div class="producto-preview-text">
+            Carcasa, deshuesado, hamburguesas y chorizos de cuy
+          </div>
+        </div>
+
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-cow"></i>
+          </div>
+          <div class="producto-preview-name">Res Premium</div>
+          <div class="producto-preview-text">
+            Lomo fino, bife, churrasco y todos los cortes que necesites
+          </div>
+        </div>
+
+        <div class="producto-preview">
+          <div class="producto-preview-icon">
+            <i class="fas fa-rabbit"></i>
+          </div>
+          <div class="producto-preview-name">Conejo Gourmet</div>
+          <div class="producto-preview-text">
+            Medallones, hamburguesas y cortes especiales de conejo
+          </div>
+        </div>
       </div>
 
-      <!-- GRID DE PRODUCTOS -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; max-width: 1400px; margin-left: auto; margin-right: auto;" id="productosGrid">
-        <div class="text-center" style="grid-column: 1/-1; padding: 40px; color: #C42127;">
-          <i class="fas fa-spinner fa-spin fa-3x"></i>
-          <p class="mt-3">Cargando productos...</p>
+      <div class="text-center mt-5">
+        <a href="catalogo.html" class="btn btn-lg btn-mv-primary">
+          <i class="fas fa-arrow-right me-2"></i> Ver Todos los Productos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIONES -->
+  <section class="section ubicaciones">
+    <div class="container">
+      <div class="section-title">
+        <h2><i class="fas fa-map-marker-alt me-3"></i> Nuestras Tiendas</h2>
+        <p>Visítanos o solicita delivery a domicilio</p>
+      </div>
+
+      <div class="ubicaciones-grid">
+        <div class="ubicacion-card">
+          <div class="ubicacion-title">
+            <i class="fas fa-store"></i>
+            San Borja
+          </div>
+          <div class="ubicacion-info">
+            <div class="ubicacion-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Av. Principal San Borja, Lima</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-clock"></i>
+              <div>Lun - Sáb: 8:00 AM - 7:00 PM<br>Dom: 8:00 AM - 2:00 PM</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-phone"></i>
+              <div>+51 989 719 386</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ubicacion-card">
+          <div class="ubicacion-title">
+            <i class="fas fa-store"></i>
+            Magdalena del Mar
+          </div>
+          <div class="ubicacion-info">
+            <div class="ubicacion-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>Av. Principal Magdalena, Lima</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-clock"></i>
+              <div>Lun - Sáb: 8:00 AM - 7:00 PM<br>Dom: 8:00 AM - 2:00 PM</div>
+            </div>
+            <div class="ubicacion-item">
+              <i class="fas fa-phone"></i>
+              <div>+51 989 719 386</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -655,7 +240,7 @@
   <!-- CTA -->
   <section class="cta-section">
     <div class="container">
-      <h2>¿Listo para tu pedido de carnes?</h2>
+      <h2>¿Listo para tu próximo pedido?</h2>
       <p>Haz tu pedido ahora y recibe carnes frescas de la mejor calidad directamente en tu hogar</p>
       <a href="pedidos.html" class="btn-hero btn-hero-primary">
         <i class="fas fa-shopping-cart"></i> Hacer Pedido Ahora
@@ -669,11 +254,11 @@
       <!-- Sobre Nosotros -->
       <div class="footer-section">
         <h4><i class="fas fa-store me-2"></i>Molino Viejo</h4>
-        <p>Carnes frescas y lácteos de calidad premium desde 1980. Comprometidos con la excelencia y la satisfacción de nuestros clientes.</p>
+        <p>Carnes frescas y de calidad premium desde 1980. Comprometidos con la excelencia y la satisfacción de nuestros clientes.</p>
         <div class="footer-social">
-          <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/51989719386" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.facebook.com/tu-pagina" data-social="facebook"><i class="fab fa-facebook"></i></a>
+          <a href="https://www.instagram.com/tu-cuenta" data-social="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/51989719386" data-social="whatsapp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
 
@@ -681,10 +266,11 @@
       <div class="footer-section">
         <h4>Productos</h4>
         <ul>
-          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
-          <li><a href="lacteos.html"><i class="fas fa-cheese me-2"></i>Lácteos</a></li>
-          <li><a href="catalogo.html"><i class="fas fa-book me-2"></i>Catálogo</a></li>
-          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
+          <li><a href="catalogo.html#pescados"><i class="fas fa-fish me-2"></i>Pescados</a></li>
+          <li><a href="catalogo.html#res"><i class="fas fa-cow me-2"></i>Res</a></li>
+          <li><a href="catalogo.html#cerdo"><i class="fas fa-piggy-bank me-2"></i>Cerdo</a></li>
+          <li><a href="catalogo.html#aves"><i class="fas fa-drumstick-bite me-2"></i>Aves</a></li>
+          <li><a href="catalogo.html#cuy"><i class="fas fa-paw me-2"></i>Cuy y Conejo</a></li>
         </ul>
       </div>
 
@@ -692,8 +278,8 @@
       <div class="footer-section">
         <h4>Enlaces Rápidos</h4>
         <ul>
-          <li><a href="index.html"><i class="fas fa-home me-2"></i>Inicio</a></li>
-          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
+          <li><a href="nosotros.html"><i class="fas fa-home me-2"></i>Inicio</a></li>
+          <li><a href="catalogo.html"><i class="fas fa-book me-2"></i>Catálogo</a></li>
           <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
           <li><a href="admin.html"><i class="fas fa-user-shield me-2"></i>Admin</a></li>
         </ul>
@@ -706,198 +292,18 @@
           <li><i class="fas fa-phone me-2"></i>+51 989 719 386</li>
           <li><i class="fas fa-map-marker-alt me-2"></i>San Borja, Lima</li>
           <li><i class="fas fa-map-marker-alt me-2"></i>Magdalena del Mar, Lima</li>
-          <li><i class="fas fa-clock me-2"></i>Lun-Sáb: 8AM-7PM</li>
-          <li><i class="fas fa-clock me-2"></i>Dom: 8AM-2PM</li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2025 Molino Viejo. Todos los derechos reservados. | Carnes y lácteos de calidad desde 1980</p>
+      <p>&copy; 2025 Molino Viejo. Todos los derechos reservados. | Carnes frescas y de calidad desde 1980</p>
     </div>
   </footer>
 
+  <script src="env-loader.js"></script>
+  <script src="config.js"></script>
+  <script src="social-links.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <script>
-
-    let productos = [];
-    let categorias = new Set();
-    let categoriaActual = 'Todos';
-
-    // Iconos por categoría
-    const iconosCategorias = {
-      'Pescados': 'fa-fish',
-      'Trucha': 'fa-fish',
-      'Cuy': 'fa-drumstick-bite',
-      'Conejo': 'fa-rabbit',
-      'Aves': 'fa-dove',
-      'Pato': 'fa-dove',
-      'Codorniz': 'fa-dove',
-      'Cerdo': 'fa-piggy-bank',
-      'Alpaca': 'fa-hippo',
-      'pollo': 'fa-drumstick-bite',
-      'Pavo': 'fa-dove',
-      'Res': 'fa-cow',
-      'Res viscera': 'fa-cow',
-      'Cordero': 'fa-sheep',
-      'Cordero viscera': 'fa-sheep',
-      'Gallina': 'fa-dove',
-      'Todos': 'fa-th'
-    };
-
-    // Cargar productos desde productos.json y asignar categorías
-    async function cargarProductos() {
-      try {
-        const response = await fetch('productos.json');
-        let data = await response.json();
-        // Asignar categoría por nombre de producto
-        productos = data.map(p => {
-          let cat = 'Otros';
-          let prod = (p.PRODUCTO || '').trim().toLowerCase();
-          if (prod.includes('res')) cat = 'Res';
-          else if (prod.includes('trucha')) cat = 'Trucha';
-          else if (prod.includes('cuy')) cat = 'Cuy';
-          else if (prod.includes('conejo')) cat = 'Conejo';
-          else if (prod.includes('cordero')) cat = 'Cordero';
-          else if (prod.includes('pato')) cat = 'Pato';
-          else if (prod.includes('codorniz')) cat = 'Codorniz';
-          else if (prod.includes('cerdo')) cat = 'Cerdo';
-          else if (prod.includes('alpaca')) cat = 'Alpaca';
-          else if (prod.includes('pollo')) cat = 'Pollo';
-          else if (prod.includes('gallina')) cat = 'Gallina';
-          else if (prod.includes('viscera')) cat = 'Visceras';
-          return { ...p, CATEGORIA: cat };
-        });
-        // Extraer categorías únicas
-        productos.forEach(p => {
-          if (p.CATEGORIA) categorias.add(p.CATEGORIA);
-        });
-        crearFiltros();
-        mostrarProductos();
-      } catch (error) {
-        console.error('Error al cargar productos:', error);
-        document.getElementById('productosGrid').innerHTML = `
-          <div class="no-results">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3>Error al cargar productos</h3>
-            <p>Por favor, intenta más tarde</p>
-          </div>
-        `;
-      }
-    }
-
-    // Crear botones de filtros
-    function crearFiltros() {
-      const filtrosContainer = document.getElementById('filtros');
-      filtrosContainer.innerHTML = '';
-      // Botón Todos
-      const btnTodos = document.createElement('button');
-      btnTodos.className = 'filter-btn active';
-      btnTodos.dataset.categoria = 'Todos';
-      btnTodos.innerHTML = `<i class="fas ${iconosCategorias['Todos']} me-2"></i> Todos`;
-      btnTodos.onclick = () => filtrarPorCategoria('Todos');
-      filtrosContainer.appendChild(btnTodos);
-      // Botones por categoría
-      Array.from(categorias).sort().forEach(cat => {
-        const icono = iconosCategorias[cat] || 'fa-tag';
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.dataset.categoria = cat;
-        btn.innerHTML = `<i class="fas ${icono} me-2"></i> ${cat}`;
-        btn.onclick = () => filtrarPorCategoria(cat);
-        filtrosContainer.appendChild(btn);
-      });
-    }
-
-    // Filtrar productos
-    function filtrarPorCategoria(categoria) {
-      categoriaActual = categoria;
-      // Actualizar botones activos
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.categoria === categoria) btn.classList.add('active');
-      });
-      mostrarProductos();
-    }
-
-    // Mostrar productos
-    function mostrarProductos() {
-      const grid = document.getElementById('productosGrid');
-      grid.innerHTML = '';
-      let productosFiltrados = categoriaActual === 'Todos' 
-        ? productos 
-        : productos.filter(p => p.CATEGORIA === categoriaActual);
-      if (productosFiltrados.length === 0) {
-        grid.innerHTML = `
-          <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #C42127;">
-            <i class="fas fa-search" style="font-size: 3rem; opacity: 0.7;"></i>
-            <h3>No hay productos en esta categoría</h3>
-          </div>
-        `;
-        return;
-      }
-      productosFiltrados.forEach(producto => {
-        const card = crearCardProducto(producto);
-        grid.appendChild(card);
-      });
-    }
-
-    // Crear card de producto
-    function crearCardProducto(producto) {
-      const card = document.createElement('div');
-      card.className = 'producto-card';
-      const icono = iconosCategorias[producto.CATEGORIA] || 'fa-utensils';
-      const descripcion = (producto.DESCRIPCION || '').trim();
-      const nombre = (producto.PRODUCTO || '').trim();
-      const titulo = descripcion || nombre || 'Producto';
-      const peso = (producto.PESO_APROX || '').trim();
-      const precio = (producto["PRECIO APROXIMADO"] || '').trim();
-      const precioKg = (producto["PRECIO POR Kg"] || '').trim();
-      const precioNum = parseFloat((precio || '').replace(/[^0-9.]/g, ''));
-      const precioKgNum = parseFloat((precioKg || '').replace(/[^0-9.]/g, ''));
-      let pesoAprox = peso;
-      if (!pesoAprox && precioNum && precioKgNum) {
-        const gramos = Math.round((precioNum / precioKgNum) * 1000);
-        pesoAprox = `${gramos} g`;
-      }
-      const pesoAproxHtml = pesoAprox ? `<div class="producto-peso-aprox">Por peso aproximado: ${pesoAprox} por unidad</div>` : '';
-      const precioKgHtml = precioKg ? `<div class="producto-precio-kg">Precio por kg: S/ ${precioKg}/kg</div>` : '';
-      card.innerHTML = `
-        <div class="producto-imagen">
-          <i class="fas ${icono}"></i>
-        </div>
-        <div class="producto-info">
-          <div class="producto-nombre">${titulo}</div>
-          <div class="producto-precio">
-            S/ ${precio || producto["PRECIO APROXIMADO"] || '--'}
-          </div>
-          ${pesoAproxHtml}
-          ${precioKgHtml}
-          <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
-          <button class="btn btn-pedir" onclick="hacerPedido('${nombre}', '${descripcion}')">
-            <i class="fas fa-shopping-cart me-2"></i> Hacer Pedido
-          </button>
-        </div>
-      `;
-      return card;
-    }
-
-    // Hacer pedido
-    function hacerPedido(producto, descripcion) {
-      const productoLimpio = (producto || '').trim();
-      const descripcionLimpia = (descripcion || '').trim();
-      let productoCompleto = descripcionLimpia || productoLimpio;
-
-      if (descripcionLimpia && productoLimpio && descripcionLimpia.toLowerCase() !== productoLimpio.toLowerCase()) {
-        productoCompleto = `${descripcionLimpia} - ${productoLimpio}`;
-      }
-
-      window.location.href = `pedidos.html?producto=${encodeURIComponent(productoCompleto)}`;
-    }
-
-    // Inicializar
-    cargarProductos();
-  </script>
 </body>
 </html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MolinoViejo.com - Catálogo</title>
+  <meta name="description" content="Catálogo de productos Molino Viejo: carnes y lácteos seleccionados para tu pedido.">
+  <link rel="canonical" href="https://molinoviejo.pe/catalogo.html">
+  <meta property="og:title" content="MolinoViejo.com - Catálogo">
+  <meta property="og:description" content="Catálogo de productos Molino Viejo: carnes y lácteos seleccionados para tu pedido.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://molinoviejo.pe/catalogo.html">
+  <meta property="og:image" content="https://molinoviejo.pe/img/logo.png">
+  <meta property="og:site_name" content="Molino Viejo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MolinoViejo.com - Catálogo">
+  <meta name="twitter:description" content="Catálogo de productos Molino Viejo: carnes y lácteos seleccionados para tu pedido.">
+  <meta name="twitter:image" content="https://molinoviejo.pe/img/logo.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  
+  <style>
+    body {
+      background: linear-gradient(135deg, #FAF7F5 0%, #F5E6E3 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: #2d3436;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      padding: 10px 0;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .navbar-brand span { display: none; }
+
+    .logo-animated {
+      animation: logoFloat 3.8s ease-in-out infinite;
+      transform-origin: center;
+      will-change: transform;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.9) !important;
+      font-weight: 600;
+      margin: 0 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active {
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.18);
+      border-bottom: none;
+    }
+
+    .navbar-toggler {
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.08));
+      }
+      50% {
+        transform: translateY(-6px) scale(1.02);
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+      }
+    }
+
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    body > nav,
+    body > header,
+    body > main,
+    body > section,
+    body > footer,
+    body > .hero,
+    body > .hero-landing,
+    body > .container-fluid,
+    body > .mv-header,
+    body > .mv-search-wrap,
+    body > .mv-cats-wrap,
+    body > .mv-stats,
+    body > .mv-main,
+    body > #loginSection,
+    body > #adminPanel {
+      animation: revealUp 0.85s ease both;
+    }
+
+    body > nav { animation-delay: 0.02s; }
+    body > header,
+    body > .hero,
+    body > .hero-landing,
+    body > .mv-header { animation-delay: 0.08s; }
+    body > .container-fluid,
+    body > section:nth-of-type(1),
+    body > .mv-search-wrap { animation-delay: 0.16s; }
+    body > section:nth-of-type(2),
+    body > .mv-cats-wrap,
+    body > .mv-stats,
+    body > main { animation-delay: 0.28s; }
+    body > section:nth-of-type(3),
+    body > footer,
+    body > #loginSection,
+    body > #adminPanel { animation-delay: 0.40s; }
+
+    .section-title,
+    .categoria-card,
+    .valor-card,
+    .producto-card,
+    .producto-preview,
+    .ubicacion-card,
+    .selection-card,
+    .filter-btn,
+    .mv-group,
+    .pcard,
+    .footer-section {
+      animation: revealUp 0.8s ease both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body > nav,
+      body > header,
+      body > main,
+      body > section,
+      body > footer,
+      body > .hero,
+      body > .hero-landing,
+      body > .container-fluid,
+      body > .mv-header,
+      body > .mv-search-wrap,
+      body > .mv-cats-wrap,
+      body > .mv-stats,
+      body > .mv-main,
+      body > #loginSection,
+      body > #adminPanel,
+      .section-title,
+      .categoria-card,
+      .valor-card,
+      .producto-card,
+      .producto-preview,
+      .ubicacion-card,
+      .selection-card,
+      .filter-btn,
+      .mv-group,
+      .pcard,
+      .footer-section,
+      .logo-animated {
+        animation: none !important;
+      }
+    }
+
+    /* CONTENEDOR */
+    .container-fluid {
+      padding: 40px 20px;
+    }
+
+    .page-title {
+      text-align: center;
+      color: #1a1a1a;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-shadow: none;
+    }
+
+    /* FILTROS */
+    .filters {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      border: 2px solid #DA2A30;
+      background: white;
+      color: #DA2A30;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #DA2A30;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(218, 42, 48, 0.3);
+    }
+
+    /* GRID DE PRODUCTOS */
+    .productos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 35px;
+      margin-top: 40px;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .producto-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .producto-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(196, 33, 39, 0.15);
+    }
+
+    .producto-imagen {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #C42127;
+      font-size: 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .producto-card:hover .producto-imagen {
+      transform: scale(1.05);
+      transition: transform 0.4s ease;
+    }
+
+    .producto-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .producto-info {
+      padding: 25px;
+    }
+
+    .producto-categoria {
+      display: inline-block;
+      background: #C42127;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .producto-nombre {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+      line-height: 1.3;
+      min-height: 56px;
+    }
+
+    .producto-descripcion {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 18px;
+      line-height: 1.5;
+      min-height: 45px;
+    }
+
+    .producto-precio {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #C42127;
+      margin-bottom: 18px;
+      letter-spacing: -0.5px;
+    }
+
+    .producto-precio small {
+      font-size: 0.85rem;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .btn-pedir {
+      width: 100%;
+      background: #C42127;
+      border: none;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-pedir:hover {
+      background: #A01D22;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(196, 33, 39, 0.25);
+    }
+
+    /* NO RESULTADOS */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: white;
+    }
+
+    .no-results i {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+      color: white;
+      padding: 60px 20px 20px;
+      margin-top: 60px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section {
+      text-align: left;
+    }
+
+    .footer-section h4 {
+      color: #C42127;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section ul li a {
+      color: #ccc;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .footer-section ul li a:hover {
+      color: #C42127;
+      padding-left: 5px;
+    }
+
+    .footer-section p {
+      color: #ccc;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      color: white;
+      font-size: 1.5rem;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .footer-social a:hover {
+      background: #C42127;
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 8px 0;
+      }
+
+      .navbar-brand img {
+        height: 34px !important;
+        max-width: 70vw;
+      }
+
+      .page-title h1 {
+        font-size: 2rem;
+      }
+      
+      .productos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg"></nav>
+
+  <!-- CONTENIDO -->
+  <div class="container-fluid">
+    <div class="page-title">
+      <h1><i class="fas fa-cow me-3"></i> Catálogo de Res</h1>
+      <p>Los mejores cortes de res frescos y de calidad</p>
+    </div>
+
+    <div class="container">
+      <!-- FILTROS -->
+      <div class="filters" id="filtros">
+        <!-- Se llenarán solo con Res -->
+      </div>
+
+      <!-- GRID DE PRODUCTOS -->
+      <div class="productos-grid" id="productosGrid">
+        <div class="text-center" style="grid-column: 1/-1; padding: 40px; color: white;">
+          <i class="fas fa-spinner fa-spin fa-3x"></i>
+          <p class="mt-3">Cargando productos...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="site-nav.js"></script>
+  
+  <script>
+    let productos = [];
+    let categorias = new Set();
+    let categoriaActual = 'Res';
+
+    // Iconos por categoría
+    const iconosCategorias = {
+      'Pescados': 'fa-fish',
+      'Cuy': 'fa-drumstick-bite',
+      'Conejo': 'fa-rabbit',
+      'Aves': 'fa-dove',
+      'Cerdo': 'fa-bacon',
+      'Carnes Especiales': 'fa-star',
+      'Res': 'fa-cow',
+      'Cordero': 'fa-sheep',
+      'Lácteos': 'fa-cheese',
+      'Todos': 'fa-th'
+    };
+
+    // Cargar productos
+    async function cargarProductos() {
+      try {
+        const response = await fetch('productos_con_imagenes.json');
+        productos = await response.json();
+        
+        // Filtrar solo Res
+        productos = productos.filter(p => p.CATEGORIA === 'Res');
+        categorias.add('Res');
+        
+        crearFiltros();
+        mostrarProductos();
+        
+      } catch (error) {
+        console.error('Error al cargar productos:', error);
+        document.getElementById('productosGrid').innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Error al cargar productos</h3>
+            <p>Por favor, intenta mÃ¡s tarde</p>
+          </div>
+        `;
+      }
+    }
+
+    // Crear botones de filtros
+    function crearFiltros() {
+      const filtrosContainer = document.getElementById('filtros');
+      
+      categorias.forEach(cat => {
+        const icono = iconosCategorias[cat] || 'fa-tag';
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.categoria = cat;
+        btn.innerHTML = `<i class="fas ${icono} me-2"></i> ${cat}`;
+        btn.onclick = () => filtrarPorCategoria(cat);
+        filtrosContainer.appendChild(btn);
+      });
+    }
+
+    // Filtrar productos
+    function filtrarPorCategoria(categoria) {
+      categoriaActual = categoria;
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.categoria === categoria);
+      });
+      
+      mostrarProductos();
+    }
+
+    // Mostrar productos
+    function mostrarProductos() {
+      const grid = document.getElementById('productosGrid');
+      grid.innerHTML = '';
+      
+      const productosFiltrados = categoriaActual === 'Todos' 
+        ? productos 
+        : productos.filter(p => p.CATEGORIA === categoriaActual);
+      
+      if (productosFiltrados.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search"></i>
+            <h3>No hay productos en esta categorÃ­a</h3>
+          </div>
+        `;
+        return;
+      }
+      
+      productosFiltrados.forEach(producto => {
+        const card = crearCardProducto(producto);
+        grid.appendChild(card);
+      });
+    }
+
+    // Crear card de producto
+    function crearCardProducto(producto) {
+      const card = document.createElement('div');
+      card.className = 'producto-card';
+      
+      const icono = iconosCategorias[producto.CATEGORIA] || 'fa-utensils';
+      const descripcion = (producto.DESCRIPCION || '').trim();
+      const nombre = (producto.PRODUCTO || '').trim();
+      const titulo = descripcion || nombre || 'Producto';
+      const subtitulo = descripcion && nombre && descripcion.toLowerCase() !== nombre.toLowerCase()
+        ? nombre
+        : '';
+      
+      card.innerHTML = `
+        <div class="producto-imagen">
+          <i class="fas ${icono}"></i>
+        </div>
+        <div class="producto-info">
+          <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
+          <div class="producto-nombre">${titulo}</div>
+          ${subtitulo ? `<div class="producto-descripcion">${subtitulo}</div>` : ''}
+          <div class="producto-precio">
+            S/ ${producto.PRECIO} <small>/ Kg</small>
+          </div>
+          <button class="btn btn-pedir" onclick="hacerPedido('${nombre}', '${descripcion}')">
+            <i class="fas fa-shopping-cart me-2"></i> Hacer Pedido
+          </button>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    // Hacer pedido (redirige a pedidos.html con producto pre-seleccionado)
+    function hacerPedido(producto, descripcion) {
+      const productoLimpio = (producto || '').trim();
+      const descripcionLimpia = (descripcion || '').trim();
+      let productoCompleto = descripcionLimpia || productoLimpio;
+
+      if (descripcionLimpia && productoLimpio && descripcionLimpia.toLowerCase() !== productoLimpio.toLowerCase()) {
+        productoCompleto = `${descripcionLimpia} - ${productoLimpio}`;
+      }
+
+      window.location.href = `pedidos.html?producto=${encodeURIComponent(productoCompleto)}`;
+    }
+
+    // Inicializar
+    cargarProductos();
+  </script>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- Sobre Nosotros -->
+      <div class="footer-section">
+        <h4><i class="fas fa-store me-2"></i>Molino Viejo</h4>
+        <p>Carnes frescas y de calidad premium desde 1980. Comprometidos con la excelencia y la satisfacciÃ³n de nuestros clientes.</p>
+        <div class="footer-social">
+          <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/51989719386" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Productos -->
+      <div class="footer-section">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
+          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
+          <li><a href="lacteos.html"><i class="fas fa-cheese me-2"></i>LÃ¡cteos</a></li>
+          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
+        </ul>
+      </div>
+
+      <!-- Enlaces Rápidos -->
+      <div class="footer-section">
+        <h4>Enlaces Rápidos</h4>
+        <ul>
+          <li><a href="nosotros.html"><i class="fas fa-home me-2"></i>Inicio</a></li>
+          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
+          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
+          <li><a href="admin.html"><i class="fas fa-user-shield me-2"></i>Admin</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <ul>
+          <li><i class="fas fa-phone me-2"></i>+51 989 719 386</li>
+          <li><i class="fas fa-map-marker-alt me-2"></i>San Borja, Lima</li>
+          <li><i class="fas fa-map-marker-alt me-2"></i>Magdalena del Mar, Lima</li>
+          <li><i class="fas fa-clock me-2"></i>Lun-Sáb: 8AM-7PM</li>
+          <li><i class="fas fa-clock me-2"></i>Dom: 8AM-2PM</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Molino Viejo. Todos los derechos reservados. | Carnes frescas y de calidad desde 1980</p>
+    </div>
+  </footer>
+</body>
+</html>

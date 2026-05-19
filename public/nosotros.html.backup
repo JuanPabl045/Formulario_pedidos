@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Molino Viejo - Nosotros</title>
+  <meta name="description" content="Conoce la historia de Molino Viejo, nuestros valores y compromiso con la calidad en carnes y lácteos.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #fafafa; }
+    .about-hero { background: linear-gradient(135deg,#fff 0,#f2f2f2 100%); padding: 60px 20px; text-align:center; }
+    .about-hero h1 { font-size: 2.8rem; color: #2d3436; font-weight:800; margin-bottom: 10px; }
+    .about-hero p { color: #636e72; font-size: 1.1rem; }
+    .timeline { max-width: 900px; margin: 40px auto; }
+    .timeline-item { background: white; border-radius: 14px; padding: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); margin-bottom: 20px; }
+    .values { display:flex; gap:20px; max-width: 1100px; margin: 40px auto; }
+    .value { flex:1; background:white; padding:30px; border-radius:12px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+    .value h3 { color:#C42127; margin-bottom:10px; }
+    @media(max-width:768px){ .values{flex-direction:column;} }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg"></nav>
+  <div class="about-hero">
+    <img src="img/logo.png" alt="Molino Viejo" style="height:80px; filter:drop-shadow(0 5px 12px rgba(0,0,0,0.08));">
+    <h1>Nuestra Historia</h1>
+    <p>Desde 1980 entregando productos de calidad a tu mesa.</p>
+  </div>
+  <main>
+    <section class="timeline">
+      <div class="timeline-item"><h3>1980 - Fundación</h3><p>Comenzamos como una tienda familiar...</p></div>
+      <div class="timeline-item"><h3>1995 - Expansión</h3><p>Ampliamos nuestras instalaciones...</p></div>
+      <div class="timeline-item"><h3>2010 - Modernización</h3><p>Incorporamos procesos de control de calidad...</p></div>
+    </section>
+    <section class="values">
+      <div class="value"><h3>Calidad</h3><p>Seleccionamos los mejores productos.</p></div>
+      <div class="value"><h3>Confianza</h3><p>Compromiso con nuestros clientes.</p></div>
+      <div class="value"><h3>Sostenibilidad</h3><p>Procesos responsables con el medio ambiente.</p></div>
+    </section>
+  </main>
+  <footer class="footer"></footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="site-nav.js"></script>
+</body>
+</html>
