@@ -126,15 +126,15 @@
       mostrarProductos();
     }
 
-    // Mostrar productos
+    // Mostrar productos usando el mismo layout que `pedidos.html` (clases .pcard)
     function mostrarProductos() {
       const grid = document.getElementById('productosGrid');
       grid.innerHTML = '';
-      
-      const productosFiltrados = categoriaActual === 'Todos' 
-        ? productos 
+
+      const productosFiltrados = categoriaActual === 'Todos'
+        ? productos
         : productos.filter(p => p.CATEGORIA === categoriaActual);
-      
+
       if (productosFiltrados.length === 0) {
         grid.innerHTML = `
           <div class="no-results">
@@ -144,44 +144,40 @@
         `;
         return;
       }
-      
-      productosFiltrados.forEach(producto => {
-        const card = crearCardProducto(producto);
-        grid.appendChild(card);
-      });
+
+      // Agrupar en una pista horizontal para mantener el mismo estilo
+      const cards = productosFiltrados.map(p => crearCardProducto(p)).join('');
+      grid.innerHTML = `<div class="mv-track">${cards}</div>`;
     }
 
-    // Crear card de producto
+    // Crear card de producto compatible con `css/site.min.css` (.pcard)
     function crearCardProducto(producto) {
-      const card = document.createElement('div');
-      card.className = 'producto-card';
-      
-      const icono = iconosCategorias[producto.CATEGORIA] || 'fa-utensils';
       const descripcion = (producto.DESCRIPCION || '').trim();
       const nombre = (producto.PRODUCTO || '').trim();
-      const titulo = descripcion || nombre || 'Producto';
-      const subtitulo = descripcion && nombre && descripcion.toLowerCase() !== nombre.toLowerCase()
-        ? nombre
-        : '';
-      
-      card.innerHTML = `
-        <div class="producto-imagen">
-          <i class="fas ${icono}"></i>
-        </div>
-        <div class="producto-info">
-          <span class="producto-categoria">${producto.CATEGORIA || 'Producto'}</span>
-          <div class="producto-nombre">${titulo}</div>
-          ${subtitulo ? `<div class="producto-descripcion">${subtitulo}</div>` : ''}
-          <div class="producto-precio">
-            S/ ${producto.PRECIO} <small>/ Kg</small>
+      const title = descripcion || nombre || 'Producto';
+      const precio = producto.PRECIO || producto['PRECIO'] || '0';
+      const img = producto.IMAGEN || 'img/ganado.jpg';
+
+      // Escape simple (no user-supplied HTML expected in data file)
+      function esc(v) { return String(v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+      return `
+        <article class="pcard" data-key="${esc(title)}">
+          <img class="pcard-img" src="${esc(img)}" alt="${esc(title)}">
+          <div class="pcard-body">
+            <div class="pcard-name">${esc(title)}</div>
+            <div class="pcard-cat">${esc(producto.CATEGORIA || '')}</div>
+            <div class="pcard-price-row">
+              <div class="pcard-price">S/ ${esc(precio)}</div>
+              <div class="pcard-kg">/ Kg</div>
+            </div>
+            <div class="pcard-stepper">
+              <button type="button" class="qty-btn" aria-label="Añadir" onclick="hacerPedido('${esc(nombre)}','${esc(descripcion)}')">+</button>
+              <span class="qty-val">0</span>
+              <button type="button" class="qty-btn" disabled aria-label="—">−</button>
+            </div>
           </div>
-          <button class="btn btn-pedir" onclick="hacerPedido('${nombre}', '${descripcion}')">
-            <i class="fas fa-shopping-cart me-2"></i> Hacer Pedido
-          </button>
-        </div>
-      `;
-      
-      return card;
+        </article>`;
     }
 
     // Hacer pedido (redirige a pedidos.html con producto pre-seleccionado)
