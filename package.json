@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Formulario de pedidos para Molino Viejo - INTENTO FINAL",
   "scripts": {
-    "start": "npx serve public --single --listen 3000",
+    "start": "firebase emulators:start --only hosting",
+    "dev": "firebase emulators:start --only hosting",
     "build:css": "cleancss -o public/css/site.min.css public/css/site.css || echo 'clean-css not found'",
     "minify:local": "node scripts/minify-css.js",
     "images:convert": "node scripts/convert-images.js",

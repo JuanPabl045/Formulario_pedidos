@@ -23,12 +23,7 @@
                                                     ]
                                     }
                                 ],
-                    "rewrites":  [
-                                     {
-                                         "source":  "**",
-                                         "destination":  "/index.html"
-                                     }
-                                 ]
+                        "rewrites":  []
                 },
     "emulators":  {
                       "hosting":  {

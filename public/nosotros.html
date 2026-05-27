@@ -4,249 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Molino Viejo - Carnes Frescas y de Calidad</title>
+  <meta name="description" content="Carnes frescas y de calidad premium desde 1980. Explora nuestro catálogo y haz tu pedido online.">
+  <link rel="canonical" href="https://molinoviejo.pe/nosotros.html">
+  <meta property="og:title" content="Molino Viejo - Carnes Frescas">
+  <meta property="og:description" content="Carnes frescas y de calidad premium desde 1980. Explora nuestro catálogo y haz tu pedido online.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://molinoviejo.pe/nosotros.html">
+  <meta property="og:image" content="https://molinoviejo.pe/img/logo.png">
+  <meta property="og:site_name" content="Molino Viejo">
+  <meta name="twitter:card" content="summary_large_image">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.min.css">
   <meta name="theme-color" content="#C42127">
   <link rel="manifest" href="/manifest.json">
 </head>
-<body>
+<body class="mv-structured">
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container-fluid px-4">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-        <picture>
-          <source type="image/webp" srcset="img/webp/logo-400.webp 400w, img/webp/logo-800.webp 800w, img/webp/logo-1200.webp 1200w" sizes="(max-width:600px) 400w, 800w">
-          <img src="img/logo.png" alt="Logo Molino Viejo" class="img-fluid mv-header-logo" loading="lazy" decoding="async">
-        </picture>
-        <span>Molino Viejo</span>
-      </a>
-      <button class="navbar-toggler navbar-toggler-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="nosotros.html">
-              <i class="fas fa-home me-1"></i> Inicio
+  <nav class="navbar navbar-expand-lg"></nav>
+
+  <div class="main-container">
+    <header class="main-header">
+      <img src="img/logo.png" alt="Logo Molino Viejo" class="main-header-logo" loading="lazy" decoding="async">
+      <div>
+        <h1>Carnes Frescas</h1>
+        <p>Selección premium con entrega rápida y atención personalizada.</p>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="content-panel">
+            <div class="content-panel-title"><i class="fas fa-drumstick-bite"></i> Nuestra selección</div>
+            <p>Trabajamos con productores confiables para garantizar cortes frescos, trazabilidad y calidad constante en cada entrega.</p>
+          </div>
+
+          <div class="content-panel">
+            <div class="content-panel-title"><i class="fas fa-cow"></i> Catálogo de Carnes</div>
+            <div class="mv-group-list" id="productGrid">
+              <div class="text-center" style="grid-column: 1/-1; padding: 30px;">
+                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                <p class="mt-3">Cargando productos...</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-4">
+          <div class="sidebar-card">
+            <div class="sidebar-title">Haz tu pedido</div>
+            <ul class="sidebar-list">
+              <li><i class="fas fa-check-circle me-2"></i>Pedidos por WhatsApp</li>
+              <li><i class="fas fa-check-circle me-2"></i>Atención personalizada</li>
+              <li><i class="fas fa-check-circle me-2"></i>Recojo o delivery</li>
+            </ul>
+            <a class="sidebar-cta mt-3" href="pedidos.html">
+              <i class="fas fa-shopping-cart"></i> Hacer Pedido
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="catalogo.html">
-              <i class="fas fa-book me-1"></i> Catálogo
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pedidos.html">
-              <i class="fas fa-shopping-cart me-1"></i> Hacer Pedido
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="admin.html">
-              <i class="fas fa-user-shield me-1"></i> Admin
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+          </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <picture>
-        <source type="image/webp" srcset="img/webp/logo-400.webp 400w, img/webp/logo-800.webp 800w, img/webp/logo-1200.webp 1200w" sizes="(max-width:600px) 400w, 800w">
-        <img src="img/logo.png" alt="Logo Molino Viejo" class="img-fluid logo-landing" loading="lazy" decoding="async">
-      </picture>
-      <h1>Bienvenidos a Molino Viejo</h1>
-      <p>Carnes frescas y de calidad premium. Desde 1980 llevando lo mejor a tu mesa con dedicación y pasión por la excelencia.</p>
-      <div class="hero-buttons">
-        <a href="pedidos.html" class="btn-hero btn-hero-primary">
-          <i class="fas fa-shopping-cart"></i> Hacer Pedido
-        </a>
-        <a href="catalogo.html" class="btn-hero btn-hero-secondary">
-          <i class="fas fa-book-open"></i> Ver Catálogo
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- NUESTROS VALORES -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2><i class="fas fa-heart me-3"></i> Nuestros Valores</h2>
-        <p>Lo que nos hace diferentes y nos mantiene como líderes en carnes de calidad</p>
-      </div>
-      
-      <div class="valores-grid">
-        <div class="valor-card">
-          <div class="valor-icon">
-            <i class="fas fa-certificate"></i>
-          </div>
-          <div class="valor-title">Calidad Premium</div>
-          <div class="valor-text">
-            Seleccionamos cuidadosamente cada producto para garantizar la mejor calidad y frescura en cada entrega.
-          </div>
-        </div>
-
-        <div class="valor-card">
-          <div class="valor-icon">
-            <i class="fas fa-leaf"></i>
-          </div>
-          <div class="valor-title">Productos Frescos</div>
-          <div class="valor-text">
-            Carnes frescas del día, sin conservantes ni químicos. Directamente de productores confiables a tu mesa.
-          </div>
-        </div>
-
-        <div class="valor-card">
-          <div class="valor-icon">
-            <i class="fas fa-truck-fast"></i>
-          </div>
-          <div class="valor-title">Entrega Rápida</div>
-          <div class="valor-text">
-            Delivery en Lima en menos de 24 horas. También puedes recoger en nuestras tiendas de San Borja y Magdalena.
-          </div>
-        </div>
-
-        <div class="valor-card">
-          <div class="valor-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="valor-title">Atención Personalizada</div>
-          <div class="valor-text">
-            Nuestro equipo te asesora en cada compra para que encuentres el corte perfecto según tus necesidades.
+          <div class="sidebar-card">
+            <div class="sidebar-title">Nuestras tiendas</div>
+            <ul class="sidebar-list">
+              <li><i class="fas fa-store me-2"></i>San Borja</li>
+              <li><i class="fas fa-store me-2"></i>Magdalena del Mar</li>
+              <li><i class="fas fa-clock me-2"></i>Lun - Sáb: 8:00 AM - 7:00 PM</li>
+              <li><i class="fas fa-clock me-2"></i>Dom: 8:00 AM - 2:00 PM</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- PRODUCTOS DESTACADOS -->
-  <section class="section productos-destacados">
-    <div class="container">
-      <div class="section-title">
-        <h2><i class="fas fa-star me-3"></i> Productos Destacados</h2>
-        <p>Descubre nuestras especialidades más solicitadas</p>
-      </div>
-
-      <div class="productos-preview">
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-fish"></i>
-          </div>
-          <div class="producto-preview-name">Trucha Fresca</div>
-          <div class="producto-preview-text">
-            Trucha de primera, filete, mariposa y más presentaciones
-          </div>
-        </div>
-
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-drumstick-bite"></i>
-          </div>
-          <div class="producto-preview-name">Cuy Especial</div>
-          <div class="producto-preview-text">
-            Carcasa, deshuesado, hamburguesas y chorizos de cuy
-          </div>
-        </div>
-
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-cow"></i>
-          </div>
-          <div class="producto-preview-name">Res Premium</div>
-          <div class="producto-preview-text">
-            Lomo fino, bife, churrasco y todos los cortes que necesites
-          </div>
-        </div>
-
-        <div class="producto-preview">
-          <div class="producto-preview-icon">
-            <i class="fas fa-rabbit"></i>
-          </div>
-          <div class="producto-preview-name">Conejo Gourmet</div>
-          <div class="producto-preview-text">
-            Medallones, hamburguesas y cortes especiales de conejo
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-5">
-        <a href="catalogo.html" class="btn btn-lg btn-mv-primary">
-          <i class="fas fa-arrow-right me-2"></i> Ver Todos los Productos
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- UBICACIONES -->
-  <section class="section ubicaciones">
-    <div class="container">
-      <div class="section-title">
-        <h2><i class="fas fa-map-marker-alt me-3"></i> Nuestras Tiendas</h2>
-        <p>Visítanos o solicita delivery a domicilio</p>
-      </div>
-
-      <div class="ubicaciones-grid">
-        <div class="ubicacion-card">
-          <div class="ubicacion-title">
-            <i class="fas fa-store"></i>
-            San Borja
-          </div>
-          <div class="ubicacion-info">
-            <div class="ubicacion-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>Av. Principal San Borja, Lima</div>
-            </div>
-            <div class="ubicacion-item">
-              <i class="fas fa-clock"></i>
-              <div>Lun - Sáb: 8:00 AM - 7:00 PM<br>Dom: 8:00 AM - 2:00 PM</div>
-            </div>
-            <div class="ubicacion-item">
-              <i class="fas fa-phone"></i>
-              <div>+51 989 719 386</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ubicacion-card">
-          <div class="ubicacion-title">
-            <i class="fas fa-store"></i>
-            Magdalena del Mar
-          </div>
-          <div class="ubicacion-info">
-            <div class="ubicacion-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <div>Av. Principal Magdalena, Lima</div>
-            </div>
-            <div class="ubicacion-item">
-              <i class="fas fa-clock"></i>
-              <div>Lun - Sáb: 8:00 AM - 7:00 PM<br>Dom: 8:00 AM - 2:00 PM</div>
-            </div>
-            <div class="ubicacion-item">
-              <i class="fas fa-phone"></i>
-              <div>+51 989 719 386</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>¿Listo para tu próximo pedido?</h2>
-      <p>Haz tu pedido ahora y recibe carnes frescas de la mejor calidad directamente en tu hogar</p>
-      <a href="pedidos.html" class="btn-hero btn-hero-primary">
-        <i class="fas fa-shopping-cart"></i> Hacer Pedido Ahora
-      </a>
-    </div>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -266,22 +102,9 @@
       <div class="footer-section">
         <h4>Productos</h4>
         <ul>
-          <li><a href="catalogo.html#pescados"><i class="fas fa-fish me-2"></i>Pescados</a></li>
-          <li><a href="catalogo.html#res"><i class="fas fa-cow me-2"></i>Res</a></li>
-          <li><a href="catalogo.html#cerdo"><i class="fas fa-piggy-bank me-2"></i>Cerdo</a></li>
-          <li><a href="catalogo.html#aves"><i class="fas fa-drumstick-bite me-2"></i>Aves</a></li>
-          <li><a href="catalogo.html#cuy"><i class="fas fa-paw me-2"></i>Cuy y Conejo</a></li>
-        </ul>
-      </div>
-
-      <!-- Enlaces Rápidos -->
-      <div class="footer-section">
-        <h4>Enlaces Rápidos</h4>
-        <ul>
-          <li><a href="nosotros.html"><i class="fas fa-home me-2"></i>Inicio</a></li>
-          <li><a href="catalogo.html"><i class="fas fa-book me-2"></i>Catálogo</a></li>
-          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Hacer Pedido</a></li>
-          <li><a href="admin.html"><i class="fas fa-user-shield me-2"></i>Admin</a></li>
+          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
+          <li><a href="lacteos.html"><i class="fas fa-cheese me-2"></i>Lácteos</a></li>
+          <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Pedidos</a></li>
         </ul>
       </div>
 
@@ -301,9 +124,159 @@
     </div>
   </footer>
 
+  <button class="scroll-top" type="button" data-scroll-top aria-label="Volver arriba">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="site-nav.js"></script>
+
+  <script>
+    let productos = [];
+    const GROUP_ORDER = ['res', 'aves', 'cordero', 'trucha', 'menores'];
+    const GROUP_CFG = {
+      res: { label: 'Res', icon: 'fa-drumstick-bite', cls: 'res' },
+      aves: { label: 'Aves', icon: 'fa-egg', cls: 'aves' },
+      cordero: { label: 'Cordero', icon: 'fa-bone', cls: 'cordero' },
+      trucha: { label: 'Trucha', icon: 'fa-fish', cls: 'trucha' },
+      menores: { label: 'Carnes Menores', icon: 'fa-paw', cls: 'menores' }
+    };
+
+    function norm(v) {
+      return (v || '').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    }
+
+    function isLacteos(p) {
+      const hay = norm(`${p.PRODUCTO || ''} ${p.DESCRIPCION || ''}`);
+      return ['queso', 'quesos', 'lacteo', 'lacteos', 'mantequilla'].some(k => hay.includes(k));
+    }
+
+    function getGroup(p) {
+      const t = norm(`${p.PRODUCTO || ''} ${p.DESCRIPCION || ''}`);
+      if (['res'].some(k => t.includes(k))) return 'res';
+      if (['pollo', 'gallina', 'pavo'].some(k => t.includes(k))) return 'aves';
+      if (['cordero'].some(k => t.includes(k))) return 'cordero';
+      if (['trucha'].some(k => t.includes(k))) return 'trucha';
+      if (['cuy', 'conejo'].some(k => t.includes(k))) return 'menores';
+      return null;
+    }
+
+    function toNum(v) {
+      const n = parseFloat(String(v || '').replace(',', '.'));
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function fmtMoney(v) {
+      return 'S/ ' + (v || 0).toLocaleString('es-PE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function getApprox(p) { return toNum(p['PRECIO APROXIMADO']); }
+    function getPriceKg(p) { return toNum(p['PRECIO POR Kg']); }
+
+    function getWeight(p) {
+      const kg = getPriceKg(p), ap = getApprox(p);
+      if (kg > 0 && ap > 0) return ap / kg;
+      return null;
+    }
+
+    function fmtWeight(p) {
+      const w = getWeight(p);
+      if (!w) return 'Peso no disp.';
+      return `${w.toFixed(w < 1 ? 2 : 1)} kg aprox.`;
+    }
+
+    async function cargarProductos() {
+      try {
+        const response = await fetch('productos.json', { cache: 'no-store' });
+        productos = await response.json();
+        productos = productos.filter(p => !isLacteos(p));
+        mostrarProductos();
+      } catch (error) {
+        console.error('Error al cargar productos:', error);
+        const grid = document.getElementById('productGrid');
+        if (grid) {
+          grid.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h3>Error al cargar productos</h3>
+              <p>Por favor, intenta más tarde</p>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function mostrarProductos() {
+      const grid = document.getElementById('productGrid');
+      if (!grid) return;
+      const html = GROUP_ORDER.map(gk => {
+        const cfg = GROUP_CFG[gk];
+        const items = productos.filter(p => getGroup(p) === gk);
+        if (!items.length) return '';
+        const cards = items.map(p => crearCardProducto(p)).join('');
+        return `<div class="mv-group" data-group="${gk}">
+          <div class="mv-group-header">
+            <span class="mv-group-pill ${cfg.cls}"><i class="fa-solid ${cfg.icon}"></i> ${cfg.label}</span>
+            <span class="mv-group-count">${items.length} cortes</span>
+          </div>
+          <div class="mv-track">${cards}</div>
+        </div>`;
+      }).join('');
+
+      grid.innerHTML = html || `
+        <div class="no-results">
+          <i class="fas fa-search"></i>
+          <h3>No hay productos disponibles</h3>
+        </div>
+      `;
+    }
+
+    function crearCardProducto(producto) {
+      const descripcion = (producto.DESCRIPCION || '').trim();
+      const nombre = (producto.PRODUCTO || '').trim();
+      const title = descripcion || nombre || 'Producto';
+      const precio = getApprox(producto);
+      const kgPrice = getPriceKg(producto);
+      const img = producto.IMAGEN || 'img/ganado.jpg';
+
+      function esc(v) { return String(v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+      return `
+        <article class="pcard" data-key="${esc(title)}">
+          <img class="pcard-img" src="${esc(img)}" alt="${esc(title)}">
+          <div class="pcard-body">
+            <div class="pcard-name">${esc(title)}</div>
+            <div class="pcard-cat">${esc(producto.PRODUCTO || '')}</div>
+            <div class="pcard-price-row">
+              <div class="pcard-price">${fmtMoney(precio)}</div>
+              <div class="pcard-kg">S/ ${kgPrice.toFixed(kgPrice >= 10 ? 0 : 2)}/kg</div>
+            </div>
+            <div class="pcard-weight"><i class="fa-solid fa-weight-hanging"></i>${esc(fmtWeight(producto))}</div>
+            <button type="button" class="pcard-cta" onclick="hacerPedido('${esc(nombre)}','${esc(descripcion)}')">
+              <i class="fas fa-shopping-cart"></i> Hacer Pedido
+            </button>
+          </div>
+        </article>`;
+    }
+
+    function hacerPedido(producto, descripcion) {
+      const productoLimpio = (producto || '').trim();
+      const descripcionLimpia = (descripcion || '').trim();
+      let productoCompleto = descripcionLimpia || productoLimpio;
+
+      if (descripcionLimpia && productoLimpio && descripcionLimpia.toLowerCase() !== productoLimpio.toLowerCase()) {
+        productoCompleto = `${descripcionLimpia} - ${productoLimpio}`;
+      }
+
+      window.location.href = `pedidos.html?producto=${encodeURIComponent(productoCompleto)}`;
+    }
+
+    cargarProductos();
+  </script>
+
   <script src="env-loader.js"></script>
   <script src="config.js"></script>
   <script src="social-links.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="ui-interactions.js"></script>
 </body>
 </html>
