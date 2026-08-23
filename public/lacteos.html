@@ -23,10 +23,35 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.min.css">
-  <meta name="theme-color" content="#C42127">
+  <style>
+    body.theme-navy {
+      --brand: #0b1f4b;
+      --accent: #1f3f86;
+      --brand-dark: #081634;
+      --brand-soft: rgba(11, 31, 75, 0.14);
+      --hero-overlay: linear-gradient(135deg, rgba(6, 16, 42, 0.62), rgba(11, 31, 75, 0.24));
+    }
+
+    body.theme-navy .main-header {
+      background: linear-gradient(135deg, #0b1f4b, #1f3f86);
+    }
+
+    body.theme-navy .footer {
+      background: linear-gradient(135deg, #081634, #0b1f4b);
+    }
+
+    body.theme-navy .filter-btn:hover,
+    body.theme-navy .filter-btn.active,
+    body.theme-navy .btn-catalogo:hover,
+    body.theme-navy .pcard-cta:hover,
+    body.theme-navy .qty-btn:not(:disabled):hover {
+      box-shadow: 0 8px 18px rgba(11, 31, 75, 0.26);
+    }
+  </style>
+  <meta name="theme-color" content="#0B1F4B">
   <link rel="manifest" href="/manifest.json">
 </head>
-<body class="mv-structured">
+<body class="mv-structured theme-navy">
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg"></nav>
@@ -58,7 +83,7 @@
                 <div class="pcard-body">
                   <div class="pcard-name">Queso</div>
                   <div class="pcard-cat">Queso fresco artesanal de alta calidad.</div>
-                  <a class="pcard-cta" href="pedidos.html">
+                  <a class="pcard-cta" href="pedidos.html?add=Queso">
                     <i class="fas fa-shopping-cart"></i> Hacer Pedido
                   </a>
                 </div>
@@ -71,7 +96,7 @@
                 <div class="pcard-body">
                   <div class="pcard-name">Mantequilla</div>
                   <div class="pcard-cat">Mantequilla natural sin sal, ideal para cocinar.</div>
-                  <a class="pcard-cta" href="pedidos.html">
+                  <a class="pcard-cta" href="pedidos.html?add=Mantequilla">
                     <i class="fas fa-shopping-cart"></i> Hacer Pedido
                   </a>
                 </div>
@@ -84,7 +109,7 @@
                 <div class="pcard-body">
                   <div class="pcard-name">Requesón</div>
                   <div class="pcard-cat">Requesón fresco del día, suave y cremoso.</div>
-                  <a class="pcard-cta" href="pedidos.html">
+                  <a class="pcard-cta" href="pedidos.html?add=Requeson">
                     <i class="fas fa-shopping-cart"></i> Hacer Pedido
                   </a>
                 </div>
@@ -97,7 +122,7 @@
                 <div class="pcard-body">
                   <div class="pcard-name">Queso Paria</div>
                   <div class="pcard-cat">Sabor intenso y textura firme.</div>
-                  <a class="pcard-cta" href="pedidos.html">
+                  <a class="pcard-cta" href="pedidos.html?add=Queso%20Paria">
                     <i class="fas fa-shopping-cart"></i> Hacer Pedido
                   </a>
                 </div>
@@ -110,7 +135,7 @@
                 <div class="pcard-body">
                   <div class="pcard-name">Queso Maduro</div>
                   <div class="pcard-cat">Sabor profundo y maduración premium.</div>
-                  <a class="pcard-cta" href="pedidos.html">
+                  <a class="pcard-cta" href="pedidos.html?add=Queso%20Maduro">
                     <i class="fas fa-shopping-cart"></i> Hacer Pedido
                   </a>
                 </div>
@@ -163,7 +188,7 @@
       <div class="footer-section">
         <h4>Productos</h4>
         <ul>
-          <li><a href="nosotros.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
+          <li><a href="carnes.html"><i class="fas fa-drumstick-bite me-2"></i>Carnes</a></li>
           <li><a href="lacteos.html"><i class="fas fa-cheese me-2"></i>Lácteos</a></li>
           <li><a href="pedidos.html"><i class="fas fa-shopping-cart me-2"></i>Pedidos</a></li>
         </ul>

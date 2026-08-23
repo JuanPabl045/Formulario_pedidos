@@ -20,6 +20,125 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.min.css">
+  <style>
+    .summary-stepper {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .summary-step-btn {
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(17, 24, 39, 0.16);
+      border-radius: 999px;
+      background: #fff;
+      color: #1f2937;
+      font-size: 0.95rem;
+      font-weight: 800;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .summary-step-qty {
+      min-width: 18px;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #1f2937;
+    }
+
+    .summary-note-btn {
+      border: 1px solid rgba(17, 24, 39, 0.18);
+      background: #fff;
+      color: #4b5563;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .summary-note-btn.has-note {
+      border-color: #0b1f4b;
+      color: #0b1f4b;
+    }
+
+    .note-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .note-modal.is-open {
+      display: flex;
+    }
+
+    .note-modal-card {
+      width: min(520px, 100%);
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+    }
+
+    .note-modal-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+
+    .note-modal textarea {
+      width: 100%;
+      min-height: 120px;
+      border: 1px solid rgba(17, 24, 39, 0.18);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      resize: vertical;
+      outline: none;
+    }
+
+    .note-modal-actions {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .note-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .note-btn-cancel {
+      background: #eef0f2;
+      color: #374151;
+    }
+
+    .note-btn-save {
+      background: #0b1f4b;
+      color: #fff;
+    }
+  </style>
   <meta name="theme-color" content="#C42127">
   <link rel="manifest" href="/manifest.json">
 </head>
@@ -161,6 +280,17 @@
     </button>
   </div>
 
+  <div class="note-modal" id="noteModal" aria-hidden="true">
+    <div class="note-modal-card" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle">
+      <div class="note-modal-title" id="noteModalTitle">Detalle del corte</div>
+      <textarea id="noteModalInput" placeholder="Escribe una descripción opcional para este corte..."></textarea>
+      <div class="note-modal-actions">
+        <button type="button" class="note-btn note-btn-cancel" id="noteModalCancel">Cancelar</button>
+        <button type="button" class="note-btn note-btn-save" id="noteModalSave">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
   <button class="scroll-top" type="button" data-scroll-top aria-label="Volver arriba">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
@@ -219,7 +349,17 @@
       return `<img class="${classNames}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.src='${DEFAULT_IMG}'">`;
     }
     const cart = new Map();
+    const cutNotes = new Map();
+    let activeNoteKey = null;
     const productIndex = new Map();
+    const incomingShortcut = (() => {
+      try {
+        const params = new URLSearchParams(window.location.search || '');
+        return (params.get('add') || params.get('producto') || '').trim();
+      } catch (e) {
+        return '';
+      }
+    })();
     let products = [];
     let activeCategory = 'Todos';
     let searchQuery = '';
@@ -312,8 +452,94 @@
     function getQty(key) { return cart.get(key) || 0; }
 
     function setQty(key, q) {
-      if (q <= 0) cart.delete(key);
+      if (q <= 0) {
+        cart.delete(key);
+        cutNotes.delete(key);
+      }
       else cart.set(key, q);
+    }
+
+    function getCutNote(key) {
+      return (cutNotes.get(key) || '').trim();
+    }
+
+    function setCutNote(key, note) {
+      const clean = (note || '').toString().trim();
+      if (!clean) {
+        cutNotes.delete(key);
+        return;
+      }
+      cutNotes.set(key, clean);
+    }
+
+    function resolveShortcutToKey(shortcut) {
+      const target = norm(shortcut);
+      if (!target) return '';
+      let best = '';
+      let bestScore = -1;
+
+      products.forEach(p => {
+        const label = formatLabel(p);
+        const labelNorm = norm(label);
+        const descNorm = norm(p.DESCRIPCION || '');
+        const prodNorm = norm(p.PRODUCTO || '');
+        let score = 0;
+
+        if (labelNorm === target) score = 100;
+        else if (descNorm === target || prodNorm === target) score = 95;
+        else if (labelNorm.includes(target) || target.includes(labelNorm)) score = 80;
+        else if (descNorm.includes(target) || prodNorm.includes(target)) score = 70;
+
+        if (score > bestScore) {
+          bestScore = score;
+          best = label;
+        }
+      });
+
+      return bestScore > 0 ? best : '';
+    }
+
+    function applyIncomingShortcut() {
+      if (!incomingShortcut) return;
+      const key = resolveShortcutToKey(incomingShortcut);
+      if (key) {
+        setQty(key, getQty(key) + 1);
+        lastTouchedKey = key;
+      }
+      const searchText = (key || incomingShortcut).replace(/\s*-\s*/g, ' ').trim();
+      searchQuery = searchText;
+      const searchInput = document.getElementById('productSearch');
+      if (searchInput) searchInput.value = searchText;
+      if (window.history && typeof window.history.replaceState === 'function') {
+        window.history.replaceState({}, '', 'pedidos.html');
+      }
+    }
+
+    function openNoteModal(key) {
+      const modal = document.getElementById('noteModal');
+      const input = document.getElementById('noteModalInput');
+      if (!modal || !input || !key) return;
+      activeNoteKey = key;
+      input.value = getCutNote(key);
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      setTimeout(() => input.focus(), 0);
+    }
+
+    function closeNoteModal() {
+      const modal = document.getElementById('noteModal');
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      activeNoteKey = null;
+    }
+
+    function saveNoteModal() {
+      const input = document.getElementById('noteModalInput');
+      if (!input || !activeNoteKey) return;
+      setCutNote(activeNoteKey, input.value);
+      closeNoteModal();
+      renderSummary();
     }
 
     function getImg(p) {
@@ -420,6 +646,9 @@
       el.querySelectorAll('.cat-chip').forEach(btn => {
         btn.addEventListener('click', () => {
           activeCategory = btn.getAttribute('data-cat') || 'Todos';
+          searchQuery = '';
+          const searchInput = document.getElementById('productSearch');
+          if (searchInput) searchInput.value = '';
           renderAll();
         });
       });
@@ -494,7 +723,11 @@
             <span class="mv-group-pill ${cfg.cls}"><i class="fa-solid ${cfg.icon}"></i> ${cfg.label}</span>
             <span class="mv-group-count">${items.length} cortes</span>
           </div>
-          <div class="mv-track">${cards}</div>
+          <div class="mv-track-wrap">
+            <button type="button" class="mv-track-nav prev" data-track-prev aria-label="Desplazar a la izquierda">‹</button>
+            <div class="mv-track">${cards}</div>
+            <button type="button" class="mv-track-nav next" data-track-next aria-label="Desplazar a la derecha">›</button>
+          </div>
         </div>`;
       }).join('');
 
@@ -505,6 +738,9 @@
         const g = t.closest('.mv-group')?.dataset.group;
         if (g && scrollMap.has(g)) setTimeout(() => { t.scrollLeft = scrollMap.get(g); }, 0);
       });
+      if (window.MVTrack && typeof window.MVTrack.init === 'function') {
+        setTimeout(() => window.MVTrack.init(grid), 0);
+      }
 
       // events
       grid.querySelectorAll('[data-key]').forEach(card => {
@@ -550,10 +786,18 @@
 
       list.innerHTML = `<div class="summary-items">${items.map(it => {
         const name = (it.product.DESCRIPCION || formatLabel(it.product)).trim();
+        const note = getCutNote(it.key);
         return `<div class="summary-row">
           <div class="summary-info">
-            <div class="summary-name">${esc(it.qty)}× ${esc(name)}</div>
-            <div class="summary-detail">${esc(fmtWeight(it.product))} · ${fmtMoney(getApprox(it.product))} c/u</div>
+            <div class="summary-name">${esc(name)}</div>
+            <div class="summary-stepper">
+              <button type="button" class="summary-step-btn" data-summary-action="dec" data-key="${esc(it.key)}" aria-label="Disminuir cantidad">−</button>
+              <span class="summary-step-qty">${it.qty}</span>
+              <button type="button" class="summary-step-btn" data-summary-action="inc" data-key="${esc(it.key)}" aria-label="Aumentar cantidad">+</button>
+            </div>
+            <button type="button" class="summary-note-btn ${note ? 'has-note' : ''}" data-note="${esc(it.key)}">
+              ${note ? 'Ver Descripcion' : 'Añadir Descripcion'}
+            </button>
           </div>
           <div class="summary-right">
             <div class="summary-price">${fmtMoney(it.sub)}</div>
@@ -566,6 +810,25 @@
 
       list.querySelectorAll('[data-remove]').forEach(b => {
         b.addEventListener('click', () => { setQty(b.getAttribute('data-remove'), 0); renderAll(); });
+      });
+      list.querySelectorAll('[data-note]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-note');
+          if (!key) return;
+          openNoteModal(key);
+        });
+      });
+      list.querySelectorAll('[data-summary-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-key');
+          if (!key) return;
+          const curr = getQty(key);
+          const action = btn.getAttribute('data-summary-action');
+          const next = action === 'inc' ? curr + 1 : Math.max(0, curr - 1);
+          setQty(key, next);
+          lastTouchedKey = key;
+          renderAll(false);
+        });
       });
 
       const total = items.reduce((s, i) => s + i.sub, 0);
@@ -648,8 +911,10 @@
       }
       items.forEach((it, i) => {
         const name = formatLabel(it.product);
+        const note = getCutNote(it.key);
         lines.push(`${i + 1}. ${it.qty}× ${name}`);
         lines.push(`   Precio: ${fmtMoney(getApprox(it.product))} · Peso: ${fmtWeight(it.product)}`);
+        if (note) lines.push(`   Detalle: ${note}`);
       });
       lines.push('');
       if (selectedDelivery) {
@@ -691,6 +956,14 @@
 
     document.getElementById('whatsappBtn')?.addEventListener('click', sendOrder);
     document.getElementById('whatsappBtnSummary')?.addEventListener('click', sendOrder);
+    document.getElementById('noteModalSave')?.addEventListener('click', saveNoteModal);
+    document.getElementById('noteModalCancel')?.addEventListener('click', closeNoteModal);
+    document.getElementById('noteModal')?.addEventListener('click', e => {
+      if (e.target?.id === 'noteModal') closeNoteModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeNoteModal();
+    });
 
     /* ── SEARCH ── */
     document.getElementById('productSearch')?.addEventListener('input', e => {
@@ -712,6 +985,7 @@
       const r = await fetch('productos.json', { cache: 'no-store' });
       products = await r.json();
       products.forEach(p => productIndex.set(formatLabel(p), p));
+      applyIncomingShortcut();
       renderCategories();
       renderAll();
       setTimeout(freezeAnimations, 900);

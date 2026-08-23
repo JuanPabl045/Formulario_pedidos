@@ -10,7 +10,7 @@
 
   const NAV_ITEMS = [
     { href: 'index.html', label: 'Inicio', icon: 'fa-home' },
-    { href: 'nosotros.html', label: 'Carnes', icon: 'fa-drumstick-bite' },
+    { href: 'carnes.html', label: 'Carnes', icon: 'fa-drumstick-bite' },
     { href: 'lacteos.html', label: 'Lácteos', icon: 'fa-cheese' },
     { href: 'pedidos.html', label: 'Pedidos', icon: 'fa-shopping-cart' }
   ];
