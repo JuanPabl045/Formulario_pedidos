@@ -12,12 +12,13 @@ const firebaseConfig = {
 };
 
 const googleMapsApiKey = window.GOOGLE_MAPS_API_KEY || "PLACEHOLDER_GOOGLE_MAPS_API_KEY";
-const whatsappNumber = window.WHATSAPP_NUMBER || "PLACEHOLDER_WHATSAPP_NUMBER";
+const whatsappNumber = window.WHATSAPP_NUMBER || "51949776123";
 
 // Expose to window for runtime scripts (social-links.js, other pages)
 window.firebaseConfig = window.firebaseConfig || firebaseConfig;
 window.googleMapsApiKey = window.googleMapsApiKey || googleMapsApiKey;
 window.whatsappNumber = window.whatsappNumber || whatsappNumber;
+window.firebaseVapidKey = window.FIREBASE_VAPID_KEY || window.firebaseVapidKey || '';
 
 // Central social links - edit these values here or provide env vars via env-loader
 window.socialLinks = window.socialLinks || {
@@ -27,6 +28,6 @@ window.socialLinks = window.socialLinks || {
     const explicit = window.SOCIAL_WHATSAPP || '';
     const base = explicit || whatsappNumber || '';
     const num = String(base).replace(/\D/g, '');
-    return num ? `https://wa.me/${num}` : `https://wa.me/51989719386`;
+    return num ? `https://wa.me/${num}` : `https://wa.me/51949776123`;
   })()
 };

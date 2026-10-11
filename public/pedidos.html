@@ -138,6 +138,108 @@
       background: #0b1f4b;
       color: #fff;
     }
+
+    .mv-actions-bar {
+      max-width: 1200px;
+      margin: 14px auto 6px;
+      padding: 0 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-repeat-order {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #c42127, #991b1b);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(196, 33, 39, 0.25);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-repeat-order:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(196, 33, 39, 0.35);
+    }
+
+    .btn-push-notify {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #d1d5db;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-push-notify:hover {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .btn-push-notify.is-active {
+      background: #ecfdf5;
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+
+    .mv-toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .mv-toast {
+      pointer-events: auto;
+      background: #0b1f4b;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: mvToastIn 0.25s ease-out forwards;
+      max-width: 380px;
+    }
+
+    .mv-toast.toast-success {
+      background: #15803d;
+    }
+
+    .mv-toast.toast-warning {
+      background: #b45309;
+    }
+
+    .mv-toast.toast-info {
+      background: #0b1f4b;
+    }
+
+    @keyframes mvToastIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
   <meta name="theme-color" content="#C42127">
   <link rel="manifest" href="/manifest.json">
@@ -159,6 +261,18 @@
       <p>Carnes &amp; lácteos frescos · Lima</p>
     </div>
   </header>
+
+  <!-- ACTION BAR (REPETIR PEDIDO & NOTIFICACIONES PUSH) -->
+  <div class="mv-actions-bar" id="actionsBar">
+    <button type="button" class="btn-repeat-order" id="repeatOrderBtn" style="display:none;" aria-label="Repetir tu último pedido">
+      <i class="fa-solid fa-rotate-left"></i>
+      <span>Repetir tu último pedido</span>
+    </button>
+    <button type="button" class="btn-push-notify" id="pushNotificationBtn" aria-label="Activar avisos de mis pedidos">
+      <i class="fa-solid fa-bell"></i>
+      <span id="pushNotificationBtnText">Activar avisos de mis pedidos</span>
+    </button>
+  </div>
 
   <!-- SEARCH -->
   <div class="mv-search-wrap">
@@ -298,6 +412,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="env-loader.js"></script>
   <script src="config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
   <script>
     const CATEGORY_ORDER = ['Todos', 'Res', 'Aves', 'Cordero', 'Trucha', 'Carnes Menores', 'Lácteos'];
     const CATEGORY_RULES = {
@@ -328,7 +444,12 @@
       Lácteos: 'lacteos'
     };
 
-    const CART_NUMBER = (window.whatsappNumber || '').toString().replace(/\D/g, '');
+    function getCartNumber() {
+      const raw = window.whatsappNumber || window.WHATSAPP_NUMBER || '51949776123';
+      const clean = String(raw).replace(/\D/g, '');
+      return clean || '51949776123';
+    }
+    const CART_NUMBER = getCartNumber();
     const DEFAULT_IMG = 'img/ganado.jpg';
     window.IMAGE_MANIFEST = {};
     fetch('img/manifest-images.json').then(r => r.ok ? r.json() : {}).then(m => { window.IMAGE_MANIFEST = m || {}; }).catch(() => { window.IMAGE_MANIFEST = {}; });
@@ -449,6 +570,91 @@
       otros: { label: 'Otras carnes', icon: 'fa-ellipsis', cls: 'otros' }
     };
 
+    const CART_STORAGE_KEY = 'molinoViejo_cart';
+    const LAST_ORDER_STORAGE_KEY = 'molinoViejo_lastOrder';
+
+    function getStoredCart(storageKey = CART_STORAGE_KEY) {
+      try {
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        console.warn(`Error al leer ${storageKey} desde localStorage:`, e);
+        return [];
+      }
+    }
+
+    function saveCartToStorage() {
+      try {
+        const items = [...cart.entries()].map(([k, q]) => ({
+          key: k,
+          qty: q,
+          note: cutNotes.get(k) || ''
+        }));
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+      } catch (e) {
+        console.warn('Error al guardar molinoViejo_cart en localStorage:', e);
+      }
+    }
+
+    function checkRepeatOrderButton() {
+      const btn = document.getElementById('repeatOrderBtn');
+      if (!btn) return;
+      const lastOrder = getStoredCart(LAST_ORDER_STORAGE_KEY);
+      const hasOrder = Array.isArray(lastOrder) && lastOrder.length > 0;
+      btn.style.display = hasOrder ? 'inline-flex' : 'none';
+    }
+
+    function repeatLastOrder() {
+      const lastOrder = getStoredCart(LAST_ORDER_STORAGE_KEY);
+      if (!lastOrder || !lastOrder.length) {
+        showToast('No se encontró un pedido anterior para repetir.', 'warning');
+        return;
+      }
+
+      cart.clear();
+      cutNotes.clear();
+      lastOrder.forEach(item => {
+        if (item && item.key && item.qty > 0) {
+          cart.set(item.key, item.qty);
+          if (item.note) cutNotes.set(item.key, item.note);
+        }
+      });
+
+      saveCartToStorage();
+      renderAll(false);
+      showToast('¡Tu pedido anterior ha sido cargado con éxito!', 'success');
+    }
+
+    function showToast(message, type = 'success') {
+      let container = document.getElementById('mvToastContainer');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'mvToastContainer';
+        container.className = 'mv-toast-container';
+        document.body.appendChild(container);
+      }
+
+      const icons = {
+        success: 'fa-circle-check',
+        warning: 'fa-triangle-exclamation',
+        info: 'fa-bell'
+      };
+
+      const toast = document.createElement('div');
+      toast.className = `mv-toast toast-${type}`;
+      toast.innerHTML = `<i class="fa-solid ${icons[type] || 'fa-info-circle'}"></i> <span>${esc(message)}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.transition = 'opacity 0.3s, transform 0.3s';
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
     function getQty(key) { return cart.get(key) || 0; }
 
     function setQty(key, q) {
@@ -457,6 +663,7 @@
         cutNotes.delete(key);
       }
       else cart.set(key, q);
+      saveCartToStorage();
     }
 
     function getCutNote(key) {
@@ -467,9 +674,11 @@
       const clean = (note || '').toString().trim();
       if (!clean) {
         cutNotes.delete(key);
-        return;
       }
-      cutNotes.set(key, clean);
+      else {
+        cutNotes.set(key, clean);
+      }
+      saveCartToStorage();
     }
 
     function resolveShortcutToKey(shortcut) {
@@ -939,7 +1148,8 @@
     function sendOrder() {
       const items = [...cart.entries()].filter(([, q]) => q > 0);
       if (!items.length) { alert('Agrega al menos un producto.'); return; }
-      if (!CART_NUMBER) { alert('Falta configurar el número de WhatsApp.'); return; }
+      const cartNumber = getCartNumber();
+      if (!cartNumber) { alert('Falta configurar el número de WhatsApp.'); return; }
       const clientName = getClientName();
       if (!clientName) { alert('Ingresa tu nombre para continuar.'); return; }
       if (selectedDelivery === 'Delivery') {
@@ -949,13 +1159,40 @@
           return;
         }
       }
-      const url = `https://wa.me/${CART_NUMBER}?text=${encodeURIComponent(buildMsg())}`;
+
+      // Preparar el mensaje de WhatsApp con el estado actual
+      const msg = buildMsg();
+      const url = `https://wa.me/${cartNumber}?text=${encodeURIComponent(msg)}`;
+
+      // Guardar copia exacta del estado actual del carrito bajo molinoViejo_lastOrder
+      try {
+        const lastOrderItems = items.map(([k, q]) => ({
+          key: k,
+          qty: q,
+          note: cutNotes.get(k) || ''
+        }));
+        localStorage.setItem(LAST_ORDER_STORAGE_KEY, JSON.stringify(lastOrderItems));
+      } catch (err) {
+        console.warn('Error al guardar molinoViejo_lastOrder:', err);
+      }
+
+      // Limpiar el carrito actual en localStorage y en memoria para empezar de cero
+      try {
+        localStorage.removeItem(CART_STORAGE_KEY);
+      } catch (err) {}
+      cart.clear();
+      cutNotes.clear();
+      renderAll(false);
+      checkRepeatOrderButton();
+
       if (/Android|iPhone|iPad/i.test(navigator.userAgent)) window.location.href = url;
       else window.open(url, '_blank', 'noopener,noreferrer');
     }
 
     document.getElementById('whatsappBtn')?.addEventListener('click', sendOrder);
     document.getElementById('whatsappBtnSummary')?.addEventListener('click', sendOrder);
+    document.getElementById('repeatOrderBtn')?.addEventListener('click', repeatLastOrder);
+    document.getElementById('pushNotificationBtn')?.addEventListener('click', requestPushPermission);
     document.getElementById('noteModalSave')?.addEventListener('click', saveNoteModal);
     document.getElementById('noteModalCancel')?.addEventListener('click', closeNoteModal);
     document.getElementById('noteModal')?.addEventListener('click', e => {
@@ -980,11 +1217,148 @@
       }, { threshold: 0.01 }).observe(sentinel);
     }
 
+    /* ── FIREBASE CLOUD MESSAGING (FCM) ── */
+    let fcmMessaging = null;
+
+    function initFirebaseMessaging() {
+      try {
+        if (typeof firebase === 'undefined') return;
+        if (!firebase.apps.length && window.firebaseConfig) {
+          firebase.initializeApp(window.firebaseConfig);
+        }
+        if (typeof firebase.messaging === 'function' && firebase.messaging.isSupported()) {
+          fcmMessaging = firebase.messaging();
+
+          // Registrar Service Worker para notificaciones en segundo plano
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('firebase-messaging-sw.js')
+              .then(registration => {
+                if (fcmMessaging && typeof fcmMessaging.useServiceWorker === 'function') {
+                  fcmMessaging.useServiceWorker(registration);
+                }
+              })
+              .catch(err => {
+                console.warn('No se pudo registrar firebase-messaging-sw.js:', err);
+              });
+          }
+
+          // Manejo de mensajes cuando la app está en primer plano (onMessage)
+          fcmMessaging.onMessage(payload => {
+            console.log('🔔 [onMessage] Mensaje recibido en primer plano:', payload);
+            const title = payload?.notification?.title || 'Molino Viejo';
+            const body = payload?.notification?.body || 'Tienes un aviso sobre tu pedido.';
+            showToast(`${title}: ${body}`, 'info');
+          });
+
+          if ('Notification' in window && Notification.permission === 'granted') {
+            updatePushButtonState(true);
+          }
+        }
+      } catch (err) {
+        console.warn('Firebase Messaging no soportado o error en inicialización:', err);
+      }
+    }
+
+    async function requestPushPermission() {
+      if (!('Notification' in window)) {
+        showToast('Las notificaciones push no son compatibles con este navegador.', 'warning');
+        return;
+      }
+
+      // Los navegadores restringen Service Workers y Notificaciones a contextos seguros (HTTPS o localhost)
+      if (!window.isSecureContext && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        showToast('Las notificaciones requieren HTTPS o localhost. En celular necesitas un túnel HTTPS para activar Push.', 'warning');
+        console.warn('⚠️ Las notificaciones Web Push requieren un entorno HTTPS seguro o localhost.');
+        return;
+      }
+
+      if (Notification.permission === 'denied') {
+        showToast('El permiso está bloqueado. Haz clic en el ícono de ajustes (🔒 o 🎛️) al lado de la URL y cambia Notificaciones a Permitir.', 'warning');
+        return;
+      }
+
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          console.log('✅ Permiso de notificaciones concedido.');
+          updatePushButtonState(true);
+          showToast('¡Avisos de pedidos activados!', 'success');
+
+          if (!fcmMessaging && typeof firebase !== 'undefined' && firebase.messaging.isSupported()) {
+            fcmMessaging = firebase.messaging();
+          }
+
+          if (fcmMessaging) {
+            const tokenOptions = {};
+            if (window.firebaseVapidKey) {
+              tokenOptions.vapidKey = window.firebaseVapidKey;
+            }
+            try {
+              const currentToken = await fcmMessaging.getToken(tokenOptions);
+              if (currentToken) {
+                console.log('🔑 [FCM Token del Dispositivo]:', currentToken);
+              } else {
+                console.warn('⚠️ No se pudo obtener el token FCM (verifica la clave VAPID en Firebase Console).');
+              }
+            } catch (tokenErr) {
+              console.error('Error al obtener token FCM:', tokenErr);
+            }
+          }
+        } else if (permission === 'denied') {
+          showToast('Permiso de notificaciones denegado en el navegador.', 'warning');
+        }
+      } catch (err) {
+        console.error('Error al solicitar permiso de notificaciones:', err);
+      }
+    }
+
+    function updatePushButtonState(isGranted) {
+      const btn = document.getElementById('pushNotificationBtn');
+      const txt = document.getElementById('pushNotificationBtnText');
+      if (!btn) return;
+      if (isGranted) {
+        btn.classList.add('is-active');
+        if (txt) txt.textContent = 'Avisos activados ✓';
+      } else {
+        btn.classList.remove('is-active');
+        if (txt) txt.textContent = 'Activar avisos de mis pedidos';
+      }
+    }
+
+    /* ── INICIALIZACIÓN DE CARRITO DESDE LOCALSTORAGE ── */
+    function initCartFromStorage() {
+      const stored = getStoredCart(CART_STORAGE_KEY);
+      if (stored && stored.length > 0) {
+        stored.forEach(item => {
+          if (item && item.key && item.qty > 0) {
+            cart.set(item.key, item.qty);
+            if (item.note) cutNotes.set(item.key, item.note);
+          }
+        });
+      }
+      renderSummary();
+      updateTotals();
+      checkRepeatOrderButton();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initCartFromStorage();
+      initFirebaseMessaging();
+
+      try {
+        const params = new URLSearchParams(window.location.search || '');
+        if (params.get('repeat') === '1') {
+          repeatLastOrder();
+        }
+      } catch (e) {}
+    });
+
     /* ── LOAD ── */
     async function loadProducts() {
       const r = await fetch('productos.json', { cache: 'no-store' });
       products = await r.json();
       products.forEach(p => productIndex.set(formatLabel(p), p));
+      initCartFromStorage();
       applyIncomingShortcut();
       renderCategories();
       renderAll();

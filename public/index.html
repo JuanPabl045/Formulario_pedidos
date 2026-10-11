@@ -48,6 +48,9 @@
         <h1>Bienvenidos a Molino Viejo</h1>
         <p>Carnes frescas y lácteos de calidad premium. Desde 1980 llevando lo mejor a tu mesa con dedicación y pasión por la excelencia.</p>
         <div class="hero-buttons">
+          <a href="pedidos.html?repeat=1" id="indexRepeatOrderBtn" class="btn-hero" style="display:none; background:#0b1f4b; color:#fff; border: 2px solid rgba(255,255,255,0.4);">
+            <i class="fas fa-rotate-left me-1"></i> Repetir Último Pedido
+          </a>
           <a href="lacteos.html" class="btn-hero btn-hero-primary">
             <i class="fas fa-cheese me-1"></i> Ver Lácteos
           </a>
@@ -337,5 +340,19 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="site-nav.js"></script>
   <script src="ui-interactions.js"></script>
+  <script>
+    (function() {
+      try {
+        const raw = localStorage.getItem('molinoViejo_lastOrder');
+        if (raw) {
+          const items = JSON.parse(raw);
+          if (Array.isArray(items) && items.length > 0) {
+            const btn = document.getElementById('indexRepeatOrderBtn');
+            if (btn) btn.style.display = 'inline-flex';
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
