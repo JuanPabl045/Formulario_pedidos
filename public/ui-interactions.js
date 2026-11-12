@@ -1,4 +1,18 @@
 (function () {
+  window.MVTrack = {
+    init(container) {
+      if (window.innerWidth < 768) return;
+      container.querySelectorAll('.mv-track-wrap').forEach(wrap => {
+        const track = wrap.querySelector('.mv-track');
+        const prev = wrap.querySelector('[data-track-prev]');
+        const next = wrap.querySelector('[data-track-next]');
+        if (!track || !prev || !next) return;
+        prev.addEventListener('click', () => track.scrollBy({ left: -260, behavior: 'smooth' }));
+        next.addEventListener('click', () => track.scrollBy({ left: 260, behavior: 'smooth' }));
+      });
+    }
+  };
+
   function init() {
     const nav = document.querySelector('nav.navbar');
     const scrollTopBtn = document.querySelector('[data-scroll-top]');
@@ -26,6 +40,7 @@
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+    window.MVTrack.init(document);
   }
 
   if (document.readyState === 'loading') {

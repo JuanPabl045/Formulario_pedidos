@@ -12,7 +12,10 @@
     { href: 'index.html', label: 'Inicio', icon: 'fa-home' },
     { href: 'carnes.html', label: 'Carnes', icon: 'fa-drumstick-bite' },
     { href: 'lacteos.html', label: 'Lácteos', icon: 'fa-cheese' },
-    { href: 'pedidos.html', label: 'Pedidos', icon: 'fa-shopping-cart' }
+    { href: 'pedidos.html', label: 'Pedidos', icon: 'fa-shopping-cart' },
+    { href: 'politica-privacidad.html', label: 'Privacidad', icon: 'fa-shield-halved' },
+    { href: 'terminos-condiciones.html', label: 'Términos', icon: 'fa-file-contract' },
+    { href: 'politica-reembolsos.html', label: 'Cambios y reembolsos', icon: 'fa-receipt' }
   ];
 
   function getFileName() {

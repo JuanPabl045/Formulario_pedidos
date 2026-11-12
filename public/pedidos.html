@@ -139,6 +139,29 @@
       color: #fff;
     }
 
+    .order-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin: 14px 0 2px;
+      color: #4b5563;
+      font-size: 0.75rem;
+      line-height: 1.45;
+    }
+
+    .order-consent input {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      accent-color: #0b1f4b;
+    }
+
+    .order-consent a {
+      color: #0b1f4b;
+      font-weight: 700;
+    }
+
     .mv-actions-bar {
       max-width: 1200px;
       margin: 14px auto 6px;
@@ -372,6 +395,10 @@
         <span class="summary-total-label">Total estimado</span>
         <span class="summary-total-val" id="summaryTotal">S/ 0.00</span>
       </div>
+      <label class="order-consent" for="orderConsent">
+        <input id="orderConsent" type="checkbox" aria-describedby="orderConsentText">
+        <span id="orderConsentText">Acepto los <a href="terminos-condiciones.html" target="_blank" rel="noopener">Términos y Condiciones</a> y autorizo el tratamiento de mis datos conforme a la <a href="politica-privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a>. También he revisado la <a href="politica-reembolsos.html" target="_blank" rel="noopener">Política de Cambios y Reembolsos</a>.</span>
+      </label>
       <button id="whatsappBtnSummary" type="button" class="mv-wa-btn" disabled aria-label="Enviar pedido por WhatsApp desde resumen">
         <i class="fa-brands fa-whatsapp"></i>
         <span id="waBtnTextSummary">Agrega productos para continuar</span>
@@ -1061,15 +1088,16 @@
       set('unitCount', units);
       set('stickySubLine', units === 0 ? 'Agrega productos' : `${cuts} corte${cuts !== 1 ? 's' : ''} · ${units} unid.`);
 
-      const disabled = units === 0;
+      const hasConsent = Boolean(document.getElementById('orderConsent')?.checked);
+      const disabled = units === 0 || !hasConsent;
       ['whatsappBtn', 'whatsappBtnSummary'].forEach(id => {
         const b = document.getElementById(id);
         if (b) b.disabled = disabled;
       });
       const wt = document.getElementById('waBtnText');
-      if (wt) wt.textContent = disabled ? 'Enviar' : `Enviar (${units})`;
+      if (wt) wt.textContent = units === 0 ? 'Enviar' : (hasConsent ? `Enviar (${units})` : 'Acepta las condiciones');
       const wts = document.getElementById('waBtnTextSummary');
-      if (wts) wts.textContent = disabled ? 'Agrega productos' : `Enviar pedido`;
+      if (wts) wts.textContent = units === 0 ? 'Agrega productos' : (hasConsent ? 'Enviar pedido' : 'Acepta las condiciones');
     }
 
     function renderAll(scroll = false) {
@@ -1148,6 +1176,10 @@
     function sendOrder() {
       const items = [...cart.entries()].filter(([, q]) => q > 0);
       if (!items.length) { alert('Agrega al menos un producto.'); return; }
+      if (!document.getElementById('orderConsent')?.checked) {
+        alert('Acepta los Términos y Condiciones y la Política de Privacidad para continuar.');
+        return;
+      }
       const cartNumber = getCartNumber();
       if (!cartNumber) { alert('Falta configurar el número de WhatsApp.'); return; }
       const clientName = getClientName();
@@ -1191,6 +1223,7 @@
 
     document.getElementById('whatsappBtn')?.addEventListener('click', sendOrder);
     document.getElementById('whatsappBtnSummary')?.addEventListener('click', sendOrder);
+    document.getElementById('orderConsent')?.addEventListener('change', updateTotals);
     document.getElementById('repeatOrderBtn')?.addEventListener('click', repeatLastOrder);
     document.getElementById('pushNotificationBtn')?.addEventListener('click', requestPushPermission);
     document.getElementById('noteModalSave')?.addEventListener('click', saveNoteModal);
